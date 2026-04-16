@@ -6,9 +6,30 @@ class SpuLogoInDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      "SPU",
-      style: TextStyle(color: AppColors.Drawer_logo_text_color, fontSize: 24),
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.Drawer_color,
+        border: Border(
+          top: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+          bottom: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+          left: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+          right: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+        ),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Icon(Icons.school, color: AppColors.Drawer_logo_text_color),
+          Text(
+            "SPU",
+            style: TextStyle(
+              color: AppColors.Drawer_logo_text_color,
+              fontSize: 24,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
