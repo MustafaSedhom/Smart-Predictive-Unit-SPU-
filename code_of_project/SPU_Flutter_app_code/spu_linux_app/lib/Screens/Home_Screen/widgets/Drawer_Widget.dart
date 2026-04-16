@@ -26,7 +26,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     Map<String, dynamic> drawerItems = {
       "Home": Icons.home_rounded,
       "Message": Icons.message,
-      "Alarm": Icons.alarm,
+      "Alarm": Icons.notifications,
       "Profile": Icons.person,
       "Settings": Icons.settings,
     };
