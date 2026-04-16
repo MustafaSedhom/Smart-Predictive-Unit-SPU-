@@ -44,7 +44,9 @@ class _DrawerElementsState extends State<DrawerElements> {
                     children: [
                       Icon(
                         widget.icon,
-                        color: AppColors.Drawer_text_color,
+                        color: widget.isSelected
+                            ? AppColors.Drawer_icon_selected_color
+                            : AppColors.Drawer_text_color,
                         size: 40,
                       ),
                       const Gap(10),
