@@ -15,4 +15,8 @@ class AppColors {
   static const Color Drawer_icon_selected_color = Color(0xff7de8ff);
   // ignore: constant_identifier_names
   static const Color Start_Button_color = Color(0xff05793a);
+  // ignore: constant_identifier_names
+  static const Color Start_indicator_color = Color(0xff13daa1);
+  // ignore: constant_identifier_names
+  static const Color Start_indicator_background_color = Color(0xff03533c);
 }

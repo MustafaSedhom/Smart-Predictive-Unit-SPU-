@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_appbar.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 class HomeScreenContainers extends StatelessWidget {
@@ -6,16 +8,6 @@ class HomeScreenContainers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        color: AppColors.Home_screen_background,
-        child: Center(
-          child: Text(
-            "Main Content",
-            style: TextStyle(fontSize: 24, color: Colors.white),
-          ),
-        ),
-      ),
-    );
+    return Expanded(child: HomeScreenAppbar());
   }
 }
