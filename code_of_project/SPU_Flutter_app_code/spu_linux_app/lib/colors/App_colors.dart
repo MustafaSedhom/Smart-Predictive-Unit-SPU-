@@ -19,4 +19,12 @@ class AppColors {
   static const Color Start_indicator_color = Color(0xff13daa1);
   // ignore: constant_identifier_names
   static const Color Start_indicator_background_color = Color(0xff03533c);
+  // ignore: constant_identifier_names
+  static const Color home_screen_title_health_color = Colors.blue;
+  // ignore: constant_identifier_names
+  static const Color home_screen_title_alarm_color = Colors.amber;
+  // ignore: constant_identifier_names
+  static const Color home_screen_title_sensor_color = Colors.green;
+  // ignore: constant_identifier_names
+  static const Color home_screen_title_maintenance_color = Colors.deepPurple;
 }
