@@ -35,7 +35,7 @@ class HomeScreenAppbar extends StatelessWidget {
           children: [
             Gap(20),
             Text(
-              "12/09/2023",
+              "16/04/2026",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -43,7 +43,7 @@ class HomeScreenAppbar extends StatelessWidget {
               ),
             ),
             Text(
-              "10:30:43 AM",
+              "07:43:43 AM",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -80,7 +80,7 @@ class HomeScreenAppbar extends StatelessWidget {
             Gap(20),
             Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
                 // ignore: deprecated_member_use
                 color: AppColors.Start_indicator_background_color.withOpacity(
                   0.8,
@@ -91,11 +91,13 @@ class HomeScreenAppbar extends StatelessWidget {
                   vertical: 10,
                   horizontal: 20,
                 ),
-                child: Text(
-                  "System Running",
-                  style: TextStyle(
-                    color: AppColors.Start_indicator_color,
-                    fontSize: 20,
+                child: Center(
+                  child: Text(
+                    "System Running",
+                    style: TextStyle(
+                      color: AppColors.Start_indicator_color,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),

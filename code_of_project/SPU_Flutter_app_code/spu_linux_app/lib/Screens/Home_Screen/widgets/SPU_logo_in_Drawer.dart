@@ -16,7 +16,7 @@ class SpuLogoInDrawer extends StatelessWidget {
           left: BorderSide(color: AppColors.Drawer_text_color, width: 2),
           right: BorderSide(color: AppColors.Drawer_text_color, width: 2),
         ),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

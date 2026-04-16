@@ -24,16 +24,16 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> drawerItems = {
-      "Home": Icons.home,
-      "Profile": Icons.person,
+      "Home": Icons.home_rounded,
       "Message": Icons.message,
       "Alarm": Icons.alarm,
+      "Profile": Icons.person,
       "Settings": Icons.settings,
     };
     ScreenArea.init(context);
     final items = drawerItems.entries.toList();
     return Container(
-      width: ScreenArea.Width * 0.2,
+      width: ScreenArea.Width * 0.17,
       color: AppColors.Drawer_color,
       child: Column(
         children: [
@@ -62,7 +62,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           InkWell(
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(15),
                 color: AppColors.Start_Button_color,
               ),
               child: Padding(
@@ -71,7 +71,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   horizontal: 20,
                 ),
                 child: Text(
-                  "SYSTEM Running",
+                  "START SYSTEM",
                   style: TextStyle(color: Colors.white, fontSize: 30),
                 ),
               ),

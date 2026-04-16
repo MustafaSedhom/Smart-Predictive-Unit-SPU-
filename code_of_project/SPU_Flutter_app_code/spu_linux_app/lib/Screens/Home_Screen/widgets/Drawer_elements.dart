@@ -27,13 +27,13 @@ class _DrawerElementsState extends State<DrawerElements> {
       children: [
         Gap(5),
         Padding(
-          padding: const EdgeInsets.all(0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
           child: Container(
             decoration: BoxDecoration(
               color: widget.isSelected
                   ? AppColors.Drawer_selected_color
                   : AppColors.Drawer_color,
-              borderRadius: BorderRadius.circular(40),
+              borderRadius: BorderRadius.circular(60),
             ),
             child: Column(
               children: [
