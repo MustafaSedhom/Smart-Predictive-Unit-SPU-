@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 class SpuLogoInDrawer extends StatelessWidget {
@@ -20,12 +21,18 @@ class SpuLogoInDrawer extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Icon(Icons.school, color: AppColors.Drawer_logo_text_color),
+          // Icon(Icons.school, color: AppColors.Drawer_logo_text_color, size: 50),
+          Image(
+            image: AssetImage("assets/images/SEDHOM.jpg"),
+            width: 60,
+            height: 60,
+          ),
           Text(
             "SPU",
-            style: TextStyle(
+            style: GoogleFonts.poppins(
               color: AppColors.Drawer_logo_text_color,
-              fontSize: 24,
+              fontSize: 70,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],
