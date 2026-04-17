@@ -12,25 +12,25 @@ class HomeScreenTitles extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         HomeScreenTitleCard(
-          icon: Icons.health_and_safety_rounded,
+          icon_img: "assets/Icons/heart-rate.png",
           title_upper: "Overall Health",
           title_down: "${70}%",
           card_color: AppColors.home_screen_title_health_color,
         ),
         HomeScreenTitleCard(
-          icon: Icons.notifications,
+          icon_img: "assets/Icons/bell.png",
           title_upper: "Active Alarms",
           title_down: "${3}",
           card_color: AppColors.home_screen_title_alarm_color,
         ),
         HomeScreenTitleCard(
-          icon: Icons.settings_input_antenna_sharp,
+          icon_img: "assets/Icons/smart-grid.png",
           title_upper: "Sensor Connected",
           title_down: "${15}/${16}",
           card_color: AppColors.home_screen_title_sensor_color,
         ),
         HomeScreenTitleCard(
-          icon: Icons.calendar_month_rounded,
+          icon_img: "assets/Icons/calendar.png",
           title_upper: "Next Maintenance",
           title_down: "in ${18} Days",
           card_color: AppColors.home_screen_title_maintenance_color,

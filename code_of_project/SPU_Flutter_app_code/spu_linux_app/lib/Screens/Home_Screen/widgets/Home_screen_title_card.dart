@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 import 'package:spu_linux_app/Responsive/Screen_Area.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 class HomeScreenTitleCard extends StatefulWidget {
-  final IconData icon;
+  // ignore: non_constant_identifier_names
+  final String icon_img;
   // ignore: non_constant_identifier_names
   final String title_upper;
   // ignore: non_constant_identifier_names
@@ -13,9 +15,13 @@ class HomeScreenTitleCard extends StatefulWidget {
   final Color card_color;
   const HomeScreenTitleCard({
     super.key,
-    required this.icon,
+    // ignore: non_constant_identifier_names
+    required this.icon_img,
+    // ignore: non_constant_identifier_names
     required this.title_upper,
+    // ignore: non_constant_identifier_names
     required this.title_down,
+    // ignore: non_constant_identifier_names
     required this.card_color,
   });
 
@@ -40,17 +46,17 @@ class _HomeScreenTitleCardState extends State<HomeScreenTitleCard> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              widget.icon,
+            SimpleShadow(
+              opacity: 0.9,
               color: widget.card_color,
-              size: 50,
-              shadows: [
-                Shadow(
-                  blurRadius: 10.0,
-                  // ignore: deprecated_member_use
-                  color: widget.card_color.withOpacity(0.5),
-                ),
-              ],
+              offset: Offset(2, 2),
+              sigma: 10,
+              child: Image.asset(
+                widget.icon_img,
+                width: 50,
+                height: 50,
+                color: widget.card_color,
+              ),
             ),
             Gap(20),
             Column(
