@@ -15,24 +15,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    // ScreenArea.init(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.Home_screen_background,
-        // body: Row(
-        //   // mainAxisAlignment: MainAxisAlignment.start,
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   children: [DrawerWidget(), HomeScreenContainers()],
-        // ),
-        body: SingleChildScrollView(
-          child: SizedBox(
-            width: ScreenArea.Width,
-            height: ScreenArea.Height,
-            child: Row(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [DrawerWidget(), HomeScreenContainers()],
-            ),
-          ),
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [DrawerWidget(), HomeScreenContainers()],
         ),
       ),
     );

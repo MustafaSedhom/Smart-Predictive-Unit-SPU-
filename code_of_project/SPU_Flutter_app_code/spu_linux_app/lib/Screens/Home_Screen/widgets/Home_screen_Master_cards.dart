@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spu_linux_app/Responsive/Screen_Area.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_Master_custom_cards.dart';
 
 class HomeScreenMasterCard extends StatelessWidget {
@@ -6,6 +7,7 @@ class HomeScreenMasterCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ScreenArea.init(context);
     return Row(
       // scrollDirection: Axis.horizontal,
       // padding: EdgeInsets.zero,
