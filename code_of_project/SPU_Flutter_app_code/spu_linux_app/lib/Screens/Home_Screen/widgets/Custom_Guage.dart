@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CustomGuage extends StatefulWidget {

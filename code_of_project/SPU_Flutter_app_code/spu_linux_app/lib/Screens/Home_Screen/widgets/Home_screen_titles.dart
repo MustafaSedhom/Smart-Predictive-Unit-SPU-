@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:spu_linux_app/Responsive/Screen_Area.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_title_card.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 

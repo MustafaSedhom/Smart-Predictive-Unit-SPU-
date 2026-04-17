@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:simple_shadow/simple_shadow.dart';
-import 'package:spu_linux_app/Responsive/Screen_Area.dart';
-import 'package:spu_linux_app/colors/App_colors.dart';
 
 class HomeScreenTitleCard extends StatefulWidget {
   // ignore: non_constant_identifier_names
