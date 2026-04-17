@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 import 'package:spu_linux_app/Responsive/Screen_Area.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Custom_Guage.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
@@ -7,7 +8,26 @@ import 'package:spu_linux_app/colors/App_colors.dart';
 class HomeScreenMasterCustomCards extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final Color card_color;
-  const HomeScreenMasterCustomCards({super.key, required this.card_color});
+  final int value;
+  final String name;
+  final String img;
+  // ignore: non_constant_identifier_names
+  final String img_icon;
+  final IconData icon;
+  // ignore: non_constant_identifier_names
+  final String status_name;
+  const HomeScreenMasterCustomCards({
+    super.key,
+    // ignore: non_constant_identifier_names
+    required this.card_color,
+    required this.value,
+    required this.name,
+    required this.img,
+    required this.icon,
+    // ignore: non_constant_identifier_names
+    required this.status_name,
+    required this.img_icon,
+  });
 
   @override
   State<HomeScreenMasterCustomCards> createState() =>
@@ -32,6 +52,7 @@ class _HomeScreenMasterCustomCardsState
           children: [
             // upper contain
             Container(
+              padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 // ignore: deprecated_member_use
                 color: widget.card_color.withOpacity(0.3),
@@ -45,17 +66,24 @@ class _HomeScreenMasterCustomCardsState
               ),
               child: Row(
                 children: [
-                  Gap(10),
-                  Icon(
-                    Icons.motorcycle_rounded,
-                    size: 50,
-                    color: AppColors.Drawer_text_color,
-                  ),
                   Gap(20),
+                  SimpleShadow(
+                    opacity: 0.9,
+                    color: widget.card_color,
+                    offset: Offset(2, 2),
+                    sigma: 10,
+                    child: Image.asset(
+                      widget.img_icon,
+                      width: 50,
+                      height: 50,
+                      color: widget.card_color,
+                    ),
+                  ),
+                  Gap(30),
                   Text(
-                    "MOTOR",
+                    widget.name,
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 25,
                       fontWeight: FontWeight.w500,
                       color: AppColors.Drawer_text_color,
                     ),
@@ -65,9 +93,9 @@ class _HomeScreenMasterCustomCardsState
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(30),
                         // ignore: deprecated_member_use
-                        color: widget.card_color.withOpacity(0.6),
+                        color: widget.card_color,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -76,10 +104,10 @@ class _HomeScreenMasterCustomCardsState
                         ),
                         child: Center(
                           child: Text(
-                            "NORMAL",
+                            widget.status_name,
                             style: TextStyle(
                               color: AppColors.Drawer_text_color,
-                              fontSize: 30,
+                              fontSize: 25,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -91,14 +119,14 @@ class _HomeScreenMasterCustomCardsState
                 ],
               ),
             ),
-            Gap(20),
+            Gap(30),
             // image & Gauge in center
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image(
-                  image: AssetImage("assets/images/SEDHOM.jpg"),
+                  image: AssetImage(widget.img),
                   width: ScreenArea.Width * 0.15,
                   height: ScreenArea.Height * 0.15,
                 ),
@@ -118,7 +146,7 @@ class _HomeScreenMasterCustomCardsState
                           ),
                         ),
                         Text(
-                          "${82}%",
+                          "${widget.value} %",
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             color: widget.card_color,
@@ -129,7 +157,18 @@ class _HomeScreenMasterCustomCardsState
                     ),
                     // Draw Guage
                     Gap(30),
-                    CustomGuage(value: 77, Guage_color: widget.card_color),
+                    CustomGuage(
+                      value: widget.value,
+                      Guage_color: widget.card_color,
+                      center: Text(
+                        "${widget.value} %",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w100,
+                          fontSize: 20,
+                          color: widget.card_color.withOpacity(0.7),
+                        ),
+                      ),
+                    ),
                     Gap(10),
                   ],
                 ),

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class CustomGuage extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final Color Guage_color;
   final int value;
-  const CustomGuage({
+  final Widget? center;
+  CustomGuage({
     super.key,
     // ignore: non_constant_identifier_names
     required this.Guage_color,
     required this.value,
+    this.center,
   });
 
   @override
@@ -23,12 +26,14 @@ class _CustomGuageState extends State<CustomGuage> {
       radius: 60.0,
       lineWidth: 15.0,
       percent: (widget.value / 100.0),
-      circularStrokeCap: CircularStrokeCap.butt,
+      circularStrokeCap: CircularStrokeCap.round,
+      // ignore: deprecated_member_use
       backgroundColor: widget.Guage_color.withOpacity(0.3),
       progressColor: widget.Guage_color,
       startAngle: 0,
       animation: true,
       animationDuration: 1000,
+      center: widget.center,
     );
   }
 }
