@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/Home_Screen.dart';
+import 'package:spu_linux_app/Screens/Start_screen/start_screen.dart';
 
 // ignore: camel_case_types
 class SPU_Linux_APP extends StatelessWidget {
@@ -11,7 +12,8 @@ class SPU_Linux_APP extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'SPU Linux App',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomeScreen(),
+      // home: const HomeScreen(),
+      home: StartScreen(),
     );
   }
 }

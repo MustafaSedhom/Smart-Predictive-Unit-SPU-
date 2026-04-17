@@ -6,7 +6,7 @@ class CustomGuage extends StatefulWidget {
   final Color Guage_color;
   final int value;
   final Widget? center;
-  CustomGuage({
+  const CustomGuage({
     super.key,
     // ignore: non_constant_identifier_names
     required this.Guage_color,
@@ -17,7 +17,6 @@ class CustomGuage extends StatefulWidget {
   @override
   State<CustomGuage> createState() => _CustomGuageState();
 }
-
 class _CustomGuageState extends State<CustomGuage> {
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class _CustomGuageState extends State<CustomGuage> {
       progressColor: widget.Guage_color,
       startAngle: 0,
       animation: true,
-      animationDuration: 1000,
+      animationDuration: 2000,
       center: widget.center,
     );
   }

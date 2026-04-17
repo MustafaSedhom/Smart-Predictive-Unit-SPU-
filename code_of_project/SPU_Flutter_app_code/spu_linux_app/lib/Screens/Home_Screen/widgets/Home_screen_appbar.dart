@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Responsive/Screen_Area.dart';
+import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_time_and_date.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 class HomeScreenAppbar extends StatelessWidget {
@@ -8,106 +9,86 @@ class HomeScreenAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: ScreenArea.Width * 0.8,
-      height: 130,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
+    return Container(
+      constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Row(
         children: [
-          Gap(20),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Gap(20),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
               Text(
-                "SMART REDUCTIVE UNIT (SPU)",
+                "SMART PREDICTIVE UNIT (SPU)",
                 style: TextStyle(
-                  fontSize: 35,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
               Text(
                 "Condition Monitoring & Predictive Maintenance",
-                style: TextStyle(fontSize: 24, color: Colors.white),
+                style: TextStyle(fontSize: 16, color: Colors.white70),
               ),
             ],
           ),
-          Spacer(),
-          Column(
-            children: [
-              Gap(20),
+
+          const Spacer(),
+          const Gap(30),
+          DigitalClockWidget(),
+
+          const Gap(30),
+
+          Row(
+            children: const [
+              Icon(Icons.account_circle, size: 35, color: Colors.white),
+              Gap(8),
               Text(
-                "16/04/2026",
+                "Admin",
                 style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
                   color: Colors.white,
-                ),
-              ),
-              Text(
-                "07:43:43 AM",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ],
           ),
-          Gap(20),
-          Column(
-            children: [
-              Gap(25),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Gap(10),
-                  Icon(Icons.account_circle, size: 40, color: Colors.white),
-                  Gap(10),
-                  Text(
-                    "Admin",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
+
+          const Gap(30),
+
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: AppColors.Start_indicator_background_color.withOpacity(
+                0.2,
               ),
-            ],
-          ),
-          Gap(20),
-          Column(
-            children: [
-              Gap(20),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  // ignore: deprecated_member_use
-                  color: AppColors.Start_indicator_background_color.withOpacity(
-                    0.8,
+              border: Border.all(
+                color: AppColors.Start_indicator_color.withOpacity(0.5),
+              ),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: Row(
+              children: [
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: AppColors.Start_indicator_color,
+                    shape: BoxShape.circle,
                   ),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 20,
-                  ),
-                  child: Center(
-                    child: Text(
-                      "System Running",
-                      style: TextStyle(
-                        color: AppColors.Start_indicator_color,
-                        fontSize: 20,
-                      ),
-                    ),
+                const Gap(8),
+                Text(
+                  "System Running",
+                  style: TextStyle(
+                    color: AppColors.Start_indicator_color,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-          Gap(20),
         ],
       ),
     );
