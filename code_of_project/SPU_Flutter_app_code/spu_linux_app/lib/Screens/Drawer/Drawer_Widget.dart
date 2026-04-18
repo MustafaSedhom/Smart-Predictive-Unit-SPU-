@@ -9,14 +9,18 @@ class DrawerWidget extends StatefulWidget {
   final Function(int index)? ontap;
   final List<DrawerItem>? data;
   final int? selectedIndex;
-  const DrawerWidget({super.key, required this.ontap, required this.data, required this.selectedIndex});
+  const DrawerWidget({
+    super.key,
+    required this.ontap,
+    required this.data,
+    required this.selectedIndex,
+  });
 
   @override
   State<DrawerWidget> createState() => _DrawerWidgetState();
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -46,7 +50,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 final item = items?[index];
                 return DrawerElements(
                   icon: item!.icon,
-                  text: item!.title,
+                  text: item.title,
                   isSelected: widget.selectedIndex == index,
                   onTap: () {
                     setState(() {

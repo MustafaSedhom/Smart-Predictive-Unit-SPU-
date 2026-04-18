@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:spu_linux_app/Screens/Drawer/Drawer_Widget.dart';
 import 'package:spu_linux_app/Screens/Drawer/widgets/Drawer_items.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/Home_Screen.dart';
-import 'package:spu_linux_app/Screens/Settings/setting_screen.dart';
+import 'package:spu_linux_app/Screens/Setting_screen/setting_screen.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 // ignore: must_be_immutable
 class DrawAllScreens extends StatefulWidget {
-  DrawAllScreens({super.key});
+  const DrawAllScreens({super.key});
 
   @override
   State<DrawAllScreens> createState() => _DrawAllScreensState();
@@ -54,7 +54,6 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
               },
               selectedIndex: selectedIndex,
             ),
-
             // Expanded(
             //   child: IndexedStack(
             //     index: selectedIndex,
