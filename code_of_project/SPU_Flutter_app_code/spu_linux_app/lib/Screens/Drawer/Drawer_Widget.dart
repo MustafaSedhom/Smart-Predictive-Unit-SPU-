@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:spu_linux_app/Screens/Home_Screen/widgets/Drawer_elments.dart';
-import 'package:spu_linux_app/Screens/Home_Screen/widgets/SPU_logo_in_Drawer.dart';
+import 'package:spu_linux_app/Screens/Drawer/widgets/Drawer_elments.dart';
+import 'package:spu_linux_app/Screens/Drawer/widgets/SPU_logo_in_Drawer.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 class DrawerWidget extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spu_linux_app/Screens/Home_Screen/widgets/Drawer_Widget.dart';
+import 'package:spu_linux_app/Screens/Drawer/Drawer_Widget.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_containe.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
