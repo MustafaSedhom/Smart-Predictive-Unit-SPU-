@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:spu_linux_app/Responsive/Screen_Area.dart';
 
 class CustomContainerForMasterCards extends StatefulWidget {
   // ignore: non_constant_identifier_names
@@ -24,8 +23,9 @@ class _CustomContainerForMasterCardsState
     extends State<CustomContainerForMasterCards> {
   @override
   Widget build(BuildContext context) {
+    double screen_width = MediaQuery.of(context).size.width;
     return Container(
-      width: ScreenArea.Width * 0.075,
+      width: screen_width * 0.075,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),

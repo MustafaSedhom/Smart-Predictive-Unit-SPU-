@@ -7,6 +7,10 @@ class SpuLogoInDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
+    double screen_width = MediaQuery.of(context).size.width;
+    // ignore: non_constant_identifier_names
+    double screen_hight = MediaQuery.of(context).size.height;
     return Container(
       decoration: BoxDecoration(
         color: AppColors.Drawer_color,
@@ -21,17 +25,16 @@ class SpuLogoInDrawer extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          // Icon(Icons.school, color: AppColors.Drawer_logo_text_color, size: 50),
           Image(
             image: AssetImage("assets/images/SEDHOM.jpg"),
-            width: 60,
-            height: 60,
+            width: screen_width * 0.05,
+            height: screen_hight * 0.05,
           ),
           Text(
             "SPU",
             style: GoogleFonts.poppins(
               color: AppColors.Drawer_logo_text_color,
-              fontSize: 70,
+              fontSize: screen_width * 0.04,
               fontWeight: FontWeight.bold,
             ),
           ),

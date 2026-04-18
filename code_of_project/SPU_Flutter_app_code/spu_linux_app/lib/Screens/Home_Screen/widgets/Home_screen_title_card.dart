@@ -35,7 +35,6 @@ class _HomeScreenTitleCardState extends State<HomeScreenTitleCard> {
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          // color: Color(0xFF1A1F26),
           // ignore: deprecated_member_use
           color: widget.card_color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12.0),

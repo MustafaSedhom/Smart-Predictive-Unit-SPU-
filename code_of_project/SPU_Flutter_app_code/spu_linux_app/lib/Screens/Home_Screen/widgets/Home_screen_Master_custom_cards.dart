@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:simple_shadow/simple_shadow.dart';
-import 'package:spu_linux_app/Responsive/Screen_Area.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Custom_Guage.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/custom_container_for_master_cards.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
@@ -61,7 +60,10 @@ class HomeScreenMasterCustomCards extends StatefulWidget {
     // ignore: non_constant_identifier_names
     required this.txt_3_down,
     // ignore: non_constant_identifier_names
-    required this.Days, required this.view_details, required this.configure,
+    required this.Days,
+    // ignore: non_constant_identifier_names
+    required this.view_details,
+    required this.configure,
   });
 
   @override
@@ -73,10 +75,14 @@ class _HomeScreenMasterCustomCardsState
     extends State<HomeScreenMasterCustomCards> {
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
+    double screen_width = MediaQuery.of(context).size.width;
+    // ignore: non_constant_identifier_names
+    double screen_height = MediaQuery.of(context).size.height;
     return Padding(
       padding: const EdgeInsetsGeometry.symmetric(horizontal: 20),
       child: Container(
-        width: ScreenArea.Width * 0.25,
+        width: 480,
         decoration: BoxDecoration(
           // ignore: deprecated_member_use
           color: widget.card_color.withOpacity(0.1),
@@ -164,8 +170,8 @@ class _HomeScreenMasterCustomCardsState
               children: [
                 Image(
                   image: AssetImage(widget.img),
-                  width: ScreenArea.Width * 0.15,
-                  height: ScreenArea.Height * 0.15,
+                  width: screen_width * 0.15,
+                  height: screen_height * 0.15,
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -280,7 +286,7 @@ class _HomeScreenMasterCustomCardsState
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 TextButton(
-                  onPressed:widget.view_details,
+                  onPressed: widget.view_details,
                   style: ButtonStyle(
                     backgroundColor: WidgetStatePropertyAll<Color>(
                       // ignore: deprecated_member_use
@@ -300,7 +306,7 @@ class _HomeScreenMasterCustomCardsState
                   ),
                 ),
                 TextButton(
-                  onPressed:widget.configure,
+                  onPressed: widget.configure,
                   style: ButtonStyle(
                     backgroundColor: WidgetStatePropertyAll<Color>(
                       // ignore: deprecated_member_use

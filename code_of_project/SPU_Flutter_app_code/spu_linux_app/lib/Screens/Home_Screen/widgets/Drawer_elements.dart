@@ -23,9 +23,10 @@ class DrawerElements extends StatefulWidget {
 class _DrawerElementsState extends State<DrawerElements> {
   @override
   Widget build(BuildContext context) {
+    double screen_height = MediaQuery.of(context).size.height;
     return Column(
       children: [
-        Gap(5),
+        Gap(20),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
           child: Container(
@@ -33,7 +34,7 @@ class _DrawerElementsState extends State<DrawerElements> {
               color: widget.isSelected
                   ? AppColors.Drawer_selected_color
                   : AppColors.Drawer_color,
-              borderRadius: BorderRadius.circular(60),
+              borderRadius: BorderRadius.circular(50),
             ),
             child: Column(
               children: [
@@ -49,12 +50,12 @@ class _DrawerElementsState extends State<DrawerElements> {
                             : AppColors.Drawer_text_color,
                         size: 40,
                       ),
-                      const Gap(10),
+                      Gap(screen_height * 0.001),
                       Text(
                         widget.text,
                         style: TextStyle(
                           color: AppColors.Drawer_text_color,
-                          fontSize: 30,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -62,7 +63,7 @@ class _DrawerElementsState extends State<DrawerElements> {
                   ),
                   onTap: widget.onTap,
                 ),
-                const Gap(20),
+                Gap(screen_height * 0.001),
               ],
             ),
           ),
