@@ -23,22 +23,33 @@ class DrawerElements extends StatefulWidget {
 class _DrawerElementsState extends State<DrawerElements> {
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
     double screen_height = MediaQuery.of(context).size.height;
+    // ignore: non_constant_identifier_names
+    double screen_width = MediaQuery.of(context).size.width;
     return Column(
       children: [
         Gap(20),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: widget.isSelected
-                  ? AppColors.Drawer_selected_color
-                  : AppColors.Drawer_color,
-              borderRadius: BorderRadius.circular(50),
+        Container(
+          padding: EdgeInsets.all(10),
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+
+          decoration: BoxDecoration(
+            color: widget.isSelected
+                // ignore: deprecated_member_use
+                ? AppColors.Drawer_selected_color.withOpacity(0.7)
+                : AppColors.Drawer_color,
+            borderRadius: BorderRadius.circular(20),
+            border: Border(
+              bottom: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+              left: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+              right: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+              top: BorderSide(color: AppColors.Drawer_text_color, width: 2),
             ),
+          ),
+          child: Center(
             child: Column(
               children: [
-                const Gap(20),
                 ListTile(
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -48,14 +59,16 @@ class _DrawerElementsState extends State<DrawerElements> {
                         color: widget.isSelected
                             ? AppColors.Drawer_icon_selected_color
                             : AppColors.Drawer_text_color,
-                        size: 40,
+                        size: screen_width * 0.02,
                       ),
                       Gap(screen_height * 0.001),
                       Text(
                         widget.text,
                         style: TextStyle(
-                          color: AppColors.Drawer_text_color,
-                          fontSize: 20,
+                          color: widget.isSelected
+                              ? AppColors.Drawer_icon_selected_color
+                              : AppColors.Drawer_text_color,
+                          fontSize: screen_width * 0.01,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -68,8 +81,6 @@ class _DrawerElementsState extends State<DrawerElements> {
             ),
           ),
         ),
-        Gap(5),
-        const Divider(),
       ],
     );
   }

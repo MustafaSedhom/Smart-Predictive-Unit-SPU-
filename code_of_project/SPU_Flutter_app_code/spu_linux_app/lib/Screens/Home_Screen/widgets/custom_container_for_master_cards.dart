@@ -23,9 +23,8 @@ class _CustomContainerForMasterCardsState
     extends State<CustomContainerForMasterCards> {
   @override
   Widget build(BuildContext context) {
-    double screen_width = MediaQuery.of(context).size.width;
     return Container(
-      width: screen_width * 0.075,
+      width: 150,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
