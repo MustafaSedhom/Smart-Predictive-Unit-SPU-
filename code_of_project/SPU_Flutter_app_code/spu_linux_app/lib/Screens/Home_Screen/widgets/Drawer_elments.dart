@@ -29,9 +29,8 @@ class _DrawerElementsState extends State<DrawerElements> {
     double screen_width = MediaQuery.of(context).size.width;
     return Column(
       children: [
-        Gap(20),
         Container(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(5),
           margin: EdgeInsets.symmetric(horizontal: 20, vertical: 4),
 
           decoration: BoxDecoration(
@@ -40,42 +39,50 @@ class _DrawerElementsState extends State<DrawerElements> {
                 ? AppColors.Drawer_selected_color.withOpacity(0.7)
                 : AppColors.Drawer_color,
             borderRadius: BorderRadius.circular(20),
-            border: Border(
-              bottom: BorderSide(color: AppColors.Drawer_text_color, width: 2),
-              left: BorderSide(color: AppColors.Drawer_text_color, width: 2),
-              right: BorderSide(color: AppColors.Drawer_text_color, width: 2),
-              top: BorderSide(color: AppColors.Drawer_text_color, width: 2),
-            ),
+            border: Border.all(color: AppColors.Drawer_text_color, width: 2),
           ),
           child: Center(
             child: Column(
               children: [
                 ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        widget.icon,
-                        color: widget.isSelected
-                            ? AppColors.Drawer_icon_selected_color
-                            : AppColors.Drawer_text_color,
-                        size: screen_width * 0.02,
-                      ),
-                      Gap(screen_height * 0.001),
-                      Text(
-                        widget.text,
-                        style: TextStyle(
+                  title: (screen_width < 1000)
+                      ? Icon(
+                          widget.icon,
                           color: widget.isSelected
                               ? AppColors.Drawer_icon_selected_color
                               : AppColors.Drawer_text_color,
-                          fontSize: screen_width * 0.01,
-                          fontWeight: FontWeight.bold,
+                          size: screen_width * 0.05,
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              widget.icon,
+                              color: widget.isSelected
+                                  ? AppColors.Drawer_icon_selected_color
+                                  : AppColors.Drawer_text_color,
+                              size: screen_width * 0.02,
+                            ),
+                            Gap(screen_height * 0.01),
+                            Expanded(
+                              child: Text(
+                                widget.text,
+                                style: TextStyle(
+                                  color: widget.isSelected
+                                      ? AppColors.Drawer_icon_selected_color
+                                      : AppColors.Drawer_text_color,
+                                  fontSize: screen_width * 0.01,
+                                  fontWeight: FontWeight.bold,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
                   onTap: widget.onTap,
                 ),
+                // (screen_width > 1000) ? Gap(screen_height * 0.001) : Gap(0),
                 Gap(screen_height * 0.001),
               ],
             ),

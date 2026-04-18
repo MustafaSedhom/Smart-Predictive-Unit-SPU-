@@ -34,7 +34,14 @@ class _DrawerWidgetState extends State<DrawerWidget> {
       color: AppColors.Drawer_color,
       child: Column(
         children: [
-          SizedBox(height: screenHeight * 0.15, child: SpuLogoInDrawer()),
+          SizedBox(
+            height: screenHeight * 0.15,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+              child: SpuLogoInDrawer(),
+            ),
+          ),
+          Divider(),
           Expanded(
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
@@ -54,6 +61,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               },
             ),
           ),
+          Divider(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
@@ -64,32 +72,31 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     width: double.infinity,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(10),
                       color: AppColors.Start_Button_color,
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: const Text(
                       "START SYSTEM",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 18,
+                        fontSize: 10,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-                const Gap(10),
                 Text(
                   "SPU v1.0.0",
                   style: TextStyle(
                     // ignore: deprecated_member_use
                     color: Colors.white.withOpacity(0.5),
-                    fontSize: 14,
+                    fontSize: 10,
                   ),
                 ),
-                const Gap(20),
+                const Gap(5),
               ],
             ),
           ),

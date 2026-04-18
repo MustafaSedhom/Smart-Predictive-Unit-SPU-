@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_Master_cards.dart';
@@ -9,6 +11,7 @@ class HomeScreenContainers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screen_hight = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
@@ -17,9 +20,9 @@ class HomeScreenContainers extends StatelessWidget {
           HomeScreenAppbar(),
           Gap(5),
           Divider(),
-          Gap(5),
+          Gap(screen_hight * 0.05),
           HomeScreenTitles(),
-          Gap(20),
+          Gap(screen_hight * 0.1),
           HomeScreenMasterCard(),
         ],
       ),

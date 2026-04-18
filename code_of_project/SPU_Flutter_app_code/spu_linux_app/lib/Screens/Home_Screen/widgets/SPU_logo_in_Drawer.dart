@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
@@ -15,31 +16,45 @@ class SpuLogoInDrawer extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.Drawer_color,
         border: Border(
-          top: BorderSide(color: AppColors.Drawer_text_color, width: 2),
-          bottom: BorderSide(color: AppColors.Drawer_text_color, width: 2),
-          left: BorderSide(color: AppColors.Drawer_text_color, width: 2),
-          right: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+          top: BorderSide(color: AppColors.Drawer_text_color, width: 1),
+          bottom: BorderSide(color: AppColors.Drawer_text_color, width: 1),
+          left: BorderSide(color: AppColors.Drawer_text_color, width: 1),
+          right: BorderSide(color: AppColors.Drawer_text_color, width: 1),
         ),
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(10),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Image(
-            image: AssetImage("assets/images/SEDHOM.jpg"),
-            width: screen_width * 0.05,
-            height: screen_hight * 0.05,
-          ),
-          Text(
-            "SPU",
-            style: GoogleFonts.poppins(
-              color: AppColors.Drawer_logo_text_color,
-              fontSize: screen_width * 0.04,
-              fontWeight: FontWeight.bold,
+      child: (screen_width < 1000)
+          ? Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Image(
+                image: AssetImage("assets/images/SPU_Logo.jpg"),
+                width: screen_width * 0.1,
+                height: screen_hight * 0.1,
+              ),
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Gap(2),
+                Image(
+                  image: AssetImage("assets/images/SPU_Logo.jpg"),
+                  width: screen_width * 0.06,
+                  height: screen_hight * 0.06,
+                ),
+                Gap(screen_width * 0.01),
+                Expanded(
+                  child: Text(
+                    "SPU",
+                    style: GoogleFonts.poppins(
+                      color: AppColors.Drawer_logo_text_color,
+                      fontSize: screen_width * 0.025,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
