@@ -27,7 +27,7 @@ class SpuLogoInDrawer extends StatelessWidget {
           ? Padding(
               padding: const EdgeInsets.all(5.0),
               child: Image(
-                image: AssetImage("assets/images/SPU_Logo.jpg"),
+                image: AssetImage("assets/images/SPU_Logo.png"),
                 width: screen_width * 0.1,
                 height: screen_hight * 0.1,
               ),
@@ -37,7 +37,7 @@ class SpuLogoInDrawer extends StatelessWidget {
               children: [
                 Gap(2),
                 Image(
-                  image: AssetImage("assets/images/SPU_Logo.jpg"),
+                  image: AssetImage("assets/images/SPU_Logo.png"),
                   width: screen_width * 0.06,
                   height: screen_hight * 0.06,
                 ),

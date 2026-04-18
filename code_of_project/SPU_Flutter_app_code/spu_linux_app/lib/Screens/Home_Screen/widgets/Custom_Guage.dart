@@ -31,7 +31,7 @@ class _CustomGuageState extends State<CustomGuage> {
       progressColor: widget.Guage_color,
       startAngle: 0,
       animation: true,
-      animationDuration: 2000,
+      animationDuration: 3000,
       center: widget.center,
     );
   }
