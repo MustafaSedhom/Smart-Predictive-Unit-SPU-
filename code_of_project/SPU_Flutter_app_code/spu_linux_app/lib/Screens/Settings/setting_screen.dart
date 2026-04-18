@@ -5,9 +5,10 @@ import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_Master_cards.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_appbar.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_titles.dart';
+import 'package:spu_linux_app/colors/App_colors.dart';
 
-class HomeScreenContainers extends StatelessWidget {
-  const HomeScreenContainers({super.key});
+class SettingScreen extends StatelessWidget {
+  const SettingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +17,10 @@ class HomeScreenContainers extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       child: Column(
         children: [
-          Gap(10),
-          HomeScreenAppbar(),
-          Gap(5),
-          Divider(),
-          Gap(screen_hight * 0.05),
-          HomeScreenTitles(),
-          Gap(screen_hight * 0.1),
-          HomeScreenMasterCard(),
+          Text(
+            "SETTING",
+            style: TextStyle(fontSize: 50, color: AppColors.Drawer_text_color),
+          ),
         ],
       ),
     );

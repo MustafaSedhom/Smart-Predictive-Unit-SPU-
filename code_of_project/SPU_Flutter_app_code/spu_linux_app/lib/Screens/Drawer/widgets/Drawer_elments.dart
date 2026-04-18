@@ -82,7 +82,6 @@ class _DrawerElementsState extends State<DrawerElements> {
                         ),
                   onTap: widget.onTap,
                 ),
-                // (screen_width > 1000) ? Gap(screen_height * 0.001) : Gap(0),
                 Gap(screen_height * 0.001),
               ],
             ),

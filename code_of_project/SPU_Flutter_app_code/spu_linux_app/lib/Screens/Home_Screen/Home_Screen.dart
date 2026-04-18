@@ -1,30 +1,30 @@
-import 'package:flutter/material.dart';
-import 'package:spu_linux_app/Screens/Drawer/Drawer_Widget.dart';
-import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_containe.dart';
-import 'package:spu_linux_app/colors/App_colors.dart';
+// ignore_for_file: non_constant_identifier_names
 
-class HomeScreen extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_Master_cards.dart';
+import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_appbar.dart';
+import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_titles.dart';
+
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.Home_screen_background,
-      body: SizedBox.expand(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const DrawerWidget(),
-
-            const Expanded(child: HomeScreenContainers()),
-          ],
-        ),
+    double screen_hight = MediaQuery.of(context).size.height;
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          Gap(10),
+          HomeScreenAppbar(),
+          Gap(5),
+          Divider(),
+          Gap(screen_hight * 0.05),
+          HomeScreenTitles(),
+          Gap(screen_hight * 0.1),
+          HomeScreenMasterCard(),
+        ],
       ),
     );
   }

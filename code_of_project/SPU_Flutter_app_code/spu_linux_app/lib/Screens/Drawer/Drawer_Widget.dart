@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Drawer/widgets/Drawer_elments.dart';
+import 'package:spu_linux_app/Screens/Drawer/widgets/Drawer_items.dart';
 import 'package:spu_linux_app/Screens/Drawer/widgets/SPU_logo_in_Drawer.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 class DrawerWidget extends StatefulWidget {
-  const DrawerWidget({super.key});
+  final Function(int index)? ontap;
+  final List<DrawerItem>? data;
+  final int? selectedIndex;
+  const DrawerWidget({super.key, required this.ontap, required this.data, required this.selectedIndex});
 
   @override
   State<DrawerWidget> createState() => _DrawerWidgetState();
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    Map<String, IconData> drawerItems = {
-      "Home": Icons.home_rounded,
-      "Message": Icons.message,
-      "Alarm": Icons.notifications,
-      "Profile": Icons.person,
-      "Settings": Icons.settings,
-    };
-    final items = drawerItems.entries.toList();
+    final items = widget.data;
 
     return Container(
       width: screenWidth * 0.17,
@@ -45,16 +41,16 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           Expanded(
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
-              itemCount: items.length,
+              itemCount: items?.length,
               itemBuilder: (context, index) {
-                final item = items[index];
+                final item = items?[index];
                 return DrawerElements(
-                  icon: item.value,
-                  text: item.key,
-                  isSelected: selectedIndex == index,
+                  icon: item!.icon,
+                  text: item!.title,
+                  isSelected: widget.selectedIndex == index,
                   onTap: () {
                     setState(() {
-                      selectedIndex = index;
+                      widget.ontap!(index);
                     });
                   },
                 );

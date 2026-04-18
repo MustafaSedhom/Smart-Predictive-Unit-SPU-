@@ -21,7 +21,6 @@ class SPU_Linux_APP extends StatelessWidget {
         },
       ),
       theme: ThemeData(primarySwatch: Colors.blue),
-      // home: const HomeScreen(),
       home: StartScreen(),
     );
   }

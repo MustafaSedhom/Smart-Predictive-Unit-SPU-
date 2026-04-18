@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:spu_linux_app/Screens/Home_Screen/Home_Screen.dart';
+import 'package:spu_linux_app/Screens/Draw_all_screens.dart';
+import 'package:spu_linux_app/Screens/Drawer/Drawer_Widget.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -24,7 +25,7 @@ class _StartScreenState extends State<StartScreen> {
         // Check if the widget is still in the tree
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          MaterialPageRoute(builder: (context) =>  DrawAllScreens()),
         );
       }
     });
