@@ -17,12 +17,13 @@ class CustomGuage extends StatefulWidget {
   @override
   State<CustomGuage> createState() => _CustomGuageState();
 }
+
 class _CustomGuageState extends State<CustomGuage> {
   @override
   Widget build(BuildContext context) {
     return CircularPercentIndicator(
-      radius: 60.0,
-      lineWidth: 15.0,
+      radius: 40,
+      lineWidth: 10.0,
       percent: (widget.value / 100.0),
       circularStrokeCap: CircularStrokeCap.round,
       // ignore: deprecated_member_use

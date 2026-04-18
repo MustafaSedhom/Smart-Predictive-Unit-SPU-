@@ -75,14 +75,10 @@ class _HomeScreenMasterCustomCardsState
     extends State<HomeScreenMasterCustomCards> {
   @override
   Widget build(BuildContext context) {
-    // ignore: non_constant_identifier_names
-    double screen_width = MediaQuery.of(context).size.width;
-    // ignore: non_constant_identifier_names
-    double screen_height = MediaQuery.of(context).size.height;
     return Padding(
-      padding: const EdgeInsetsGeometry.symmetric(horizontal: 20),
+      padding: const EdgeInsetsGeometry.symmetric(horizontal: 5),
       child: Container(
-        width: 480,
+        width: 250,
         decoration: BoxDecoration(
           // ignore: deprecated_member_use
           color: widget.card_color.withOpacity(0.1),
@@ -95,7 +91,7 @@ class _HomeScreenMasterCustomCardsState
           children: [
             // upper contain
             Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 // ignore: deprecated_member_use
                 color: widget.card_color.withOpacity(0.3),
@@ -109,7 +105,7 @@ class _HomeScreenMasterCustomCardsState
               ),
               child: Row(
                 children: [
-                  Gap(20),
+                  Gap(5),
                   SimpleShadow(
                     opacity: 0.9,
                     color: widget.card_color,
@@ -117,23 +113,23 @@ class _HomeScreenMasterCustomCardsState
                     sigma: 10,
                     child: Image.asset(
                       widget.img_icon,
-                      width: 50,
-                      height: 50,
+                      width: 30,
+                      height: 30,
                       color: widget.card_color,
                     ),
                   ),
-                  Gap(30),
+                  Gap(10),
                   Text(
                     widget.name,
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: 15,
                       fontWeight: FontWeight.w500,
                       color: AppColors.Drawer_text_color,
                     ),
                   ),
                   Spacer(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
@@ -143,14 +139,14 @@ class _HomeScreenMasterCustomCardsState
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                           vertical: 0,
-                          horizontal: 20,
+                          horizontal: 10,
                         ),
                         child: Center(
                           child: Text(
                             widget.status_name,
                             style: TextStyle(
                               color: AppColors.Drawer_text_color,
-                              fontSize: 25,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -162,17 +158,12 @@ class _HomeScreenMasterCustomCardsState
                 ],
               ),
             ),
-            Gap(30),
             // image & Gauge in center
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image(
-                  image: AssetImage(widget.img),
-                  width: screen_width * 0.15,
-                  height: screen_height * 0.15,
-                ),
+                Image(image: AssetImage(widget.img), width: 100, height: 100),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -185,7 +176,7 @@ class _HomeScreenMasterCustomCardsState
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             color: AppColors.Drawer_text_color,
-                            fontSize: 20,
+                            fontSize: 10,
                           ),
                         ),
                         Text(
@@ -193,13 +184,13 @@ class _HomeScreenMasterCustomCardsState
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             color: widget.card_color,
-                            fontSize: 30,
+                            fontSize: 20,
                           ),
                         ),
                       ],
                     ),
                     // Draw Guage
-                    Gap(30),
+                    Gap(10),
                     CustomGuage(
                       value: widget.value,
                       Guage_color: widget.card_color,
@@ -207,7 +198,8 @@ class _HomeScreenMasterCustomCardsState
                         "${widget.value} %",
                         style: TextStyle(
                           fontWeight: FontWeight.w100,
-                          fontSize: 20,
+                          fontSize: 10,
+                          // ignore: deprecated_member_use
                           color: widget.card_color.withOpacity(0.7),
                         ),
                       ),
@@ -218,7 +210,6 @@ class _HomeScreenMasterCustomCardsState
                 Gap(10),
               ],
             ),
-            Gap(20),
             // sensor cards
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -239,48 +230,46 @@ class _HomeScreenMasterCustomCardsState
                 Gap(5),
               ],
             ),
-            Gap(10),
             // time and days
             Row(
               children: [
-                Gap(20),
+                Gap(5),
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 10,
+                    vertical: 5,
+                    horizontal: 5,
                   ),
                   child: Text(
                     "Predicted Fault : ",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: AppColors.Drawer_text_color,
-                      fontSize: 20,
+                      fontSize: 12,
                     ),
                   ),
                 ),
                 Icon(
                   Icons.timelapse_rounded,
                   color: widget.card_color,
-                  size: 30,
+                  size: 15,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    vertical: 10,
-                    horizontal: 10,
+                    vertical: 5,
+                    horizontal: 5,
                   ),
                   child: Text(
                     "in ${widget.Days} Days",
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: Colors.amber,
-                      fontSize: 25,
+                      fontSize: 15,
                     ),
                   ),
                 ),
               ],
             ),
             Divider(color: widget.card_color),
-            Gap(10),
             // Buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -302,7 +291,7 @@ class _HomeScreenMasterCustomCardsState
                       "VIEW DETAILS",
                       style: TextStyle(
                         color: AppColors.Drawer_text_color,
-                        fontSize: 25,
+                        fontSize: 10,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -322,14 +311,14 @@ class _HomeScreenMasterCustomCardsState
                       "CONFIGURE",
                       style: TextStyle(
                         color: AppColors.Drawer_text_color,
-                        fontSize: 25,
+                        fontSize: 10,
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-            Gap(10),
+            Gap(5),
           ],
         ),
       ),

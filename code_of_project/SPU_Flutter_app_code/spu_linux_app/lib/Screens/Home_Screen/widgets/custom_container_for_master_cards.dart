@@ -24,8 +24,8 @@ class _CustomContainerForMasterCardsState
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
-      padding: EdgeInsets.all(10),
+      width: 75,
+      padding: EdgeInsets.all(5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.white, width: 0.25),
@@ -40,16 +40,16 @@ class _CustomContainerForMasterCardsState
             widget.txt_up,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontSize: 10,
               color: Colors.white,
             ),
           ),
-          Gap(20),
+          Gap(5),
           Text(
             widget.txt_down,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 24,
+              fontSize: 12,
               color: Colors.white,
             ),
           ),

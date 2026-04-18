@@ -58,8 +58,7 @@ class _HomeScreenTitleCardState extends State<HomeScreenTitleCard> {
             Gap(10),
             Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   widget.title_upper,
@@ -74,7 +73,7 @@ class _HomeScreenTitleCardState extends State<HomeScreenTitleCard> {
                   widget.title_down,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 10,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
