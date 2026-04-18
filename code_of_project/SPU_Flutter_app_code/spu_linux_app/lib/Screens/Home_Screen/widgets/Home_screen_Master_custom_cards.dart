@@ -280,39 +280,41 @@ class _HomeScreenMasterCustomCardsState
               ],
             ),
             Divider(color: widget.card_color),
-            Gap(20),
+            Gap(10),
             // Buttons
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TextButton(
                   onPressed: widget.view_details,
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll<Color>(
-                      // ignore: deprecated_member_use
-                      Colors.blueAccent.withOpacity(0.8),
+                  style: TextButton.styleFrom(
+                    backgroundColor: AppColors.button_master_card_1_color,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    shadowColor: WidgetStatePropertyAll<Color>(Colors.green),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 5,
+                    ),
                     child: Text(
                       "VIEW DETAILS",
                       style: TextStyle(
                         color: AppColors.Drawer_text_color,
-                        fontSize: 30,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
                 TextButton(
                   onPressed: widget.configure,
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll<Color>(
-                      // ignore: deprecated_member_use
-                      Colors.blueGrey.withOpacity(0.3),
+                  style: TextButton.styleFrom(
+                    backgroundColor: AppColors.button_master_card_2_color,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    shadowColor: WidgetStatePropertyAll<Color>(Colors.green),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -320,14 +322,14 @@ class _HomeScreenMasterCustomCardsState
                       "CONFIGURE",
                       style: TextStyle(
                         color: AppColors.Drawer_text_color,
-                        fontSize: 30,
+                        fontSize: 25,
                       ),
                     ),
                   ),
                 ),
               ],
             ),
-            Gap(20),
+            Gap(10),
           ],
         ),
       ),

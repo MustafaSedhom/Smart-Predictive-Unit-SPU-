@@ -9,20 +9,18 @@ class HomeScreenContainers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            HomeScreenAppbar(),
-            Gap(10),
-            Divider(),
-            Gap(20),
-            HomeScreenTitles(),
-            Gap(20),
-            HomeScreenMasterCard(),
-          ],
-        ),
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Column(
+        children: [
+          HomeScreenAppbar(),
+          Gap(10),
+          Divider(),
+          Gap(20),
+          HomeScreenTitles(),
+          Gap(20),
+          HomeScreenMasterCard(),
+        ],
       ),
     );
   }

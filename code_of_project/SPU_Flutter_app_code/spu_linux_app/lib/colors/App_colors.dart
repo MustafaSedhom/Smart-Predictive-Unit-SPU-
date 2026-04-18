@@ -27,4 +27,8 @@ class AppColors {
   static const Color home_screen_title_sensor_color = Colors.green;
   // ignore: constant_identifier_names
   static const Color home_screen_title_maintenance_color = Colors.deepPurple;
+  // ignore: constant_identifier_names
+  static const Color button_master_card_1_color = Color(0xff0559c3);
+  // ignore: constant_identifier_names
+  static const Color button_master_card_2_color = Color(0xff28374c);
 }

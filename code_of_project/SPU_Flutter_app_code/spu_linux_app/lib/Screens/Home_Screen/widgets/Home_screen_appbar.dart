@@ -38,7 +38,7 @@ class HomeScreenAppbar extends StatelessWidget {
                 ),
               ],
             ),
-            Gap(screenWidth * 0.36),
+            Gap(screenWidth * 0.35),
             DigitalClockWidget(),
             const Gap(30),
             Row(
@@ -62,28 +62,35 @@ class HomeScreenAppbar extends StatelessWidget {
 
   Widget _buildStatusIndicator() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: AppColors.Start_indicator_background_color.withOpacity(0.1),
+        // ignore: deprecated_member_use
+        color: AppColors.Start_indicator_background_color.withOpacity(0.7),
         border: Border.all(
+          // ignore: deprecated_member_use
           color: AppColors.Start_indicator_color.withOpacity(0.3),
         ),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             width: 10,
             height: 10,
             decoration: const BoxDecoration(
-              color: Colors.green,
+              color: Colors.lightGreen,
               shape: BoxShape.circle,
             ),
           ),
           const Gap(10),
           const Text(
             "System Running",
-            style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: Colors.lightGreen,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
           ),
         ],
       ),
