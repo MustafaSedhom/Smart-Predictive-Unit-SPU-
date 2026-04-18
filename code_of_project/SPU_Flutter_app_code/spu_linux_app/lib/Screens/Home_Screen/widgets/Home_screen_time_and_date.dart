@@ -11,25 +11,25 @@ class DigitalClockWidget extends StatelessWidget {
       stream: Stream.periodic(const Duration(seconds: 1)),
       builder: (context, snapshot) {
         DateTime now = DateTime.now();
-        String formattedTime = DateFormat('hh:mm:ss a').format(now);
-        String formattedDate = DateFormat('dd/MM/yyyy').format(now);
+        String formattedTime = DateFormat('hh : mm : ss a').format(now);
+        String formattedDate = DateFormat('dd / MM / yyyy').format(now);
         "${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}:${now.second.toString().padLeft(2, '0')}";
         return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              formattedDate,
-              style: const TextStyle(
-                fontSize: 20,
+              formattedTime,
+              style: TextStyle(
+                fontSize: 15,
                 color: AppColors.Drawer_text_color,
-                fontWeight: FontWeight.bold,
               ),
             ),
             Text(
-              formattedTime,
-              style: TextStyle(
-                fontSize: 18,
+              formattedDate,
+              style: const TextStyle(
+                fontSize: 10,
                 color: AppColors.Drawer_text_color,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],

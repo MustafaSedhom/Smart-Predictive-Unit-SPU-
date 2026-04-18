@@ -13,7 +13,6 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    // استخدمنا SizedBox.expand لضمان أن الـ Scaffold يأخذ حجم الشاشة بالكامل
     return Scaffold(
       backgroundColor: AppColors.Home_screen_background,
       body: SizedBox.expand(
@@ -21,10 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // 1. Drawer ثابت في مكانه (Width ثابت)
             const DrawerWidget(),
 
-            // 2. محتوى الشاشة هو اللي هيكون جواه السكرول
             const Expanded(child: HomeScreenContainers()),
           ],
         ),

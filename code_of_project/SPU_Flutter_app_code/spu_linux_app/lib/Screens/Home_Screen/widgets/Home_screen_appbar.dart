@@ -11,7 +11,7 @@ class HomeScreenAppbar extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return SizedBox(
-      height: 100,
+      height: 40,
       width: double.infinity,
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -19,7 +19,7 @@ class HomeScreenAppbar extends StatelessWidget {
         child: Row(
           children: [
             // 1. Titles
-            Gap(30),
+            Gap(10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -27,7 +27,7 @@ class HomeScreenAppbar extends StatelessWidget {
                 Text(
                   "SMART PREDICTIVE UNIT (SPU)",
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -38,22 +38,23 @@ class HomeScreenAppbar extends StatelessWidget {
                 ),
               ],
             ),
-            Gap(screenWidth * 0.35),
+            Gap(screenWidth * 0.15),
             DigitalClockWidget(),
-            const Gap(30),
+            const Gap(15),
             Row(
               children: const [
                 Icon(Icons.account_circle, size: 35, color: Colors.white),
                 Gap(8),
                 Text(
                   "Admin",
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  style: TextStyle(fontSize: 12, color: Colors.white),
                 ),
               ],
             ),
 
-            const Gap(30),
+            const Gap(10),
             _buildStatusIndicator(),
+            const Gap(10),
           ],
         ),
       ),
@@ -89,7 +90,7 @@ class HomeScreenAppbar extends StatelessWidget {
             style: TextStyle(
               color: Colors.lightGreen,
               fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontSize: 10,
             ),
           ),
         ],

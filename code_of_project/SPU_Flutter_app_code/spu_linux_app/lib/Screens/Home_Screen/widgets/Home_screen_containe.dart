@@ -13,6 +13,7 @@ class HomeScreenContainers extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       child: Column(
         children: [
+          Gap(10),
           HomeScreenAppbar(),
           Gap(10),
           Divider(),
