@@ -38,7 +38,7 @@ class HomeScreenAppbar extends StatelessWidget {
                 ),
               ],
             ),
-            Gap(screenWidth * 0.15),
+            Gap(screenWidth * 0.14),
             DigitalClockWidget(),
             const Gap(15),
             Row(

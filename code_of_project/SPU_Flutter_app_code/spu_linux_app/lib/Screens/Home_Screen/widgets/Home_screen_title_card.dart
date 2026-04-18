@@ -31,7 +31,7 @@ class _HomeScreenTitleCardState extends State<HomeScreenTitleCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsGeometry.symmetric(horizontal: 20),
+      padding: const EdgeInsetsGeometry.symmetric(horizontal: 10),
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
@@ -50,12 +50,12 @@ class _HomeScreenTitleCardState extends State<HomeScreenTitleCard> {
               sigma: 10,
               child: Image.asset(
                 widget.icon_img,
-                width: 50,
-                height: 50,
+                width: 30,
+                height: 30,
                 color: widget.card_color,
               ),
             ),
-            Gap(20),
+            Gap(10),
             Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class _HomeScreenTitleCardState extends State<HomeScreenTitleCard> {
                   widget.title_upper,
                   style: TextStyle(
                     color: widget.card_color,
-                    fontSize: 20,
+                    fontSize: 10,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -74,13 +74,12 @@ class _HomeScreenTitleCardState extends State<HomeScreenTitleCard> {
                   widget.title_down,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 10,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
-            Gap(40),
           ],
         ),
       ),

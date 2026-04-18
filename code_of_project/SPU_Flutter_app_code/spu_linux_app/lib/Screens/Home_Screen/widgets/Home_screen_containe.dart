@@ -15,9 +15,9 @@ class HomeScreenContainers extends StatelessWidget {
         children: [
           Gap(10),
           HomeScreenAppbar(),
-          Gap(10),
+          Gap(5),
           Divider(),
-          Gap(20),
+          Gap(5),
           HomeScreenTitles(),
           Gap(20),
           HomeScreenMasterCard(),
