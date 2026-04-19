@@ -1,0 +1,11 @@
+{
+    "Motor1": {"enable": "False"},
+    "Belt_Motor1": {"enable": "False"},
+    "Pump_Motor1": {"enable": "False"},
+    "Motor2": {"enable": "False"},
+    "Belt_Motor2": {"enable": "False"},
+    "Pump_Motor2": {"enable": "False"},
+    "Motor3": {"enable": "False"},
+    "Belt_Motor3": {"enable": "False"},
+    "Pump_Motor3": {"enable": "False"}
+}
