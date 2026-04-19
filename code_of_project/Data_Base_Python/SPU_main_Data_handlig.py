@@ -72,7 +72,7 @@ def choose_key():
     print("4 -> Sensors")
     return int(input("Enter: "))
 
-def main():
+def control_app_Data():
     while True:
         actuator = choose_actuator()
         if actuator == "Exit":
@@ -149,10 +149,61 @@ def main():
                     pump.set_Predicted_fault(value)
 
             elif key == 4:
-                pass
-
+                if(actuator == "Motor"):
+                    print("\nChoose type of Motor Sensor:")
+                    print("1 -> Temperature")
+                    print("2 -> Vibration")
+                    print("3 -> Current")
+                    print("4 -> Exit")
+                    choose_sensor = int(input("Enter: "))
+                    if choose_sensor == 1:
+                        value = float(input("Enter value: "))
+                        motor.set_Temperature(value)
+                    elif choose_sensor == 2:
+                        value = float(input("Enter value: "))
+                        motor.set_Vibration(value)
+                    elif choose_sensor == 3:
+                        value = float(input("Enter value: "))
+                        motor.set_Current(value)
+                    elif choose_sensor == 4:
+                        break
+                elif(actuator == "Belt_Driver"):
+                    print("\nChoose type of Belt Driver Sensor:")
+                    print("1 -> Tension")
+                    print("2 -> Alignment")
+                    print("3 -> Speed")
+                    print("4 -> Exit")
+                    choose_sensor = int(input("Enter: "))
+                    if choose_sensor == 1:
+                        value = float(input("Enter value: "))
+                        belt.set_Tension(value)
+                    elif choose_sensor == 2:
+                        value = float(input("Enter value: "))
+                        belt.set_Alignment(value)
+                    elif choose_sensor == 3:
+                        value = float(input("Enter value: "))
+                        belt.set_Speed(value)
+                    elif choose_sensor == 4:
+                        break
+                elif(actuator == "Pump"):
+                    print("\nChoose type of Pump Sensor:")
+                    print("1 -> Pressure In")
+                    print("2 -> Flow Rate")
+                    print("3 -> Temprtautre")
+                    print("4 -> Exit")
+                    choose_sensor = int(input("Enter: "))
+                    if choose_sensor == 1:
+                        value = float(input("Enter value: "))
+                        pump.set_Pressure_In(value)
+                    elif choose_sensor == 2:
+                        value = float(input("Enter value: "))
+                        pump.set_Flow_Rate(value)
+                    elif choose_sensor == 3:
+                        value = float(input("Enter value: "))
+                        pump.set_Temperature(value)
+                    elif choose_sensor == 4:
+                        break
         print("\n==============================\n")
 
-
 if __name__ == "__main__":
-    main()
+    control_app_Data()
