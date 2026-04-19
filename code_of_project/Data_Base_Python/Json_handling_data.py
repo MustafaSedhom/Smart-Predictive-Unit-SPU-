@@ -1,7 +1,7 @@
 import json
 import os
 # Data class
-class Data:
+class Handle_Json:
     # Constructor
     def __init__(self,file_path):
         self.file_path = file_path
@@ -26,3 +26,4 @@ class Data:
     def write_data(self, data):
         with open(self.file_path, "w") as file:
             json.dump(data, file, indent=4)
+

@@ -1,3 +1,4 @@
+
 # Arduino (Sensors)
 #         ↓
 #    Serial / WiFi
@@ -7,18 +8,19 @@
 #    JSON Output
 #         ↓
 # Flutter App (Dashboard)
-from Json_handling_data import Data
+
+from handling_Data import Data_from_json
 import os
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(base_dir, "SPU_Data_between_app_and_python_Rassbiary_pi.json")
 
-Data_from_app = Data(file_path)
 
-data = Data_from_app.Read_Data()
-motor_current = data["Actuators"]["Motor"]["Sensors"]["Current"]
-motor_status = data["Actuators"]["Motor"]["status"]
-print(f"value ->  {type(motor_current)}   ->   {motor_current}")
-print(f"value ->  {type(motor_status)}   ->   {motor_status}")
+Data = Data_from_json(file_path)
 
+print(Data.Overall_Health)
+print(Data.Active_alarms)
+print(Data.Sensors_online)
+print(Data.Next_Maintenance)
+print(Data.Actuators)
 
