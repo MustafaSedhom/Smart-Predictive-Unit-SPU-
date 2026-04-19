@@ -8,17 +8,17 @@
     "Next_Maintenance": 200,
     "Actuators": {
         "Motor": {
-            "status": "Normal",
+            "status": "normal",
             "Predicted_fault": 45,
-            "Health": 10,
+            "Health": 55.0,
             "Sensors": {
-                "Temperature": 10,
+                "Temperature": 70,
                 "Vibration": 3.3,
                 "Current": 2.1
             }
         },
         "Belt_Driver": {
-            "status": "Warning",
+            "status": "normal",
             "Predicted_fault": 12,
             "Health": 64,
             "Sensors": {
@@ -28,7 +28,7 @@
             }
         },
         "Pump": {
-            "status": "Alert",
+            "status": "alert",
             "Predicted_fault": 5,
             "Health": 38,
             "Sensors": {

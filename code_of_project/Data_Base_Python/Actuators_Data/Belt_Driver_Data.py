@@ -26,25 +26,25 @@ class Belt_Driver_Data:
     # SET METHODS
     # ======================
     def set_status(self, val):
-        self.__data.json_data_access["Actuators"]["Motor"]["status"] = val
+        self.__data.json_data_access["Actuators"]["Belt_Driver"]["status"] = val
         self.save_data()
     def set_Predicted_fault(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Predicted_fault"] = val
+        self.__data.json_data_access["Actuators"]["Belt_Driver"]["Predicted_fault"] = val
         self.save_data()
     def set_Health(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Health"] = val
+        self.__data.json_data_access["Actuators"]["Belt_Driver"]["Health"] = val
         self.save_data()
     def set_Sensors(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"] = val
+        self.__data.json_data_access["Actuators"]["Belt_Driver"]["Sensors"] = val
         self.save_data()
     def set_Tension(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["Tension"] = val
+        self.__data.json_data_access["Actuators"]["Belt_Driver"]["Sensors"]["Tension"] = val
         self.save_data()
     def set_Alignment(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["Alignment"] = val
+        self.__data.json_data_access["Actuators"]["Belt_Driver"]["Sensors"]["Alignment"] = val
         self.save_data()
     def set_Speed(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["Speed"] = val
+        self.__data.json_data_access["Actuators"]["Belt_Driver"]["Sensors"]["Speed"] = val
         self.save_data()
     # ======================
     # SAVE

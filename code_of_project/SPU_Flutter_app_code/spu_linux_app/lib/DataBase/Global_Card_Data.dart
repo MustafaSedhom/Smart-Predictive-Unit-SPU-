@@ -1,0 +1,68 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:spu_linux_app/DataBase/json_file_path.dart';
+
+class SensorsOnline {
+  final int active;
+  final int total;
+
+  SensorsOnline({required this.active, required this.total});
+
+  factory SensorsOnline.fromJson(Map<String, dynamic> json) {
+    return SensorsOnline(
+      active: json['active'] ?? 0,
+      total: json['total'] ?? 0,
+    );
+  }
+}
+
+class SystemData {
+  final int overallHealth;
+  final int activeAlarms;
+  final int nextMaintenance;
+  final SensorsOnline sensorsOnline;
+
+  SystemData({
+    required this.overallHealth,
+    required this.activeAlarms,
+    required this.nextMaintenance,
+    required this.sensorsOnline,
+  });
+
+  factory SystemData.fromJson(Map<String, dynamic> json) {
+    return SystemData(
+      overallHealth: (json['overall_Health'] as num?)?.toInt() ?? 0,
+
+      activeAlarms: (json['Active_Alarms'] as num?)?.toInt() ?? 0,
+
+      nextMaintenance: (json['Next_Maintenance'] as num?)?.toInt() ?? 0,
+
+      sensorsOnline: SensorsOnline.fromJson(
+        json['sensors_online'] as Map<String, dynamic>? ?? {},
+      ),
+    );
+  }
+}
+
+Future<SystemData> loadSystemFromFile() async {
+  try {
+    final file = File(JsonFilePath.path);
+
+    if (!await file.exists()) {
+      return SystemData(
+        overallHealth: 0,
+        activeAlarms: 0,
+        nextMaintenance: 0,
+        sensorsOnline: SensorsOnline(active: 0, total: 0),
+      );
+    }
+
+    final data = await file.readAsString();
+    final jsonResult = jsonDecode(data);
+
+    return SystemData.fromJson(jsonResult);
+  } catch (e) {
+    throw Exception("Failed to load system file: $e");
+  }
+}

@@ -6,8 +6,6 @@ import 'package:spu_linux_app/Screens/Home_Screen/widgets/custom_container_for_m
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 class HomeScreenMasterCustomCards extends StatefulWidget {
-  // ignore: non_constant_identifier_names
-  final Color card_color;
   final int value;
   final String name;
   final String img;
@@ -37,8 +35,6 @@ class HomeScreenMasterCustomCards extends StatefulWidget {
   final Function() configure;
   const HomeScreenMasterCustomCards({
     super.key,
-    // ignore: non_constant_identifier_names
-    required this.card_color,
     required this.value,
     required this.name,
     required this.img,
@@ -75,15 +71,24 @@ class _HomeScreenMasterCustomCardsState
     extends State<HomeScreenMasterCustomCards> {
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
+    Color card_color = Colors.red;
+    if (widget.status_name.toUpperCase() == "WARNING") {
+      card_color = Colors.amber;
+    } else if (widget.status_name.toUpperCase() == "NORMAL") {
+      card_color = Colors.green;
+    } else {
+      card_color = Colors.red;
+    }
     return Padding(
       padding: const EdgeInsetsGeometry.symmetric(horizontal: 5),
       child: Container(
         width: 250,
         decoration: BoxDecoration(
           // ignore: deprecated_member_use
-          color: widget.card_color.withOpacity(0.1),
+          color: card_color.withOpacity(0.1),
           borderRadius: BorderRadius.circular(12.0),
-          border: Border.all(color: widget.card_color, width: 1),
+          border: Border.all(color: card_color, width: 1),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -94,28 +99,28 @@ class _HomeScreenMasterCustomCardsState
               padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 // ignore: deprecated_member_use
-                color: widget.card_color.withOpacity(0.3),
+                color: card_color.withOpacity(0.3),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(12),
                   topRight: Radius.circular(12),
                   bottomLeft: Radius.circular(0),
                   bottomRight: Radius.circular(0),
                 ),
-                border: Border.all(color: widget.card_color, width: 1),
+                border: Border.all(color: card_color, width: 1),
               ),
               child: Row(
                 children: [
                   Gap(5),
                   SimpleShadow(
                     opacity: 0.9,
-                    color: widget.card_color,
+                    color: card_color,
                     offset: Offset(2, 2),
                     sigma: 10,
                     child: Image.asset(
                       widget.img_icon,
                       width: 30,
                       height: 30,
-                      color: widget.card_color,
+                      color: card_color,
                     ),
                   ),
                   Gap(10),
@@ -134,7 +139,7 @@ class _HomeScreenMasterCustomCardsState
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         // ignore: deprecated_member_use
-                        color: widget.card_color,
+                        color: card_color,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -143,7 +148,7 @@ class _HomeScreenMasterCustomCardsState
                         ),
                         child: Center(
                           child: Text(
-                            widget.status_name,
+                            widget.status_name.toUpperCase(),
                             style: TextStyle(
                               color: AppColors.Drawer_text_color,
                               fontSize: 15,
@@ -183,7 +188,7 @@ class _HomeScreenMasterCustomCardsState
                           "${widget.value} %",
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            color: widget.card_color,
+                            color: card_color,
                             fontSize: 20,
                           ),
                         ),
@@ -193,14 +198,14 @@ class _HomeScreenMasterCustomCardsState
                     Gap(10),
                     CustomGuage(
                       value: widget.value,
-                      Guage_color: widget.card_color,
+                      Guage_color: card_color,
                       center: Text(
                         "${widget.value} %",
                         style: TextStyle(
                           fontWeight: FontWeight.w100,
                           fontSize: 10,
                           // ignore: deprecated_member_use
-                          color: widget.card_color.withOpacity(0.7),
+                          color: card_color.withOpacity(0.7),
                         ),
                       ),
                     ),
@@ -248,11 +253,7 @@ class _HomeScreenMasterCustomCardsState
                     ),
                   ),
                 ),
-                Icon(
-                  Icons.timelapse_rounded,
-                  color: widget.card_color,
-                  size: 15,
-                ),
+                Icon(Icons.timelapse_rounded, color: card_color, size: 15),
                 Padding(
                   padding: const EdgeInsets.symmetric(
                     vertical: 5,
@@ -269,7 +270,7 @@ class _HomeScreenMasterCustomCardsState
                 ),
               ],
             ),
-            Divider(color: widget.card_color),
+            Divider(color: card_color),
             // Buttons
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

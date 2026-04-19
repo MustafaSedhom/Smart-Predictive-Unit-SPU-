@@ -26,25 +26,25 @@ class Pump_Data:
     # SET METHODS
     # ======================
     def set_status(self, val):
-        self.__data.json_data_access["Actuators"]["Motor"]["status"] = val
+        self.__data.json_data_access["Actuators"]["Pump"]["status"] = val
         self.save_data()
     def set_Predicted_fault(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Predicted_fault"] = val
+        self.__data.json_data_access["Actuators"]["Pump"]["Predicted_fault"] = val
         self.save_data()
     def set_Health(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Health"] = val
+        self.__data.json_data_access["Actuators"]["Pump"]["Health"] = val
         self.save_data()
     def set_Sensors(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"] = val
+        self.__data.json_data_access["Actuators"]["Pump"]["Sensors"] = val
         self.save_data()
     def set_Pressure_In(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["Pressure_In"] = val
+        self.__data.json_data_access["Actuators"]["Pump"]["Sensors"]["Pressure_In"] = val
         self.save_data()
     def set_Flow_Rate(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["Flow_Rate"] = val
+        self.__data.json_data_access["Actuators"]["Pump"]["Sensors"]["Flow_Rate"] = val
         self.save_data()
     def set_Temperature(self,val):
-        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["Temperature"] = val
+        self.__data.json_data_access["Actuators"]["Pump"]["Sensors"]["Temperature"] = val
         self.save_data()
     # ======================
     # SAVE

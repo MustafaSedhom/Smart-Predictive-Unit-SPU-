@@ -39,7 +39,10 @@ class _DrawerElementsState extends State<DrawerElements> {
                 ? AppColors.Drawer_selected_color.withOpacity(0.7)
                 : AppColors.Drawer_color,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.Drawer_text_color, width: 2),
+            border: Border(
+              top: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+              left: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+            ),
           ),
           child: Center(
             child: Column(
