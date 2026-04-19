@@ -1,11 +1,42 @@
 {
-    "Motor1": {"enable": "False"},
-    "Belt_Motor1": {"enable": "False"},
-    "Pump_Motor1": {"enable": "False"},
-    "Motor2": {"enable": "False"},
-    "Belt_Motor2": {"enable": "False"},
-    "Pump_Motor2": {"enable": "False"},
-    "Motor3": {"enable": "False"},
-    "Belt_Motor3": {"enable": "False"},
-    "Pump_Motor3": {"enable": "False"}
+    "overall_Health" : 70,
+    "Active_Alarms" : 3,
+   "sensors_online": {
+        "active": 15,
+        "total": 16
+    },
+    "Next_Maintenance" : 18,
+    "Actuators":
+    {
+        "Motor":{
+            "status" : "Normal",
+            "Predicted_fault":45,
+            "Health" : 82,
+            "Sensors" : {
+                "Temperature" : 65,
+                "Vibration" : 3.3,
+                "Current" : 8.5
+            }
+        },
+        "Belt_Driver":{
+            "status" : "Warning",
+            "Predicted_fault":12,
+            "Health" : 64,
+            "Sensors" : {
+                "Tension" : 385,
+                "Alignment" : 0.5,
+                "Speed" : 1480
+            }
+        },
+        "Pump":{
+            "status" : "Alert",
+            "Predicted_fault":5,
+            "Health" : 38,
+            "Sensors" : {
+                "Pressure_In" : 2.5,
+                "Flow_Rate" : 18.5,
+                "Temperature" : 72
+            }
+        }
+    }
 }
