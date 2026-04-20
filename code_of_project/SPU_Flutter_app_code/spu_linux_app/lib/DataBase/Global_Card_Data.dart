@@ -47,7 +47,11 @@ class SystemData {
 
 Future<SystemData> loadSystemFromFile() async {
   try {
-    final file = File(JsonFilePath.path);
+    if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
+      throw Exception("File path is not set");
+    }
+
+    final file = File(JsonFilePath.path!);
 
     if (!await file.exists()) {
       return SystemData(
@@ -59,10 +63,20 @@ Future<SystemData> loadSystemFromFile() async {
     }
 
     final data = await file.readAsString();
+
+    if (data.isEmpty) {
+      throw Exception("File is empty");
+    }
+
     final jsonResult = jsonDecode(data);
 
     return SystemData.fromJson(jsonResult);
   } catch (e) {
-    throw Exception("Failed to load system file: $e");
+    return SystemData(
+      overallHealth: 0,
+      activeAlarms: 0,
+      nextMaintenance: 0,
+      sensorsOnline: SensorsOnline(active: 0, total: 0),
+    );
   }
 }

@@ -24,7 +24,7 @@ class _CustomGuageState extends State<CustomGuage> {
     return CircularPercentIndicator(
       radius: 40,
       lineWidth: 10.0,
-      percent: (widget.value / 100.0),
+      percent: (widget.value <= 100) ? (widget.value / 100.0) : 1,
       circularStrokeCap: CircularStrokeCap.round,
       // ignore: deprecated_member_use
       backgroundColor: widget.Guage_color.withOpacity(0.3),

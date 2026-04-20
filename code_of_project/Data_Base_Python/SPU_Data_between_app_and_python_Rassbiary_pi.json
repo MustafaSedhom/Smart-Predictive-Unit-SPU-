@@ -1,40 +1,40 @@
 {
-    "overall_Health": 70,
-    "Active_Alarms": 3,
+    "overall_Health": 5,
+    "Active_Alarms": 12,
     "sensors_online": {
-        "active": 5,
+        "active": 1,
         "total": 10
     },
-    "Next_Maintenance": 12,
+    "Next_Maintenance": 55,
     "Actuators": {
         "Motor": {
             "status": "normal",
-            "Predicted_fault": 45,
-            "Health": 90,
+            "Predicted_fault": 22,
+            "Health": 80,
             "Sensors": {
-                "Temperature": 28,
+                "Temperature": 58,
                 "Vibration": 3.3,
-                "Current": 8.1
+                "Current":1.1
             }
         },
         "Belt_Driver": {
             "status": "warning",
-            "Predicted_fault": 12,
+            "Predicted_fault": 21,
             "Health": 45,
             "Sensors": {
-                "Tension": 385,
+                "Tension": 400,
                 "Alignment": 0.5,
-                "Speed": 1480
+                "Speed": 1410
             }
         },
         "Pump": {
             "status": "alert",
-            "Predicted_fault": 5,
-            "Health": 28,
+            "Predicted_fault": 12,
+            "Health": 23,
             "Sensors": {
-                "Pressure_In": 2.5,
+                "Pressure_In": 21.5,
                 "Flow_Rate": 13.4,
-                "Temperature": 33
+                "Temperature": 65
             }
         }
     }

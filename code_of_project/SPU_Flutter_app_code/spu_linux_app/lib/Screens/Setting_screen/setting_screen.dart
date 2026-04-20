@@ -1,9 +1,79 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:spu_linux_app/DataBase/json_file_path.dart';
+import 'package:spu_linux_app/Screens/Setting_screen/widgets/Custom_text_feild.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:file_picker/file_picker.dart';
 
-class SettingScreen extends StatelessWidget {
-  const SettingScreen({super.key});
+// ignore: must_be_immutable
+class SettingScreen extends StatefulWidget {
+  SettingScreen({super.key});
+
+  @override
+  State<SettingScreen> createState() => _SettingScreenState();
+}
+
+class _SettingScreenState extends State<SettingScreen> {
+  TextEditingController nameController = TextEditingController();
+  FilePickerResult? result;
+  String? File_path = "";
+  Future<void> saveFilePath(String path) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("file_path", path);
+  }
+
+  Future<void> loadSavedPath() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? savedPath = prefs.getString("file_path");
+
+    if (savedPath != null) {
+      setState(() {
+        nameController.text = savedPath;
+      });
+    }
+  }
+  Future<String?> getFilePath() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString("file_path");
+  }
+
+  Future<String?> loadFilePath() async {
+    result = await FilePicker.pickFiles(
+      allowMultiple: false,
+      type: FileType.custom,
+      allowedExtensions: ["json"],
+    );
+    if (result != null) {
+      PlatformFile file = result!.files.first;
+      File_path = File_path;
+      return file.path!;
+    }
+    return "";
+  }
+
+@override
+  void initState() {
+    super.initState();
+    loadPath();
+  }
+
+  void loadPath() async {
+    String? path = await getFilePath();
+    if (path != null) {
+      setState(() {
+        nameController.text = path;
+        JsonFilePath.path = path;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +81,74 @@ class SettingScreen extends StatelessWidget {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            "SETTING",
-            style: TextStyle(fontSize: 50, color: AppColors.Drawer_text_color),
+          Gap(20),
+          SizedBox(
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    "File Data Base :",
+                    style: TextStyle(
+                      color: AppColors.Drawer_text_color,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Gap(20),
+                  Expanded(
+                    child: CustomTextField(
+                      controller: nameController,
+                      hint: "Json File Path",
+                      prefix_icon: Icons.edit,
+                      suffix_icon: Icons.upload_file,
+                      ontap_suffix_icon: () async {
+                        String? path = await loadFilePath();
+
+                        if (path != null) {
+                          setState(() {
+                            nameController.text = path;
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                  Gap(20),
+                  TextButton(
+                   onPressed: () async {
+                      if (nameController.text.isNotEmpty) {
+                        await saveFilePath(nameController.text);
+                        JsonFilePath.path = nameController.text;
+                      }
+                    },
+                    style: TextButton.styleFrom(
+                      backgroundColor: AppColors.button_master_card_1_color,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 5,
+                      ),
+                      child: Text(
+                        "Save",
+                        style: TextStyle(
+                          color: AppColors.Drawer_text_color,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

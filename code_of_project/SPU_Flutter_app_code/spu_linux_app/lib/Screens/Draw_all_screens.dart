@@ -20,19 +20,19 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
     DrawerItem(
       title: "Home",
       icon: Icons.home_rounded,
-      page: const HomeScreen(),
+      page:  HomeScreen(),
     ),
-    DrawerItem(title: "Message", icon: Icons.message, page: const HomeScreen()),
+    DrawerItem(title: "Message", icon: Icons.message, page:  HomeScreen()),
     DrawerItem(
       title: "Alarm",
       icon: Icons.notifications,
-      page: const HomeScreen(),
+      page:  HomeScreen(),
     ),
-    DrawerItem(title: "Profile", icon: Icons.person, page: const HomeScreen()),
+    DrawerItem(title: "Profile", icon: Icons.person, page:  HomeScreen()),
     DrawerItem(
       title: "Settings",
       icon: Icons.settings,
-      page: const SettingScreen(),
+      page: SettingScreen(),
     ),
   ];
 

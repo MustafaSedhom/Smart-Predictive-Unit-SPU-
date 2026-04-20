@@ -31,29 +31,56 @@ class BeltDriver {
   });
 
   factory BeltDriver.fromJson(Map<String, dynamic> json) {
+    final belt = json["Actuators"]?['Belt_Driver'] as Map<String, dynamic>? ?? {};
+    final sensors =
+        json["Actuators"]?['Belt_Driver']?["Sensors"] as Map<String, dynamic>? ?? {};
     return BeltDriver(
-      Predicted_fault: (json['Predicted_fault'] as num?)?.toInt() ?? 0,
-      status: json['status'] ?? "unknown",
-      Health: (json['Health'] as num?)?.toInt() ?? 0,
+      Predicted_fault: (belt['Predicted_fault'] as num?)?.toInt() ?? 0,
+      status: belt['status'] ?? "unknown",
+      Health: (belt['Health'] as num?)?.toInt() ?? 0,
 
-      Tension: (json['Sensors']['Tension'] as num?)?.toInt() ?? 0,
-      Alignment: (json['Sensors']['Alignment'] as num?)?.toDouble() ?? 0.0,
-      Speed: (json['Sensors']['Speed'] as num?)?.toInt() ?? 0,
+      Tension: (sensors['Tension'] as num?)?.toInt() ?? 0,
+      Alignment: (sensors['Alignment'] as num?)?.toDouble() ?? 0.0,
+      Speed: (sensors['Speed'] as num?)?.toInt() ?? 0,
     );
   }
 }
 Future<BeltDriver> loadBeltDriverFromFile() async {
-  final file = File(JsonFilePath.path);
+  try {
+    if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
+      throw Exception("File path is not set");
+    }
+
+    final file = File(JsonFilePath.path!);
+
     if (!await file.exists()) {
+      return BeltDriver(
+        Predicted_fault: 0,
+        status: "",
+        Health: 0,
+        Tension: 0,
+        Alignment: 0,
+        Speed: 0,
+      );
+    }
+
+    final data = await file.readAsString();
+
+    if (data.isEmpty) {
+      throw Exception("File is empty");
+    }
+
+    final jsonResult = jsonDecode(data);
+
+    return BeltDriver.fromJson(jsonResult);
+  } catch (e) {
     return BeltDriver(
       Predicted_fault: 0,
       status: "",
-      Health: 0, Tension: 0, Alignment: 0, Speed: 0,
-
+      Health: 0,
+      Tension: 0,
+      Alignment: 0,
+      Speed: 0,
     );
   }
-  String data = await file.readAsString();
-  final jsonResult = jsonDecode(data);
-  final motorJson = jsonResult['Actuators']['Belt_Driver'];
-  return BeltDriver.fromJson(motorJson);
 }
