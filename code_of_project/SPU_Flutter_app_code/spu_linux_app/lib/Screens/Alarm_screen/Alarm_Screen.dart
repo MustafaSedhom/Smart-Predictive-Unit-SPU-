@@ -56,19 +56,6 @@ class AlarmScreen extends StatelessWidget {
       Time: "11 : 01 : 13",
       value: "78 °C",
     ),
-    // {"title": "Motor", "value": "Running", "icon": Icons.settings},
-    // {"title": "Temperature", "value": "32°C", "icon": Icons.thermostat},
-    // {"title": "Vibration", "value": "1.2 mm/s", "icon": Icons.graphic_eq},
-    // {"title": "Motor", "value": "Running", "icon": Icons.settings},
-    // {"title": "Temperature", "value": "32°C", "icon": Icons.thermostat},
-    // {"title": "Vibration", "value": "1.2 mm/s", "icon": Icons.graphic_eq},
-    // {"title": "Motor", "value": "Running", "icon": Icons.settings},
-    // {"title": "Temperature", "value": "32°C", "icon": Icons.thermostat},
-    // {"title": "Vibration", "value": "1.2 mm/s", "icon": Icons.graphic_eq},
-    // {"title": "Current", "value": "1.4 A", "icon": Icons.bolt},
-    // {"title": "Current", "value": "1.4 A", "icon": Icons.bolt},
-    // {"title": "Current", "value": "1.4 A", "icon": Icons.bolt},
-    // {"title": "Current", "value": "1.4 A", "icon": Icons.bolt},
   ];
   @override
   Widget build(BuildContext context) {

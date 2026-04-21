@@ -15,10 +15,12 @@ class CustomListViewContainer extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.Drawer_selected_color,
+        // ignore: deprecated_member_use
+        color: AppColors.Drawer_selected_color.withOpacity(0.2),
         borderRadius: BorderRadius.circular(15),
+
         boxShadow: [
-          BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(2, 2)),
+          BoxShadow(color: Colors.black54, blurRadius: 5, offset: Offset(1, 1)),
         ],
       ),
       child: Row(
