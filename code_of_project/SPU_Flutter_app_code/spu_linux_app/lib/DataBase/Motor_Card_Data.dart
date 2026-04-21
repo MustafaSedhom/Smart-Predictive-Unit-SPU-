@@ -48,6 +48,15 @@ class Motor {
   }
 }
 
+// ignore: non_constant_identifier_names
+Motor none_motor = Motor(
+  Predicted_fault: 0,
+  status: "None",
+  Health: 0,
+  Temperature: 0,
+  Vibration: 0,
+  Current: 0,
+);
 Future<Motor> loadMotorFromFile() async {
   try {
     if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
@@ -57,14 +66,7 @@ Future<Motor> loadMotorFromFile() async {
     final file = File(JsonFilePath.path!);
 
     if (!await file.exists()) {
-      return Motor(
-        Predicted_fault: 0,
-        status: "",
-        Health: 0,
-        Temperature: 0,
-        Vibration: 0,
-        Current: 0,
-      );
+      return none_motor;
     }
 
     final data = await file.readAsString();
@@ -77,13 +79,6 @@ Future<Motor> loadMotorFromFile() async {
 
     return Motor.fromJson(jsonResult);
   } catch (e) {
-    return Motor(
-      Predicted_fault: 0,
-      status: "None",
-      Health: 0,
-      Temperature: 0,
-      Vibration: 0,
-      Current: 0,
-    );
+    return none_motor;
   }
 }

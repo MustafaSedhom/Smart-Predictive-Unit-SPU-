@@ -52,6 +52,15 @@ class Pump {
   }
 }
 
+// ignore: non_constant_identifier_names
+Pump none_pump = Pump(
+  Predicted_fault: 0,
+  status: "None",
+  Health: 0,
+  Temperature: 0,
+  Pressure_In: 0,
+  Flow_Rate: 0,
+);
 Future<Pump> loadPumpFromFile() async {
   try {
     if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
@@ -61,14 +70,7 @@ Future<Pump> loadPumpFromFile() async {
     final file = File(JsonFilePath.path!);
 
     if (!await file.exists()) {
-      return Pump(
-        Predicted_fault: 0,
-        status: "None",
-        Health: 0,
-        Temperature: 0,
-        Pressure_In: 0,
-        Flow_Rate: 0,
-      );
+      return none_pump;
     }
 
     final data = await file.readAsString();
@@ -81,13 +83,6 @@ Future<Pump> loadPumpFromFile() async {
 
     return Pump.fromJson(jsonResult);
   } catch (e) {
-    return Pump(
-      Predicted_fault: 0,
-      status: "None",
-      Health: 0,
-      Temperature: 0,
-      Pressure_In: 0,
-      Flow_Rate: 0,
-    );
+    return none_pump;
   }
 }

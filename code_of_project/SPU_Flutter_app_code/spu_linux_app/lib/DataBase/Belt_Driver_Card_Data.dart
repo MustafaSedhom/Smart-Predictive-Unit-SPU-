@@ -31,9 +31,12 @@ class BeltDriver {
   });
 
   factory BeltDriver.fromJson(Map<String, dynamic> json) {
-    final belt = json["Actuators"]?['Belt_Driver'] as Map<String, dynamic>? ?? {};
+    final belt =
+        json["Actuators"]?['Belt_Driver'] as Map<String, dynamic>? ?? {};
     final sensors =
-        json["Actuators"]?['Belt_Driver']?["Sensors"] as Map<String, dynamic>? ?? {};
+        json["Actuators"]?['Belt_Driver']?["Sensors"]
+            as Map<String, dynamic>? ??
+        {};
     return BeltDriver(
       Predicted_fault: (belt['Predicted_fault'] as num?)?.toInt() ?? 0,
       status: belt['status'] ?? "unknown",
@@ -45,6 +48,16 @@ class BeltDriver {
     );
   }
 }
+
+// ignore: non_constant_identifier_names
+BeltDriver none_belt_driver = BeltDriver(
+  Predicted_fault: 0,
+  status: "None",
+  Health: 0,
+  Tension: 0,
+  Alignment: 0,
+  Speed: 0,
+);
 Future<BeltDriver> loadBeltDriverFromFile() async {
   try {
     if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
@@ -54,14 +67,7 @@ Future<BeltDriver> loadBeltDriverFromFile() async {
     final file = File(JsonFilePath.path!);
 
     if (!await file.exists()) {
-      return BeltDriver(
-        Predicted_fault: 0,
-        status: "",
-        Health: 0,
-        Tension: 0,
-        Alignment: 0,
-        Speed: 0,
-      );
+      return none_belt_driver;
     }
 
     final data = await file.readAsString();
@@ -74,13 +80,6 @@ Future<BeltDriver> loadBeltDriverFromFile() async {
 
     return BeltDriver.fromJson(jsonResult);
   } catch (e) {
-    return BeltDriver(
-      Predicted_fault: 0,
-      status: "",
-      Health: 0,
-      Tension: 0,
-      Alignment: 0,
-      Speed: 0,
-    );
+    return none_belt_driver;
   }
 }

@@ -45,6 +45,13 @@ class SystemData {
   }
 }
 
+// ignore: non_constant_identifier_names
+SystemData none_system_data = SystemData(
+  overallHealth: 0,
+  activeAlarms: 0,
+  nextMaintenance: 0,
+  sensorsOnline: SensorsOnline(active: 0, total: 0),
+);
 Future<SystemData> loadSystemFromFile() async {
   try {
     if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
@@ -54,12 +61,7 @@ Future<SystemData> loadSystemFromFile() async {
     final file = File(JsonFilePath.path!);
 
     if (!await file.exists()) {
-      return SystemData(
-        overallHealth: 0,
-        activeAlarms: 0,
-        nextMaintenance: 0,
-        sensorsOnline: SensorsOnline(active: 0, total: 0),
-      );
+      return none_system_data;
     }
 
     final data = await file.readAsString();
@@ -72,11 +74,6 @@ Future<SystemData> loadSystemFromFile() async {
 
     return SystemData.fromJson(jsonResult);
   } catch (e) {
-    return SystemData(
-      overallHealth: 0,
-      activeAlarms: 0,
-      nextMaintenance: 0,
-      sensorsOnline: SensorsOnline(active: 0, total: 0),
-    );
+    return none_system_data;
   }
 }
