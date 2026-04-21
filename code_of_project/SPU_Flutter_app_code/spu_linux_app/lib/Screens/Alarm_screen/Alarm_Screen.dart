@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:spu_linux_app/Screens/Alarm_screen/widgets/Custom_list_view_container.dart';
 
 class AlarmScreen extends StatelessWidget {
   AlarmScreen({super.key});
@@ -20,59 +22,39 @@ class AlarmScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(12),
-      child: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          final item = items[index];
-
-          return Container(
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade900,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 6,
-                  offset: Offset(2, 2),
-                ),
-              ],
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Title
+          Text(
+            "Last Alarms",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
-            child: Row(
-              children: [
-                Icon(item["icon"], size: 30, color: Colors.green),
-                const SizedBox(width: 15),
+          ),
+          Gap(5),
+          // ListView Sensors
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: ListView.builder(
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
 
-                /// TEXTS
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item["title"],
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        item["value"],
-                        style: TextStyle(color: Colors.white70, fontSize: 14),
-                      ),
-                    ],
-                  ),
-                ),
-
-                /// STATUS ICON
-                Icon(Icons.circle, color: Colors.green, size: 12),
-              ],
+                  return CustomListViewContainer(
+                    icon: item["icon"],
+                    title: item["title"],
+                    value: item["value"],
+                  );
+                },
+              ),
             ),
-          );
-        },
+          ),
+        ],
       ),
     );
   }
