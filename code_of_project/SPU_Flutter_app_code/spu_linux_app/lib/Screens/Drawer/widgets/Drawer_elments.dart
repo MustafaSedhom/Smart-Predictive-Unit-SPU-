@@ -42,6 +42,8 @@ class _DrawerElementsState extends State<DrawerElements> {
             border: Border(
               top: BorderSide(color: AppColors.Drawer_text_color, width: 2),
               left: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+              bottom: BorderSide(color: AppColors.Drawer_text_color, width: 2),
+              right: BorderSide(color: AppColors.Drawer_text_color, width: 2),
             ),
           ),
           child: Center(

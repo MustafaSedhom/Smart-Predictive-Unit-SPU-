@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:spu_linux_app/Screens/Alarm_screen/Alarm_Screen.dart';
 import 'package:spu_linux_app/Screens/Drawer/Drawer_Widget.dart';
 import 'package:spu_linux_app/Screens/Drawer/widgets/Drawer_items.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/Home_Screen.dart';
@@ -15,29 +16,28 @@ class DrawAllScreens extends StatefulWidget {
 
 class _DrawAllScreensState extends State<DrawAllScreens> {
   int selectedIndex = 0;
-
-  List<DrawerItem> menuItems = [
-    DrawerItem(
-      title: "Home",
-      icon: Icons.home_rounded,
-      page:  HomeScreen(),
-    ),
-    DrawerItem(title: "Message", icon: Icons.message, page:  HomeScreen()),
-    DrawerItem(
-      title: "Alarm",
-      icon: Icons.notifications,
-      page:  HomeScreen(),
-    ),
-    DrawerItem(title: "Profile", icon: Icons.person, page:  HomeScreen()),
-    DrawerItem(
-      title: "Settings",
-      icon: Icons.settings,
-      page: SettingScreen(),
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    List<DrawerItem> menuItems = [
+      DrawerItem(title: "Home", icon: Icons.home_rounded, page: HomeScreen()),
+      DrawerItem(
+        title: "Details",
+        icon: Icons.data_saver_off_rounded,
+        page: HomeScreen(),
+      ),
+      DrawerItem(title: "Alarm", icon: Icons.notifications, page: AlarmScreen()),
+      DrawerItem(title: "AI Data", icon: Icons.chat, page: HomeScreen()),
+      DrawerItem(
+        title: "Settings",
+        icon: Icons.settings,
+        page: SettingScreen(),
+      ),
+      DrawerItem(
+        title: "About",
+        icon: Icons.add_box_rounded,
+        page: HomeScreen(),
+      ),
+    ];
     return Scaffold(
       backgroundColor: AppColors.Home_screen_background,
       body: SizedBox.expand(
