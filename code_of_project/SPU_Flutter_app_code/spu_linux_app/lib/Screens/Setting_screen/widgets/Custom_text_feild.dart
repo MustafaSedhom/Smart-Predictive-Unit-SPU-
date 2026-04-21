@@ -7,20 +7,16 @@ class CustomTextField extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final IconData prefix_icon;
   // ignore: non_constant_identifier_names
-  final IconData suffix_icon;
-  // ignore: non_constant_identifier_names
-  final Function() ontap_suffix_icon;
+  final Function() ontap_prefix_icon;
 
   const CustomTextField({
     super.key,
     required this.controller,
     this.hint = "Enter text",
     // ignore: non_constant_identifier_names
-    required this.ontap_suffix_icon,
+    required this.ontap_prefix_icon,
     // ignore: non_constant_identifier_names
     this.prefix_icon = Icons.edit,
-    // ignore: non_constant_identifier_names
-    this.suffix_icon = Icons.edit,
   });
 
   @override
@@ -38,7 +34,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 200),
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
         decoration: BoxDecoration(
           color: AppColors.Home_screen_background,
           borderRadius: BorderRadius.circular(16),
@@ -63,7 +59,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           controller: widget.controller,
           style: TextStyle(
             color: AppColors.Drawer_text_color,
-            fontSize: 25,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
           ),
           decoration: InputDecoration(
@@ -73,27 +69,23 @@ class _CustomTextFieldState extends State<CustomTextField> {
               color: AppColors.Drawer_text_color.withOpacity(0.5),
             ),
 
-            prefixIcon: Icon(
-              widget.prefix_icon,
-              color: AppColors.Drawer_text_color,
-            ),
-            suffix: InkWell(
-              onTap: widget.ontap_suffix_icon,
+            prefixIcon: InkWell(
+              onTap: widget.ontap_prefix_icon,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 15,
                   vertical: 8,
                 ),
                 child: Icon(
-                  widget.suffix_icon,
+                  widget.prefix_icon,
                   color: AppColors.Drawer_text_color,
+                  size: 25,
                 ),
               ),
             ),
-
             suffixIcon: widget.controller.text.isNotEmpty
                 ? IconButton(
-                    icon: Icon(Icons.close, color: Colors.red),
+                    icon: Icon(Icons.close, color: Colors.red, size: 25),
                     onPressed: () {
                       widget.controller.clear();
                       setState(() {});

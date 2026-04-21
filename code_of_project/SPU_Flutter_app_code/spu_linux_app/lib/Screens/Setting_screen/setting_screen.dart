@@ -19,6 +19,7 @@ class _SettingScreenState extends State<SettingScreen> {
   TextEditingController nameController = TextEditingController();
   FilePickerResult? result;
   String? File_path = "";
+  bool isLoading = false;
   Future<void> saveFilePath(String path) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("file_path", path);
@@ -34,6 +35,7 @@ class _SettingScreenState extends State<SettingScreen> {
       });
     }
   }
+
   Future<String?> getFilePath() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString("file_path");
@@ -53,7 +55,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return "";
   }
 
-@override
+  @override
   void initState() {
     super.initState();
     loadPath();
@@ -91,22 +93,23 @@ class _SettingScreenState extends State<SettingScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  // title
                   Text(
                     "File Data Base :",
                     style: TextStyle(
                       color: AppColors.Drawer_text_color,
-                      fontSize: 30,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Gap(20),
+                  // Text field
                   Expanded(
                     child: CustomTextField(
                       controller: nameController,
                       hint: "Json File Path",
-                      prefix_icon: Icons.edit,
-                      suffix_icon: Icons.upload_file,
-                      ontap_suffix_icon: () async {
+                      prefix_icon: Icons.upload_file,
+                      ontap_prefix_icon: () async {
                         String? path = await loadFilePath();
 
                         if (path != null) {
@@ -118,33 +121,50 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ),
                   Gap(20),
+                  // Save Button
                   TextButton(
-                   onPressed: () async {
-                      if (nameController.text.isNotEmpty) {
-                        await saveFilePath(nameController.text);
-                        JsonFilePath.path = nameController.text;
-                      }
-                    },
+                    onPressed: isLoading
+                        ? null
+                        : () async {
+                            setState(() => isLoading = true);
+
+                            if (nameController.text.isNotEmpty) {
+                              await saveFilePath(nameController.text);
+                              JsonFilePath.path = nameController.text;
+                            }
+
+                            await Future.delayed(Duration(seconds: 1));
+
+                            setState(() => isLoading = false);
+
+                            ScaffoldMessenger.of(
+                              // ignore: use_build_context_synchronously
+                              context,
+                            ).showSnackBar(SnackBar(content: Text("Saved ✅")));
+                          },
                     style: TextButton.styleFrom(
                       backgroundColor: AppColors.button_master_card_1_color,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 5,
-                      ),
-                      child: Text(
-                        "Save",
-                        style: TextStyle(
-                          color: AppColors.Drawer_text_color,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                    child: isLoading
+                        ? SizedBox(
+                            width: 15,
+                            height: 15,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: AppColors.Drawer_text_color,
+                            ),
+                          )
+                        : Text(
+                            "Save",
+                            style: TextStyle(
+                              color: AppColors.Drawer_text_color,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                   ),
                 ],
               ),
