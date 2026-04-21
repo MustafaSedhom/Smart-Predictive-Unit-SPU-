@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/DataBase/Global_Card_Data.dart';
+import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_title_card.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
@@ -53,7 +54,7 @@ class _HomeScreenTitlesState extends State<HomeScreenTitles> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           HomeScreenTitleCard(
-            icon_img: "assets/Icons/heart-rate.png",
+            icon_img: AppIcons.heart_rate_Icon,
             title_upper: "Overall Health",
             title_down: "${global?.overallHealth ?? 0}%",
             card_color: AppColors.home_screen_title_health_color,
@@ -62,7 +63,7 @@ class _HomeScreenTitlesState extends State<HomeScreenTitles> {
           Gap(screen_width * 0.05),
 
           HomeScreenTitleCard(
-            icon_img: "assets/Icons/bell.png",
+            icon_img: AppIcons.bell_Icon,
             title_upper: "Active Alarms",
             title_down: "${global?.activeAlarms ?? "∞"}",
             card_color: AppColors.home_screen_title_alarm_color,
@@ -71,7 +72,7 @@ class _HomeScreenTitlesState extends State<HomeScreenTitles> {
           Gap(screen_width * 0.05),
 
           HomeScreenTitleCard(
-            icon_img: "assets/Icons/smart-grid.png",
+            icon_img: AppIcons.sensor_connected_Icon,
             title_upper: "Sensors Online",
             title_down:
                 "${global?.sensorsOnline.active ?? "∞"} / ${global?.sensorsOnline.total ?? "∞"}",
@@ -81,7 +82,7 @@ class _HomeScreenTitlesState extends State<HomeScreenTitles> {
           Gap(screen_width * 0.05),
 
           HomeScreenTitleCard(
-            icon_img: "assets/Icons/calendar.png",
+            icon_img: AppIcons.calender_Icon,
             title_upper: "Next Maintenance",
             title_down: "${global?.nextMaintenance ?? 0} Days",
             card_color: AppColors.home_screen_title_maintenance_color,

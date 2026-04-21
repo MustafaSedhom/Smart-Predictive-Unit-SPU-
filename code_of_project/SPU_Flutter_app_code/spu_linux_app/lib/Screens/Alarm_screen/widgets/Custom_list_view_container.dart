@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:simple_shadow/simple_shadow.dart';
+import 'package:spu_linux_app/Screens/Alarm_screen/Data_Type/Alarm_Data.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 class CustomListViewContainer extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final String value;
-  const CustomListViewContainer({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.value,
-  });
+  final AlarmData alarm;
+
+  CustomListViewContainer({required this.alarm});
 
   @override
   Widget build(BuildContext context) {
@@ -28,50 +23,52 @@ class CustomListViewContainer extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Icon(icon, size: 30, color: Colors.green),
+          // Icons
           SimpleShadow(
             opacity: 0.9,
             color: AppColors.Drawer_logo_text_color,
             offset: Offset(2, 2),
             sigma: 10,
             child: Image.asset(
-              "assets/icons/motor_icon.png",
+              alarm.Icon,
               width: 50,
               height: 50,
               color: AppColors.Drawer_logo_text_color,
             ),
           ),
           Gap(15),
-
-          /// TEXTS
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Gap(5),
-                Text(
-                  value,
-                  style: TextStyle(color: Colors.white70, fontSize: 14),
-                ),
-              ],
-            ),
-          ),
-
-          /// STATUS ICON
-          // Icon(Icons.circle, color: Colors.green, size: 12),
+          // problem text and icons and value
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "22/02/2006",
+                alarm.title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Gap(5),
+              Row(
+                children: [
+                  Icon(alarm.Problem_Icon, size: 30, color: Colors.orange),
+                  Gap(10),
+                  Text(
+                    alarm.value,
+                    style: TextStyle(color: Colors.orange, fontSize: 14),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Spacer(),
+          // time and date
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                alarm.Date,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
@@ -80,7 +77,7 @@ class CustomListViewContainer extends StatelessWidget {
               ),
               Gap(5),
               Text(
-                "06:18:23",
+                alarm.Time,
                 style: TextStyle(color: Colors.white70, fontSize: 14),
               ),
             ],

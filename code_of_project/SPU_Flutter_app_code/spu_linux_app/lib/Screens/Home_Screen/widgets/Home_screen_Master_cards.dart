@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:spu_linux_app/DataBase/Belt_Driver_Card_Data.dart';
 import 'package:spu_linux_app/DataBase/Motor_Card_Data.dart';
 import 'package:spu_linux_app/DataBase/Pump_Card_Data.dart';
+import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_Master_custom_cards.dart';
 
 class HomeScreenMasterCard extends StatefulWidget {
@@ -59,8 +60,8 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
           HomeScreenMasterCustomCards(
             value: motor?.Health ?? 0,
             name: 'MOTOR',
-            img: "assets/images/motor.png",
-            img_icon: "assets/Icons/motor_icon.png",
+            img: AppImages.motor_Image,
+            img_icon: AppIcons.motor_Icon,
             icon: Icons.macro_off,
             status_name: motor?.status ?? "None",
             txt_1_up: 'Temperature',
@@ -77,8 +78,8 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
           HomeScreenMasterCustomCards(
             value: beltDriver?.Health ?? 0,
             name: 'BELT DRIVE',
-            img: "assets/images/motor_belt.png",
-            img_icon: "assets/Icons/motor_belt_icon.png",
+            img: AppImages.motor_belt_Image,
+            img_icon: AppIcons.motor_belt_Icon,
             icon: Icons.macro_off,
             status_name: beltDriver?.status ?? "None",
             txt_1_up: 'Tension',
@@ -95,8 +96,8 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
           HomeScreenMasterCustomCards(
             value: pump?.Health ?? 0,
             name: 'PUMP',
-            img: "assets/images/motor_pump.png",
-            img_icon: "assets/Icons/motor_pump_icon.png",
+            img: AppImages.motor_pump_Image,
+            img_icon: AppIcons.motor_pump_Icon,
             icon: Icons.macro_off,
             status_name: pump?.status ?? "None",
             txt_1_up: 'Pressure In',
