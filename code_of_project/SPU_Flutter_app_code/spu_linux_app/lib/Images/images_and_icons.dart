@@ -22,7 +22,7 @@ class AppIcons {
   // ignore: non_constant_identifier_names
   static String motor_belt_Icon = "assets/Icons/motor_belt_icon.png";
   // ignore: non_constant_identifier_names
-  static String motor_Icon = "assets/Icons/motor_icon.png";
+  static const String motor_Icon = "assets/Icons/motor_icon.png";
   // ignore: non_constant_identifier_names
   static String motor_pump_Icon = "assets/Icons/motor_pump_icon.png";
   // ignore: non_constant_identifier_names

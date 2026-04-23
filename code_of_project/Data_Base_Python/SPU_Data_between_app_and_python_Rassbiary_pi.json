@@ -8,9 +8,9 @@
     "Next_Maintenance": 55,
     "Actuators": {
         "Motor": {
-            "status": "alert",
+            "status": "NoRmaL",
             "Predicted_fault": 22,
-            "Health": 10,
+            "Health": 84,
             "Sensors": {
                 "Temperature": 58,
                 "Vibration": 3.3,
