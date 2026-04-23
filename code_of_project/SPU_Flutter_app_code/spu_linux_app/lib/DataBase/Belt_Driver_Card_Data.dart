@@ -26,7 +26,9 @@ class BeltDriver {
     required this.Health,
     // ignore: non_constant_identifier_names
     required this.Tension,
+    // ignore: non_constant_identifier_names
     required this.Alignment,
+    // ignore: non_constant_identifier_names
     required this.Speed,
   });
 

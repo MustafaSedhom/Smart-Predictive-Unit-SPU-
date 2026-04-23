@@ -1,5 +1,6 @@
-import 'package:fl_chart/fl_chart.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:spu_linux_app/DataBase/Analysis_data.dart';
 import 'package:spu_linux_app/widgets/custom_liner_charts.dart';
 
 class AnalysisScreen extends StatefulWidget {
@@ -10,19 +11,38 @@ class AnalysisScreen extends StatefulWidget {
 }
 
 class _AnalysisScreenState extends State<AnalysisScreen> {
+  AnalysisModel? analysis;
+  Timer? timer;
+  Future<void> loadData() async {
+    final motorData = await loadAnalysisFromFile();
+
+    if (!mounted) return;
+
+    setState(() {
+      analysis = motorData;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // load data
+    Timer.periodic(const Duration(milliseconds: 500), (_) async {
+      await loadData();
+      if (!mounted) return;
+    });
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomLineChart(
-      spots: [
-        FlSpot(0, 2),
-        FlSpot(1, 5),
-        FlSpot(2, 3),
-        FlSpot(3, 8),
-        FlSpot(4, 2),
-        FlSpot(5, 5),
-        FlSpot(6, 3),
-        FlSpot(7, 8),
-      ],
+      spots: getSpots(analysis ?? AnalysisModel(xPoints: [], yPoints: [])),
     );
   }
 }

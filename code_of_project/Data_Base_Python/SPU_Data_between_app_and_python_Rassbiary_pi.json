@@ -34,8 +34,12 @@
             "Sensors": {
                 "Pressure_In": 21.5,
                 "Flow_Rate": 13.4,
-                "Temperature": 65
+                "Temperature": 64
             }
         }
+    },
+    "Analysis":{
+        "x_points":[1,2,2.2,3,4,5,6,7,8,9],
+        "y_points":[2,1,3,4,3,6,5,8,7,9]
     }
 }
