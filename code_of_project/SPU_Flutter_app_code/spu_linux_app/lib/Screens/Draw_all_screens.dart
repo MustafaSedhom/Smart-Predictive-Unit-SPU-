@@ -3,11 +3,11 @@ import 'package:spu_linux_app/Screens/Add_screen/Add_screen.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/Alarm_Screen.dart';
 import 'package:spu_linux_app/Screens/Analysis_Screen/Analysis_screen.dart';
 import 'package:spu_linux_app/Screens/Details_screen/Details_screen.dart';
-import 'package:spu_linux_app/Screens/Drawer/Drawer_Widget.dart';
-import 'package:spu_linux_app/Screens/Drawer/widgets/Drawer_items.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/Home_Screen.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/setting_screen.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:spu_linux_app/widgets/Drawer/Drawer_Widget.dart';
+import 'package:spu_linux_app/widgets/Drawer/widgets/Drawer_items.dart';
 
 // ignore: must_be_immutable
 class DrawAllScreens extends StatefulWidget {
