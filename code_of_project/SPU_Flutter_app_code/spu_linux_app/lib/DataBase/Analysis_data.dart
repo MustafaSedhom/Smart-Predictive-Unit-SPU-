@@ -1,33 +1,36 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:spu_linux_app/DataBase/json_file_path.dart';
-
-class AnalysisModel {
+///////////////////////////////////////////////////////////////////////
+///// read point analysis data
+class PointAnalysisModel {
   final List<double> xPoints;
   final List<double> yPoints;
 
-  AnalysisModel({required this.xPoints, required this.yPoints});
+  PointAnalysisModel({required this.xPoints, required this.yPoints});
 
-  factory AnalysisModel.fromJson(Map<String, dynamic> json) {
-    final analysis = json["Analysis"] as Map<String, dynamic>? ?? {};
+  factory PointAnalysisModel.fromJson(Map<String, dynamic> json) {
+    final points = json["Analysis"]?["points"] as Map<String, dynamic>? ?? {};
 
-    return AnalysisModel(
+    return PointAnalysisModel(
       xPoints: List<double>.from(
-        (analysis["x_points"] ?? []).map((e) => e.toDouble()),
+        (points["x_points"] ?? []).map((e) => e.toDouble()),
       ),
       yPoints: List<double>.from(
-        (analysis["y_points"] ?? []).map((e) => e.toDouble()),
+        (points["y_points"] ?? []).map((e) => e.toDouble()),
       ),
     );
   }
 }
 
 // 🔥 empty safe model
-AnalysisModel noneAnalysisModel = AnalysisModel(xPoints: [], yPoints: []);
+PointAnalysisModel nonePointAnalysisModel = PointAnalysisModel(xPoints: [], yPoints: []);
 
 // 📡 load file
-Future<AnalysisModel> loadAnalysisFromFile() async {
+Future<PointAnalysisModel> loadPointAnalysisFromFile() async {
   try {
     if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
       throw Exception("File path is not set");
@@ -36,23 +39,23 @@ Future<AnalysisModel> loadAnalysisFromFile() async {
     final file = File(JsonFilePath.path!);
 
     if (!await file.exists()) {
-      return noneAnalysisModel;
+      return nonePointAnalysisModel;
     }
 
     final data = await file.readAsString();
 
     if (data.isEmpty) {
-      return noneAnalysisModel;
+      return nonePointAnalysisModel;
     }
 
     final jsonResult = jsonDecode(data);
 
-    return AnalysisModel.fromJson(jsonResult);
+    return PointAnalysisModel.fromJson(jsonResult);
   } catch (e) {
-    return noneAnalysisModel;
+    return nonePointAnalysisModel;
   }
 }
-List<FlSpot> getSpots(AnalysisModel model) {
+List<FlSpot> getSpots(PointAnalysisModel model) {
   List<FlSpot> spots = [];
 
   for (int i = 0; i < model.xPoints.length; i++) {
@@ -60,4 +63,55 @@ List<FlSpot> getSpots(AnalysisModel model) {
   }
 
   return spots;
+}
+///////////////////////////////////////////////////////////////////////
+///// read point analysis data
+class LabelAnalysisModel {
+  final List<String> xPoints;
+  final List<String> yPoints;
+
+  LabelAnalysisModel({required this.xPoints, required this.yPoints});
+
+  factory LabelAnalysisModel.fromJson(Map<String, dynamic> json) {
+    final points = json["Analysis"]?["labels"] as Map<String, dynamic>? ?? {};
+
+    return LabelAnalysisModel(
+      xPoints: List<String>.from(
+        (points["x_labels"] ?? []).map((e) => e.toString()),
+      ),
+      yPoints: List<String>.from(
+        (points["y_labels"] ?? []).map((e) => e.toString()),
+      ),
+    );
+  }
+}
+
+// 🔥 empty safe model
+LabelAnalysisModel none_label_analysis = LabelAnalysisModel(xPoints: [], yPoints: []);
+
+// 📡 load file
+Future<LabelAnalysisModel> loadLabelAnalysisFromFile() async {
+  try {
+    if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
+      throw Exception("File path is not set");
+    }
+
+    final file = File(JsonFilePath.path!);
+
+    if (!await file.exists()) {
+      return none_label_analysis;
+    }
+
+    final data = await file.readAsString();
+
+    if (data.isEmpty) {
+      return none_label_analysis;
+    }
+
+    final jsonResult = jsonDecode(data);
+
+    return LabelAnalysisModel.fromJson(jsonResult);
+  } catch (e) {
+    return none_label_analysis;
+  }
 }

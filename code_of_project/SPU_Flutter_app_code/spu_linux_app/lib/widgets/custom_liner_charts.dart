@@ -18,10 +18,20 @@ class CustomLineChart extends StatefulWidget {
   final Color point_color;
   // ignore: non_constant_identifier_names
   final double point_radius;
+  // ignore: non_constant_identifier_names
+  final double padding_int_v;
+  // ignore: non_constant_identifier_names
+  final double padding_int_h;
   const CustomLineChart({
     super.key,
     required this.spots,
-    this.colors = const [Colors.red, Colors.orange, Colors.green],
+    this.colors = const [
+      Colors.red,
+      Colors.orange,
+      Colors.green,
+      Colors.blue,
+      Colors.deepPurple,
+    ],
     this.minX = 0,
     this.maxX = 10,
     this.minY = 0,
@@ -60,6 +70,10 @@ class CustomLineChart extends StatefulWidget {
     this.point_color = Colors.white,
     // ignore: non_constant_identifier_names
     this.point_radius = 5,
+    // ignore: non_constant_identifier_names
+    this.padding_int_v = 2,
+    // ignore: non_constant_identifier_names
+    this.padding_int_h = 2,
   });
 
   @override
@@ -69,16 +83,7 @@ class CustomLineChart extends StatefulWidget {
 class _CustomLineChartState extends State<CustomLineChart> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: LineChart(_mainData()),
-          ),
-        ),
-      ],
-    );
+    return Column(children: [Expanded(child: LineChart(_mainData()))]);
   }
 
   String safeXLabel(double value) {

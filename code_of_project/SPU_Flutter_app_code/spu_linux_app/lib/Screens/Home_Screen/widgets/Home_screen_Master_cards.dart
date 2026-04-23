@@ -35,7 +35,7 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
   void initState() {
     super.initState();
     // load data
-    Timer.periodic(const Duration(milliseconds: 500), (_) async {
+    Timer.periodic(const Duration(milliseconds: 100), (_) async {
       await loadData();
       if (!mounted) return;
       // check status

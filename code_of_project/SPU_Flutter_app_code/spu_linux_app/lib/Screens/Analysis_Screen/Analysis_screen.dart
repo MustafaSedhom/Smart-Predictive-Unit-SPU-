@@ -11,15 +11,18 @@ class AnalysisScreen extends StatefulWidget {
 }
 
 class _AnalysisScreenState extends State<AnalysisScreen> {
-  AnalysisModel? analysis;
+  PointAnalysisModel? point;
+  LabelAnalysisModel? label;
   Timer? timer;
   Future<void> loadData() async {
-    final motorData = await loadAnalysisFromFile();
+    final pointData = await loadPointAnalysisFromFile();
+    final labelData = await loadLabelAnalysisFromFile();
 
     if (!mounted) return;
 
     setState(() {
-      analysis = motorData;
+      point = pointData;
+      label = labelData;
     });
   }
 
@@ -27,7 +30,7 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
   void initState() {
     super.initState();
     // load data
-    Timer.periodic(const Duration(milliseconds: 500), (_) async {
+    Timer.periodic(const Duration(milliseconds: 100), (_) async {
       await loadData();
       if (!mounted) return;
     });
@@ -41,8 +44,14 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomLineChart(
-      spots: getSpots(analysis ?? AnalysisModel(xPoints: [], yPoints: [])),
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: CustomLineChart(
+        xLabels: label?.xPoints ?? [],
+        yLabels: label?.yPoints ?? [],
+        spots: getSpots(point ?? PointAnalysisModel(xPoints: [], yPoints: [])),
+        padding_int_h: 30,
+      ),
     );
   }
 }

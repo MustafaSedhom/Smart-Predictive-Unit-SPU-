@@ -31,15 +31,16 @@ class SystemData {
   });
 
   factory SystemData.fromJson(Map<String, dynamic> json) {
+    final overAll = json["Over_All"] as Map<String, dynamic>? ?? {};
     return SystemData(
-      overallHealth: (json['overall_Health'] as num?)?.toInt() ?? 0,
+      overallHealth: (overAll['overall_Health'] as num?)?.toInt() ?? 0,
 
-      activeAlarms: (json['Active_Alarms'] as num?)?.toInt() ?? 0,
+      activeAlarms: (overAll['Active_Alarms'] as num?)?.toInt() ?? 0,
 
-      nextMaintenance: (json['Next_Maintenance'] as num?)?.toInt() ?? 0,
+      nextMaintenance: (overAll['Next_Maintenance'] as num?)?.toInt() ?? 0,
 
       sensorsOnline: SensorsOnline.fromJson(
-        json['sensors_online'] as Map<String, dynamic>? ?? {},
+        overAll['sensors_online'] as Map<String, dynamic>? ?? {},
       ),
     );
   }
