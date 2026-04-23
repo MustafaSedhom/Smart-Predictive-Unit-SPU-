@@ -4,8 +4,14 @@ import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/Data_Type/Alarm_Data.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/widgets/Custom_list_view_container.dart';
 
-class AlarmScreen extends StatelessWidget {
+class AlarmScreen extends StatefulWidget {
   AlarmScreen({super.key});
+
+  @override
+  State<AlarmScreen> createState() => _AlarmScreenState();
+}
+
+class _AlarmScreenState extends State<AlarmScreen> {
   // ignore: non_constant_identifier_names
   final List<AlarmData> alarm_list = [
     AlarmData(
@@ -57,35 +63,81 @@ class AlarmScreen extends StatelessWidget {
       value: "78 °C",
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable, non_constant_identifier_names
+    bool alarm_list_is_empty = alarm_list.isEmpty;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          // Title
-          Text(
-            "Last Alarms",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
+          // Appbar
+          Row(
+            children: [
+              Gap(20),
+              Text(
+                "Last Alarms",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Spacer(),
+              // clear button
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    alarm_list.clear();
+                  });
+                },
+                style: TextButton.styleFrom(
+                  foregroundColor: Colors.orange,
+                  backgroundColor: Colors.transparent,
+                  side: BorderSide(color: Colors.orange),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.close_rounded),
+                    SizedBox(width: 6),
+                    Text("Clear"),
+                  ],
+                ),
+              ),
+              Gap(20),
+            ],
           ),
           Gap(5),
           // ListView Sensors
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: ListView.builder(
-                itemCount: alarm_list.length,
-                itemBuilder: (context, index) {
-                  return CustomListViewContainer(alarm: alarm_list[index]);
-                },
-              ),
-            ),
-          ),
+          (alarm_list_is_empty)
+              ? Text(
+                  "No Alarms",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 100,
+                  ),
+                )
+              : Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: ListView.builder(
+                      itemCount: alarm_list.length,
+                      itemBuilder: (context, index) {
+                        return CustomListViewContainer(
+                          alarm: alarm_list[index],
+                        );
+                      },
+                    ),
+                  ),
+                ),
         ],
       ),
     );

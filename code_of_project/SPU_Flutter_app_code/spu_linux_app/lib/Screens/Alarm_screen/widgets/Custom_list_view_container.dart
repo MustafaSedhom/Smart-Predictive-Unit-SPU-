@@ -16,7 +16,7 @@ class CustomListViewContainer extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         // ignore: deprecated_member_use
-        color: AppColors.Drawer_selected_color.withOpacity(0.2),
+        color: Colors.red.withOpacity(0.5),
         borderRadius: BorderRadius.circular(15),
 
         boxShadow: [

@@ -25,17 +25,17 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
         icon: Icons.data_saver_off_rounded,
         page: HomeScreen(),
       ),
-      DrawerItem(title: "Alarm", icon: Icons.notifications, page: AlarmScreen()),
+      DrawerItem(
+        title: "Alarm",
+        icon: Icons.notifications,
+        page: AlarmScreen(),
+      ),
       DrawerItem(title: "AI Data", icon: Icons.chat, page: HomeScreen()),
+      DrawerItem(title: "Add", icon: Icons.add_box_rounded, page: HomeScreen()),
       DrawerItem(
         title: "Settings",
         icon: Icons.settings,
         page: SettingScreen(),
-      ),
-      DrawerItem(
-        title: "About",
-        icon: Icons.add_box_rounded,
-        page: HomeScreen(),
       ),
     ];
     return Scaffold(
