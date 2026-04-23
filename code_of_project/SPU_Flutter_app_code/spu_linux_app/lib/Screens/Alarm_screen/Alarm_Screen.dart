@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/Data_Type/Alarm_Data.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/widgets/Custom_list_view_container.dart';
+import 'package:spu_linux_app/colors/App_colors.dart';
 
 class AlarmScreen extends StatefulWidget {
   AlarmScreen({super.key});
@@ -91,7 +92,59 @@ class _AlarmScreenState extends State<AlarmScreen> {
               TextButton(
                 onPressed: () {
                   setState(() {
-                    alarm_list.clear();
+                    (alarm_list_is_empty)
+                        ? Gap(0)
+                        : showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                icon: Icon(
+                                  Icons.cleaning_services,
+                                  color: AppColors.Drawer_text_color,
+                                ),
+                                backgroundColor: AppColors.Drawer_color,
+                                content: Text(
+                                  "Are you sure you want to clear Last Alarms?",
+                                  style: TextStyle(
+                                    color: AppColors.Drawer_text_color,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "Cancel",
+                                      style: TextStyle(
+                                        color: AppColors.Drawer_text_color,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        alarm_list.clear();
+                                      });
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "Ok",
+                                      style: TextStyle(
+                                        color: AppColors.Drawer_text_color,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                   });
                 },
                 style: TextButton.styleFrom(
