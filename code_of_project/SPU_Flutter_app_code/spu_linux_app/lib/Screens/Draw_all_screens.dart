@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/Alarm_Screen.dart';
+import 'package:spu_linux_app/Screens/Details_screen/Details_screen.dart';
 import 'package:spu_linux_app/Screens/Drawer/Drawer_Widget.dart';
 import 'package:spu_linux_app/Screens/Drawer/widgets/Drawer_items.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/Home_Screen.dart';
@@ -23,7 +24,7 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
       DrawerItem(
         title: "Details",
         icon: Icons.data_saver_off_rounded,
-        page: HomeScreen(),
+        page: DetailsScreen(),
       ),
       DrawerItem(
         title: "Alarm",
