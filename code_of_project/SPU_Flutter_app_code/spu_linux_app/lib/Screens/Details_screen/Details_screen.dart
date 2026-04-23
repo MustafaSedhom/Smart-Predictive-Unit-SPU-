@@ -3,8 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Details_screen/widgets/Sensor_details_container.dart';
-import 'package:spu_linux_app/colors/App_colors.dart';
-import 'package:spu_linux_app/widgets/Alarm_dialog.dart';
+
 
 class DetailsScreen extends StatefulWidget {
   DetailsScreen({super.key});
@@ -46,13 +45,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   return SensorDetailsContainer(
                     txt: "$index",
                     ontap: () {
-                      showAlarmDialog(
-                        context,
-                        // alarm_color: Colors.white,
-                        auto_close: false,
-                        message:
-                            "Temprature Error\n : temp > 80 dccccccccegree",
-                      );
+                      // showAlarmDialog(
+                      //   context,
+                      //   // alarm_color: Colors.white,
+                      //   auto_close: false,
+                      //   message:
+                      //       "Temprature Error\n : temp > 80 dccccccccegree",
+                      // );
                     },
                   );
                 },

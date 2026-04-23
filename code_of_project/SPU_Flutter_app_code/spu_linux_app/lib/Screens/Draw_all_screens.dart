@@ -1,11 +1,14 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/Alarm_Screen.dart';
+import 'package:spu_linux_app/Screens/Analysis_Screen/Analysis_screen.dart';
 import 'package:spu_linux_app/Screens/Details_screen/Details_screen.dart';
 import 'package:spu_linux_app/Screens/Drawer/Drawer_Widget.dart';
 import 'package:spu_linux_app/Screens/Drawer/widgets/Drawer_items.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/Home_Screen.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/setting_screen.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:spu_linux_app/widgets/custom_liner_charts.dart';
 
 // ignore: must_be_immutable
 class DrawAllScreens extends StatefulWidget {
@@ -31,7 +34,11 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
         icon: Icons.notifications,
         page: AlarmScreen(),
       ),
-      DrawerItem(title: "AI Data", icon: Icons.chat, page: HomeScreen()),
+      DrawerItem(
+        title: "Analysis",
+        icon: Icons.analytics,
+        page: AnalysisScreen(),
+      ),
       DrawerItem(title: "Add", icon: Icons.add_box_rounded, page: HomeScreen()),
       DrawerItem(
         title: "Settings",
