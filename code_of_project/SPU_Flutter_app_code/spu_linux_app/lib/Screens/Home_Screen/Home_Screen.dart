@@ -19,7 +19,10 @@ class HomeScreen extends StatelessWidget {
           Gap(10),
           HomeScreenAppbar(),
           Gap(5),
-          Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Divider(),
+          ),
           Gap(screen_hight * 0.05),
           HomeScreenTitles(),
           Gap(screen_hight * 0.1),

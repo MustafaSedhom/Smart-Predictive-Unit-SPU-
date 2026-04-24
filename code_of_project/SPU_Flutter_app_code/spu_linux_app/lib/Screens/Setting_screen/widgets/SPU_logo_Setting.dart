@@ -4,15 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:spu_linux_app/widgets/settings_global.dart';
 
-class AdminSetting extends StatefulWidget {
-  const AdminSetting({super.key});
+class SpuLogoSetting extends StatefulWidget {
+  const SpuLogoSetting({super.key});
 
   @override
-  State<AdminSetting> createState() => _AdminSettingState();
+  State<SpuLogoSetting> createState() => _SpuLogoSettingState();
 }
 
-class _AdminSettingState extends State<AdminSetting> {
+class _SpuLogoSettingState extends State<SpuLogoSetting> {
   File? image;
 
   Future<void> pickAndSaveImage() async {
@@ -24,22 +25,28 @@ class _AdminSettingState extends State<AdminSetting> {
       final path = pickedFile.path;
 
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("HomeScreen_image_path", path);
-
-      setState(() {
-        image = File(path);
-      });
+      await prefs.setString("SPU_Logo_image_path", path);
+      // ignore: unnecessary_null_comparison
+      if (path != null) {
+        setState(() {
+          image = File(path);
+        });
+      }
+      logoNotifier.value = File(path);
     }
   }
 
   Future<void> loadImage() async {
     final prefs = await SharedPreferences.getInstance();
-    String? path = prefs.getString("HomeScreen_image_path");
+    String? path = prefs.getString("SPU_Logo_image_path");
 
     if (path != null) {
       setState(() {
         image = File(path);
       });
+    }
+    if (path != null && File(path).existsSync()) {
+      logoNotifier.value = File(path);
     }
   }
 

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/Admin_Setting.dart';
+import 'package:spu_linux_app/Screens/Setting_screen/widgets/SPU_logo_Setting.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 // ignore: must_be_immutable
@@ -21,25 +22,24 @@ class _SettingScreenState extends State<SettingScreen> {
       physics: BouncingScrollPhysics(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Gap(20),
           //Appbar
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Gap(5),
-
-              Text(
-                "SETTING",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.Drawer_text_color,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "SETTING",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.Drawer_text_color,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: InkWell(
+                InkWell(
                   // ignore: deprecated_member_use
                   hoverColor: AppColors.Drawer_icon_selected_color.withOpacity(
                     0.5,
@@ -54,10 +54,62 @@ class _SettingScreenState extends State<SettingScreen> {
                     size: 30,
                   ),
                 ),
+              ],
+            ),
+          ),
+          //divider
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: Divider(),
+          ),
+          Gap(5),
+          // home screen image
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Home Screen Image",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Colors.amber,
+                      ),
+                    ),
+                    Gap(5),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: AdminSetting(),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "SPU Logo Image",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: Colors.amber,
+                      ),
+                    ),
+                    Gap(5),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: SpuLogoSetting(),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
-          AdminSetting(),
         ],
       ),
     );

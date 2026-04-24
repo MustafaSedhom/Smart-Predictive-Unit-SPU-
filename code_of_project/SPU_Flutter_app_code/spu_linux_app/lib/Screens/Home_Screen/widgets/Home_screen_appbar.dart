@@ -18,7 +18,7 @@ File? image;
 class _HomeScreenAppbarState extends State<HomeScreenAppbar> {
   Future<void> loadImage() async {
     final prefs = await SharedPreferences.getInstance();
-    String? path = prefs.getString("image_path");
+    String? path = prefs.getString("HomeScreen_image_path");
 
     if (path != null) {
       setState(() {
@@ -53,7 +53,7 @@ class _HomeScreenAppbarState extends State<HomeScreenAppbar> {
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.Drawer_logo_text_color,
               ),
             ),
 
