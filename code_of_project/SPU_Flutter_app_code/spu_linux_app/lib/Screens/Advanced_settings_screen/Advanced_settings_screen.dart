@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spu_linux_app/DataBase/json_file_path.dart';
-import 'package:spu_linux_app/Screens/Setting_screen/widgets/Custom_text_feild.dart';
+import 'package:spu_linux_app/widgets/Custom_text_feild.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 class AdvancedSettingScreen extends StatefulWidget {

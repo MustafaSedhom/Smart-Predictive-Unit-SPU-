@@ -8,6 +8,12 @@ class CustomTextField extends StatefulWidget {
   final IconData prefix_icon;
   // ignore: non_constant_identifier_names
   final Function() ontap_prefix_icon;
+  // ignore: non_constant_identifier_names
+  final TextStyle? Text_style;
+  // ignore: non_constant_identifier_names
+  final double? icon_size;
+  // ignore: non_constant_identifier_names
+  final bool? obscure_text;
 
   const CustomTextField({
     super.key,
@@ -17,6 +23,17 @@ class CustomTextField extends StatefulWidget {
     required this.ontap_prefix_icon,
     // ignore: non_constant_identifier_names
     this.prefix_icon = Icons.edit,
+    // ignore: non_constant_identifier_names
+    this.Text_style = const TextStyle(
+      color: AppColors.Drawer_text_color,
+      fontSize: 15,
+      fontWeight: FontWeight.bold,
+      // ignore: non_constant_identifier_names
+    ),
+    // ignore: non_constant_identifier_names
+    this.icon_size = 25,
+    // ignore: non_constant_identifier_names
+    this.obscure_text = false,
   });
 
   @override
@@ -56,12 +73,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ],
         ),
         child: TextFormField(
+          obscureText: widget.obscure_text!,
           controller: widget.controller,
-          style: TextStyle(
-            color: AppColors.Drawer_text_color,
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-          ),
+          style: widget.Text_style,
           decoration: InputDecoration(
             hintText: widget.hint,
             hintStyle: TextStyle(
@@ -79,13 +93,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 child: Icon(
                   widget.prefix_icon,
                   color: AppColors.Drawer_text_color,
-                  size: 25,
+                  size: widget.icon_size,
                 ),
               ),
             ),
             suffixIcon: widget.controller.text.isNotEmpty
                 ? IconButton(
-                    icon: Icon(Icons.close, color: Colors.red, size: 25),
+                    icon: Icon(
+                      Icons.close,
+                      color: Colors.red,
+                      size: widget.icon_size,
+                    ),
                     onPressed: () {
                       widget.controller.clear();
                       setState(() {});

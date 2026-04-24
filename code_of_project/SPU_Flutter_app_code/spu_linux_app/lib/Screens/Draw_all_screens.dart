@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spu_linux_app/Screens/Advanced_settings_screen/Advanced_settings_screen.dart';
-import 'package:spu_linux_app/Screens/Advanced_settings_screen/widgets/Password_dialog.dart';
+import 'package:spu_linux_app/widgets/Password_dialog.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/Alarm_Screen.dart';
 import 'package:spu_linux_app/Screens/Analysis_Screen/Analysis_screen.dart';
 import 'package:spu_linux_app/Screens/Details_screen/Details_screen.dart';
@@ -19,10 +22,44 @@ class DrawAllScreens extends StatefulWidget {
 }
 
 class _DrawAllScreensState extends State<DrawAllScreens> {
+  @override
+  void initState() {
+    super.initState();
+    initPassword();
+  }
+
+  Future<void> initPassword() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    if (!prefs.containsKey("password")) {
+      await prefs.setString("password", "2002");
+    }
+  }
+
+  Future<void> openPage(int index) async {
+    if (menuItems[index].title == "Advanced") {
+      String? password = await loadPassword();
+
+      bool result = await showPasswordDialog(context, password!);
+
+      if (!result) return;
+    }
+
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
+  Future<String?> loadPassword() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString("password");
+  }
+
   int selectedIndex = 0;
   Future<void> openAdvancedSetting(int index) async {
     if (menuItems[index].title == "Advanced") {
-      bool result = await showPasswordDialog(context);
+      String? savedPassword = await loadPassword();
+      bool result = await showPasswordDialog(context, savedPassword ?? "2006");
 
       if (!result) return;
     }
@@ -50,23 +87,35 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
       icon: Icons.settings,
       page: SettingScreen(
         advanced_setting_ontap: () async {
-          bool result = await showPasswordDialog(context);
+          String? savedPassword = await loadPassword();
+
+          bool result = await showPasswordDialog(
+            context,
+            savedPassword ?? "2006",
+          );
 
           if (result) {
             setState(() {
-              selectedIndex = 5; // Advanced index
+              // ignore: recursive_getters
+              selectedIndex = menuItems.indexWhere(
+                (e) => e.title == "Advanced",
+              );
             });
           }
-        }, 
+        },
       ),
     ),
-
     DrawerItem(
       title: "Advanced",
       icon: Icons.settings_suggest,
       page: AdvancedSettingScreen(),
     ),
   ];
+  Future<void> savePassword(String password) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("password", password);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,20 +127,8 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
           children: [
             DrawerWidget(
               data: menuItems,
-              ontap: (index) async {
-                if (menuItems[index].title == "Advanced") {
-                  bool result = await showPasswordDialog(context);
-
-                  if (result) {
-                    setState(() {
-                      selectedIndex = index;
-                    });
-                  }
-                } else {
-                  setState(() {
-                    selectedIndex = index;
-                  });
-                }
+              ontap: (index) {
+                openPage(index);
               },
               selectedIndex: selectedIndex,
             ),
