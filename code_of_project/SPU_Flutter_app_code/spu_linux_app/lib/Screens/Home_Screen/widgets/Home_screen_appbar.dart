@@ -1,10 +1,37 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_time_and_date.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
-class HomeScreenAppbar extends StatelessWidget {
+class HomeScreenAppbar extends StatefulWidget {
   const HomeScreenAppbar({super.key});
+
+  @override
+  State<HomeScreenAppbar> createState() => _HomeScreenAppbarState();
+}
+
+File? image;
+
+class _HomeScreenAppbarState extends State<HomeScreenAppbar> {
+  Future<void> loadImage() async {
+    final prefs = await SharedPreferences.getInstance();
+    String? path = prefs.getString("image_path");
+
+    if (path != null) {
+      setState(() {
+        image = File(path);
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadImage();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,36 +47,24 @@ class HomeScreenAppbar extends StatelessWidget {
           children: [
             // 1. Titles
             Gap(10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "SMART PREDICTIVE UNIT (SPU)",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  "Condition Monitoring & Predictive Maintenance",
-                  style: TextStyle(fontSize: 16, color: Colors.white70),
-                ),
-              ],
+
+            Text(
+              "SMART PREDICTIVE UNIT (SPU)",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-            Gap(screenWidth * 0.14),
+
+            Gap(screenWidth * 0.25),
             DigitalClockWidget(),
-            const Gap(15),
-            Row(
-              children: const [
-                Icon(Icons.account_circle, size: 35, color: Colors.white),
-                Gap(8),
-                Text(
-                  "Admin",
-                  style: TextStyle(fontSize: 12, color: Colors.white),
-                ),
-              ],
+            Gap(10),
+            CircleAvatar(
+              // radius: 30,
+              backgroundImage: image != null
+                  ? FileImage(image!, scale: 1)
+                  : null,
             ),
 
             const Gap(10),

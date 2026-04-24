@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:spu_linux_app/Screens/Setting_screen/widgets/Admin_Setting.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 
 // ignore: must_be_immutable
@@ -27,6 +28,7 @@ class _SettingScreenState extends State<SettingScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Gap(5),
+
               Text(
                 "SETTING",
                 style: TextStyle(
@@ -36,7 +38,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: InkWell(
                   // ignore: deprecated_member_use
                   hoverColor: AppColors.Drawer_icon_selected_color.withOpacity(
@@ -55,6 +57,7 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
             ],
           ),
+          AdminSetting(),
         ],
       ),
     );
