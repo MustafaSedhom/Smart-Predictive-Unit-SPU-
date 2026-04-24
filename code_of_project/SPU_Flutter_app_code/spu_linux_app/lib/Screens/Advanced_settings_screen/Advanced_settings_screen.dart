@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spu_linux_app/DataBase/json_file_path.dart';
-import 'package:spu_linux_app/widgets/Custom_text_feild.dart';
-import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:spu_linux_app/Screens/Advanced_settings_screen/widgets/Custom_changes.dart';
 
 class AdvancedSettingScreen extends StatefulWidget {
   const AdvancedSettingScreen({super.key});
@@ -14,11 +13,15 @@ class AdvancedSettingScreen extends StatefulWidget {
 }
 
 class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
-  TextEditingController nameController = TextEditingController();
+  TextEditingController filePathController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   FilePickerResult? result;
   // ignore: non_constant_identifier_names
   String? File_path = "";
-  bool isLoading = false;
+  // ignore: non_constant_identifier_names
+  bool file_load = false;
+  // ignore: non_constant_identifier_names
+  bool pass_change = false;
   Future<void> saveFilePath(String path) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("file_path", path);
@@ -30,7 +33,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
 
     if (savedPath != null) {
       setState(() {
-        nameController.text = savedPath;
+        filePathController.text = savedPath;
       });
     }
   }
@@ -53,6 +56,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
     }
     return "";
   }
+
   @override
   void initState() {
     super.initState();
@@ -63,15 +67,21 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
     String? path = await getFilePath();
     if (path != null) {
       setState(() {
-        nameController.text = path;
+        filePathController.text = path;
         JsonFilePath.path = path;
       });
     }
   }
 
+  // ignore: non_constant_identifier_names
+  Future<void> update_admin_password(String password) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString("password", password);
+  }
+
   @override
   void dispose() {
-    nameController.dispose();
+    filePathController.dispose();
     super.dispose();
   }
 
@@ -83,89 +93,88 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Gap(20),
-          SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // title
-                  Text(
-                    "File Data Base :",
-                    style: TextStyle(
-                      color: AppColors.Drawer_text_color,
-                      fontSize: 15,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Gap(20),
-                  // Text field
-                  Expanded(
-                    child: CustomTextField(
-                      controller: nameController,
-                      hint: "Json File Path",
-                      prefix_icon: Icons.upload_file,
-                      ontap_prefix_icon: () async {
-                        String? path = await loadFilePath();
+          // file path setting
+          CustomChanges(
+            controller: filePathController,
+            title: "Data Base File :",
+            hint: "File Path",
+            is_saved: file_load,
+            ontap_prefix_icon: () async {
+              String? path = await loadFilePath();
 
-                        if (path != null) {
-                          setState(() {
-                            nameController.text = path;
-                          });
-                        }
-                      },
-                    ),
-                  ),
-                  Gap(20),
-                  // Save Button
-                  TextButton(
-                    onPressed: isLoading
-                        ? null
-                        : () async {
-                            setState(() => isLoading = true);
+              if (path != null) {
+                setState(() {
+                  filePathController.text = path;
+                });
+              }
+            },
+            save_operation: file_load
+                ? () {}
+                : () async {
+                    setState(() => file_load = true);
 
-                            if (nameController.text.isNotEmpty) {
-                              await saveFilePath(nameController.text);
-                              JsonFilePath.path = nameController.text;
-                            }
+                    try {
+                      if (filePathController.text.isNotEmpty) {
+                        await saveFilePath(filePathController.text);
+                        JsonFilePath.path = filePathController.text;
+                      }
 
-                            await Future.delayed(Duration(seconds: 1));
+                      await Future.delayed(Duration(milliseconds: 500));
 
-                            setState(() => isLoading = false);
+                      if (!mounted) return;
 
-                            ScaffoldMessenger.of(
-                              // ignore: use_build_context_synchronously
-                              context,
-                            ).showSnackBar(SnackBar(content: Text("Saved ✅")));
-                          },
-                    style: TextButton.styleFrom(
-                      backgroundColor: AppColors.button_master_card_1_color,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: isLoading
-                        ? SizedBox(
-                            width: 15,
-                            height: 15,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              color: AppColors.Drawer_text_color,
-                            ),
-                          )
-                        : Text(
-                            "Save",
-                            style: TextStyle(
-                              color: AppColors.Drawer_text_color,
-                              fontSize: 10,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                  ),
-                ],
-              ),
-            ),
+                      ScaffoldMessenger.of(
+                        // ignore: use_build_context_synchronously
+                        context,
+                      ).showSnackBar(
+                        SnackBar(content: Text("file path Saved ✅")),
+                      );
+                    } finally {
+                      if (mounted) {
+                        setState(() => file_load = false);
+                      }
+                    }
+                  },
+          ),
+          // change password setting
+          CustomChanges(
+            controller: passwordController,
+            title: "New Password :",
+            hint: "new password",
+            prefix_icon: Icons.password_rounded,
+            is_saved: pass_change,
+            ontap_prefix_icon: () async {},
+            save_operation: pass_change
+                ? () {}
+                : () async {
+                    final password = passwordController.text.trim();
+
+                    if (password.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Password cannot be empty❌")),
+                      );
+                      return;
+                    }
+
+                    setState(() => pass_change = true);
+
+                    try {
+                      await update_admin_password(password);
+
+                      await Future.delayed(Duration(milliseconds: 500));
+
+                      if (!mounted) return;
+
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Password updated ✅")),
+                      );
+                    } finally {
+                      if (mounted) {
+                        setState(() => pass_change = false);
+                      }
+                    }
+                  },
           ),
         ],
       ),
