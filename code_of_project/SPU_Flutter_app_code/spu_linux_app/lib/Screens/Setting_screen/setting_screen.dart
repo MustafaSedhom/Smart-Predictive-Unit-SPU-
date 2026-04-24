@@ -63,8 +63,9 @@ class _SettingScreenState extends State<SettingScreen> {
             child: Divider(),
           ),
           Gap(5),
-          // home screen image
+          // change images
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -110,6 +111,11 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
             ],
           ),
+          //divider
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          //   child: Divider(),
+          // ),
         ],
       ),
     );
