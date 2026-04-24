@@ -22,6 +22,7 @@ class CustomLineChart extends StatefulWidget {
   final double padding_int_v;
   // ignore: non_constant_identifier_names
   final double padding_int_h;
+  final double spacing;
   const CustomLineChart({
     super.key,
     required this.spots,
@@ -74,6 +75,8 @@ class CustomLineChart extends StatefulWidget {
     this.padding_int_v = 2,
     // ignore: non_constant_identifier_names
     this.padding_int_h = 2,
+    // ignore: non_constant_identifier_names
+    this.spacing = 1,
   });
 
   @override
@@ -143,7 +146,7 @@ class _CustomLineChartState extends State<CustomLineChart> {
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            interval: 1,
+            interval: widget.spacing == 0 ? 1 : widget.spacing,
             getTitlesWidget: (value, meta) {
               return Text(safeXLabel(value), style: widget.style);
             },
@@ -154,7 +157,7 @@ class _CustomLineChartState extends State<CustomLineChart> {
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
-            interval: 1,
+            interval: widget.spacing == 0 ? 1 : widget.spacing,
             getTitlesWidget: (value, meta) {
               return Text(safeYLabel(value), style: widget.style);
             },

@@ -59,7 +59,7 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
   Future<void> openAdvancedSetting(int index) async {
     if (menuItems[index].title == "Advanced") {
       String? savedPassword = await loadPassword();
-      bool result = await showPasswordDialog(context, savedPassword ?? "2006");
+      bool result = await showPasswordDialog(context, savedPassword ?? "2002");
 
       if (!result) return;
     }
@@ -91,7 +91,7 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
 
           bool result = await showPasswordDialog(
             context,
-            savedPassword ?? "2006",
+            savedPassword ?? "2002",
           );
 
           if (result) {

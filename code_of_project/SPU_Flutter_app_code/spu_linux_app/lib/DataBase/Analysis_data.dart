@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:spu_linux_app/DataBase/json_file_path.dart';
+
 ///////////////////////////////////////////////////////////////////////
 ///// read point analysis data
 class PointAnalysisModel {
@@ -26,10 +27,13 @@ class PointAnalysisModel {
   }
 }
 
-// 🔥 empty safe model
-PointAnalysisModel nonePointAnalysisModel = PointAnalysisModel(xPoints: [], yPoints: []);
+//  empty safe model
+PointAnalysisModel nonePointAnalysisModel = PointAnalysisModel(
+  xPoints: [],
+  yPoints: [],
+);
 
-// 📡 load file
+//  load file
 Future<PointAnalysisModel> loadPointAnalysisFromFile() async {
   try {
     if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
@@ -55,6 +59,7 @@ Future<PointAnalysisModel> loadPointAnalysisFromFile() async {
     return nonePointAnalysisModel;
   }
 }
+
 List<FlSpot> getSpots(PointAnalysisModel model) {
   List<FlSpot> spots = [];
 
@@ -64,6 +69,7 @@ List<FlSpot> getSpots(PointAnalysisModel model) {
 
   return spots;
 }
+
 ///////////////////////////////////////////////////////////////////////
 ///// read point analysis data
 class LabelAnalysisModel {
@@ -86,10 +92,13 @@ class LabelAnalysisModel {
   }
 }
 
-// 🔥 empty safe model
-LabelAnalysisModel none_label_analysis = LabelAnalysisModel(xPoints: [], yPoints: []);
+// empty safe model
+LabelAnalysisModel none_label_analysis = LabelAnalysisModel(
+  xPoints: [],
+  yPoints: [],
+);
 
-// 📡 load file
+// load file
 Future<LabelAnalysisModel> loadLabelAnalysisFromFile() async {
   try {
     if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
@@ -113,5 +122,45 @@ Future<LabelAnalysisModel> loadLabelAnalysisFromFile() async {
     return LabelAnalysisModel.fromJson(jsonResult);
   } catch (e) {
     return none_label_analysis;
+  }
+}
+
+///////////////////////////////////////////////////////////////////////
+///// read point analysis data
+class AnalysisSpacing {
+  final double Spacing;
+  AnalysisSpacing({this.Spacing = 0});
+  factory AnalysisSpacing.fromJson(Map<String, dynamic> json) {
+    final space_data = json["Analysis"]?["Spacing"] as double? ?? 0;
+    return AnalysisSpacing(Spacing: space_data);
+  }
+}
+
+AnalysisSpacing none_analysis_spacing = AnalysisSpacing(Spacing: 0);
+
+// load file
+Future<AnalysisSpacing> loadAnalysisSpacingFromFile() async {
+  try {
+    if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
+      throw Exception("File path is not set");
+    }
+
+    final file = File(JsonFilePath.path!);
+
+    if (!await file.exists()) {
+      return none_analysis_spacing;
+    }
+
+    final data = await file.readAsString();
+
+    if (data.isEmpty) {
+      return none_analysis_spacing;
+    }
+
+    final jsonResult = jsonDecode(data);
+
+    return AnalysisSpacing.fromJson(jsonResult);
+  } catch (e) {
+    return none_analysis_spacing;
   }
 }

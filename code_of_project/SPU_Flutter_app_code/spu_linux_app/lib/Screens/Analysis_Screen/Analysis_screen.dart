@@ -13,17 +13,51 @@ class AnalysisScreen extends StatefulWidget {
 class _AnalysisScreenState extends State<AnalysisScreen> {
   PointAnalysisModel? point;
   LabelAnalysisModel? label;
+  AnalysisSpacing? spacing;
   Timer? timer;
   Future<void> loadData() async {
     final pointData = await loadPointAnalysisFromFile();
     final labelData = await loadLabelAnalysisFromFile();
+    final spacingData = await loadAnalysisSpacingFromFile();
 
     if (!mounted) return;
 
     setState(() {
       point = pointData;
       label = labelData;
+      spacing = spacingData;
     });
+  }
+
+double getMinX(List points) {
+    if (points.isEmpty) return 0;
+
+    return points
+        .map((e) => double.parse(e.toString()))
+        .reduce((a, b) => a < b ? a : b);
+  }
+
+double getMaxX(List points) {
+    if (points.isEmpty) return 10;
+
+    return points
+        .map((e) => double.parse(e.toString()))
+        .reduce((a, b) => a > b ? a : b);
+  }
+double getMinY(List points) {
+    if (points.isEmpty) return 0;
+
+    return points
+        .map((e) => double.parse(e.toString()))
+        .reduce((a, b) => a < b ? a : b);
+  }
+
+double getMaxY(List points) {
+    if (points.isEmpty) return 10;
+
+    return points
+        .map((e) => double.parse(e.toString()))
+        .reduce((a, b) => a > b ? a : b);
   }
 
   @override
@@ -47,9 +81,18 @@ class _AnalysisScreenState extends State<AnalysisScreen> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: CustomLineChart(
-        xLabels: label?.xPoints ?? [],
-        yLabels: label?.yPoints ?? [],
+        minX: getMinX(label?.xPoints ?? []),
+        maxX: getMaxX(label?.xPoints ?? []),
+        minY: getMinY(label?.xPoints ?? []),
+        maxY: getMaxY(label?.xPoints ?? []),
+
+        spacing: (spacing?.Spacing ?? 1) <= 0 ? 1 : spacing?.Spacing??1,
+
+        xLabels: label?.xPoints.map((e) => e.toString()).toList() ?? [],
+        yLabels: label?.yPoints.map((e) => e.toString()).toList() ?? [],
+
         spots: getSpots(point ?? PointAnalysisModel(xPoints: [], yPoints: [])),
+
         padding_int_h: 30,
       ),
     );
