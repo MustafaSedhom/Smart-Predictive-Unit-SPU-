@@ -53,7 +53,8 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
             auto_close: true,
             close_time_seconds: 1,
             alarm_color: getColor(motor!.status),
-            message: "motor State changed \n now status is ${motor!.status.toUpperCase()}",
+            message:
+                "motor State changed \n now status is ${motor!.status.toUpperCase()}",
           );
         }
       }
@@ -67,11 +68,12 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
 
           showAlarmDialog(
             context,
-            img: AppIcons.motor_pump_Icon,
+            img: AppIcons.motor_belt_Icon,
             auto_close: true,
             close_time_seconds: 1,
             alarm_color: getColor(beltDriver!.status),
-            message: "Belt Driver State changed \n now status is ${beltDriver!.status.toUpperCase()}",
+            message:
+                "Belt Driver State changed \n now status is ${beltDriver!.status.toUpperCase()}",
           );
         }
       }
@@ -84,11 +86,12 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
 
           showAlarmDialog(
             context,
-            img: AppIcons.motor_belt_Icon,
+            img: AppIcons.motor_pump_Icon,
             auto_close: true,
             close_time_seconds: 1,
             alarm_color: getColor(pump!.status),
-            message: "Pump State changed \n now status is ${pump!.status.toUpperCase()}",
+            message:
+                "Pump State changed \n now status is ${pump!.status.toUpperCase()}",
           );
         }
       }
