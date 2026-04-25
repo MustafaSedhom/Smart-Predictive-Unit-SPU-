@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Images/images_and_icons.dart';
-import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_appbar.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/Custom_text_feild.dart';
 
 class DiameterSettingWidget extends StatefulWidget {
+  final TextEditingController? controller;
   final String? title;
   final String? img;
   final double? size;
+  final String? unit;
+  final double? value;
+  final Function(double)? onChanged;
   const DiameterSettingWidget({
     super.key,
     this.title = "title",
     this.img = AppIcons.motor_Icon,
     this.size = 20,
+    this.value,
+    this.onChanged,
+    this.unit = "mm",
+    this.controller,
   });
 
   @override
@@ -21,43 +28,48 @@ class DiameterSettingWidget extends StatefulWidget {
 }
 
 class _DiameterSettingWidgetState extends State<DiameterSettingWidget> {
-  double diameter = 10;
-  final TextEditingController controller = TextEditingController();
+  late double diameter;
 
   @override
   void initState() {
     super.initState();
-    controller.text = diameter.toString();
+    diameter = widget.value ?? 0;
+    // widget.controller!.text = diameter.toString();
+  }
+
+  void update(double val) {
+    setState(() {
+      diameter = val;
+    });
+
+    widget.onChanged?.call(val);
   }
 
   void increase() {
-    setState(() {
-      diameter++;
-      controller.text = diameter.toString();
-    });
+    final newVal = diameter + 1;
+    // widget.controller!.text = newVal.toString();
+    update(newVal);
   }
 
   void decrease() {
-    setState(() {
-      if (diameter > 0) {
-        diameter--;
-        controller.text = diameter.toString();
-      }
-    });
+    if (diameter <= 0) return;
+    final newVal = diameter - 1;
+    // widget.controller!.text = newVal.toString();
+    update(newVal);
   }
 
   void onTextChanged(String value) {
-    final num? val = num.tryParse(value);
-    if (val != null) {
-      setState(() {
-        diameter = val.toDouble();
-      });
-    }
+    if (value.isEmpty) return;
+
+    final double? val = double.tryParse(value);
+
+    if (val == null) return;
+
+    update(val);
   }
 
   @override
   void dispose() {
-    controller.dispose();
     super.dispose();
   }
 
@@ -118,13 +130,13 @@ class _DiameterSettingWidgetState extends State<DiameterSettingWidget> {
                 SizedBox(
                   width: 120,
                   child: CustomTextField(
-                    controller: controller,
+                    controller: widget.controller!,
                     show_icons: false,
                     show_hint_text: false,
                     text_align: TextAlign.center,
                     text_input: TextInputType.number,
                     onChanged: onTextChanged,
-                    suffix_text: "mm",
+                    suffix_text: widget.unit!,
                   ),
                 ),
                 Gap(5),

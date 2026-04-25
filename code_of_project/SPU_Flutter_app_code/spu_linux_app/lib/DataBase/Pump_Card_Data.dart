@@ -39,7 +39,7 @@ class Pump {
     return Pump(
       Predicted_fault: (pump['Predicted_fault'] as num?)?.toInt() ?? 0,
 
-      status: pump['status'] ?? "unknown",
+      status: pump['status'] ?? "none",
 
       Health: (pump['Health'] as num?)?.toInt() ?? 0,
 

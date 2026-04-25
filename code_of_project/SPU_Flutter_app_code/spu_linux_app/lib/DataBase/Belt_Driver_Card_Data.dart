@@ -41,7 +41,7 @@ class BeltDriver {
         {};
     return BeltDriver(
       Predicted_fault: (belt['Predicted_fault'] as num?)?.toInt() ?? 0,
-      status: belt['status'] ?? "unknown",
+      status: belt['status'] ?? "none",
       Health: (belt['Health'] as num?)?.toInt() ?? 0,
 
       Tension: (sensors['Tension'] as num?)?.toInt() ?? 0,
