@@ -80,7 +80,7 @@ class _SettingScreenState extends State<SettingScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "SETTING",
+                  "Setting",
                   style: CustomAppBarTextStyle.appbar_text_style(size: 25),
                 ),
                 InkWell(
@@ -111,7 +111,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.Drawer_text_color,
+                  color: AppColors.Drawer_icon_selected_color,
                 ),
               ),
               Gap(5),
@@ -164,7 +164,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
-                        color: Colors.amber,
+                        color: AppColors.Drawer_icon_selected_color,
                       ),
                     ),
                     Gap(5),
@@ -185,7 +185,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
-                        color: Colors.amber,
+                        color: AppColors.Drawer_icon_selected_color,
                       ),
                     ),
                     Gap(5),
