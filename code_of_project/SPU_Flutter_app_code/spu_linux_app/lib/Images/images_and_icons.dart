@@ -11,6 +11,7 @@ class AppImages {
   // ignore: non_constant_identifier_names
   static String Start_screen_Image = "assets/images/Start_screen_img.jpeg";
 }
+
 // ignore: camel_case_types
 class AppIcons {
   // ignore: non_constant_identifier_names
@@ -27,4 +28,8 @@ class AppIcons {
   static String motor_pump_Icon = "assets/Icons/motor_pump_icon.png";
   // ignore: non_constant_identifier_names
   static String sensor_connected_Icon = "assets/Icons/smart-grid.png";
+  // ignore: non_constant_identifier_names
+  static String Advance_setting_Icon = "assets/Icons/Advance_setting.png";
+  // ignore: non_constant_identifier_names
+  static String setting_Icon = "assets/Icons/setting_icon.png";
 }

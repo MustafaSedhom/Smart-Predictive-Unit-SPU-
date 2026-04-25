@@ -28,7 +28,7 @@ class _SettingScreenState extends State<SettingScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(20),
+          Gap(10),
           //Appbar
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
@@ -37,7 +37,7 @@ class _SettingScreenState extends State<SettingScreen> {
               children: [
                 Text(
                   "SETTING",
-                  style: CustomAppBarTextStyle.appbar_text_style(),
+                  style: CustomAppBarTextStyle.appbar_text_style(size: 25),
                 ),
                 InkWell(
                   // ignore: deprecated_member_use
@@ -48,10 +48,10 @@ class _SettingScreenState extends State<SettingScreen> {
                   radius: 50,
                   borderRadius: BorderRadius.circular(50),
                   onTap: widget.advanced_setting_ontap,
-                  child: Icon(
-                    Icons.settings_suggest,
+                  child: Image.asset(
+                    AppIcons.Advance_setting_Icon,
+                    width: 30,
                     color: AppColors.Drawer_text_color,
-                    size: 50,
                   ),
                 ),
               ],
@@ -70,13 +70,21 @@ class _SettingScreenState extends State<SettingScreen> {
                   color: AppColors.Drawer_text_color,
                 ),
               ),
-              Gap(20),
+              Gap(5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  DiameterSettingWidget(title: "Big Gear"),
+                  DiameterSettingWidget(
+                    title: "Big Gear",
+                    img: AppIcons.setting_Icon,
+                    size: 40,
+                  ),
                   Image.asset(AppIcons.motor_belt_Icon, width: 100),
-                  DiameterSettingWidget(title: "Small Gear"),
+                  DiameterSettingWidget(
+                    title: "Small Gear",
+                    img: AppIcons.setting_Icon,
+                    size: 30,
+                  ),
                 ],
               ),
             ],

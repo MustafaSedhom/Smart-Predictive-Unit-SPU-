@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:spu_linux_app/Images/images_and_icons.dart';
+import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_appbar.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/Custom_text_feild.dart';
 
 class DiameterSettingWidget extends StatefulWidget {
   final String? title;
-  const DiameterSettingWidget({super.key, this.title = "title"});
+  final String? img;
+  final double? size;
+  const DiameterSettingWidget({
+    super.key,
+    this.title = "title",
+    this.img = AppIcons.motor_Icon,
+    this.size = 20,
+  });
 
   @override
   State<DiameterSettingWidget> createState() => _DiameterSettingWidgetState();
@@ -77,7 +86,7 @@ class _DiameterSettingWidgetState extends State<DiameterSettingWidget> {
                   ),
                 ),
                 Gap(20),
-                Icon(Icons.grid_view_sharp, size: 35),
+                Image.asset(widget.img!, width: widget.size),
               ],
             ),
             // buttons and text feild
