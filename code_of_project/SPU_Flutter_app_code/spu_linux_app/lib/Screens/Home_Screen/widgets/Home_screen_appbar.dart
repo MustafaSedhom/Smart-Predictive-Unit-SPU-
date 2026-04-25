@@ -46,7 +46,7 @@ class _HomeScreenAppbarState extends State<HomeScreenAppbar> {
         child: Row(
           children: [
             // 1. Titles
-            Gap(10),
+            Gap(25),
 
             Text(
               "SMART PREDICTIVE UNIT (SPU)",
@@ -57,7 +57,7 @@ class _HomeScreenAppbarState extends State<HomeScreenAppbar> {
               ),
             ),
 
-            Gap(screenWidth * 0.25),
+            Gap(screenWidth * 0.23),
             DigitalClockWidget(),
             Gap(10),
             CircleAvatar(

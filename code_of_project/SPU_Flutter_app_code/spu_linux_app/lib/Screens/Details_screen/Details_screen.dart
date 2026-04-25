@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Details_screen/widgets/Sensor_details_container.dart';
+import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -27,11 +28,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               Gap(20),
               Text(
                 "Sensors Details",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: CustomAppBarTextStyle.appbar_text_style(size: 25),
               ),
               // Spacer(),
             ],

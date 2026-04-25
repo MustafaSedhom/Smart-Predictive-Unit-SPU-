@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/Admin_Setting.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/SPU_logo_Setting.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
 // ignore: must_be_immutable
@@ -34,11 +35,7 @@ class _SettingScreenState extends State<SettingScreen> {
               children: [
                 Text(
                   "SETTING",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.Drawer_text_color,
-                  ),
+                  style: CustomAppBarTextStyle.appbar_text_style(),
                 ),
                 InkWell(
                   // ignore: deprecated_member_use
@@ -52,7 +49,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   child: Icon(
                     Icons.settings_suggest,
                     color: AppColors.Drawer_text_color,
-                    size: 30,
+                    size: 50,
                   ),
                 ),
               ],
@@ -110,10 +107,7 @@ class _SettingScreenState extends State<SettingScreen> {
             ],
           ),
           //divider
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          //   child: Divider(),
-          // ),
+          CustomDivider(),
         ],
       ),
     );

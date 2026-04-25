@@ -4,6 +4,7 @@ import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/Data_Type/Alarm_Data.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/widgets/Custom_list_view_container.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
 class AlarmScreen extends StatefulWidget {
@@ -83,11 +84,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
               Gap(20),
               Text(
                 "Last Alarms",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: CustomAppBarTextStyle.appbar_text_style(size: 25),
               ),
               Spacer(),
               // clear button
