@@ -1,7 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/Admin_Setting.dart';
+import 'package:spu_linux_app/Screens/Setting_screen/widgets/Dimeter_setting_widget.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/SPU_logo_Setting.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
@@ -54,6 +56,30 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
+          ),
+          //divider
+          CustomDivider(),
+          // Gear Diameter Settings
+          Column(
+            children: [
+              Text(
+                "Gear Setting",
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.Drawer_text_color,
+                ),
+              ),
+              Gap(20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  DiameterSettingWidget(title: "Big Gear"),
+                  Image.asset(AppIcons.motor_belt_Icon, width: 100),
+                  DiameterSettingWidget(title: "Small Gear"),
+                ],
+              ),
+            ],
           ),
           //divider
           CustomDivider(),

@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spu_linux_app/DataBase/json_file_path.dart';
 import 'package:spu_linux_app/Screens/Advanced_settings_screen/widgets/Custom_changes.dart';
-import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
