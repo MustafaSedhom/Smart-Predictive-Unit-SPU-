@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/Admin_Setting.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/SPU_logo_Setting.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
 // ignore: must_be_immutable
 class SettingScreen extends StatefulWidget {
@@ -58,10 +59,7 @@ class _SettingScreenState extends State<SettingScreen> {
             ),
           ),
           //divider
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Divider(),
-          ),
+          CustomDivider(),
           Gap(5),
           // change images
           Row(

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Details_screen/widgets/Sensor_details_container.dart';
-
+import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
 class DetailsScreen extends StatefulWidget {
   DetailsScreen({super.key});
@@ -20,6 +20,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Gap(10),
           // Appbar
           Row(
             children: [
@@ -35,6 +36,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
               // Spacer(),
             ],
           ),
+          CustomDivider(),
           // screen body
           Expanded(
             child: Padding(

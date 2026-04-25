@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_Master_cards.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_appbar.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_titles.dart';
+import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -19,10 +20,7 @@ class HomeScreen extends StatelessWidget {
           Gap(10),
           HomeScreenAppbar(),
           Gap(5),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Divider(),
-          ),
+          CustomDivider(),
           Gap(screen_hight * 0.05),
           HomeScreenTitles(),
           Gap(screen_hight * 0.1),

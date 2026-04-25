@@ -4,6 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spu_linux_app/DataBase/json_file_path.dart';
 import 'package:spu_linux_app/Screens/Advanced_settings_screen/widgets/Custom_changes.dart';
+import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
 class AdvancedSettingScreen extends StatefulWidget {
   const AdvancedSettingScreen({super.key});
@@ -92,7 +94,18 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Gap(20),
+          Gap(10),
+          // appbar
+          Text(
+            "Advanced Setting",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+              color: AppColors.Drawer_text_color,
+            ),
+          ),
+          // divider
+          CustomDivider(),
           // file path setting
           CustomChanges(
             controller: filePathController,
@@ -136,6 +149,8 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                     }
                   },
           ),
+          // divider
+          CustomDivider(),
           // change password setting
           CustomChanges(
             controller: passwordController,
@@ -176,6 +191,8 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                     }
                   },
           ),
+          // divider
+          CustomDivider(),
         ],
       ),
     );

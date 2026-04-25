@@ -4,6 +4,7 @@ import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/Data_Type/Alarm_Data.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/widgets/Custom_list_view_container.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
 class AlarmScreen extends StatefulWidget {
   AlarmScreen({super.key});
@@ -75,6 +76,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Gap(10),
           // Appbar
           Row(
             children: [
@@ -168,6 +170,7 @@ class _AlarmScreenState extends State<AlarmScreen> {
             ],
           ),
           Gap(5),
+          CustomDivider(),
           // ListView Sensors
           (alarm_list_is_empty)
               ? Text(
