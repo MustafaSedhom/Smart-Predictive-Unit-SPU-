@@ -31,7 +31,7 @@
       "Predicted_fault": 21,
       "Health": 45,
       "Sensors": {
-        "Tension": 501,
+        "Tension": 502,
         "Alignment": 0.5,
         "Speed": 1410
       }
@@ -42,7 +42,7 @@
       "Health": 23,
       "Sensors": {
         "Pressure_In": 23.5,
-        "Flow_Rate": 13.4,
+        "Flow_Rate": 16.4,
         "Temperature": 64
       }
     }

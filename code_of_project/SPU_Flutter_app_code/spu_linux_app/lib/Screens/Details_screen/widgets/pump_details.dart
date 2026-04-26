@@ -1,25 +1,24 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:spu_linux_app/DataBase/Motor_Card_Data.dart';
+import 'package:spu_linux_app/DataBase/Pump_Card_Data.dart';
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Details_screen/widgets/custom_value_sensor_card.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
 import 'package:spu_linux_app/widgets/get_state_color.dart';
 
-class MotorDetails extends StatefulWidget {
-  const MotorDetails({super.key});
+class PumpDetails extends StatefulWidget {
+  const PumpDetails({super.key});
 
   @override
-  State<MotorDetails> createState() => _MotorDetailsState();
+  State<PumpDetails> createState() => _BPumpDetailsState();
 }
 
-class _MotorDetailsState extends State<MotorDetails> {
-  Motor? motor;
+class _BPumpDetailsState extends State<PumpDetails> {
+  Pump? pump;
   Timer? timer;
 
   @override
@@ -31,12 +30,12 @@ class _MotorDetailsState extends State<MotorDetails> {
   }
 
   Future<void> loadData() async {
-    final globalData = await loadMotorFromFile();
+    final globalData = await loadPumpFromFile();
 
     if (!mounted) return;
 
     setState(() {
-      motor = globalData;
+      pump = globalData;
     });
   }
 
@@ -56,7 +55,7 @@ class _MotorDetailsState extends State<MotorDetails> {
         decoration: BoxDecoration(
           // ignore: deprecated_member_use
           color: GetStateColor.getColor(
-            motor?.status ?? "none",
+            pump?.status ?? "none",
             // ignore: deprecated_member_use
           ).withOpacity(0.3),
           borderRadius: BorderRadius.circular(20),
@@ -69,11 +68,11 @@ class _MotorDetailsState extends State<MotorDetails> {
               child: Row(
                 children: [
                   // icon
-                  Image.asset(AppImages.motor_Image, width: 50),
+                  Image.asset(AppImages.motor_pump_Image, width: 50),
                   Spacer(),
                   // image
                   Text(
-                    "Motor Details",
+                    "Pump Details",
                     style: TextStyle(
                       color: AppColors.Drawer_text_color,
                       fontSize: 30,
@@ -83,7 +82,7 @@ class _MotorDetailsState extends State<MotorDetails> {
                   Spacer(),
                   // icon
                   Image.asset(
-                    AppIcons.motor_Icon,
+                    AppIcons.motor_pump_Icon,
                     width: 50,
                     color: Colors.green,
                   ),
@@ -91,11 +90,11 @@ class _MotorDetailsState extends State<MotorDetails> {
               ),
             ),
             CustomDivider(),
-            // motor state
+            // pump state
             Column(
               children: [
                 Text(
-                  "Motor State",
+                  "Pump State",
                   style: TextStyle(
                     color: Colors.amber,
                     fontSize: 20,
@@ -109,19 +108,19 @@ class _MotorDetailsState extends State<MotorDetails> {
                     children: [
                       CustomValueSensorCard(
                         name: 'State',
-                        value: motor?.status.toUpperCase() ?? "NONE",
+                        value: pump?.status ?? "NONE",
                         uint: '',
                       ),
                       Gap(0.03 * screen_width),
                       CustomValueSensorCard(
                         name: 'Health',
-                        value: '${motor?.Health ?? 0}',
+                        value: '${pump?.Health ?? 0}',
                         uint: '%',
                       ),
                       Gap(0.03 * screen_width),
                       CustomValueSensorCard(
                         name: 'Predicted Fault',
-                        value: '${motor?.Predicted_fault ?? 0}',
+                        value: '${pump?.Predicted_fault ?? 0}',
                         uint: 'Day',
                       ),
                     ],
@@ -131,11 +130,11 @@ class _MotorDetailsState extends State<MotorDetails> {
             ),
             Gap(5),
             CustomDivider(),
-            // volt sensors
+            // sensors
             Column(
               children: [
                 Text(
-                  "Volt Values",
+                  "Sensors",
                   style: TextStyle(
                     color: Colors.amber,
                     fontSize: 20,
@@ -148,95 +147,21 @@ class _MotorDetailsState extends State<MotorDetails> {
                   child: Row(
                     children: [
                       CustomValueSensorCard(
-                        name: 'Volt P1',
-                        value: '${motor?.Volt_p1 ?? 0}',
+                        name: 'Pressure',
+                        value: '${pump?.Pressure_In ?? 0}',
                         uint: 'V',
                       ),
                       Gap(0.05 * screen_width),
                       CustomValueSensorCard(
-                        name: 'Volt P2',
-                        value: '${motor?.Volt_p2 ?? 0}',
+                        name: 'Flow Rate',
+                        value: '${pump?.Flow_Rate ?? 0}',
                         uint: 'V',
                       ),
                       Gap(0.05 * screen_width),
-                      CustomValueSensorCard(
-                        name: 'Volt P3',
-                        value: '${motor?.Volt_p3 ?? 0}',
-                        uint: 'V',
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            CustomDivider(),
-            Gap(5),
-            // Current sensor
-            Column(
-              children: [
-                Text(
-                  "Current Values",
-                  style: TextStyle(
-                    color: Colors.amber,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Gap(5),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      CustomValueSensorCard(
-                        name: "Current P1",
-                        value: '${motor?.Current_p1 ?? 0}',
-                        uint: 'A',
-                      ),
-                      Gap(0.04 * screen_width),
-                      CustomValueSensorCard(
-                        name: "Current P1",
-                        value: '${motor?.Current_p2 ?? 0}',
-                        uint: 'A',
-                      ),
-                      Gap(0.04 * screen_width),
-                      CustomValueSensorCard(
-                        name: "Current P1",
-                        value: '${motor?.Current_p3 ?? 0}',
-                        uint: 'A',
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            CustomDivider(),
-            Gap(5),
-            // Current sensor
-            Column(
-              children: [
-                Text(
-                  "Other Sensors",
-                  style: TextStyle(
-                    color: Colors.amber,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Gap(10),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
                       CustomValueSensorCard(
                         name: 'Temperature',
-                        value: '${motor?.Temperature ?? 0}',
-                        uint: '°C',
-                      ),
-                      Gap(0.25 * screen_width),
-                      CustomValueSensorCard(
-                        name: 'Vibration',
-                        value: '${motor?.Vibration ?? 0}',
-                        uint: 'm/s²',
+                        value: '${pump?.Temperature ?? 0}',
+                        uint: 'V',
                       ),
                     ],
                   ),

@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Details_screen/widgets/Motor_details.dart';
+import 'package:spu_linux_app/Screens/Details_screen/widgets/belt_Driver_details.dart';
+import 'package:spu_linux_app/Screens/Details_screen/widgets/pump_details.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
@@ -32,7 +34,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            child: ListView(children: [MotorDetails()]),
+            child: ListView(
+              children: [MotorDetails(), BeltDriverDetails(), PumpDetails()],
+            ),
           ),
         ),
       ],
