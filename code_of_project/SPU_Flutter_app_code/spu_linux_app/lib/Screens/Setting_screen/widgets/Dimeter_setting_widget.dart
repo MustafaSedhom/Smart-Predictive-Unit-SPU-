@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Images/images_and_icons.dart';
@@ -34,28 +36,24 @@ class _DiameterSettingWidgetState extends State<DiameterSettingWidget> {
   void initState() {
     super.initState();
     diameter = widget.value ?? 0;
-    // widget.controller!.text = diameter.toString();
   }
 
   void update(double val) {
     setState(() {
       diameter = val;
     });
-
     widget.onChanged?.call(val);
   }
 
   void increase() {
-    final newVal = diameter + 1;
-    // widget.controller!.text = newVal.toString();
-    update(newVal);
+    final newVal = diameter + 0.2;
+    update(roundDouble(newVal, 2));
   }
 
   void decrease() {
     if (diameter <= 0) return;
-    final newVal = diameter - 1;
-    // widget.controller!.text = newVal.toString();
-    update(newVal);
+    final newVal = diameter - 0.2;
+    update(roundDouble(newVal, 2));
   }
 
   void onTextChanged(String value) {
@@ -66,6 +64,11 @@ class _DiameterSettingWidgetState extends State<DiameterSettingWidget> {
     if (val == null) return;
 
     update(val);
+  }
+
+  double roundDouble(double value, int places) {
+    final mod = pow(10.0, places);
+    return (value * mod).round() / mod;
   }
 
   @override
