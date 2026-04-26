@@ -76,7 +76,7 @@ class _MotorDetailsState extends State<MotorDetails> {
                     "Motor Details",
                     style: TextStyle(
                       color: AppColors.Drawer_text_color,
-                      fontSize: 30,
+                      fontSize: 27,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

@@ -56,7 +56,7 @@ class _BeltDriverDetailsState extends State<BeltDriverDetails> {
           // ignore: deprecated_member_use
           color: GetStateColor.getColor(
             belt?.status ?? "none",
-          // ignore: deprecated_member_use
+            // ignore: deprecated_member_use
           ).withOpacity(0.3),
           borderRadius: BorderRadius.circular(20),
         ),
@@ -75,7 +75,7 @@ class _BeltDriverDetailsState extends State<BeltDriverDetails> {
                     "Belt Driver Details",
                     style: TextStyle(
                       color: AppColors.Drawer_text_color,
-                      fontSize: 30,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -94,7 +94,7 @@ class _BeltDriverDetailsState extends State<BeltDriverDetails> {
             Column(
               children: [
                 Text(
-                  "BeltDriver State",
+                  "Belt Driver State",
                   style: TextStyle(
                     color: Colors.amber,
                     fontSize: 20,
@@ -149,19 +149,19 @@ class _BeltDriverDetailsState extends State<BeltDriverDetails> {
                       CustomValueSensorCard(
                         name: 'Tension',
                         value: '${belt?.Tension ?? 0}',
-                        uint: 'V',
+                        uint: 'N',
                       ),
                       Gap(0.05 * screen_width),
                       CustomValueSensorCard(
                         name: 'Alignment',
                         value: '${belt?.Alignment ?? 0}',
-                        uint: 'V',
+                        uint: 'mm',
                       ),
                       Gap(0.05 * screen_width),
                       CustomValueSensorCard(
                         name: 'Speed',
                         value: '${belt?.Speed ?? 0}',
-                        uint: 'V',
+                        uint: 'RPM',
                       ),
                     ],
                   ),

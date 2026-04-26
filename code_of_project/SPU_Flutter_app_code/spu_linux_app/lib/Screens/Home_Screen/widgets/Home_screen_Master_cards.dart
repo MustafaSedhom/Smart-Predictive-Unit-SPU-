@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -9,14 +11,15 @@ import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_Master_cus
 import 'package:spu_linux_app/widgets/Alarm_dialog.dart';
 
 class HomeScreenMasterCard extends StatefulWidget {
-  const HomeScreenMasterCard({super.key});
+  final VoidCallback details;
+  final VoidCallback alarm;
+  const HomeScreenMasterCard({super.key, required this.details, required this.alarm});
 
   @override
   State<HomeScreenMasterCard> createState() => _HomeScreenMasterCardState();
 }
 
 class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
-  // ignore: non_constant_identifier_names
   String? motor_status = "";
 
   Motor? motor;
@@ -24,11 +27,10 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
   Pump? pump;
   Timer? timer;
 
-  // ignore: non_constant_identifier_names
   String? motor_temp_state;
-  // ignore: non_constant_identifier_names
+
   String? belt_driver_temp_state;
-  // ignore: non_constant_identifier_names
+
   String? pump_temp_state;
 
   @override
@@ -151,8 +153,8 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
             txt_3_up: 'Current',
             txt_3_down: '${motor?.Current ?? 0} A',
             Days: motor?.Predicted_fault ?? 0,
-            view_details: () {},
-            configure: () {},
+            view_details: widget.details,
+            alarm: widget.alarm,
           ),
           const Gap(20),
           HomeScreenMasterCustomCards(
@@ -169,8 +171,8 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
             txt_3_up: 'Speed',
             txt_3_down: '${beltDriver?.Speed ?? 0} RPM',
             Days: beltDriver?.Predicted_fault ?? 0,
-            view_details: () {},
-            configure: () {},
+            view_details: widget.details,
+            alarm: widget.alarm,
           ),
           const Gap(20),
           HomeScreenMasterCustomCards(
@@ -187,8 +189,8 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
             txt_3_up: 'Temperature',
             txt_3_down: '${pump?.Temperature ?? 0} \u00B0C',
             Days: pump?.Predicted_fault ?? 0,
-            view_details: () {},
-            configure: () {},
+            view_details: widget.details,
+            alarm: widget.alarm,
           ),
         ],
       ),

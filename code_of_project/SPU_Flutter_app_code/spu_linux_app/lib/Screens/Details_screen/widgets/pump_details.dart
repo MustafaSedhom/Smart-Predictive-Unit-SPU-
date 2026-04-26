@@ -75,7 +75,7 @@ class _BPumpDetailsState extends State<PumpDetails> {
                     "Pump Details",
                     style: TextStyle(
                       color: AppColors.Drawer_text_color,
-                      fontSize: 30,
+                      fontSize: 27,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -149,19 +149,19 @@ class _BPumpDetailsState extends State<PumpDetails> {
                       CustomValueSensorCard(
                         name: 'Pressure',
                         value: '${pump?.Pressure_In ?? 0}',
-                        uint: 'V',
+                        uint: 'Bar',
                       ),
-                      Gap(0.05 * screen_width),
+                      Gap(0.03 * screen_width),
                       CustomValueSensorCard(
                         name: 'Flow Rate',
                         value: '${pump?.Flow_Rate ?? 0}',
-                        uint: 'V',
+                        uint: 'L/min',
                       ),
-                      Gap(0.05 * screen_width),
+                      Gap(0.03 * screen_width),
                       CustomValueSensorCard(
                         name: 'Temperature',
                         value: '${pump?.Temperature ?? 0}',
-                        uint: 'V',
+                        uint: '°C',
                       ),
                     ],
                   ),

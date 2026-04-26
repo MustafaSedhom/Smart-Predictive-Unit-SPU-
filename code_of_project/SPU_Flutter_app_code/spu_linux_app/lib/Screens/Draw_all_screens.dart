@@ -70,7 +70,24 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
   }
 
   List<DrawerItem> get menuItems => [
-    DrawerItem(title: "Home", icon: Icons.home_rounded, page: HomeScreen()),
+    DrawerItem(
+      title: "Home",
+      icon: Icons.home_rounded,
+      page: HomeScreen(
+        details: () {
+          setState(() {
+            // ignore: recursive_getters
+            selectedIndex = menuItems.indexWhere((e) => e.title == "Details");
+          });
+        },
+        alarm: () {
+          setState(() {
+            // ignore: recursive_getters
+            selectedIndex = menuItems.indexWhere((e) => e.title == "Alarm");
+          });
+        },
+      ),
+    ),
     DrawerItem(
       title: "Details",
       icon: Icons.data_saver_off_rounded,

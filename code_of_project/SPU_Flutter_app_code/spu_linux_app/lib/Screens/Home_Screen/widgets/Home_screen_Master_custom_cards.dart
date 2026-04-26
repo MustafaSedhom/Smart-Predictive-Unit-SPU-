@@ -32,7 +32,7 @@ class HomeScreenMasterCustomCards extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final Function() view_details;
   // ignore: non_constant_identifier_names
-  final Function() configure;
+  final Function() alarm;
   const HomeScreenMasterCustomCards({
     super.key,
     required this.value,
@@ -59,7 +59,7 @@ class HomeScreenMasterCustomCards extends StatefulWidget {
     required this.Days,
     // ignore: non_constant_identifier_names
     required this.view_details,
-    required this.configure,
+    required this.alarm,
   });
 
   @override
@@ -299,7 +299,7 @@ class _HomeScreenMasterCustomCardsState
                   ),
                 ),
                 TextButton(
-                  onPressed: widget.configure,
+                  onPressed: widget.alarm,
                   style: TextButton.styleFrom(
                     backgroundColor: AppColors.button_master_card_2_color,
                     shape: RoundedRectangleBorder(
@@ -309,7 +309,7 @@ class _HomeScreenMasterCustomCardsState
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      "CONFIGURE",
+                      "ALARMS",
                       style: TextStyle(
                         color: AppColors.Drawer_text_color,
                         fontSize: 10,
