@@ -147,7 +147,7 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
             txt_1_up: 'Temperature',
             txt_1_down: '${motor?.Temperature ?? 0} \u00B0C',
             txt_2_up: 'Vibration',
-            txt_2_down: '${motor?.Vibration ?? 0} mm/s',
+            txt_2_down: '${motor?.Vibration ?? 0} m/s²',
             txt_3_up: 'Current',
             txt_3_down: '${motor?.Current ?? 0} A',
             Days: motor?.Predicted_fault ?? 0,

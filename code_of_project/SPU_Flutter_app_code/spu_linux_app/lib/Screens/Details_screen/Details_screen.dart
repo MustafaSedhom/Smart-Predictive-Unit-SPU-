@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:spu_linux_app/Screens/Details_screen/widgets/Sensor_details_container.dart';
-import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
+import 'package:spu_linux_app/Screens/Details_screen/widgets/Motor_details.dart';
+import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
 class DetailsScreen extends StatefulWidget {
@@ -15,50 +15,27 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Gap(10),
-          // Appbar
-          Row(
-            children: [
-              Gap(20),
-              Text(
-                "Sensors Details",
-                style: CustomAppBarTextStyle.appbar_text_style(size: 25),
-              ),
-              // Spacer(),
-            ],
+    return Column(
+      children: [
+        Gap(10),
+        // appbar
+        Text(
+          "Actuators Details",
+          style: TextStyle(
+            color: AppColors.home_screen_title_alarm_color,
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
           ),
-          CustomDivider(),
-          // screen body
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: ListView.builder(
-                itemCount: 20,
-                itemBuilder: (context, index) {
-                  return SensorDetailsContainer(
-                    txt: "$index",
-                    ontap: () {
-                      // showAlarmDialog(
-                      //   context,
-                      //   // alarm_color: Colors.white,
-                      //   auto_close: false,
-                      //   message:
-                      //       "Temprature Error\n : temp > 80 dccccccccegree",
-                      // );
-                    },
-                  );
-                },
-              ),
-            ),
+        ),
+        CustomDivider(),
+        //actuators cards
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            child: ListView(children: [MotorDetails()]),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

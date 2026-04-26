@@ -16,6 +16,18 @@ class Motor {
   final double Vibration;
   // ignore: non_constant_identifier_names
   final double Current;
+  // ignore: non_constant_identifier_names
+  final double Current_p1;
+  // ignore: non_constant_identifier_names
+  final double Current_p2;
+  // ignore: non_constant_identifier_names
+  final double Current_p3;
+  // ignore: non_constant_identifier_names
+  final double Volt_p1;
+  // ignore: non_constant_identifier_names
+  final double Volt_p2;
+  // ignore: non_constant_identifier_names
+  final double Volt_p3;
 
   Motor({
     // ignore: non_constant_identifier_names
@@ -30,6 +42,12 @@ class Motor {
     required this.Vibration,
     // ignore: non_constant_identifier_names
     required this.Current,
+    required this.Current_p1,
+    required this.Current_p2,
+    required this.Current_p3,
+    required this.Volt_p1,
+    required this.Volt_p2,
+    required this.Volt_p3,
   });
 
   factory Motor.fromJson(Map<String, dynamic> json) {
@@ -44,6 +62,12 @@ class Motor {
       Temperature: (sensors['Temperature'] as num?)?.toInt() ?? 0,
       Vibration: (sensors['Vibration'] as num?)?.toDouble() ?? 0.0,
       Current: (sensors['Current'] as num?)?.toDouble() ?? 0.0,
+      Current_p1: sensors['Current_p1'],
+      Current_p2: sensors['Current_p2'],
+      Current_p3: sensors['Current_p3'],
+      Volt_p1: sensors['volt_p1'],
+      Volt_p2: sensors['volt_p2'],
+      Volt_p3: sensors['volt_p3'],
     );
   }
 }
@@ -56,6 +80,12 @@ Motor none_motor = Motor(
   Temperature: 0,
   Vibration: 0,
   Current: 0,
+  Current_p1: 0.0,
+  Current_p2: 0.0,
+  Current_p3: 0.0,
+  Volt_p1: 0.0,
+  Volt_p2: 0.0,
+  Volt_p3: 0.0,
 );
 Future<Motor> loadMotorFromFile() async {
   try {
