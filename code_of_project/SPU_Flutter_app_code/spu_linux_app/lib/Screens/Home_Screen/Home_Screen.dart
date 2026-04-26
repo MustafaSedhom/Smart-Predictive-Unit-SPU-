@@ -31,7 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
           CustomDivider(),
           Gap(screen_hight * 0.05),
           HomeScreenTitles(),
-          Gap(screen_hight * 0.05),
+          Gap(screen_hight * 0.1),
           HomeScreenMasterCard(details: widget.details, alarm: widget.alarm),
         ],
       ),
