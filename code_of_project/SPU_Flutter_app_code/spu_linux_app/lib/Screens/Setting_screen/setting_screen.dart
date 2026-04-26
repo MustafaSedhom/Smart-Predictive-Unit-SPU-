@@ -65,7 +65,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // double screen_hight = MediaQuery.of(context).size.height;
+    double screen_width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Column(
@@ -115,35 +115,44 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ),
               Gap(5),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  DiameterSettingWidget(
-                    controller: Big_Gear_Controller,
-                    title: "Big Gear",
-                    img: AppIcons.setting_Icon,
-                    size: 40,
-                    unit: Gears?.Gear_setting_unit ?? "mm",
-                    value: Gears?.Big_Gear ?? 0,
-                    onChanged: (val) async {
-                      Gears?.Big_Gear = val;
-                      await saveGearSettingToFile(Gears!);
-                    },
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Gap(0.02 * screen_width),
+                      DiameterSettingWidget(
+                        controller: Big_Gear_Controller,
+                        title: "Big Gear",
+                        img: AppIcons.setting_Icon,
+                        size: 40,
+                        unit: Gears?.Gear_setting_unit ?? "mm",
+                        value: Gears?.Big_Gear ?? 0,
+                        onChanged: (val) async {
+                          Gears?.Big_Gear = val;
+                          await saveGearSettingToFile(Gears!);
+                        },
+                      ),
+                      Gap(0.05 * screen_width),
+                      Image.asset(AppIcons.motor_belt_Icon, width: 100),
+                      Gap(0.05 * screen_width),
+                      DiameterSettingWidget(
+                        controller: Small_Gear_Controller,
+                        title: "Small Gear",
+                        img: AppIcons.setting_Icon,
+                        size: 30,
+                        unit: Gears?.Gear_setting_unit ?? "mm",
+                        value: Gears?.Small_Gear ?? 0,
+                        onChanged: (val) async {
+                          Gears?.Small_Gear = val;
+                          await saveGearSettingToFile(Gears!);
+                        },
+                      ),
+                    ],
                   ),
-                  Image.asset(AppIcons.motor_belt_Icon, width: 100),
-                  DiameterSettingWidget(
-                    controller: Small_Gear_Controller,
-                    title: "Small Gear",
-                    img: AppIcons.setting_Icon,
-                    size: 30,
-                    unit: Gears?.Gear_setting_unit ?? "mm",
-                    value: Gears?.Small_Gear ?? 0,
-                    onChanged: (val) async {
-                      Gears?.Small_Gear = val;
-                      await saveGearSettingToFile(Gears!);
-                    },
-                  ),
-                ],
+                ),
               ),
             ],
           ),
@@ -151,55 +160,63 @@ class _SettingScreenState extends State<SettingScreen> {
           CustomDivider(),
           Gap(5),
           // change images
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Home Screen Image",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                        color: AppColors.Drawer_icon_selected_color,
-                      ),
+          SizedBox(
+            width: screen_width,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Gap(0.05 * screen_width),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Home Screen Image",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            color: AppColors.Drawer_icon_selected_color,
+                          ),
+                        ),
+                        Gap(5),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: AdminSetting(),
+                        ),
+                      ],
                     ),
-                    Gap(5),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: AdminSetting(),
+                  ),
+                  Gap(0.15 * screen_width),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "SPU Logo Image",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            color: AppColors.Drawer_icon_selected_color,
+                          ),
+                        ),
+                        Gap(5),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: SpuLogoSetting(),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "SPU Logo Image",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                        color: AppColors.Drawer_icon_selected_color,
-                      ),
-                    ),
-                    Gap(5),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: SpuLogoSetting(),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
           //divider
-          CustomDivider(),
+          // CustomDivider(),
         ],
       ),
     );
