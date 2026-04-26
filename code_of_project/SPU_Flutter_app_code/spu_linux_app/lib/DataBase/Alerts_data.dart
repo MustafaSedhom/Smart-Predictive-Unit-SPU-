@@ -1,28 +1,4 @@
 // ignore_for_file: non_constant_identifier_names
-// "Alerts":
-// {
-// "List_item_count": 30,
-// "Alert_List":[
-//             {
-//               "id": 1,
-//               "device":"Motor",
-//               "timestamp": "2006-02-22T11:15:04",
-//               "type": "temperature",
-//               "message": "Motor overheating",
-//               "level": "high",
-//               "value": 80
-//             },
-//             {
-//               "id": 2,
-//               "device":"Motor",
-//               "timestamp": "2006-02-22T11:20:10",
-//               "type": "temperature",
-//               "message": "Temperature still high",
-//               "level": "high",
-//               "value": 82
-//             }
-//         ]
-// },
 import 'dart:convert';
 import 'dart:io';
 import 'package:spu_linux_app/DataBase/json_file_path.dart';
@@ -54,7 +30,9 @@ class AlertsListData {
   final String message;
   final String level;
   final double value;
+  final String uint;
   final DateTime timestamp;
+  final String period_name;
 
   AlertsListData({
     required this.id,
@@ -64,6 +42,8 @@ class AlertsListData {
     required this.level,
     required this.value,
     required this.timestamp,
+    required this.uint,
+    required this.period_name,
   });
 
   factory AlertsListData.fromJson(Map<String, dynamic> json) {
@@ -75,6 +55,8 @@ class AlertsListData {
       level: json['level'] ?? "low",
       value: (json['value'] as num).toDouble(),
       timestamp: DateTime.tryParse(json['timestamp'] ?? "") ?? DateTime.now(),
+      uint: json['uint'] ?? "",
+      period_name: json['period_name'] ?? "",
     );
   }
 }
@@ -87,6 +69,8 @@ AlertsListData none_alert_list_data = AlertsListData(
   level: "Low",
   value: 0,
   timestamp: DateTime.now(),
+  uint: 'none',
+  period_name: 'none',
 );
 AlertsData none_alert_data = AlertsData(count: 0, alerts: []);
 List<AlertsListData> parseAlertsList(List<dynamic> list) {
@@ -116,4 +100,24 @@ Future<AlertsData> loadAlertsDataFromFile() async {
   } catch (e) {
     return none_alert_data;
   }
+}
+
+Future<void> clearAlerts() async {
+  final path = JsonFilePath.path;
+
+  if (path == null || path.isEmpty) return;
+
+  final file = File(path);
+
+  if (!await file.exists()) return;
+
+  final data = await file.readAsString();
+  if (data.isEmpty) return;
+
+  final jsonResult = jsonDecode(data);
+
+  jsonResult["Alerts"]["Alert_List"] = [];
+  jsonResult["Alerts"]["List_item_count"] = 0;
+
+  await file.writeAsString(jsonEncode(jsonResult));
 }

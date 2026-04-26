@@ -1,81 +1,55 @@
+// ignore_for_file: non_constant_identifier_names
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:spu_linux_app/Images/images_and_icons.dart';
-import 'package:spu_linux_app/Screens/Alarm_screen/Data_Type/Alarm_Data.dart';
+import 'package:spu_linux_app/DataBase/Alerts_data.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/widgets/Custom_list_view_container.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
 class AlarmScreen extends StatefulWidget {
-  AlarmScreen({super.key});
+  const AlarmScreen({super.key});
 
   @override
   State<AlarmScreen> createState() => _AlarmScreenState();
 }
 
 class _AlarmScreenState extends State<AlarmScreen> {
-  // ignore: non_constant_identifier_names
-  final List<AlarmData> alarm_list = [
-    AlarmData(
-      title: "Motor",
-      Icon: AppIcons.motor_Icon,
-      Problem_Icon: Icons.thermostat,
-      Date: "22 / 02 / 2006",
-      Time: "11 : 08 : 57",
-      value: "12 °C",
-    ),
-    AlarmData(
-      title: "Belt Driver",
-      Icon: AppIcons.motor_belt_Icon,
-      Problem_Icon: Icons.graphic_eq,
-      Date: "22 / 02 / 2006",
-      Time: "11 : 01 : 13",
-      value: "5.4 m/s\u00B2",
-    ),
-    AlarmData(
-      title: "Motor",
-      Icon: AppIcons.motor_Icon,
-      Problem_Icon: Icons.bolt,
-      Date: "22 / 02 / 2006",
-      Time: "11 : 03 : 01",
-      value: "100 A",
-    ),
-    AlarmData(
-      title: "Motor",
-      Icon: AppIcons.motor_Icon,
-      Problem_Icon: Icons.graphic_eq,
-      Date: "22 / 02 / 2006",
-      Time: "11 : 01 : 13",
-      value: "5.4 m/s\u00B2",
-    ),
-    AlarmData(
-      title: "Belt Driver",
-      Icon: AppIcons.motor_belt_Icon,
-      Problem_Icon: Icons.graphic_eq,
-      Date: "22 / 02 / 2006",
-      Time: "11 : 01 : 13",
-      value: "5.4 m/s\u00B2",
-    ),
-    AlarmData(
-      title: "Belt Driver",
-      Icon: AppIcons.motor_pump_Icon,
-      Problem_Icon: Icons.thermostat,
-      Date: "22 / 02 / 2006",
-      Time: "11 : 01 : 13",
-      value: "78 °C",
-    ),
-  ];
+  AlertsData? alertsData;
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(Duration(milliseconds: 100), (_) async {
+      await loadData();
+    });
+  }
+
+  Future<void> loadData() async {
+    final AlertData = await loadAlertsDataFromFile();
+
+    if (!mounted) return;
+
+    setState(() {
+      alertsData = AlertData;
+    });
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable, non_constant_identifier_names
-    bool alarm_list_is_empty = alarm_list.isEmpty;
+    bool alarm_list_is_empty = alertsData?.alerts.isEmpty ?? true;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Gap(10),
           // Appbar
@@ -125,10 +99,10 @@ class _AlarmScreenState extends State<AlarmScreen> {
                                     ),
                                   ),
                                   TextButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        alarm_list.clear();
-                                      });
+                                    onPressed: () async {
+                                      await clearAlerts();
+                                      setState(() {});
+                                      // ignore: use_build_context_synchronously
                                       Navigator.pop(context);
                                     },
                                     child: Text(
@@ -182,10 +156,10 @@ class _AlarmScreenState extends State<AlarmScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(12),
                     child: ListView.builder(
-                      itemCount: alarm_list.length,
+                      itemCount: alertsData!.alerts.length,
                       itemBuilder: (context, index) {
                         return CustomListViewContainer(
-                          alarm: alarm_list[index],
+                          alarm: alertsData!.alerts[index],
                         );
                       },
                     ),
