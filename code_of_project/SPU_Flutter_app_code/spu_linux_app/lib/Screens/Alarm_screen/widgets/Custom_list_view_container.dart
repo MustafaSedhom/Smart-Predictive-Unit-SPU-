@@ -45,7 +45,7 @@ class CustomListViewContainer extends StatelessWidget {
     } else if (my_problem == "PRESSURE") {
       return Icons.compress;
     }
-    return Icons.thermostat_rounded;
+    return Icons.circle;
   }
 
   @override

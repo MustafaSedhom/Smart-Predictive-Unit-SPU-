@@ -54,52 +54,20 @@
                   "message": "Motor overheating",
                   "level": "high",
                   "value": 80,
-                  "uint":" \u00B0C"
+                  "uint":" A"
                 },
                 {
                   "id": 2,
-                  "device" : "belt driver",
-                  "timestamp": "2006-02-22T11:20:10",
+                  "device" : "pump",
+                  "timestamp": "2026-02-26T12:18:21",
                   "period_name":"AM",
-                  "type": "temperature",
-                  "message": "Temperature still high",
+                  "type": "temp",
+                  "message": "Motor overheating",
                   "level": "low",
-                  "value": 82,
-                  "uint":" \u00B0C"
-                },
-                {
-                  "id": 2,
-                  "device" : "PUMP",
-                  "timestamp": "2026-04-26T11:20:10",
-                  "period_name":"PM",
-                  "type": "Alignment",
-                  "message": "Temperature still high",
-                  "level": "high",
-                  "value": 12,
-                  "uint":" \u00B0C"
-                },
-                {
-                  "id": 2,
-                  "device" : "PUMP",
-                  "timestamp": "2026-04-26T11:20:10",
-                  "period_name":"PM",
-                  "type": "Alignment",
-                  "message": "Temperature still high",
-                  "level": "high",
-                  "value": 12,
-                  "uint":" \u00B0C"
-                },
-                {
-                  "id": 2,
-                  "device" : "PUMP",
-                  "timestamp": "2026-04-26T11:20:10",
-                  "period_name":"PM",
-                  "type": "Alignment",
-                  "message": "Temperature still high",
-                  "level": "high",
-                  "value": 12,
+                  "value": 20,
                   "uint":" \u00B0C"
                 }
+
             ]
     },
   "Analysis": {

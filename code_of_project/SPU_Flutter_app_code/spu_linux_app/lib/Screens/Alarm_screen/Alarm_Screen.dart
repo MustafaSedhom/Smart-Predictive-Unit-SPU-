@@ -158,8 +158,10 @@ class _AlarmScreenState extends State<AlarmScreen> {
                     child: ListView.builder(
                       itemCount: alertsData!.alerts.length,
                       itemBuilder: (context, index) {
+                        final reversedList = alertsData!.alerts.reversed
+                            .toList();
                         return CustomListViewContainer(
-                          alarm: alertsData!.alerts[index],
+                          alarm: reversedList[index],
                         );
                       },
                     ),
