@@ -16,6 +16,7 @@ from Actuators_Data.Pump_Data import Pump_Data
 from OverAll_Data.OverAll_Data import OverAll_Data
 from Alerts_Data.Alerts_Data import Alerts_Data,AlertStruct
 from Analysis_Data.Analysis_Data import AnalysisData
+from Gear_Setting_Data.Gear_Setting_Data import GearSettingData
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(base_dir, "SPU_Data_between_app_and_python_Rassbiary_pi.json")
@@ -27,6 +28,7 @@ belt = Belt_Driver_Data(file_path)
 overall =OverAll_Data(file_path)
 alert = Alerts_Data(file_path)
 analysis = AnalysisData(file_path)
+gear = GearSettingData(file_path)
 ########################################################################
 def choose_actuator():
     print("================================================================")
@@ -265,6 +267,7 @@ if __name__ == "__main__":
     # alert.clear_all_alerts()
     # analysis.add_point(15,3)
     # analysis.remove_point_by_index(2)
+    # gear.update_gear(big=1.66,unit="kg")
     pass
     
 ########################################################################

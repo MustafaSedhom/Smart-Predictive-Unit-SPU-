@@ -146,8 +146,8 @@
         }
     },
     "Gear_Setting": {
-        "Big_Gear": 11,
-        "Small_Gear": 7.0,
-        "Gear_Setting_Unit": "mm"
+        "Big_Gear": 1.66,
+        "Small_Gear": 3.44,
+        "Gear_Setting_Unit": "kg"
     }
 }
