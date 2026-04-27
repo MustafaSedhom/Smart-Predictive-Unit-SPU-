@@ -1,10 +1,8 @@
 from typing import Optional
-from handling_Data.handling_Data import Control_Data_from_json
-
 
 class GearSettingData:
-    def __init__(self, file_path):
-        self.__data = Control_Data_from_json(file_path)
+    def __init__(self, data):
+        self.__data =data
 
     # ======================
     # INTERNAL

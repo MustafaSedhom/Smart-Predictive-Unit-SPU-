@@ -1,7 +1,6 @@
-from handling_Data.handling_Data import Control_Data_from_json
 
 class AlertStruct:
-    def __init__(self, id=None, device="", timestamp="", type="", message="", level="", value=0, unit=""):
+    def __init__(self, id=None, device="", timestamp="", type="", message="", level="", value=0, unit="",period_name=""):
         self.id = id
         self.device = device
         self.timestamp = timestamp
@@ -10,6 +9,7 @@ class AlertStruct:
         self.level = level
         self.value = value
         self.unit = unit
+        self.period_name = period_name
 
     def to_dict(self):
         return {
@@ -21,11 +21,12 @@ class AlertStruct:
             "level": self.level,
             "value": self.value,
             "unit": self.unit,
+            "period_name": self.period_name,
         }
 
 class Alerts_Data:
-    def __init__(self, file_path):
-        self.__data = Control_Data_from_json(file_path)
+    def __init__(self, data):
+        self.__data =data
         self.Alert_struct = AlertStruct()
     # ======================
     # GET METHODS

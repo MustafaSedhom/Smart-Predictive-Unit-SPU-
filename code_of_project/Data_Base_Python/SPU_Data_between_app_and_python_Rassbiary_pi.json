@@ -48,7 +48,19 @@
     },
     "Alerts": {
         "List_item_count": 0,
-        "Alert_List": []
+        "Alert_List": [
+            {
+                "id": 1,
+                "device": "motor",
+                "timestamp": "2026-04-27T12:04:30",
+                "type": "current",
+                "message": "High vibration detected",
+                "level": "low",
+                "value": 45,
+                "unit": "A",
+                "period_name": "PM"
+            }
+        ]
     },
     "Analysis": {
         "Spacing": 1,
@@ -148,6 +160,6 @@
     "Gear_Setting": {
         "Big_Gear": 1.66,
         "Small_Gear": 3.44,
-        "Gear_Setting_Unit": "kg"
+        "Gear_Setting_Unit": "mm"
     }
 }
