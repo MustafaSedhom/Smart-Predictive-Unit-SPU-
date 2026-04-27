@@ -1,12 +1,12 @@
 {
     "Over_All": {
         "overall_Health": 43,
-        "Active_Alarms": 20,
+        "Active_Alarms": 12,
         "sensors_online": {
-            "active": 3,
+            "active": 2,
             "total": 20
         },
-        "Next_Maintenance": 55
+        "Next_Maintenance": 19
     },
     "Actuators": {
         "Motor": {
@@ -136,7 +136,8 @@
                 "12",
                 "13",
                 "15",
-                "16"
+                "16",
+                "17"
             ],
             "y_labels": [
                 "0",
@@ -154,7 +155,8 @@
                 "12",
                 "13",
                 "15",
-                "16"
+                "16",
+                "17"
             ]
         },
         "points": {
@@ -169,7 +171,8 @@
                 7,
                 8,
                 9,
-                10
+                10,
+                13
             ],
             "y_points": [
                 0,
@@ -182,7 +185,8 @@
                 7,
                 5,
                 5,
-                3
+                3,
+                10
             ]
         }
     },

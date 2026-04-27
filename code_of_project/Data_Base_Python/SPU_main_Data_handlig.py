@@ -9,33 +9,20 @@
 #         ↓
 # Flutter App (Dashboard)
 
+import os
 from Actuators_Data.Motor_Data import Motor_Data
 from Actuators_Data.Belt_Driver_Data import Belt_Driver_Data
 from Actuators_Data.Pump_Data import Pump_Data
-from handling_Data.handling_Data import Control_Data_from_json
-import os
+from OverAll_Data.OverAll_Data import OverAll_Data
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(base_dir, "SPU_Data_between_app_and_python_Rassbiary_pi.json")
 
-
-Data = Control_Data_from_json(file_path)
-
+########################################################################
 motor = Motor_Data(file_path)
 pump = Pump_Data(file_path)
 belt = Belt_Driver_Data(file_path)
-# print("================================================================")
-# choose_actuator = int(input("choose :\n1-> Motor\n 2-> Belt\n 3-> Pump"))
-# if(choose_actuator == 1):
-#     choose_actuator = int(input("choose :\n1-> \n 2-> Belt\n 3-> Pump"))
-# elif(choose_actuator == 2):
-#     pass
-# elif(choose_actuator == 3):
-#     pass
-# else:
-#     pass
-# print("================================================================")
-
+overall =OverAll_Data(file_path)
 ########################################################################
 def choose_actuator():
     print("================================================================")
@@ -259,6 +246,8 @@ def control_app_Data():
                     elif choose_sensor == 4:
                         break
         print("\n==============================\n")
-
+########################################################################
 if __name__ == "__main__":
-    control_app_Data()
+    # control_app_Data()
+    overall.set_Sensors_online_active(2)
+########################################################################
