@@ -1,4 +1,6 @@
 // SPU Linux App
+// ignore_for_file: unnecessary_import
+
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spu_linux_app/DataBase/json_file_path.dart';
@@ -30,7 +32,7 @@ void main() async {
   windowManager.waitUntilReadyToShow(windowOptions, () async {
     await windowManager.show();
     await windowManager.focus();
-     await windowManager.setFullScreen(true);
+    await windowManager.setFullScreen(true);
   });
   await initApp();
   runApp(SPU_Linux_APP());

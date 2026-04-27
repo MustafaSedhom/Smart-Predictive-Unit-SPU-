@@ -1,9 +1,12 @@
+// ignore_for_file: non_constant_identifier_names, unused_local_variable, dead_code
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/widgets/Drawer/widgets/Drawer_elments.dart';
 import 'package:spu_linux_app/widgets/Drawer/widgets/Drawer_items.dart';
 import 'package:spu_linux_app/widgets/Drawer/widgets/SPU_logo_in_Drawer.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:window_manager/window_manager.dart';
 
 class DrawerWidget extends StatefulWidget {
   final Function(int index)? ontap;
@@ -21,6 +24,7 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
+  bool is_max = true;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -66,25 +70,47 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
               children: [
-                InkWell(
-                  onTap: () {},
+                GestureDetector(
+                  onTap: () async {
+                    bool isFull = await windowManager.isFullScreen();
+
+                    bool newState = !isFull;
+
+                    await windowManager.setFullScreen(newState);
+
+                    setState(() {
+                      is_max = newState;
+                    });
+                  },
                   child: Container(
                     width: double.infinity,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: AppColors.Start_Button_color,
+                      color: (is_max)
+                          ? Colors.green.shade900
+                          : Colors.red.shade900,
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    child: const Text(
-                      "START SYSTEM",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                          is_max ? Icons.fullscreen_exit : Icons.fullscreen,
+                          color: Colors.white,
+                          size: 16,
+                        ),
+                        Text(
+                          (is_max) ? "Minimize SPU" : "Maximize SPU",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

@@ -136,7 +136,11 @@ class _SettingScreenState extends State<SettingScreen> {
                         },
                       ),
                       Gap(0.05 * screen_width),
-                      Image.asset(AppIcons.motor_belt_Icon, width: 100),
+                      Image.asset(
+                        AppIcons.motor_belt_Icon,
+                        width: 100,
+                        color: AppColors.Drawer_icon_selected_color,
+                      ),
                       Gap(0.05 * screen_width),
                       DiameterSettingWidget(
                         controller: Small_Gear_Controller,
