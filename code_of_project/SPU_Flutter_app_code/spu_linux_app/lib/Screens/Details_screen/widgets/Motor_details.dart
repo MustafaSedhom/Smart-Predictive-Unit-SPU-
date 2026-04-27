@@ -194,13 +194,13 @@ class _MotorDetailsState extends State<MotorDetails> {
                       ),
                       Gap(0.04 * screen_width),
                       CustomValueSensorCard(
-                        name: "Current P1",
+                        name: "Current P2",
                         value: '${motor?.Current_p2 ?? 0}',
                         uint: 'A',
                       ),
                       Gap(0.04 * screen_width),
                       CustomValueSensorCard(
-                        name: "Current P1",
+                        name: "Current P3",
                         value: '${motor?.Current_p3 ?? 0}',
                         uint: 'A',
                       ),

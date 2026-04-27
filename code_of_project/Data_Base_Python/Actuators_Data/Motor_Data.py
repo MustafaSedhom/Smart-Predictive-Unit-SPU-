@@ -22,6 +22,18 @@ class Motor_Data:
         return self.get_Sensors().get("Vibration", "unknown")
     def get_Current(self):
         return self.get_Sensors().get("Current", "unknown")
+    def get_Current_P1(self):
+        return self.get_Sensors().get("Current_p1", "unknown")
+    def get_Current_P2(self):
+        return self.get_Sensors().get("Current_p2", "unknown")
+    def get_Current_P3(self):
+        return self.get_Sensors().get("Current_p3", "unknown")
+    def get_Volt_P1(self):
+        return self.get_Sensors().get("volt_p1", "unknown")
+    def get_Volt_P2(self):
+        return self.get_Sensors().get("volt_p2", "unknown")
+    def get_Volt_P3(self):
+        return self.get_Sensors().get("volt_p3", "unknown")
     # ======================
     # SET METHODS
     # ======================
@@ -45,6 +57,24 @@ class Motor_Data:
         self.save_data()
     def set_Current(self,val):
         self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["Current"] = val
+        self.save_data()
+    def set_Current_P1(self,val):
+        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["Current_p1"] = val
+        self.save_data()
+    def set_Current_P2(self,val):
+        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["Current_p2"] = val
+        self.save_data()
+    def set_Current_P3(self,val):
+        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["Current_p3"] = val
+        self.save_data()
+    def set_Volt_P1(self,val):
+        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["volt_p1"] = val
+        self.save_data()
+    def set_Volt_P2(self,val):
+        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["volt_p2"] = val
+        self.save_data()
+    def set_Volt_P3(self,val):
+        self.__data.json_data_access["Actuators"]["Motor"]["Sensors"]["volt_p3"] = val
         self.save_data()
     # ======================
     # SAVE

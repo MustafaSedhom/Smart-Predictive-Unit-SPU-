@@ -111,7 +111,38 @@ def control_app_Data():
 
             elif key == 4:
                 if(actuator == "Motor"):
-                    print(motor.get_Sensors())
+                    print("\nChoose type of Motor Sensor:")
+                    print("1 -> Temperature")
+                    print("2 -> Vibration")
+                    print("3 -> Current")
+                    print("4 -> Current_P1")
+                    print("5 -> Current_P2")
+                    print("6 -> Current_P3")
+                    print("7 -> Volt_P1")
+                    print("8 -> Volt_P2")
+                    print("9 -> Volt_P3")
+                    print("10 -> Exit")
+                    choose_sensor = int(input("Enter: "))
+                    if choose_sensor == 1:
+                        print(motor.get_Temperature())
+                    elif choose_sensor == 2:
+                        print(motor.get_Vibration())
+                    elif choose_sensor == 3:
+                        print(motor.get_Current())
+                    elif choose_sensor == 4:
+                        print(motor.get_Current_P1())
+                    elif choose_sensor == 5:
+                        print(motor.get_Current_P2())
+                    elif choose_sensor == 6:
+                        print(motor.get_Current_P3())
+                    elif choose_sensor == 7:
+                        print(motor.get_Volt_P1())
+                    elif choose_sensor == 8:
+                        print(motor.get_Volt_P2())
+                    elif choose_sensor == 9:
+                        print(motor.get_Volt_P3())
+                    elif choose_sensor == 10:
+                        break
                 elif(actuator == "Belt_Driver"):
                     print(belt.get_Sensors())
                 elif(actuator == "Pump"):
@@ -154,7 +185,13 @@ def control_app_Data():
                     print("1 -> Temperature")
                     print("2 -> Vibration")
                     print("3 -> Current")
-                    print("4 -> Exit")
+                    print("4 -> Current_P1")
+                    print("5 -> Current_P2")
+                    print("6 -> Current_P3")
+                    print("7 -> Volt_P1")
+                    print("8 -> Volt_P2")
+                    print("9 -> Volt_P3")
+                    print("10 -> Exit")
                     choose_sensor = int(input("Enter: "))
                     if choose_sensor == 1:
                         value = float(input("Enter value: "))
@@ -166,6 +203,24 @@ def control_app_Data():
                         value = float(input("Enter value: "))
                         motor.set_Current(value)
                     elif choose_sensor == 4:
+                        value = float(input("Enter value: "))
+                        motor.set_Current_P1(value)
+                    elif choose_sensor == 5:
+                        value = float(input("Enter value: "))
+                        motor.set_Current_P2(value)
+                    elif choose_sensor == 6:
+                        value = float(input("Enter value: "))
+                        motor.set_Current_P3(value)
+                    elif choose_sensor == 7:
+                        value = float(input("Enter value: "))
+                        motor.set_Volt_P1(value)
+                    elif choose_sensor == 8:
+                        value = float(input("Enter value: "))
+                        motor.set_Volt_P2(value)
+                    elif choose_sensor == 9:
+                        value = float(input("Enter value: "))
+                        motor.set_Volt_P3(value)
+                    elif choose_sensor == 10:
                         break
                 elif(actuator == "Belt_Driver"):
                     print("\nChoose type of Belt Driver Sensor:")
