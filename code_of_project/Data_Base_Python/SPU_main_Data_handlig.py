@@ -14,6 +14,7 @@ from Actuators_Data.Motor_Data import Motor_Data
 from Actuators_Data.Belt_Driver_Data import Belt_Driver_Data
 from Actuators_Data.Pump_Data import Pump_Data
 from OverAll_Data.OverAll_Data import OverAll_Data
+from Alerts_Data.Alerts_Data import Alerts_Data,AlertStruct
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(base_dir, "SPU_Data_between_app_and_python_Rassbiary_pi.json")
@@ -23,6 +24,7 @@ motor = Motor_Data(file_path)
 pump = Pump_Data(file_path)
 belt = Belt_Driver_Data(file_path)
 overall =OverAll_Data(file_path)
+alert = Alerts_Data(file_path)
 ########################################################################
 def choose_actuator():
     print("================================================================")
@@ -248,6 +250,15 @@ def control_app_Data():
         print("\n==============================\n")
 ########################################################################
 if __name__ == "__main__":
-    # control_app_Data()
-    overall.set_Sensors_online_active(2)
+    # alert_1 = AlertStruct(
+    #     device="motor",
+    #     timestamp="2026-04-27T10:00:00",
+    #     type="current",
+    #     message="High vibration detected",
+    #     level="low",
+    #     value=45,
+    #     unit="A"
+    #     )
+    # alert.add_alert(alert_1)
+    alert.clear_all_alerts()
 ########################################################################
