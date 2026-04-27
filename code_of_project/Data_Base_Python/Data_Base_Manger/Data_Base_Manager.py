@@ -21,7 +21,7 @@ class Time_Date_conversion:
     def to_iso(self, dt: datetime):
         return dt.strftime("%Y-%m-%dT%H:%M:%S")
 
-class DataManager:
+class DataBaseManager:
     def __init__(self, file_path):
         self.data = Control_Data_from_json(file_path)
         self.motor = Motor_Data(self.data)

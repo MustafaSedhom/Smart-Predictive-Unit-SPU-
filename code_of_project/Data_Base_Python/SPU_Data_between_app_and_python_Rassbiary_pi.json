@@ -59,6 +59,17 @@
                 "value": 45,
                 "unit": "A",
                 "period_name": "PM"
+            },
+            {
+                "id": 2,
+                "device": "motor",
+                "timestamp": "2026-04-27T12:07:52",
+                "type": "current",
+                "message": "High vibration detected",
+                "level": "low",
+                "value": 45,
+                "unit": "A",
+                "period_name": "PM"
             }
         ]
     },

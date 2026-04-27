@@ -12,14 +12,14 @@
 import os
 from datetime import datetime
 
-from Data_Base_Manger.Data_Base_Manager import DataManager
+from Data_Base_Manger.Data_Base_Manager import DataBaseManager
 from Alerts_Data.Alerts_Data import AlertStruct
 
 
 base_dir = os.path.dirname(os.path.abspath(__file__))
 file_path = os.path.join(base_dir, "SPU_Data_between_app_and_python_Rassbiary_pi.json")
 
-DataBase = DataManager(file_path)
+DataBase = DataBaseManager(file_path)
 Date_time_now = datetime.now()
 
 if __name__ == "__main__":
