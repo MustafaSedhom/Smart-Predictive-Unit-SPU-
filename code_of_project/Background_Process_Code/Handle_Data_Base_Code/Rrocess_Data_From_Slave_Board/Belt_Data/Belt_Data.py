@@ -1,4 +1,4 @@
-class Pump:
+class BeltDriver:
     def __init__(self, data):
         self.data = data
 

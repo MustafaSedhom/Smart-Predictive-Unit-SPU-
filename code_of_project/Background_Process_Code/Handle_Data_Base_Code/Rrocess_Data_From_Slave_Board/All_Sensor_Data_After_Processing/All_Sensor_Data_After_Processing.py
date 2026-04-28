@@ -1,8 +1,8 @@
 import json
 
-from Belt_Data.Belt_Data import BeltDriver
-from Motor_Data.Motor_Data import Motor
-from Pump_Data.Pump_Data import Pump
+from  ..Belt_Data.Belt_Data import BeltDriver
+from  ..Motor_Data.Motor_Data import Motor
+from  ..Pump_Data.Pump_Data import Pump
 
 
 class All_Sensor_Data_After_Receiving:

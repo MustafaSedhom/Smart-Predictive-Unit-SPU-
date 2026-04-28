@@ -3,6 +3,7 @@
     "appbar",
     "containe",
     "elments",
+    "handlig",
     "Maximizable",
     "ontap",
     "prefs",
@@ -67,5 +68,9 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "python.analysis.extraPaths": [
+    "./code_of_project/Data_Base_Python",
+    "./code_of_project/Data_Base_Python"
+  ]
 }

@@ -1,6 +1,6 @@
 
 class AlertStruct:
-    def __init__(self, id=None, device="", timestamp="", type="", message="", level="", value=0, unit="",period_name=""):
+    def __init__(self, id:int=0, device:str="", timestamp:str="", type:str="", message:str="", level:str="", value:float=0, unit:str="",period_name:str=""):
         self.id = id
         self.device = device
         self.timestamp = timestamp
