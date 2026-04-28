@@ -8,7 +8,8 @@
     "prefs",
     "Rassbiary",
     "SEDHOM",
-    "Temprtautre"
+    "Temprtautre",
+    "UART"
   ],
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
