@@ -1,29 +1,26 @@
 //-----------------------------------------------------------
 // import librarys
 #include <Arduino.h>
-#include "ArduinoJson.h"
+#include "Actuators_Structs/ActuatorsStructs.h"
+#include "Handling_Communction_Data/Json_Data.h"
 //-----------------------------------------------------------
 // defines 
 
 //-----------------------------------------------------------
 // Global Variables
-
+Motor motor;
+Belt belt;
+Pump pump;
+Json_Data Json;
 //-----------------------------------------------------------
 // init program
 void setup() 
 {
     Serial.begin(9600);
-    JsonDocument doc;
-    doc["temperature"] = 32.5;
-    doc["vibration"] = 1.2;
-    doc["current"] = 1.4;
-    serializeJson(doc, Serial);
-    Serial.println();
 }
 //-----------------------------------------------------------
 // program
 void loop()  
-{
-    
+{   
 }
 //-----------------------------------------------------------
