@@ -8,10 +8,10 @@
 
 //-----------------------------------------------------------
 // Global Variables
+Json_Data Json;
 Motor motor;
 Belt belt;
 Pump pump;
-Json_Data Json;
 //-----------------------------------------------------------
 // init program
 void setup() 
