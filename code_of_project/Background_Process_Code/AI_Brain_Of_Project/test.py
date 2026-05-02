@@ -7,9 +7,9 @@ from ..Handle_Data_Base_Code.Data_Base_Python.SPU_main_Data_handlig import Acces
 from ..AI_Brain_Of_Project.Asign_values_to_app_directly.Asign_values_to_app_directly import put_sensors_value_and_send_it_to_app_directly
 #########################################################################################
 # variables
-APIJsonFilePath = "C:/Users/elmoh/OneDrive/Desktop/API.json"
+APIJsonFilePath = r"C:\Users\elmoh\OneDrive\Desktop\Ibrahim_mohamed_project\API.json"
 communication_port = "COM5"
-communication_boudrate = 9600
+communication_boudrate = 115200
 #########################################################################################
 
 #########################################################################################
@@ -36,3 +36,5 @@ if __name__ == "__main__":
         except Exception as e:
             print("DB update error:", e)
 #########################################################################################
+
+
