@@ -1,0 +1,17 @@
+[Unit]
+Description=SPU Main System
+After=network.target graphical.target
+
+[Service]
+Environment=DISPLAY=:0
+Environment=XAUTHORITY=/home/pi/.Xauthority
+
+WorkingDirectory=/home/pi/SPU_System
+
+ExecStart=/usr/bin/python3 /home/pi/SPU_System/SPU_run.py
+
+Restart=always
+User=pi
+
+[Install]
+WantedBy=graphical.target
