@@ -46,80 +46,60 @@ belt_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{belt_last_data_f
 
 if __name__ == "__main__":
     ########################################
-    # read last data
-    motor_last_data = Read_Last_Motor_Data(motor_last_data_file_path)
-    pump_last_data = Read_Last_Pump_Data(pump_last_data_file_path)
-    belt_last_data = Read_Last_Belt_Data(belt_last_data_file_path)
-
     # # UART object
     Slave_Data = None
-
     # Try connect UART
     try:
-
         Slave_Data = UARTReaderJSON(
             port=communication_port,
             baud=communication_boudrate
         )
-
         print("UART Connected")
-
     except Exception as e:
-
         print("UART Disabled")
         print(e)
-
     # Database
     Data_Base = Access_data_Base(APIJsonFilePath)
-
     running = True
-
     while running:
-
         print("AI Running")
-
         # READ UART DATA
         if Slave_Data:
-
             raw = Slave_Data.read()
-
         else:
-
             # Simulation Mode
             raw = ""  # Empty data to avoid errors
-
             time.sleep(1)
-
         # check empty
         if not raw or str(raw).strip() == "":
-
             time.sleep(0.1)
             continue
-
         # PARSE JSON
         try:
-
             Sensors_Data = All_Sensor_Data_After_Receiving(raw)
-
         except Exception as e:
-
             print("Sensor parse error:", e)
             continue
-
         # DATABASE UPDATE
         try:
             put_sensors_value_and_send_it_to_app_directly(
                 Data_Base,
                 Sensors_Data
             )
-
         except Exception as e:
             print("Database Error:", e)
-
         try:
-            Store_Data_Directly(Sensors_Data)
-
+            Store_Data_Directly(
+                sensors = Sensors_Data,
+                motor_file = motor_last_data_file_path,
+                pump_file = pump_last_data_file_path,
+                belt_file = belt_last_data_file_path,
+            )
         except Exception as e:
             print("Store Error:", e)
+            # read last data
+        motor_last_data = Read_Last_Motor_Data(motor_last_data_file_path)
+        pump_last_data = Read_Last_Pump_Data(pump_last_data_file_path)
+        belt_last_data = Read_Last_Belt_Data(belt_last_data_file_path)
 
 #########################################################################################

@@ -10,12 +10,12 @@ def Store_Motor_Data(
     file_path,
     Temperature,
     Vibration,
-    Current_p1,
-    Current_p2,
-    Current_p3,
-    volt_p1,
-    volt_p2,
-    volt_p3
+    Current_P_R,
+    Current_P_S,
+    Current_P_T,
+    Volt_P_R,
+    Volt_P_S,
+    Volt_P_T
 ):
 
     try:
@@ -30,13 +30,13 @@ def Store_Motor_Data(
             "Temperature": Temperature,
             "Vibration": Vibration,
 
-            "Current_P_R": Current_p1,
-            "Current_P_S": Current_p2,
-            "Current_P_T": Current_p3,
+            "Current_P_R": Current_P_R,
+            "Current_P_S": Current_P_S,
+            "Current_P_T": Current_P_T,
 
-            "volt_P_R": volt_p1,
-            "volt_P_S": volt_p2,
-            "volt_P_T": volt_p3
+            "Volt_P_R": Volt_P_R,
+            "Volt_P_S": Volt_P_S,
+            "Volt_P_T": Volt_P_T
         }
 
         data = pd.DataFrame([data_dict])
