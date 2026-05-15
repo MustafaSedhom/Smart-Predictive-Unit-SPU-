@@ -17,22 +17,41 @@ from .Asign_values_to_app_directly.Asign_values_to_app_directly import (
     put_sensors_value_and_send_it_to_app_directly
 )
 
+from .AI_Store_and_Read_process_Data.AI_Read_Process_Data import (
+    Read_Last_Motor_Data,
+    Read_Last_Pump_Data,
+    Read_Last_Belt_Data
+)
+from .AI_Store_Data_directly.AI_Store_Data_directly import (Store_Data_Directly)
+
 #########################################################################################
-
 # variables
-API_Json_Folder_Path = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
+##### main folder
+Main_Folder_Path = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
+##### main folder
 API_Json_File_name = "SPU_API"
-
+AI_Last_Data_Stored_folder_path = f"{Main_Folder_Path}/AI_Data"
+motor_last_data_file_name = "Last_Motor_Data.csv"
+pump_last_data_file_name = "Last_Pump_Data.csv"  
+belt_last_data_file_name = "Last_Belt_Data.csv"
+# UART communication details
 communication_port = "COM5"
 communication_boudrate = 115200
-
 #########################################################################################
-APIJsonFilePath = f"{API_Json_Folder_Path}/{API_Json_File_name}.json"
+APIJsonFilePath = f"{Main_Folder_Path}/{API_Json_File_name}.json"
+motor_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{motor_last_data_file_name}"
+pump_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{pump_last_data_file_name}"
+belt_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{belt_last_data_file_name}"
 #########################################################################################
 
 if __name__ == "__main__":
+    ########################################
+    # read last data
+    motor_last_data = Read_Last_Motor_Data(motor_last_data_file_path)
+    pump_last_data = Read_Last_Pump_Data(pump_last_data_file_path)
+    belt_last_data = Read_Last_Belt_Data(belt_last_data_file_path)
 
-    # UART object
+    # # UART object
     Slave_Data = None
 
     # Try connect UART
@@ -89,14 +108,18 @@ if __name__ == "__main__":
 
         # DATABASE UPDATE
         try:
-
             put_sensors_value_and_send_it_to_app_directly(
                 Data_Base,
                 Sensors_Data
             )
 
         except Exception as e:
+            print("Database Error:", e)
 
-            print("DB update error:", e)
+        try:
+            Store_Data_Directly(Sensors_Data)
+
+        except Exception as e:
+            print("Store Error:", e)
 
 #########################################################################################
