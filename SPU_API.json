@@ -14,10 +14,10 @@
             "Predicted_fault": 22,
             "Health": 12,
             "Sensors": {
-                "Temperature": 45.0,
+                "Temperature": 98.0,
                 "Vibration": 2.1,
-                "Current": 5.6,
-                "Current_p1": 5.6,
+                "Current": 7.7,
+                "Current_p1": 7.7,
                 "Current_p2": 2.1,
                 "Current_p3": 1.0,
                 "volt_p1": 221.3,
@@ -30,9 +30,9 @@
             "Predicted_fault": 21,
             "Health": 45,
             "Sensors": {
-                "Tension": 1234.0,
+                "Tension": 1122.0,
                 "Alignment": 3.5,
-                "Speed": 785.0
+                "Speed": 555.0
             }
         },
         "Pump": {
@@ -42,7 +42,7 @@
             "Sensors": {
                 "Pressure_In": 18.3,
                 "Flow_Rate": 22.4,
-                "Temperature": 78.0
+                "Temperature": 55.0
             }
         }
     },
