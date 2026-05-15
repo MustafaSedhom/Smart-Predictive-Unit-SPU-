@@ -1,26 +1,64 @@
+# SPU_RUN.py
+###################################################################################################################
 import subprocess
 import time
 import os
-import signal
+###################################################################################################################
+
+########### SPU System Runner Script ######################
+
+# Paths
+App_BASE_PATH = "C:/Users/elmoh/OneDrive/Desktop/SPU"
+AI_BASE_PATH = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project/code_of_project"
+# App details
+App_name = "SPU.exe"
+# AI module details
+AI_module_path = "Background_Process_Code.AI_Brain_Of_Project.AI_Main_module"
+
+###################################################################################################################
+
+# Full app path
+APP_PATH = rf"{App_BASE_PATH}\{App_name}"
+AI_FILE = rf"{AI_BASE_PATH}\{AI_module_path.replace('.', os.sep)}.py"
+
+# Check app exists
+if not os.path.exists(APP_PATH):
+    print("ERROR: App file not found")
+    print(APP_PATH)
+    exit()
+
+# Check AI file exists
+if not os.path.exists(AI_FILE):
+    print("ERROR: AI file not found")
+    print(AI_FILE)
+    exit()
+
+
+###################################################################################################################
 
 print("Starting SPU System...")
 
-# run AI Backend
+# Hide terminal windows
+CREATE_NO_WINDOW = 0x08000000
+
+# Run AI Backend
 ai_process = subprocess.Popen(
     [
-        "python3",
+        "python",
         "-m",
-        "Background_Process_Code.AI_Brain_Of_Project.test"
+        AI_module_path
     ],
-    cwd="/home/pi/SPU_System"
+    cwd=AI_BASE_PATH,
+    creationflags=CREATE_NO_WINDOW
 )
 
-# run Flutter App
+# Run Flutter App
 flutter_process = subprocess.Popen(
     [
-        "/home/pi/SPU_System/SPU_app/build/linux/arm64/release/bundle/SPU_app"
+        APP_PATH
     ],
-    cwd="/home/pi/SPU_System"
+    cwd=App_BASE_PATH,
+    creationflags=CREATE_NO_WINDOW
 )
 
 print("SPU System Running")
@@ -32,10 +70,13 @@ try:
         # monitor AI
         if ai_process.poll() is not None:
             print("AI Backend Stopped")
+            print("Exit Code:", ai_process.returncode)
+            break
 
         # monitor Flutter
         if flutter_process.poll() is not None:
             print("Flutter App Stopped")
+            break
 
         time.sleep(2)
 
@@ -43,8 +84,10 @@ except KeyboardInterrupt:
 
     print("Stopping SPU System...")
 
-    ai_process.send_signal(signal.SIGTERM)
-    flutter_process.send_signal(signal.SIGTERM)
+finally:
+
+    ai_process.terminate()
+    flutter_process.terminate()
 
     ai_process.wait()
     flutter_process.wait()
