@@ -20,7 +20,8 @@ from .Asign_values_to_app_directly.Asign_values_to_app_directly import (
 #########################################################################################
 
 # variables
-APIJsonFilePath = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project/API.json"
+APIJsonFolderPath = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
+APIJsonFilePath = f"{APIJsonFolderPath}/SPU_API.json"
 
 communication_port = "COM5"
 communication_boudrate = 115200
