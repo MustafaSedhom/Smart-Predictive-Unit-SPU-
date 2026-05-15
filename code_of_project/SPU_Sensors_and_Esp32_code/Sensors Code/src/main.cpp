@@ -3,6 +3,9 @@
 #include <Arduino.h>
 #include "Actuators_Structs/ActuatorsStructs.h"
 #include "Handling_Communction_Data/Json_Data.h"
+#include "Read_Sensor_Data/Motor_Sensors/Motor_Sensors.h"
+#include "Read_Sensor_Data/Pump_Sensors/Pump_Sensors.h"
+#include "Read_Sensor_Data/Belt_Sensors/Belt_Sensors.h"
 //-----------------------------------------------------------
 // defines 
 #define delay_time 1000
@@ -18,7 +21,7 @@ Pump pump , last_pump;
 void setup() 
 {
     Serial.begin(115200);
-    motor = Motor(98,2.1,Phases(221.3,220.1,33),Phases(7.7,2.1,1.0));
+    motor = Motor(115,2.1,Phases(221.3,220.1,33),Phases(7.7,2.1,1.0));
     pump = Pump(18.3,22.4,55);
     belt = Belt(1122,3.5,555);
     Json.updateMotor(motor);
@@ -34,8 +37,6 @@ void loop()
     if (millis() - lastSend >= delay_time)
     {
         // check temp is not above 100 to avoid overflow
-        if (motor.Temperature > 100) motor.Temperature = 0;
-        if (pump.Temperature > 100) pump.Temperature = 0;
         if(motor != last_motor || pump != last_pump || belt != last_belt)
         {
             Json.updateAll(motor, belt, pump);

@@ -14,7 +14,7 @@
             "Predicted_fault": 22,
             "Health": 12,
             "Sensors": {
-                "Temperature": 98.0,
+                "Temperature": 12.7,
                 "Vibration": 2.1,
                 "Current": 7.7,
                 "Current_p1": 7.7,
@@ -32,7 +32,7 @@
             "Sensors": {
                 "Tension": 1122.0,
                 "Alignment": 3.5,
-                "Speed": 555.0
+                "Speed": 12.0
             }
         },
         "Pump": {
@@ -49,6 +49,17 @@
     "Alerts": {
         "List_item_count": 0,
         "Alert_List": [
+            {
+                "id": 1,
+                "device": "motor",
+                "timestamp": "2002-02-22T11:15:04",
+                "period_name": "PM",
+                "type": "Current",
+                "message": "Motor overheating",
+                "level": "high",
+                "value": 80,
+                "uint": " \u00b0C"
+            },
             {
                 "id": 1,
                 "device": "motor",
