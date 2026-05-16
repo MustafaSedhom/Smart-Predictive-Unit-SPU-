@@ -9,7 +9,7 @@ import os
 
 # Paths
 BASE_FOLDER = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
-App_BASE_PATH = f"{BASE_FOLDER}/SPU"
+App_BASE_PATH = f"{BASE_FOLDER}/SPU_Windows_App"
 AI_BASE_PATH = f"{BASE_FOLDER}/code_of_project"
 # App details
 App_name = "SPU.exe"
