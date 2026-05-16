@@ -29,10 +29,10 @@ from .AI_Store_Data_directly.AI_Store_Data_directly import (Store_Data_Directly)
 ##### main folder
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # if you run on windows
-Main_Folder_Path = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
+# Main_Folder_Path = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # if you run on linux
-# Main_Folder_Path = "/home/sedhom/SPU"
+Main_Folder_Path = "/home/sedhom/SPU"
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ##### main folder
 API_Json_File_name = "SPU_API"

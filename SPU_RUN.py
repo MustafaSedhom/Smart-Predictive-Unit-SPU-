@@ -10,14 +10,14 @@ import os
 #/////////////////////////////////////////////////////////
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #if you in run in linux
-# BASE_FOLDER = "/home/sedhom/SPU"
-# App_BASE_PATH = f"{BASE_FOLDER}/SPU_Linux_App/SPU_APP"
-# App_name = "SPU"
+BASE_FOLDER = "/home/sedhom/SPU"
+App_BASE_PATH = f"{BASE_FOLDER}/SPU_Linux_App/SPU_APP"
+App_name = "SPU"
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # if you run in windows
-BASE_FOLDER = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
-App_BASE_PATH = f"{BASE_FOLDER}/SPU_Windows_App"
-App_name = "SPU.exe"
+# BASE_FOLDER = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
+# App_BASE_PATH = f"{BASE_FOLDER}/SPU_Windows_App"
+# App_name = "SPU.exe"
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #/////////////////////////////////////////////////////////
 # AI module details
