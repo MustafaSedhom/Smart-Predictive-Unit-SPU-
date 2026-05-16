@@ -11,7 +11,7 @@ import os
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #if you in run in linux
 BASE_FOLDER = "/home/sedhom/SPU"
-App_BASE_PATH = f"{BASE_FOLDER}/SPU_Linux_App/SPU_APP"
+App_BASE_PATH = f"{BASE_FOLDER}/SPU_Linux_App"
 App_name = "SPU"
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # if you run in windows
