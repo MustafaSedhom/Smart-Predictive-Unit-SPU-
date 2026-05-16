@@ -27,7 +27,13 @@ from .AI_Store_Data_directly.AI_Store_Data_directly import (Store_Data_Directly)
 #########################################################################################
 # variables
 ##### main folder
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# if you run on windows
 Main_Folder_Path = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# if you run on linux
+# Main_Folder_Path = "/home/sedhom/SPU"
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ##### main folder
 API_Json_File_name = "SPU_API"
 AI_Last_Data_Stored_folder_path = f"{Main_Folder_Path}/AI_Data"
