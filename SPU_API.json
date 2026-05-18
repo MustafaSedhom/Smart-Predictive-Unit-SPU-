@@ -10,11 +10,11 @@
     },
     "Actuators": {
         "Motor": {
-            "status": "alert",
+            "status": "normal",
             "Predicted_fault": 22,
-            "Health": 12,
+            "Health": 82,
             "Sensors": {
-                "Temperature": 115.0,
+                "Temperature": 49.0,
                 "Vibration": 2.1,
                 "Current": 7.7,
                 "Current_p1": 7.7,
@@ -213,7 +213,7 @@
         },
         "Health_Thresholds": {
             "Motor": {
-                "warning": 50,
+                "warning": 55,
                 "alert": 20
             },
             "Belt_Driver": {
@@ -229,8 +229,8 @@
             "Motor": {
                 "Temperature": {
                     "min": 20.0,
-                    "normal": 75.0,
-                    "max": 120.0
+                    "normal": 40.0,
+                    "max": 90.0
                 },
                 "Vibration": {
                     "min": 0.0,

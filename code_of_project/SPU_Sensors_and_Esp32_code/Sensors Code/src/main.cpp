@@ -21,7 +21,7 @@ Pump pump , last_pump;
 void setup() 
 {
     Serial.begin(115200);
-    motor = Motor(115,2.1,Phases(221.3,220.1,33),Phases(7.7,2.1,1.0));
+    motor = Motor(random(0, 100),2.1,Phases(221.3,220.1,33),Phases(7.7,2.1,1.0));
     pump = Pump(18.3,22.4,55);
     belt = Belt(1122,3.5,555);
     Json.updateMotor(motor);
@@ -33,12 +33,15 @@ void setup()
 // program
 void loop()  
 {   
+    pump = Pump(18.3,22.4,55);
+    belt = Belt(1122,3.5,555);
     // check if it's time to send data
     if (millis() - lastSend >= delay_time)
     {
         // check temp is not above 100 to avoid overflow
         if(motor != last_motor || pump != last_pump || belt != last_belt)
         {
+            motor = Motor(random(0, 100),2.1,Phases(221.3,220.1,33),Phases(7.7,2.1,1.0));
             Json.updateAll(motor, belt, pump);
             Serial.println(Json.get_Json_formate()); 
             last_motor = motor;

@@ -71,8 +71,6 @@ if __name__ == "__main__":
     running = True
     while running:
         # print("AI Running")
-        # print(Data_Base.Data_Base.time_date_settings.get_min_time())
-        # print(Data_Base.Data_Base.time_date_settings.get_max_time())
         # READ UART DATA
         if Slave_Data:
             raw = Slave_Data.read()
@@ -105,6 +103,7 @@ if __name__ == "__main__":
                 pump_file = last_data_files_paths['pump'],
                 belt_file = last_data_files_paths['belt'],
             )
+            analysis_data.analyse_all_actuators_data()
         except Exception as e:
             print("Store Error:", e)
 

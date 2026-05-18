@@ -7,4 +7,5 @@ class Analysis_Maintenance_Data:
         self.Data_Base = DB
         self.files_paths_Last_Data = files_paths_Last_Data
         self.motor_analysis = Motor_Analysis(DB,files_paths_Last_Data['motor'])
+    def analyse_all_actuators_data(self):
         self.motor_analysis.analyse_motor_data()
