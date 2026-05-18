@@ -207,9 +207,81 @@
         "Gear_Setting_Unit": "mm"
     },
     "Settings": {
-        "Time_Date": {
-            "min_time": "2025-11-05T00:00:11",
-            "max_time": "2025-12-31T23:59:59"
+        "Time_Date_Analysis": {
+            "start_time_analysis": "2026-01-01T00:00:11",
+            "end_time_analysis": "2026-12-31T23:59:59"
+        },
+        "Health_Thresholds": {
+            "Motor": {
+                "warning": 50,
+                "alert": 20
+            },
+            "Belt_Driver": {
+                "warning": 60,
+                "alert": 30
+            },
+            "Pump": {
+                "warning": 40,
+                "alert": 15
+            }
+        },
+        "min_normal_max_values": {
+            "Motor": {
+                "Temperature": {
+                    "min": 20.0,
+                    "normal": 75.0,
+                    "max": 120.0
+                },
+                "Vibration": {
+                    "min": 0.0,
+                    "normal": 1.5,
+                    "max": 5.0
+                },
+                "Current": {
+                    "min": 0.0,
+                    "normal": 5.0,
+                    "max": 10.0
+                },
+                "Volt": {
+                    "min": 0.0,
+                    "normal": 5.0,
+                    "max": 10.0
+                }
+            },
+            "Belt_Driver": {
+                "Tension": {
+                    "min": 800.0,
+                    "normal": 1000.0,
+                    "max": 1200.0
+                },
+                "Alignment": {
+                    "min": 0.0,
+                    "normal": 2.0,
+                    "max": 5.0
+                },
+                "Speed": {
+                    "min": 300.0,
+                    "normal": 500.0,
+                    "max": 700.0
+                }
+            },
+            "Pump": {
+                "Pressure_In": {
+                    "min": 10.0,
+                    "normal": 15.0,
+                    "max": 25.0
+                },
+                "Flow_Rate": {
+                    "min": 10.0,
+                    "normal": 20.0,
+                    "max": 30.0
+                },
+                "Temperature": {
+                    "min": 20.0,
+                    "normal": 50.0,
+                    "max": 80.0
+                }
+            }
         }
     }
 }

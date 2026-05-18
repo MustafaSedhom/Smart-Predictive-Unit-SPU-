@@ -13,20 +13,20 @@ class Time_Date_Settings:
         return self.__data.json_data_access.get(
             "Settings", {}
         ).get(
-            "Time_Date", {}
+            "Time_Date_Analysis", {}
         )
 
-    def get_min_time(self):
+    def get_motor_analysis_start_time(self):
 
         return self.get_time_date().get(
-            "min_time",
+            "start_time_analysis",
             "unknown"
         )
 
-    def get_max_time(self):
+    def get_motor_analysis_end_time(self):
 
         return self.get_time_date().get(
-            "max_time",
+            "end_time_analysis",
             "unknown"
         )
 
@@ -34,26 +34,26 @@ class Time_Date_Settings:
     # SET METHODS
     # ======================
 
-    def set_min_time(self, val):
+    def set_motor_analysis_start_time(self, val):
 
         self.__data.json_data_access[
             "Settings"
         ][
-            "Time_Date"
+            "Time_Date_Analysis"
         ][
-            "min_time"
+            "start_time_analysis"
         ] = val
 
         self.save_data()
 
-    def set_max_time(self, val):
+    def set_motor_analysis_end_time(self, val):
 
         self.__data.json_data_access[
             "Settings"
         ][
-            "Time_Date"
+            "Time_Date_Analysis"
         ][
-            "max_time"
+            "end_time_analysis"
         ] = val
 
         self.save_data()
