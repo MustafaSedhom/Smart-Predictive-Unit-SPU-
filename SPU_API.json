@@ -11,8 +11,8 @@
     "Actuators": {
         "Motor": {
             "status": "normal",
-            "Predicted_fault": 22,
-            "Health": 82,
+            "Predicted_fault": 99,
+            "Health": 76,
             "Sensors": {
                 "Temperature": 49.0,
                 "Vibration": 2.1,
@@ -243,9 +243,9 @@
                     "max": 10.0
                 },
                 "Volt": {
-                    "min": 0.0,
-                    "normal": 5.0,
-                    "max": 10.0
+                    "min": 170.0,
+                    "normal": 220.0,
+                    "max": 280.0
                 }
             },
             "Belt_Driver": {

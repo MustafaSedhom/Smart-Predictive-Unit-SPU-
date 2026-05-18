@@ -38,6 +38,7 @@ motor_last_data_files_name = "Last_Motor_Data.csv"
 pump_last_data_files_name = "Last_Pump_Data.csv"
 belt_last_data_files_name = "Last_Belt_Data.csv"
 alarms_last_data_files_name = "Last_Alarm_Data.csv"
+health_last_data_files_name = "Last_Health_Data.csv"
 # UART communication details
 communication_port = "COM5"
 communication_boudrate = 115200
@@ -47,7 +48,8 @@ last_data_files_paths = {
     "motor": f"{AI_Last_Data_Stored_folder_path}/{motor_last_data_files_name}",
     "pump": f"{AI_Last_Data_Stored_folder_path}/{pump_last_data_files_name}",
     "belt": f"{AI_Last_Data_Stored_folder_path}/{belt_last_data_files_name}",
-    "alarms": f"{AI_Last_Data_Stored_folder_path}/{alarms_last_data_files_name}"
+    "alarms": f"{AI_Last_Data_Stored_folder_path}/{alarms_last_data_files_name}",
+    "health": f"{AI_Last_Data_Stored_folder_path}/{health_last_data_files_name}"
 }
 #########################################################################################
 
@@ -67,7 +69,6 @@ if __name__ == "__main__":
         print(e)
     # Database
     Data_Base = Access_data_Base(APIJsonFilePath)
-    analysis_data = Analysis_Maintenance_Data(Data_Base,last_data_files_paths)
     running = True
     while running:
         # print("AI Running")
@@ -85,6 +86,7 @@ if __name__ == "__main__":
         # PARSE JSON
         try:
             Sensors_Data = All_Sensor_Data_After_Receiving(raw)
+            analysis_data = Analysis_Maintenance_Data(Data_Base,last_data_files_paths)
         except Exception as e:
             print("Sensor parse error:", e)
             continue
@@ -99,13 +101,18 @@ if __name__ == "__main__":
         try:
             Store_Data_Directly(
                 sensors = Sensors_Data,
+                data_base = Data_Base,
+                health_file = last_data_files_paths['health'],
                 motor_file = last_data_files_paths['motor'],
                 pump_file = last_data_files_paths['pump'],
                 belt_file = last_data_files_paths['belt'],
             )
-            analysis_data.analyse_all_actuators_data()
         except Exception as e:
             print("Store Error:", e)
+        try:
+            analysis_data.analyse_all_actuators_data()
+        except Exception as e:
+            print("Analysis Error:", e)
 
         
 

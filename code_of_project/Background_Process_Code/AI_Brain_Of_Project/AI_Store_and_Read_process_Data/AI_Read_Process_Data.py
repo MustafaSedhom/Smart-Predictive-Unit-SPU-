@@ -113,4 +113,49 @@ def Read_Last_Belt_Data(file_path):
         print(f"Error : {e}")
 
         return None
+# ---------------------------------------------------
+# Read Last alarms Data
+# ---------------------------------------------------
+def Read_Last_Alarms_Data(file_path):
 
+    try:
+
+        data = pd.read_csv(file_path)
+
+        last_row = data.iloc[-1]
+
+        alarms_data = {
+
+            "Date": last_row["Date"],
+            "Time": last_row["Time"],
+
+            "Motor_Alarm": last_row["Motor_Alarm"],
+            "Pump_Alarm": last_row["Pump_Alarm"],
+            "Belt_Alarm": last_row["Belt_Alarm"]
+        }
+        alarms_data = {k: float(v) if hasattr(v, "item") else v
+              for k, v in alarms_data.items()}
+
+        return alarms_data
+
+    except Exception as e:
+
+        print(f"Error : {e}")
+
+        return None
+# ---------------------------------------------------
+# Read Last Health Data
+# ---------------------------------------------------
+def Read_All_Last_Health_Data(file_path):
+
+    try:
+
+        data = pd.read_csv(file_path)
+
+        return data
+
+    except Exception as e:
+
+        print(f"Error : {e}")
+
+        return None

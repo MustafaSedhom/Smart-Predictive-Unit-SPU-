@@ -175,5 +175,44 @@ def Store_Alarms_Data(
     except Exception as e:
 
         print(f"Error : {e}")
+# ---------------------------------------------------
+# Store Health Data
+# ---------------------------------------------------
+def Store_Health_Data(
+    file_path,
+    Motor_Health,
+    Pump_Health,
+    Belt_Health
+):
 
+    try:
+
+        now = datetime.now()
+
+        data_dict = {
+
+            "Date": now.strftime("%Y-%m-%d"),
+            "Time": now.strftime("%H:%M:%S"),
+
+            "Motor_Health": Motor_Health,
+            "Pump_Health": Pump_Health,
+            "Belt_Health": Belt_Health
+        }
+
+        data = pd.DataFrame([data_dict])
+
+        file_exists = os.path.isfile(file_path)
+
+        data.to_csv(
+            file_path,
+            mode='a',
+            header=not file_exists,
+            index=False
+        )
+
+        print("Health Data Stored Successfully")
+
+    except Exception as e:
+
+        print(f"Error : {e}")
 

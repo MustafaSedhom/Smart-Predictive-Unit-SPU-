@@ -1,12 +1,13 @@
 from ..AI_Store_and_Read_process_Data.AI_Store_Process_Data import (
     Store_Motor_Data, 
     Store_Pump_Data, 
-    Store_Belt_Data
+    Store_Belt_Data,
+    Store_Alarms_Data,
+    Store_Health_Data
     )
-from Background_Process_Code.Handle_Data_Base_Code.Rrocess_Data_From_Slave_Board.All_Sensor_Data_After_Processing.All_Sensor_Data_After_Processing import All_Sensor_Data_After_Receiving
-
-
-def Store_Data_Directly(motor_file:str, pump_file:str, belt_file:str, sensors: All_Sensor_Data_After_Receiving):
+from ...Handle_Data_Base_Code.Rrocess_Data_From_Slave_Board.All_Sensor_Data_After_Processing.All_Sensor_Data_After_Processing import All_Sensor_Data_After_Receiving
+from ...Handle_Data_Base_Code.Data_Base_Python.SPU_main_Data_handlig import Access_data_Base
+def Store_Data_Directly(data_base: Access_data_Base, health_file:str, motor_file:str, pump_file:str, belt_file:str, sensors: All_Sensor_Data_After_Receiving):
 
     try:
 
@@ -51,3 +52,17 @@ def Store_Data_Directly(motor_file:str, pump_file:str, belt_file:str, sensors: A
     except Exception as e:
 
         print("Pump Store Error:", e)
+
+    try:
+
+       Store_Health_Data(
+            file_path=health_file,
+            Motor_Health = data_base.Data_Base.motor.get_Health(),
+            Belt_Health = data_base.Data_Base.belt.get_Health(),
+            Pump_Health = data_base.Data_Base.pump.get_Health()
+       )
+
+
+    except Exception as e:
+
+        print("health Store Error:", e)
