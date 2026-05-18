@@ -5,8 +5,6 @@ from datetime import datetime
 from ...Handle_Data_Base_Code.Data_Base_Python.SPU_main_Data_handlig import (
     AlertStruct
 )
-
-
 # ---------------------------------------------------
 # Store Motor Sensor Data
 # ---------------------------------------------------

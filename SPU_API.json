@@ -205,5 +205,11 @@
         "Big_Gear": 11,
         "Small_Gear": 7.0,
         "Gear_Setting_Unit": "mm"
+    },
+    "Settings": {
+        "Time_Date": {
+            "min_time": "2025-11-05T00:00:11",
+            "max_time": "2025-12-31T23:59:59"
+        }
     }
 }

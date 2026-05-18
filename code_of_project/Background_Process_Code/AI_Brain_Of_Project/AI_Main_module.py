@@ -40,19 +40,21 @@ Main_Folder_Path = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
 ##### main folder
 API_Json_File_name = "SPU_API"
 AI_Last_Data_Stored_folder_path = f"{Main_Folder_Path}/AI_Data"
-motor_last_data_file_name = "Last_Motor_Data.csv"
-pump_last_data_file_name = "Last_Pump_Data.csv"  
-belt_last_data_file_name = "Last_Belt_Data.csv"
-alarms_last_data_file_name = "Last_Alarm_Data.csv"
+last_data_files_name = {
+    "motor": "Last_Motor_Data.csv",
+    "pump": "Last_Pump_Data.csv",
+    "belt": "Last_Belt_Data.csv",
+    "alarms": "Last_Alarm_Data.csv"
+}
 # UART communication details
 communication_port = "COM5"
 communication_boudrate = 115200
 #########################################################################################
 APIJsonFilePath = f"{Main_Folder_Path}/{API_Json_File_name}.json"
-motor_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{motor_last_data_file_name}"
-pump_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{pump_last_data_file_name}"
-belt_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{belt_last_data_file_name}"
-alarms_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{alarms_last_data_file_name}"
+motor_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{last_data_files_name['motor']}"
+pump_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{last_data_files_name['pump']}"
+belt_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{last_data_files_name['belt']}"
+alarms_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{last_data_files_name['alarms']}"
 #########################################################################################
 
 if __name__ == "__main__":
@@ -74,6 +76,8 @@ if __name__ == "__main__":
     running = True
     while running:
         # print("AI Running")
+        # print(Data_Base.Data_Base.time_date_settings.get_min_time())
+        # print(Data_Base.Data_Base.time_date_settings.get_max_time())
         # READ UART DATA
         if Slave_Data:
             raw = Slave_Data.read()
@@ -108,24 +112,7 @@ if __name__ == "__main__":
             )
         except Exception as e:
             print("Store Error:", e)
-            # read last data
-        motor_last_data = Read_Last_Motor_Data(motor_last_data_file_path)
-        pump_last_data = Read_Last_Pump_Data(pump_last_data_file_path)
-        belt_last_data = Read_Last_Belt_Data(belt_last_data_file_path)
-        motor_All_last_data = Read_All_Last_Data_to_One_Actuator(motor_last_data_file_path)
-        pump_All_last_data = Read_All_Last_Data_to_One_Actuator(pump_last_data_file_path)
-        belt_All_last_data = Read_All_Last_Data_to_One_Actuator(belt_last_data_file_path)
-        Store_Alarms_Data(
-            file_path = alarms_last_data_file_path,
-            alert = AlertStruct(
-                id = 0,
-                device = "pump",
-                type = "speed",
-                message = "Speed is very high",
-                level = "Low",
-                value = 121,
-                unit = "RPM",
-            )
-        )
+
+        
 
 #########################################################################################

@@ -6,6 +6,7 @@ from  Background_Process_Code.Handle_Data_Base_Code.Data_Base_Python.Alerts_Data
 from  Background_Process_Code.Handle_Data_Base_Code.Data_Base_Python.Analysis_Data.Analysis_Data import AnalysisData
 from  Background_Process_Code.Handle_Data_Base_Code.Data_Base_Python.Gear_Setting_Data.Gear_Setting_Data import GearSettingData
 from  Background_Process_Code.Handle_Data_Base_Code.Data_Base_Python.handling_Data.handling_Data import Control_Data_from_json
+from Background_Process_Code.Handle_Data_Base_Code.Data_Base_Python.Setting_Data.Limit_Time_Date_Data import Time_Date_Settings
 from datetime import datetime
 
 class Time_Date_conversion:
@@ -32,3 +33,4 @@ class DataBaseManager:
         self.analysis = AnalysisData(self.data)
         self.gear = GearSettingData(self.data)
         self.time_date_handling = Time_Date_conversion()
+        self.time_date_settings = Time_Date_Settings(self.data)
