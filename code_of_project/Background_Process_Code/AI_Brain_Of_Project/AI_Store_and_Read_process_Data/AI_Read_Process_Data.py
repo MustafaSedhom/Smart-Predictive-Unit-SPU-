@@ -1,6 +1,20 @@
 import pandas as pd
 
+# ---------------------------------------------------
+# Read All Last Pump Data
+# ---------------------------------------------------
+def Read_All_Last_Data_to_One_Actuator(file_path):
 
+    try:
+
+        data = pd.read_csv(file_path)
+        return data
+
+    except Exception as e:
+
+        print(f"Error : {e}")
+
+        return None
 # ---------------------------------------------------
 # Read Last Motor Data
 # ---------------------------------------------------
@@ -21,16 +35,17 @@ def Read_Last_Motor_Data(file_path):
 
             "Temperature": last_row["Temperature"],
             "Vibration": last_row["Vibration"],
-            "Current": last_row["Current"],
 
-            "Current_p1": last_row["Current_p1"],
-            "Current_p2": last_row["Current_p2"],
-            "Current_p3": last_row["Current_p3"],
+            "Current_P_R": last_row["Current_P_R"],
+            "Current_P_S": last_row["Current_P_S"],
+            "Current_P_T": last_row["Current_P_T"],
 
-            "volt_p1": last_row["volt_p1"],
-            "volt_p2": last_row["volt_p2"],
-            "volt_p3": last_row["volt_p3"]
+            "Volt_P_R": last_row["Volt_P_R"],
+            "Volt_P_S": last_row["Volt_P_S"],
+            "Volt_P_T": last_row["Volt_P_T"]
         }
+        motor_data = {k: float(v) if hasattr(v, "item") else v
+              for k, v in motor_data.items()}
 
         return motor_data
 
@@ -39,8 +54,6 @@ def Read_Last_Motor_Data(file_path):
         print(f"Error : {e}")
 
         return None
-
-
 # ---------------------------------------------------
 # Read Last Pump Data
 # ---------------------------------------------------
@@ -61,7 +74,8 @@ def Read_Last_Pump_Data(file_path):
             "Flow_Rate": last_row["Flow_Rate"],
             "Temperature": last_row["Temperature"]
         }
-
+        pump_data = {k: float(v) if hasattr(v, "item") else v
+              for k, v in pump_data.items()}
         return pump_data
 
     except Exception as e:
@@ -69,8 +83,6 @@ def Read_Last_Pump_Data(file_path):
         print(f"Error : {e}")
 
         return None
-
-
 # ---------------------------------------------------
 # Read Last Belt Data
 # ---------------------------------------------------
@@ -91,6 +103,8 @@ def Read_Last_Belt_Data(file_path):
             "Alignment": last_row["Alignment"],
             "Speed": last_row["Speed"]
         }
+        belt_data = {k: float(v) if hasattr(v, "item") else v
+              for k, v in belt_data.items()}
 
         return belt_data
 

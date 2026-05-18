@@ -10,14 +10,14 @@ import os
 #/////////////////////////////////////////////////////////
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #if you in run in linux
-BASE_FOLDER = "/home/sedhom/SPU"
-App_BASE_PATH = f"{BASE_FOLDER}/SPU_Linux_App"
-App_name = "SPU"
+# BASE_FOLDER = "/home/sedhom/SPU"
+# App_BASE_PATH = f"{BASE_FOLDER}/SPU_Linux_App"
+# App_name = "SPU"
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # if you run in windows
-# BASE_FOLDER = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
-# App_BASE_PATH = f"{BASE_FOLDER}/SPU_Windows_App"
-# App_name = "SPU.exe"
+BASE_FOLDER = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
+App_BASE_PATH = f"{BASE_FOLDER}/SPU_Windows_App"
+App_name = "SPU.exe"
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #/////////////////////////////////////////////////////////
 # AI module details
@@ -44,6 +44,8 @@ if not os.path.exists(AI_FILE):
 ###################################################################################################################
 
 print("Starting SPU System...")
+print("Starting AI Backend...")
+print("Starting SPU App...")
 
 # Run AI Backend
 ai_process = subprocess.Popen(
@@ -55,6 +57,7 @@ ai_process = subprocess.Popen(
     ],
     cwd=AI_BASE_PATH,
 )
+print("AI Backend Running")
 
 # Run Flutter App
 flutter_process = subprocess.Popen(
@@ -63,6 +66,8 @@ flutter_process = subprocess.Popen(
     ],
     cwd=App_BASE_PATH
 )
+
+print("SPU App Running")
 
 print("SPU System Running")
 
@@ -76,9 +81,9 @@ try:
             print("Exit Code:", ai_process.returncode)
             break
 
-        # monitor Flutter
+        # monitor SPU App
         if flutter_process.poll() is not None:
-            print("Flutter App Stopped")
+            print("SPU App Stopped")
             break
 
         time.sleep(2)
@@ -98,4 +103,4 @@ finally:
     except NameError:
         pass
 
-    print("System Stopped")
+    print("All System Stopped (AI + SPU App)")

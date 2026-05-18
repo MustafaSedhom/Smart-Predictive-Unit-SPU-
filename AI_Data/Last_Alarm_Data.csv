@@ -1,0 +1,5 @@
+Date,Time,id,device,type,message,level,value,unit
+2026-05-18,06:40:24,0,Motor,Temp,Temp is very hight,High,84,*C
+2026-05-18,06:44:59,0,Motor,Temp,Temp is very hight,High,84,*C
+2026-05-18,06:50:43,0,pump,speed,Speed is very high,Low,121,RPM
+2026-05-18,06:52:03,0,pump,speed,Speed is very high,Low,121,RPM

@@ -2,6 +2,8 @@
 # imports
 import time
 
+from .AI_Store_and_Read_process_Data.AI_Store_Process_Data import Store_Alarms_Data
+
 from ..Handle_Data_Base_Code.Recieve_Data_from_Slave_Board.Recieve_Data_From_Slave_Board import UARTReaderJSON
 
 from ..Handle_Data_Base_Code.Rrocess_Data_From_Slave_Board.All_Sensor_Data_After_Processing.All_Sensor_Data_After_Processing import (
@@ -18,6 +20,7 @@ from .Asign_values_to_app_directly.Asign_values_to_app_directly import (
 )
 
 from .AI_Store_and_Read_process_Data.AI_Read_Process_Data import (
+    Read_All_Last_Data_to_One_Actuator,
     Read_Last_Motor_Data,
     Read_Last_Pump_Data,
     Read_Last_Belt_Data
@@ -29,10 +32,10 @@ from .AI_Store_Data_directly.AI_Store_Data_directly import (Store_Data_Directly)
 ##### main folder
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # if you run on windows
-# Main_Folder_Path = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
+Main_Folder_Path = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # if you run on linux
-Main_Folder_Path = "/home/sedhom/SPU"
+# Main_Folder_Path = "/home/sedhom/SPU"
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ##### main folder
 API_Json_File_name = "SPU_API"
@@ -40,6 +43,7 @@ AI_Last_Data_Stored_folder_path = f"{Main_Folder_Path}/AI_Data"
 motor_last_data_file_name = "Last_Motor_Data.csv"
 pump_last_data_file_name = "Last_Pump_Data.csv"  
 belt_last_data_file_name = "Last_Belt_Data.csv"
+alarms_last_data_file_name = "Last_Alarm_Data.csv"
 # UART communication details
 communication_port = "COM5"
 communication_boudrate = 115200
@@ -48,6 +52,7 @@ APIJsonFilePath = f"{Main_Folder_Path}/{API_Json_File_name}.json"
 motor_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{motor_last_data_file_name}"
 pump_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{pump_last_data_file_name}"
 belt_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{belt_last_data_file_name}"
+alarms_last_data_file_path = f"{AI_Last_Data_Stored_folder_path}/{alarms_last_data_file_name}"
 #########################################################################################
 
 if __name__ == "__main__":
@@ -68,7 +73,7 @@ if __name__ == "__main__":
     Data_Base = Access_data_Base(APIJsonFilePath)
     running = True
     while running:
-        print("AI Running")
+        # print("AI Running")
         # READ UART DATA
         if Slave_Data:
             raw = Slave_Data.read()
@@ -107,5 +112,20 @@ if __name__ == "__main__":
         motor_last_data = Read_Last_Motor_Data(motor_last_data_file_path)
         pump_last_data = Read_Last_Pump_Data(pump_last_data_file_path)
         belt_last_data = Read_Last_Belt_Data(belt_last_data_file_path)
+        motor_All_last_data = Read_All_Last_Data_to_One_Actuator(motor_last_data_file_path)
+        pump_All_last_data = Read_All_Last_Data_to_One_Actuator(pump_last_data_file_path)
+        belt_All_last_data = Read_All_Last_Data_to_One_Actuator(belt_last_data_file_path)
+        Store_Alarms_Data(
+            file_path = alarms_last_data_file_path,
+            alert = AlertStruct(
+                id = 0,
+                device = "pump",
+                type = "speed",
+                message = "Speed is very high",
+                level = "Low",
+                value = 121,
+                unit = "RPM",
+            )
+        )
 
 #########################################################################################
