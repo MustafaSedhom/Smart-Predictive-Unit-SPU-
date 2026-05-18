@@ -1,7 +1,4 @@
 
-import random
-import time
-
 from ....Handle_Data_Base_Code.Data_Base_Python.SPU_main_Data_handlig import (
     Access_data_Base
 )
