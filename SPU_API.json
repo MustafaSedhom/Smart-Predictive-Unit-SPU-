@@ -11,7 +11,7 @@
     "Actuators": {
         "Motor": {
             "status": "normal",
-            "Predicted_fault": 99,
+            "Predicted_fault": 100,
             "Health": 76,
             "Sensors": {
                 "Temperature": 49.0,
@@ -27,8 +27,8 @@
         },
         "Belt_Driver": {
             "status": "warning",
-            "Predicted_fault": 21,
-            "Health": 45,
+            "Predicted_fault": 99,
+            "Health": 53,
             "Sensors": {
                 "Tension": 1122.0,
                 "Alignment": 3.5,
@@ -36,7 +36,7 @@
             }
         },
         "Pump": {
-            "status": "normal",
+            "status": "alert",
             "Predicted_fault": 99,
             "Health": 75,
             "Sensors": {
@@ -207,6 +207,11 @@
         "Gear_Setting_Unit": "mm"
     },
     "Settings": {
+        "max_Days_if_normal": {
+            "Motor": "100",
+            "Belt_Driver": "100",
+            "Pump": "100"
+        },
         "Time_Date_Analysis": {
             "start_time_analysis": "2026-01-01T00:00:11",
             "end_time_analysis": "2026-12-31T23:59:59"
@@ -217,12 +222,12 @@
                 "alert": 20
             },
             "Belt_Driver": {
-                "warning": 60,
+                "warning": 55,
                 "alert": 30
             },
             "Pump": {
-                "warning": 40,
-                "alert": 15
+                "warning": 90,
+                "alert": 80
             }
         },
         "min_normal_max_values": {

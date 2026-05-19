@@ -4,24 +4,24 @@ from ....Handle_Data_Base_Code.Data_Base_Python.SPU_main_Data_handlig import (
 )
 from ...AI_Store_and_Read_process_Data.AI_Read_Process_Data import (
     Read_All_Last_Data_to_One_Actuator,
-    Read_Last_Pump_Data,
+    Read_Last_Belt_Data,
     Read_All_Last_Health_Data
 )  
 import pandas as pd
-class Pump_Analysis:
-    def __init__(self,DB:Access_data_Base,file_path_last_pump_data:str,file_path_last_health_data:str):
+class Belt_Analysis:
+    def __init__(self,DB:Access_data_Base,file_path_last_belt_data:str,file_path_last_health_data:str):
         self.Data_Base = DB
-        self.file_path_last_pump_data = file_path_last_pump_data
+        self.file_path_last_belt_data = file_path_last_belt_data
         self.file_path_last_health_data = file_path_last_health_data
-        self.last_pump_data = Read_Last_Pump_Data(file_path_last_pump_data)
-        self.all_pump_last_data = Read_All_Last_Data_to_One_Actuator(file_path_last_pump_data)
-    def update_last_pump_data(self):
-        self.last_pump_data = Read_Last_Pump_Data(self.file_path_last_pump_data)
-        self.all_pump_last_data = Read_All_Last_Data_to_One_Actuator(self.file_path_last_pump_data)
-    def filter_pump_data(self):
+        self.last_belt_data = Read_Last_Belt_Data(self.file_path_last_belt_data)
+        self.all_belt_last_data = Read_All_Last_Data_to_One_Actuator(self.file_path_last_belt_data)
+    def update_last_belt_data(self):
+        self.last_belt_data = Read_Last_Belt_Data(self.file_path_last_belt_data)
+        self.all_belt_last_data = Read_All_Last_Data_to_One_Actuator(self.file_path_last_belt_data)
+    def filter_belt_data(self):
 
         df = Read_All_Last_Data_to_One_Actuator(
-            self.file_path_last_pump_data
+            self.file_path_last_belt_data
         )
 
         # Convert Date + Time to DateTime
@@ -32,10 +32,10 @@ class Pump_Analysis:
 
         # Convert numeric columns
         numeric_cols = [
-            "Temperature",
-            "Pressure_In",
-            "Flow_Rate",
-            "Pump_Health"
+            "Tension",
+            "Alignment",
+            "Speed",
+            "Belt_Health"
         ]
 
         for col in numeric_cols:
@@ -69,90 +69,90 @@ class Pump_Analysis:
         return filtered_df
     def set_status_based_on_health(self,health):
         status = "normal"
-        if health < self.Data_Base.Data_Base.health_thresholds.get_pump_health_thresholds_alert():
-            self.Data_Base.Data_Base.pump.set_status("alert")
+        if health < self.Data_Base.Data_Base.health_thresholds.get_belt_driver_health_thresholds_alert():
+            self.Data_Base.Data_Base.belt.set_status("alert")
             status = "alert"
-        elif health < self.Data_Base.Data_Base.health_thresholds.get_pump_health_thresholds_warning():
-            self.Data_Base.Data_Base.pump.set_status("warning")
+        elif health < self.Data_Base.Data_Base.health_thresholds.get_belt_driver_health_thresholds_warning():
+            self.Data_Base.Data_Base.belt.set_status("warning")
             status = "warning"
         else:
-            self.Data_Base.Data_Base.pump.set_status("normal") 
+            self.Data_Base.Data_Base.belt.set_status("normal") 
             status = "normal"
         return status
-    def calc_pump_temperature_Health(self):
+    def calc_belt_Tension_Health(self):
 
-        self.update_last_pump_data()
+        self.update_last_belt_data()
 
-        df = self.filter_pump_data()
+        df = self.filter_belt_data()
 
         if df.empty:
             print("No data available")
             return 0
 
-        avg_temp = df["Temperature"].mean()
+        avg_tension = df["Tension"].mean()
 
-        normal = self.Data_Base.Data_Base.min_normal_max_values.get_pump_min_normal_max_values_Temperature_normal()
-        max_t = self.Data_Base.Data_Base.min_normal_max_values.get_pump_min_normal_max_values_Temperature_max()
+        normal = self.Data_Base.Data_Base.min_normal_max_values.get_belt_driver_min_normal_max_values_Tension_normal()
+        max_t = self.Data_Base.Data_Base.min_normal_max_values.get_belt_driver_min_normal_max_values_Tension_max()
 
-        health = 100 - ((avg_temp - normal) / (max_t - normal)) * 100
+        health = 100 - ((avg_tension - normal) / (max_t - normal)) * 100
 
         health = max(0, min(100, health))
         return health
-    def calc_pump_pressure_Health(self):
+    def calc_belt_Alignment_Health(self):
 
-        self.update_last_pump_data()
+        self.update_last_belt_data()
 
-        df = self.filter_pump_data()
+        df = self.filter_belt_data()
 
         if df.empty:
             print("No data available")
             return 0
 
         # convert column to numeric
-        df["Pressure_In"] = pd.to_numeric(
-            df["Pressure_In"],
+        df["Alignment"] = pd.to_numeric(
+            df["Alignment"],
             errors="coerce"
         )
 
-        avg_pressure = float(df["Pressure_In"].mean())
+        avg_alignment = float(df["Alignment"].mean())
 
         normal = float(
             self.Data_Base.Data_Base.min_normal_max_values
-            .get_pump_min_normal_max_values_Pressure_normal()
+            .get_belt_driver_min_normal_max_values_Alignment_normal()
         )
 
-        max_p = float(
+        max_a = float(
             self.Data_Base.Data_Base.min_normal_max_values
-            .get_pump_min_normal_max_values_Pressure_max()
+            .get_belt_driver_min_normal_max_values_Alignment_max()
         )
 
         health = 100 - (
-            (avg_pressure - normal) / (max_p - normal)
+            (avg_alignment - normal) / (max_a - normal)
         ) * 100
 
         health = max(0, min(100, health))
 
         return health
-    def calc_pump_Flow_Rate_Health(self):
-        self.update_last_pump_data()
-        df = self.filter_pump_data()
+    def calc_belt_Speed_Health(self):
+        self.update_last_belt_data()
+        df = self.filter_belt_data()
         if df.empty:
             print("No data available")
             return 0
-        avg_flow_rate = df["Flow_Rate"].mean()
-        normal = self.Data_Base.Data_Base.min_normal_max_values.get_pump_min_normal_max_values_Flow_Rate_normal()
-        max_f = self.Data_Base.Data_Base.min_normal_max_values.get_pump_min_normal_max_values_Flow_Rate_max()
-        health = 100 - ((avg_flow_rate - normal) / (max_f - normal)) * 100
+        avg_speed = df["Speed"].mean()
+        normal = self.Data_Base.Data_Base.min_normal_max_values.get_belt_driver_min_normal_max_values_Speed_normal()
+        max_s = self.Data_Base.Data_Base.min_normal_max_values.get_belt_driver_min_normal_max_values_Speed_max()
+        health = 100 - ((avg_speed - normal) / (max_s - normal)) * 100
         health = max(0, min(100, health))
         return health
-    def calc_pump_overall_Health(self):
-        temp_health = self.calc_pump_temperature_Health()
-        pressure_health = self.calc_pump_pressure_Health()
-        flow_rate_health = self.calc_pump_Flow_Rate_Health()
+    def calc_belt_Overall_Health(self):
+        tension_health = self.calc_belt_Tension_Health()
+        alignment_health = self.calc_belt_Alignment_Health()
+        speed_health = self.calc_belt_Speed_Health()
 
-        overall_health = (temp_health + pressure_health + flow_rate_health ) / 3
+        overall_health = (tension_health + alignment_health + speed_health ) / 3
         return overall_health
-    def calc_health_between_days(self):
+    def calc_belt_health_between_days(self):
         df = Read_All_Last_Health_Data(
             self.file_path_last_health_data
         )
@@ -179,7 +179,7 @@ class Pump_Analysis:
             print("No data in selected range")
             return None
         return filtered_df
-    def calc_pump_predict_fault_days(self, health_values):
+    def calc_belt_Predict_Fault_Days(self, health_values):
         if len(health_values) < 2:
             return None
         # health loss per day
@@ -194,20 +194,20 @@ class Pump_Analysis:
             current_health - critical_health
         ) / avg_drop_per_day
         return round(predicted_days, 2)
-    def analyse_pump_data(self): 
-        max_days_if_normal = self.Data_Base.Data_Base.max_days_if_normal.get_pump_max_days_if_normal()
-        health = self.calc_pump_overall_Health()
-        self.Data_Base.Data_Base.pump.set_Health(int(health))
-        filtered_df = self.calc_health_between_days()
+    def analyse_belt_data(self):
+        max_days_if_normal = self.Data_Base.Data_Base.max_days_if_normal.get_belt_driver_max_days_if_normal()
+        health = self.calc_belt_Overall_Health()
+        self.Data_Base.Data_Base.belt.set_Health(int(health))
+        filtered_df = self.calc_belt_health_between_days()
         if filtered_df is None:
             return
-        health_values = filtered_df["Pump_Health"].tolist()
+        health_values = filtered_df["Belt_Health"].tolist()
 
-        days = self.calc_pump_predict_fault_days(
+        days = self.calc_belt_Predict_Fault_Days(
             health_values
         )
         status = self.set_status_based_on_health(health)
         if status == "alert" or status == "warning":
-            self.Data_Base.Data_Base.pump.set_Predicted_fault(days)
+            self.Data_Base.Data_Base.belt.set_Predicted_fault(days)
         elif status == "normal":
-            self.Data_Base.Data_Base.pump.set_Predicted_fault(max_days_if_normal)
+            self.Data_Base.Data_Base.belt.set_Predicted_fault(max_days_if_normal)

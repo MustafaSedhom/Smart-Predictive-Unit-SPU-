@@ -10,6 +10,7 @@ from  ...Data_Base_Python.handling_Data.handling_Data import Control_Data_from_j
 from  ...Data_Base_Python.Setting_Data.Limit_Time_Date_Data import Time_Date_Settings
 from  ...Data_Base_Python.Setting_Data.Health_Thresholds import Health_Thresholds_settings
 from  ...Data_Base_Python.Setting_Data.Min_Normal_Max_Values import Min_Normal_Max_Values
+from  ...Data_Base_Python.Setting_Data.Max_Days_if_normal import Max_Days_if_normal_Settings
 class Time_Date_conversion:
     def __init__(self):
         pass
@@ -34,3 +35,4 @@ class DataBaseManager:
         self.time_date_settings = Time_Date_Settings(self.data)
         self.health_thresholds = Health_Thresholds_settings(self.data)
         self.min_normal_max_values = Min_Normal_Max_Values(self.data)
+        self.max_days_if_normal = Max_Days_if_normal_Settings(self.data)

@@ -41,12 +41,17 @@ class Motor_Analysis:
             (df["DateTime"] <= end_time)
         ]
     def set_status_based_on_health(self,health):
+        status = "normal"
         if health < self.Data_Base.Data_Base.health_thresholds.get_motor_health_thresholds_alert():
             self.Data_Base.Data_Base.motor.set_status("alert")
+            status = "alert"
         elif health < self.Data_Base.Data_Base.health_thresholds.get_motor_health_thresholds_warning():
             self.Data_Base.Data_Base.motor.set_status("warning")
+            status = "warning"
         else:
             self.Data_Base.Data_Base.motor.set_status("normal") 
+            status = "normal"
+        return status
     def calc_motor_temperature_Health(self):
 
         self.update_last_motor_data()
@@ -162,6 +167,7 @@ class Motor_Analysis:
 
         return round(predicted_days, 2)
     def analyse_motor_data(self): 
+        max_days_if_normal = self.Data_Base.Data_Base.max_days_if_normal.get_motor_max_days_if_normal()
         health = self.calc_motor_overall_Health()
         self.Data_Base.Data_Base.motor.set_Health(int(health))
         filtered_df = self.calc_health_between_days()
@@ -172,5 +178,8 @@ class Motor_Analysis:
         days = self.calc_motor_predict_fault_days(
             health_values
         )
-        self.set_status_based_on_health(health)
-        self.Data_Base.Data_Base.motor.set_Predicted_fault(days)
+        status = self.set_status_based_on_health(health)
+        if status == "alert" or status == "warning":
+            self.Data_Base.Data_Base.motor.set_Predicted_fault(days)
+        elif status == "normal":
+            self.Data_Base.Data_Base.motor.set_Predicted_fault(max_days_if_normal)
