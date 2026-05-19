@@ -1,9 +1,10 @@
-// ignore_for_file: deprecated_member_use, non_constant_identifier_names, prefer_const_constructors_in_immutables
+// ignore_for_file: deprecated_member_use, non_constant_identifier_names, prefer_const_constructors_in_immutables, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
+import 'package:spu_linux_app/widgets/changes_color_container.dart';
 import 'package:spu_linux_app/widgets/selsect_date_and_time.dart';
 
 class SetTimeAnalysisWidget extends StatefulWidget {
@@ -18,6 +19,7 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
 
   DateTime selected_Date_Time_For_End = DateTime.now();
 
+  Color color = Colors.deepPurpleAccent;
   //---------------------------------------------------------
   String Format_Time(DateTime dateTime) {
     int hour = dateTime.hour;
@@ -39,14 +41,30 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Color color = Colors.deepPurpleAccent;
-    return Container(
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.4),
-        borderRadius: BorderRadius.circular(25),
-        boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black12)],
-      ),
+    List<BoxShadow> custom_shadow = [
+      BoxShadow(color: Colors.white, blurRadius: 5, offset: Offset(1, 1)),
+      BoxShadow(color: Colors.white, blurRadius: 5, offset: Offset(1, 1)),
+      BoxShadow(color: Colors.white, blurRadius: 5, offset: Offset(1, 1)),
+    ];
+    return ChangesColorContainer(
+      saveKey: "Analysis_Time_Color",
+      colors: [
+        Colors.green,
+        Colors.blue,
+        Colors.red,
+        Colors.orange,
+        Colors.purple,
+        Colors.deepPurpleAccent,
+        Colors.black,
+        Colors.grey,
+        Colors.blueGrey,
+      ],
+      onColorChanged: (return_color) async {
+        setState(() {
+          color = return_color;
+        });
+      },
+      shadow: custom_shadow,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -82,7 +100,7 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
                 decoration: BoxDecoration(
                   color: color,
                   borderRadius: BorderRadius.circular(25),
-                  boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black12)],
+                  boxShadow: custom_shadow,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -215,7 +233,7 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
                 decoration: BoxDecoration(
                   color: color,
                   borderRadius: BorderRadius.circular(25),
-                  boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black12)],
+                  boxShadow: custom_shadow,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

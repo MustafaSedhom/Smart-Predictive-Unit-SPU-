@@ -1,10 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Sensors_Screen/widgets/set_time_analysis_widget.dart';
-import 'package:spu_linux_app/colors/App_colors.dart';
-import 'package:spu_linux_app/widgets/selsect_date_and_time.dart';
 
 class SensorsScreen extends StatefulWidget {
   const SensorsScreen({super.key});
