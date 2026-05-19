@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spu_linux_app/Screens/Advanced_settings_screen/Advanced_settings_screen.dart';
+import 'package:spu_linux_app/Screens/Sensors_Screen/Sensors_Screen.dart';
 import 'package:spu_linux_app/widgets/Password_dialog.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/Alarm_Screen.dart';
 import 'package:spu_linux_app/Screens/Analysis_Screen/Analysis_screen.dart';
@@ -70,6 +71,7 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
   }
 
   List<DrawerItem> get menuItems => [
+    // HomeScreen
     DrawerItem(
       title: "Home",
       icon: Icons.home_rounded,
@@ -88,17 +90,31 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
         },
       ),
     ),
+    // DetailsScreen
     DrawerItem(
       title: "Details",
       icon: Icons.data_saver_off_rounded,
       page: DetailsScreen(),
     ),
-    DrawerItem(title: "Alarm", icon: Icons.notifications, page: AlarmScreen()),
+    // AlarmScreen
+    DrawerItem(
+      title: "Alarm",
+      icon: Icons.notifications_active_rounded,
+      page: AlarmScreen(),
+    ),
+    // AnalysisScreen
     DrawerItem(
       title: "Analysis",
       icon: Icons.analytics,
       page: AnalysisScreen(),
     ),
+    // SensorsScreen
+    DrawerItem(
+      title: "Sensors",
+      icon: Icons.tune_rounded,
+      page: SensorsScreen(),
+    ),
+    // SettingScreen
     DrawerItem(
       title: "Settings",
       icon: Icons.settings,
@@ -122,6 +138,7 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
         },
       ),
     ),
+    // AdvancedSettingScreen
     DrawerItem(
       title: "Advanced",
       icon: Icons.settings_suggest,
