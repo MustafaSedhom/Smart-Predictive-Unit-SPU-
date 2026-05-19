@@ -16,14 +16,14 @@ class Time_Date_Settings:
             "Time_Date_Analysis", {}
         )
 
-    def get_motor_analysis_start_time(self):
+    def get_analysis_start_time(self):
 
         return self.get_time_date().get(
             "start_time_analysis",
             "unknown"
         )
 
-    def get_motor_analysis_end_time(self):
+    def get_analysis_end_time(self):
 
         return self.get_time_date().get(
             "end_time_analysis",
@@ -34,7 +34,7 @@ class Time_Date_Settings:
     # SET METHODS
     # ======================
 
-    def set_motor_analysis_start_time(self, val):
+    def set_analysis_start_time(self, val):
 
         self.__data.json_data_access[
             "Settings"
@@ -46,7 +46,7 @@ class Time_Date_Settings:
 
         self.save_data()
 
-    def set_motor_analysis_end_time(self, val):
+    def set_analysis_end_time(self, val):
 
         self.__data.json_data_access[
             "Settings"

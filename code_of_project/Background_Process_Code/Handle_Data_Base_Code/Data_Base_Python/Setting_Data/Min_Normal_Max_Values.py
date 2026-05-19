@@ -108,7 +108,7 @@ class Min_Normal_Max_Values:
     # pump pressure settings
     def get_pump_min_normal_max_values_pressure(self):
         return self.get_Pump_min_normal_max_values().get(
-            "Pressure", {}
+            "Pressure_In", {}
         )
     def get_pump_min_normal_max_values_Pressure_min(self):
         return self.get_pump_min_normal_max_values_pressure().get(

@@ -37,8 +37,8 @@
         },
         "Pump": {
             "status": "normal",
-            "Predicted_fault": 12,
-            "Health": 23,
+            "Predicted_fault": 99,
+            "Health": 75,
             "Sensors": {
                 "Pressure_In": 18.3,
                 "Flow_Rate": 22.4,

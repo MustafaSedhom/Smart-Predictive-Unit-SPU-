@@ -29,11 +29,11 @@ class Motor_Analysis:
         )
 
         start_time = pd.to_datetime(
-            self.Data_Base.Data_Base.time_date_settings.get_motor_analysis_start_time()
+            self.Data_Base.Data_Base.time_date_settings.get_analysis_start_time()
         )
 
         end_time = pd.to_datetime(
-            self.Data_Base.Data_Base.time_date_settings.get_motor_analysis_end_time()
+            self.Data_Base.Data_Base.time_date_settings.get_analysis_end_time()
         )
 
         return df[
@@ -127,11 +127,11 @@ class Motor_Analysis:
 
         # Start and End from settings
         start_time = pd.to_datetime(
-            self.Data_Base.Data_Base.time_date_settings.get_motor_analysis_start_time()
+            self.Data_Base.Data_Base.time_date_settings.get_analysis_start_time()
         )
 
         end_time = pd.to_datetime(
-            self.Data_Base.Data_Base.time_date_settings.get_motor_analysis_end_time()
+            self.Data_Base.Data_Base.time_date_settings.get_analysis_end_time()
         )
 
         # Filter data
