@@ -68,9 +68,10 @@ if __name__ == "__main__":
         print("UART Disabled")
         print(e)
     # Database
-    Data_Base = Access_data_Base(APIJsonFilePath)
     running = True
     while running:
+        # read data base and create object
+        Data_Base = Access_data_Base(APIJsonFilePath)
         # print("AI Running")
         # READ UART DATA
         if Slave_Data:
