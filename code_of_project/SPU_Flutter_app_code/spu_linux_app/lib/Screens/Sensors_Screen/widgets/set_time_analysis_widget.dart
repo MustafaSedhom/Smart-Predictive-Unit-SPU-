@@ -244,6 +244,7 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
                         select ?? selected_Date_Time_For_Start;
                   });
                 },
+                shadow: custom_shadow,
               ),
 
               Gap(20),
@@ -280,6 +281,7 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
                         select ?? selected_Date_Time_For_End;
                   });
                 },
+                shadow: custom_shadow,
               ),
             ],
           ),
@@ -316,6 +318,7 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
 
   Widget build_time_box({
     required String title,
+    required List<BoxShadow> shadow,
     required String icon,
     required DateTime selectedDateTime,
     required VoidCallback onDateTap,
@@ -329,9 +332,7 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
 
         borderRadius: BorderRadius.circular(25),
 
-        boxShadow: [
-          BoxShadow(color: Colors.white, blurRadius: 5, offset: Offset(1, 1)),
-        ],
+        boxShadow: shadow,
       ),
 
       child: Column(

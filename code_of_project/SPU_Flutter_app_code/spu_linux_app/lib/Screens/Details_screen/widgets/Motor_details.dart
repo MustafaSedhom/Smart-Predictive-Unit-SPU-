@@ -9,7 +9,7 @@ import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Details_screen/widgets/custom_value_sensor_card.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
-import 'package:spu_linux_app/widgets/get_state_color.dart';
+import 'package:spu_linux_app/widgets/changes_color_container.dart';
 
 class MotorDetails extends StatefulWidget {
   const MotorDetails({super.key});
@@ -51,16 +51,19 @@ class _MotorDetailsState extends State<MotorDetails> {
     double screen_width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          // ignore: deprecated_member_use
-          color: GetStateColor.getColor(
-            motor?.status ?? "none",
-            // ignore: deprecated_member_use
-          ).withOpacity(0.3),
-          borderRadius: BorderRadius.circular(20),
-        ),
+      child: ChangesColorContainer(
+        colors: [
+          Colors.green,
+          Colors.blue,
+          Colors.red,
+          Colors.orange,
+          Colors.purple,
+          Colors.deepPurpleAccent,
+          Colors.black,
+          Colors.grey,
+          Colors.blueGrey,
+        ],
+        saveKey: 'Motor_Details_Color',
         child: Column(
           children: [
             // card appbar
@@ -85,8 +88,9 @@ class _MotorDetailsState extends State<MotorDetails> {
                   Image.asset(
                     AppIcons.motor_Icon,
                     width: 50,
-                    color: Colors.green,
+                    color: Colors.white,
                   ),
+                  Gap(30),
                 ],
               ),
             ),
