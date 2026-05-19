@@ -1,292 +1,292 @@
 {
-    "Over_All": {
-        "overall_Health": 43,
-        "Active_Alarms": 20,
-        "sensors_online": {
-            "active": 3,
-            "total": 20
-        },
-        "Next_Maintenance": 2
+  "Over_All": {
+    "overall_Health": 43,
+    "Active_Alarms": 20,
+    "sensors_online": {
+      "active": 3,
+      "total": 20
     },
-    "Actuators": {
-        "Motor": {
-            "status": "normal",
-            "Predicted_fault": "\u221e",
-            "Health": 76,
-            "Sensors": {
-                "Temperature": 49.0,
-                "Vibration": 2.1,
-                "Current": 7.7,
-                "Current_p1": 7.7,
-                "Current_p2": 2.1,
-                "Current_p3": 1.0,
-                "volt_p1": 221.3,
-                "volt_p2": 220.1,
-                "volt_p3": 33.0
-            }
-        },
-        "Belt_Driver": {
-            "status": "warning",
-            "Predicted_fault": "99",
-            "Health": 53,
-            "Sensors": {
-                "Tension": 1122.0,
-                "Alignment": 3.5,
-                "Speed": 555.0
-            }
-        },
-        "Pump": {
-            "status": "alert",
-            "Predicted_fault": "99",
-            "Health": 75,
-            "Sensors": {
-                "Pressure_In": 18.3,
-                "Flow_Rate": 22.4,
-                "Temperature": 55.0
-            }
-        }
+    "Next_Maintenance": 2
+  },
+  "Actuators": {
+    "Motor": {
+      "status": "normal",
+      "Predicted_fault": "ASD",
+      "Health": 76,
+      "Sensors": {
+        "Temperature": 49.0,
+        "Vibration": 2.1,
+        "Current": 7.7,
+        "Current_p1": 7.7,
+        "Current_p2": 2.1,
+        "Current_p3": 1.0,
+        "volt_p1": 221.3,
+        "volt_p2": 220.1,
+        "volt_p3": 33.0
+      }
     },
-    "Alerts": {
-        "List_item_count": 0,
-        "Alert_List": [
-            {
-                "id": 1,
-                "device": "motor",
-                "timestamp": "2002-02-22T11:15:04",
-                "period_name": "PM",
-                "type": "Current",
-                "message": "Motor overheating",
-                "level": "high",
-                "value": 80,
-                "uint": " \u00b0C"
-            },
-            {
-                "id": 1,
-                "device": "motor",
-                "timestamp": "2006-02-22T11:15:04",
-                "period_name": "PM",
-                "type": "Current",
-                "message": "Motor overheating",
-                "level": "high",
-                "value": 80,
-                "uint": " \u00b0C"
-            },
-            {
-                "id": 2,
-                "device": "belt driver",
-                "timestamp": "2006-02-22T11:20:11",
-                "period_name": "AM",
-                "type": "temperature",
-                "message": "Temperature still high",
-                "level": "low",
-                "value": 82,
-                "uint": " \u00b0C"
-            },
-            {
-                "id": 3,
-                "device": "PUMP",
-                "timestamp": "2026-04-26T11:20:11",
-                "period_name": "PM",
-                "type": "Alignment",
-                "message": "Temperature still high",
-                "level": "high",
-                "value": 12,
-                "uint": " \u00b0C"
-            },
-            {
-                "id": 4,
-                "device": "PUMP",
-                "timestamp": "2026-04-26T11:20:10",
-                "period_name": "PM",
-                "type": "Alignment",
-                "message": "Temperature still high",
-                "level": "high",
-                "value": 12,
-                "uint": " \u00b0C"
-            },
-            {
-                "id": 5,
-                "device": "PUMP",
-                "timestamp": "2026-04-26T11:20:15",
-                "period_name": "PM",
-                "type": "Alignment",
-                "message": "Temperature still high",
-                "level": "high",
-                "value": 12,
-                "uint": " \u00b0C"
-            },
-            {
-                "id": 6,
-                "device": "Motor",
-                "timestamp": "2026-04-26T11:20:10",
-                "period_name": "PM",
-                "type": "Alignment",
-                "message": "Temperature still high",
-                "level": "high",
-                "value": 12,
-                "uint": " \u00b0C"
-            }
-        ]
+    "Belt_Driver": {
+      "status": "warning",
+      "Predicted_fault": "99",
+      "Health": 53,
+      "Sensors": {
+        "Tension": 1122.0,
+        "Alignment": 3.5,
+        "Speed": 555.0
+      }
     },
-    "Analysis": {
-        "Spacing": 1,
-        "labels": {
-            "x_labels": [
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "11",
-                "12",
-                "13",
-                "15",
-                "16"
-            ],
-            "y_labels": [
-                "0",
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10",
-                "11",
-                "12",
-                "13",
-                "15",
-                "16"
-            ]
-        },
-        "points": {
-            "x_points": [
-                0,
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                7,
-                8,
-                9,
-                10,
-                13,
-                13
-            ],
-            "y_points": [
-                0,
-                4,
-                2,
-                6,
-                9,
-                4,
-                1,
-                7,
-                5,
-                5,
-                3,
-                0,
-                0
-            ]
-        }
-    },
-    "Gear_Setting": {
-        "Big_Gear": 11,
-        "Small_Gear": 7.0,
-        "Gear_Setting_Unit": "mm"
-    },
-    "Settings": {
-        "max_Days_if_normal": {
-            "Motor": "\u221e",
-            "Belt_Driver": "\u221e",
-            "Pump": "\u221e"
-        },
-        "Time_Date_Analysis": {
-            "start_time_analysis": "2026-01-01T00:00:11",
-            "end_time_analysis": "2026-12-31T23:59:59"
-        },
-        "Health_Thresholds": {
-            "Motor": {
-                "warning": 55,
-                "alert": 20
-            },
-            "Belt_Driver": {
-                "warning": 55,
-                "alert": 30
-            },
-            "Pump": {
-                "warning": 90,
-                "alert": 80
-            }
-        },
-        "min_normal_max_values": {
-            "Motor": {
-                "Temperature": {
-                    "min": 20.0,
-                    "normal": 40.0,
-                    "max": 90.0
-                },
-                "Vibration": {
-                    "min": 0.0,
-                    "normal": 1.5,
-                    "max": 5.0
-                },
-                "Current": {
-                    "min": 0.0,
-                    "normal": 5.0,
-                    "max": 10.0
-                },
-                "Volt": {
-                    "min": 170.0,
-                    "normal": 220.0,
-                    "max": 280.0
-                }
-            },
-            "Belt_Driver": {
-                "Tension": {
-                    "min": 800.0,
-                    "normal": 1000.0,
-                    "max": 1200.0
-                },
-                "Alignment": {
-                    "min": 0.0,
-                    "normal": 2.0,
-                    "max": 5.0
-                },
-                "Speed": {
-                    "min": 300.0,
-                    "normal": 500.0,
-                    "max": 700.0
-                }
-            },
-            "Pump": {
-                "Pressure_In": {
-                    "min": 10.0,
-                    "normal": 15.0,
-                    "max": 25.0
-                },
-                "Flow_Rate": {
-                    "min": 10.0,
-                    "normal": 20.0,
-                    "max": 30.0
-                },
-                "Temperature": {
-                    "min": 20.0,
-                    "normal": 50.0,
-                    "max": 80.0
-                }
-            }
-        }
+    "Pump": {
+      "status": "alert",
+      "Predicted_fault": "99",
+      "Health": 75,
+      "Sensors": {
+        "Pressure_In": 18.3,
+        "Flow_Rate": 22.4,
+        "Temperature": 55.0
+      }
     }
+  },
+  "Alerts": {
+    "List_item_count": 0,
+    "Alert_List": [
+      {
+        "id": 1,
+        "device": "motor",
+        "timestamp": "2002-02-22T11:15:04",
+        "period_name": "PM",
+        "type": "Current",
+        "message": "Motor overheating",
+        "level": "high",
+        "value": 80,
+        "uint": " Â°C"
+      },
+      {
+        "id": 1,
+        "device": "motor",
+        "timestamp": "2006-02-22T11:15:04",
+        "period_name": "PM",
+        "type": "Current",
+        "message": "Motor overheating",
+        "level": "high",
+        "value": 80,
+        "uint": " Â°C"
+      },
+      {
+        "id": 2,
+        "device": "belt driver",
+        "timestamp": "2006-02-22T11:20:11",
+        "period_name": "AM",
+        "type": "temperature",
+        "message": "Temperature still high",
+        "level": "low",
+        "value": 82,
+        "uint": " Â°C"
+      },
+      {
+        "id": 3,
+        "device": "PUMP",
+        "timestamp": "2026-04-26T11:20:11",
+        "period_name": "PM",
+        "type": "Alignment",
+        "message": "Temperature still high",
+        "level": "high",
+        "value": 12,
+        "uint": " Â°C"
+      },
+      {
+        "id": 4,
+        "device": "PUMP",
+        "timestamp": "2026-04-26T11:20:10",
+        "period_name": "PM",
+        "type": "Alignment",
+        "message": "Temperature still high",
+        "level": "high",
+        "value": 12,
+        "uint": " Â°C"
+      },
+      {
+        "id": 5,
+        "device": "PUMP",
+        "timestamp": "2026-04-26T11:20:15",
+        "period_name": "PM",
+        "type": "Alignment",
+        "message": "Temperature still high",
+        "level": "high",
+        "value": 12,
+        "uint": " Â°C"
+      },
+      {
+        "id": 6,
+        "device": "Motor",
+        "timestamp": "2026-04-26T11:20:10",
+        "period_name": "PM",
+        "type": "Alignment",
+        "message": "Temperature still high",
+        "level": "high",
+        "value": 12,
+        "uint": " Â°C"
+      }
+    ]
+  },
+  "Analysis": {
+    "Spacing": 1,
+    "labels": {
+      "x_labels": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "15",
+        "16"
+      ],
+      "y_labels": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "15",
+        "16"
+      ]
+    },
+    "points": {
+      "x_points": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        13,
+        13
+      ],
+      "y_points": [
+        0,
+        4,
+        2,
+        6,
+        9,
+        4,
+        1,
+        7,
+        5,
+        5,
+        3,
+        0,
+        0
+      ]
+    }
+  },
+  "Gear_Setting": {
+    "Big_Gear": 11,
+    "Small_Gear": 7.0,
+    "Gear_Setting_Unit": "mm"
+  },
+  "Settings": {
+    "max_Days_if_normal": {
+      "Motor": "ASD",
+      "Belt_Driver": "ASD",
+      "Pump": "ASD"
+    },
+    "Time_Date_Analysis": {
+      "start_time_analysis": "2022-08-22T00:06:00.000",
+      "end_time_analysis": "2029-11-19T12:00:00.000"
+    },
+    "Health_Thresholds": {
+      "Motor": {
+        "warning": 55,
+        "alert": 20
+      },
+      "Belt_Driver": {
+        "warning": 55,
+        "alert": 30
+      },
+      "Pump": {
+        "warning": 90,
+        "alert": 80
+      }
+    },
+    "min_normal_max_values": {
+      "Motor": {
+        "Temperature": {
+          "min": 20.0,
+          "normal": 40.0,
+          "max": 90.0
+        },
+        "Vibration": {
+          "min": 0.0,
+          "normal": 1.5,
+          "max": 5.0
+        },
+        "Current": {
+          "min": 0.0,
+          "normal": 5.0,
+          "max": 10.0
+        },
+        "Volt": {
+          "min": 170.0,
+          "normal": 220.0,
+          "max": 280.0
+        }
+      },
+      "Belt_Driver": {
+        "Tension": {
+          "min": 800.0,
+          "normal": 1000.0,
+          "max": 1200.0
+        },
+        "Alignment": {
+          "min": 0.0,
+          "normal": 2.0,
+          "max": 5.0
+        },
+        "Speed": {
+          "min": 300.0,
+          "normal": 500.0,
+          "max": 700.0
+        }
+      },
+      "Pump": {
+        "Pressure_In": {
+          "min": 10.0,
+          "normal": 15.0,
+          "max": 25.0
+        },
+        "Flow_Rate": {
+          "min": 10.0,
+          "normal": 20.0,
+          "max": 30.0
+        },
+        "Temperature": {
+          "min": 20.0,
+          "normal": 50.0,
+          "max": 80.0
+        }
+      }
+    }
+  }
 }
