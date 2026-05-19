@@ -28,7 +28,7 @@ class HomeScreenMasterCustomCards extends StatefulWidget {
   // ignore: non_constant_identifier_names
   final String status_name;
   // ignore: non_constant_identifier_names
-  final int Days;
+  final String Days;
   // ignore: non_constant_identifier_names
   final Function() view_details;
   // ignore: non_constant_identifier_names

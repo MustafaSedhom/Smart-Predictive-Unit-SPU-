@@ -208,6 +208,6 @@ class Pump_Analysis:
         )
         status = self.set_status_based_on_health(health)
         if status == "alert" or status == "warning":
-            self.Data_Base.Data_Base.pump.set_Predicted_fault(days)
+            self.Data_Base.Data_Base.pump.set_Predicted_fault(str(days))
         elif status == "normal":
-            self.Data_Base.Data_Base.pump.set_Predicted_fault(max_days_if_normal)
+            self.Data_Base.Data_Base.pump.set_Predicted_fault(str(max_days_if_normal))

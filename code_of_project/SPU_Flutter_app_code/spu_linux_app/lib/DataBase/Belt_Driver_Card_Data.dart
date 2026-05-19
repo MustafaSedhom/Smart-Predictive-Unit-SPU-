@@ -7,7 +7,7 @@ import 'package:spu_linux_app/DataBase/json_file_path.dart';
 class BeltDriver {
   final String status;
   // ignore: non_constant_identifier_names
-  final int Predicted_fault;
+  final String Predicted_fault;
   // ignore: non_constant_identifier_names
   final int Health;
   // ignore: non_constant_identifier_names
@@ -40,8 +40,8 @@ class BeltDriver {
             as Map<String, dynamic>? ??
         {};
     return BeltDriver(
-      Predicted_fault: (belt['Predicted_fault'] as num?)?.toInt() ?? 0,
-      status: belt['status'] ?? "none",
+      Predicted_fault: (belt['Predicted_fault'] ?? "None"),
+      status: belt['status'] ?? "None",
       Health: (belt['Health'] as num?)?.toInt() ?? 0,
 
       Tension: (sensors['Tension'] as num?)?.toInt() ?? 0,
@@ -53,7 +53,7 @@ class BeltDriver {
 
 // ignore: non_constant_identifier_names
 BeltDriver none_belt_driver = BeltDriver(
-  Predicted_fault: 0,
+  Predicted_fault: "None",
   status: "None",
   Health: 0,
   Tension: 0,

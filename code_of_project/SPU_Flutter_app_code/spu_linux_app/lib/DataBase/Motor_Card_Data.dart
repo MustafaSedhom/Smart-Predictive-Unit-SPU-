@@ -7,7 +7,7 @@ import 'package:spu_linux_app/DataBase/json_file_path.dart';
 class Motor {
   final String status;
   // ignore: non_constant_identifier_names
-  final int Predicted_fault;
+  final String Predicted_fault;
   // ignore: non_constant_identifier_names
   final int Health;
   // ignore: non_constant_identifier_names
@@ -56,7 +56,7 @@ class Motor {
         json["Actuators"]?['Motor']?["Sensors"] as Map<String, dynamic>? ?? {};
 
     return Motor(
-      Predicted_fault: (motor['Predicted_fault'] as num?)?.toInt() ?? 0,
+      Predicted_fault: (motor['Predicted_fault'] ?? "None"),
       status: motor['status'] ?? "None",
       Health: (motor['Health'] as num?)?.toInt() ?? 0,
       Temperature: (sensors['Temperature'] as num?)?.toInt() ?? 0,
@@ -74,7 +74,7 @@ class Motor {
 
 // ignore: non_constant_identifier_names
 Motor none_motor = Motor(
-  Predicted_fault: 0,
+  Predicted_fault: "None",
   status: "None",
   Health: 0,
   Temperature: 0,

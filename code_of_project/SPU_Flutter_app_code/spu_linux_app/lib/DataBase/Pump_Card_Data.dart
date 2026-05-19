@@ -7,7 +7,7 @@ import 'package:spu_linux_app/DataBase/json_file_path.dart';
 class Pump {
   final String status;
   // ignore: non_constant_identifier_names
-  final int Predicted_fault;
+  final String Predicted_fault;
   // ignore: non_constant_identifier_names
   final int Health;
   // ignore: non_constant_identifier_names
@@ -37,9 +37,9 @@ class Pump {
     final sensors =
         json["Actuators"]?['Pump']?["Sensors"] as Map<String, dynamic>? ?? {};
     return Pump(
-      Predicted_fault: (pump['Predicted_fault'] as num?)?.toInt() ?? 0,
+      Predicted_fault: (pump['Predicted_fault'] ?? "None"),
 
-      status: pump['status'] ?? "none",
+      status: pump['status'] ?? "None",
 
       Health: (pump['Health'] as num?)?.toInt() ?? 0,
 
@@ -54,7 +54,7 @@ class Pump {
 
 // ignore: non_constant_identifier_names
 Pump none_pump = Pump(
-  Predicted_fault: 0,
+  Predicted_fault: "None",
   status: "None",
   Health: 0,
   Temperature: 0,
