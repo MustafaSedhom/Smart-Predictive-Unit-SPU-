@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/Screens/Sensors_Screen/widgets/App_Bar_Sensor_screen.dart';
+import 'package:spu_linux_app/Screens/Sensors_Screen/widgets/Gear_Setting_widget.dart';
 import 'package:spu_linux_app/Screens/Sensors_Screen/widgets/health_threathold.dart';
 import 'package:spu_linux_app/Screens/Sensors_Screen/widgets/min_normal_max_setting.dart';
 import 'package:spu_linux_app/Screens/Sensors_Screen/widgets/set_max_days_if_normal_setting.dart';
@@ -35,6 +36,9 @@ class _SensorsScreenState extends State<SensorsScreen> {
                 HealthThreshold(),
                 Gap(30),
                 MinNormalMaxSetting(),
+                Gap(30),
+                GearSettingScreen(),
+                Gap(30),
               ],
             ),
           ),

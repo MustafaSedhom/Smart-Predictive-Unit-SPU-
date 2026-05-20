@@ -1,11 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
-import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:spu_linux_app/DataBase/Gear_setting.dart';
+
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/Admin_Setting.dart';
-import 'package:spu_linux_app/Screens/Setting_screen/widgets/Dimeter_setting_widget.dart';
+
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/SPU_logo_Setting.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
@@ -21,45 +21,13 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  TextEditingController Big_Gear_Controller = TextEditingController();
-  TextEditingController Small_Gear_Controller = TextEditingController();
-  GearSetting? Gears;
-  Timer? timer;
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(Duration(milliseconds: 100), (_) async {
-      await loadData();
-    });
-  }
-
-  Future<void> loadData() async {
-    final gearData = await loadGearSettingFromFile();
-
-    // ignore: unnecessary_null_comparison
-    if (!mounted || gearData == null) return;
-
-    setState(() {
-      Gears = gearData;
-
-      final big = gearData.Big_Gear.toString();
-      final small = gearData.Small_Gear.toString();
-
-      if (Big_Gear_Controller.text != big) {
-        Big_Gear_Controller.text = big;
-      }
-
-      if (Small_Gear_Controller.text != small) {
-        Small_Gear_Controller.text = small;
-      }
-    });
   }
 
   @override
   void dispose() {
-    timer?.cancel();
-    Big_Gear_Controller.dispose();
-    Small_Gear_Controller.dispose();
     super.dispose();
   }
 
@@ -80,7 +48,7 @@ class _SettingScreenState extends State<SettingScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Setting",
+                  "Admin Setting",
                   style: CustomAppBarTextStyle.appbar_text_style(size: 25),
                 ),
                 InkWell(
@@ -100,65 +68,6 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
-          ),
-          //divider
-          CustomDivider(),
-          // Gear Diameter Settings
-          Column(
-            children: [
-              Text(
-                "Gear Setting",
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.Drawer_icon_selected_color,
-                ),
-              ),
-              Gap(5),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Gap(0.02 * screen_width),
-                      DiameterSettingWidget(
-                        controller: Big_Gear_Controller,
-                        title: "Big Gear",
-                        img: AppIcons.setting_Icon,
-                        size: 40,
-                        unit: Gears?.Gear_setting_unit ?? "mm",
-                        value: Gears?.Big_Gear ?? 0,
-                        onChanged: (val) async {
-                          Gears?.Big_Gear = val;
-                          await saveGearSettingToFile(Gears!);
-                        },
-                      ),
-                      Gap(0.05 * screen_width),
-                      Image.asset(
-                        AppIcons.motor_belt_Icon,
-                        width: 100,
-                        color: AppColors.Drawer_icon_selected_color,
-                      ),
-                      Gap(0.05 * screen_width),
-                      DiameterSettingWidget(
-                        controller: Small_Gear_Controller,
-                        title: "Small Gear",
-                        img: AppIcons.setting_Icon,
-                        size: 30,
-                        unit: Gears?.Gear_setting_unit ?? "mm",
-                        value: Gears?.Small_Gear ?? 0,
-                        onChanged: (val) async {
-                          Gears?.Small_Gear = val;
-                          await saveGearSettingToFile(Gears!);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
           ),
           //divider
           CustomDivider(),

@@ -207,6 +207,11 @@
     "Gear_Setting_Unit": "mm"
   },
   "Settings": {
+    "Gear_Setting": {
+      "Big_Gear": 15.1,
+      "Small_Gear": 7.3,
+      "Gear_setting_unit": "mm"
+    },
     "max_Days_if_normal": {
       "Motor": "∞",
       "Belt_Driver": "∞",

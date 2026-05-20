@@ -108,16 +108,10 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
       icon: Icons.analytics,
       page: AnalysisScreen(),
     ),
-    // SensorsScreen
+    // AdminScreen
     DrawerItem(
-      title: "Sensors",
-      icon: Icons.tune_rounded,
-      page: SensorsScreen(),
-    ),
-    // SettingScreen
-    DrawerItem(
-      title: "Settings",
-      icon: Icons.settings,
+      title: "Admin",
+      icon: Icons.person,
       page: SettingScreen(
         advanced_setting_ontap: () async {
           String? savedPassword = await loadPassword();
@@ -138,6 +132,8 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
         },
       ),
     ),
+    // SettingScreen
+    DrawerItem(title: "Settings", icon: Icons.settings, page: SensorsScreen()),
     // AdvancedSettingScreen
     DrawerItem(
       title: "Advanced",
