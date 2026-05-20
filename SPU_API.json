@@ -201,11 +201,6 @@
       ]
     }
   },
-  "Gear_Setting": {
-    "Big_Gear": 11,
-    "Small_Gear": 7.0,
-    "Gear_Setting_Unit": "mm"
-  },
   "Settings": {
     "Gear_Setting": {
       "Big_Gear": 15.1,

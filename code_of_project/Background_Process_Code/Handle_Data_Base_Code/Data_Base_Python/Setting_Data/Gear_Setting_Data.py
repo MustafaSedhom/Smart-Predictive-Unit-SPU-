@@ -8,7 +8,11 @@ class GearSettingData:
     # INTERNAL
     # ======================
     def _gear(self):
-        return self.__data.json_data_access.setdefault("Gear_Setting", {})
+          return self.__data.json_data_access.get(
+            "Settings", {}
+        ).get(
+            "Gear_Setting", {}
+        )
 
     # ======================
     # GET

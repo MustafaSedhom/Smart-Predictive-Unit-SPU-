@@ -5,8 +5,8 @@ from  ...Data_Base_Python.Actuators_Data.Pump_Data import Pump_Data
 from  ...Data_Base_Python.OverAll_Data.OverAll_Data import OverAll_Data
 from  ...Data_Base_Python.Alerts_Data.Alerts_Data import Alerts_Data,AlertStruct
 from  ...Data_Base_Python.Analysis_Data.Analysis_Data import AnalysisData
-from  ...Data_Base_Python.Gear_Setting_Data.Gear_Setting_Data import GearSettingData
 from  ...Data_Base_Python.handling_Data.handling_Data import Control_Data_from_json
+from  ...Data_Base_Python.Setting_Data.Gear_Setting_Data import GearSettingData
 from  ...Data_Base_Python.Setting_Data.Limit_Time_Date_Data import Time_Date_Settings
 from  ...Data_Base_Python.Setting_Data.Health_Thresholds import Health_Thresholds_settings
 from  ...Data_Base_Python.Setting_Data.Min_Normal_Max_Values import Min_Normal_Max_Values
