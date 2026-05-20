@@ -52,17 +52,8 @@ class _MotorDetailsState extends State<MotorDetails> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ChangesColorContainer(
-        colors: [
-          Colors.green,
-          Colors.blue,
-          Colors.red,
-          Colors.orange,
-          Colors.purple,
-          Colors.deepPurpleAccent,
-          Colors.black,
-          Colors.grey,
-          Colors.blueGrey,
-        ],
+        shadow: AppColors.shadow_list,
+        colors: AppColors.color_list,
         saveKey: 'Motor_Details_Color',
         child: Column(
           children: [

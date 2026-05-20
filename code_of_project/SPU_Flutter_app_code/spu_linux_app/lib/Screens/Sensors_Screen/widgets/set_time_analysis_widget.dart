@@ -127,17 +127,6 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
   @override
   Widget build(BuildContext context) {
     ////////////////////////////////////////////////////////
-    /// SHADOW
-
-    List<BoxShadow> custom_shadow = [
-      BoxShadow(color: Colors.white, blurRadius: 5, offset: Offset(1, 1)),
-
-      BoxShadow(color: Colors.white, blurRadius: 5, offset: Offset(1, 1)),
-
-      BoxShadow(color: Colors.white, blurRadius: 5, offset: Offset(1, 1)),
-    ];
-
-    ////////////////////////////////////////////////////////
 
     return ChangesColorContainer(
       //----------------------------------------------------
@@ -146,17 +135,7 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
 
       //----------------------------------------------------
       // COLORS
-      colors: [
-        Colors.green,
-        Colors.blue,
-        Colors.red,
-        Colors.orange,
-        Colors.purple,
-        Colors.deepPurpleAccent,
-        Colors.black,
-        Colors.grey,
-        Colors.blueGrey,
-      ],
+      colors: AppColors.color_list,
 
       //----------------------------------------------------
       // CHANGE COLOR
@@ -168,7 +147,7 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
 
       //----------------------------------------------------
       // SHADOW
-      shadow: custom_shadow,
+      shadow: AppColors.shadow_list,
 
       //----------------------------------------------------
       // CHILD
@@ -244,7 +223,7 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
                         select ?? selected_Date_Time_For_Start;
                   });
                 },
-                shadow: custom_shadow,
+                shadow: AppColors.shadow_list,
               ),
 
               Gap(20),
@@ -281,7 +260,7 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
                         select ?? selected_Date_Time_For_End;
                   });
                 },
-                shadow: custom_shadow,
+                shadow: AppColors.shadow_list,
               ),
             ],
           ),
