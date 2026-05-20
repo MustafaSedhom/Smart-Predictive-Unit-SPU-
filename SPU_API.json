@@ -208,9 +208,9 @@
   },
   "Settings": {
     "max_Days_if_normal": {
-      "Motor": "âˆž",
-      "Belt_Driver": "âˆž",
-      "Pump": "âˆž"
+      "Motor": "∞",
+      "Belt_Driver": "∞",
+      "Pump": "∞"
     },
     "Time_Date_Analysis": {
       "start_time_analysis": "2025-08-22T00:00:00.000",

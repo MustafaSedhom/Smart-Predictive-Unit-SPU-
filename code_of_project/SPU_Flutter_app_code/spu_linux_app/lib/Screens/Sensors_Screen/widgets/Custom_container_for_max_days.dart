@@ -7,11 +7,16 @@ class CustomContainerForMaxDays extends StatefulWidget {
   final String text;
   final Color color;
   final List<BoxShadow> shadow;
+  final String current_val;
+  final Function(String val)? get_value;
   const CustomContainerForMaxDays({
     super.key,
     required this.icon,
     required this.text,
-    required this.color, required this.shadow,
+    required this.color,
+    required this.shadow,
+    this.get_value,
+    required this.current_val,
   });
 
   @override
@@ -21,10 +26,28 @@ class CustomContainerForMaxDays extends StatefulWidget {
 
 class _CustomContainerForMaxDaysState extends State<CustomContainerForMaxDays> {
   //---------------------------------------------------------
+  late String selectedValue;
 
   TextEditingController textController = TextEditingController();
 
-  String selectedValue = "∞";
+  @override
+  void initState() {
+    super.initState();
+
+    //-------------------------------------------------
+    // load current value
+    //-------------------------------------------------
+
+    selectedValue = widget.current_val;
+
+    //-------------------------------------------------
+    // if custom text
+    //-------------------------------------------------
+
+    if (selectedValue != "∞" && selectedValue != "~") {
+      textController.text = selectedValue;
+    }
+  }
 
   //---------------------------------------------------------
 
@@ -33,7 +56,7 @@ class _CustomContainerForMaxDaysState extends State<CustomContainerForMaxDays> {
       selectedValue = value;
     });
 
-    print(selectedValue);
+    widget.get_value?.call(value);
   }
 
   //---------------------------------------------------------
@@ -43,22 +66,25 @@ class _CustomContainerForMaxDaysState extends State<CustomContainerForMaxDays> {
     return Container(
       width: 220,
       height: 240,
+
       padding: const EdgeInsets.all(15),
 
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: widget.color,
-        boxShadow: widget.shadow
+        boxShadow: widget.shadow,
       ),
 
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
+
         children: [
           //-------------------------------------------------
           // icon + title
           //-------------------------------------------------
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
+
             children: [
               Image.asset(
                 widget.icon,
@@ -66,14 +92,22 @@ class _CustomContainerForMaxDaysState extends State<CustomContainerForMaxDays> {
                 height: 40,
                 color: AppColors.Drawer_text_color,
               ),
-              Gap(15),
-              Text(
-                widget.text,
 
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.Drawer_text_color,
-                  fontSize: 16,
+              const Gap(15),
+
+              Expanded(
+                child: Text(
+                  widget.text,
+
+                  overflow: TextOverflow.ellipsis,
+
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+
+                    color: AppColors.Drawer_text_color,
+
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ],
@@ -90,17 +124,18 @@ class _CustomContainerForMaxDaysState extends State<CustomContainerForMaxDays> {
 
             children: [
               ChoiceChip(
-                label: const Text("∞"),
+                label: Text("∞", style: TextStyle(color: widget.color)),
 
                 selected: selectedValue == "∞",
-
+                checkmarkColor: widget.color,
                 onSelected: (value) {
                   updateValue("∞");
                 },
               ),
 
               ChoiceChip(
-                label: const Text("~"),
+                checkmarkColor: widget.color,
+                label: Text("~", style: TextStyle(color: widget.color)),
 
                 selected: selectedValue == "~",
 
@@ -110,7 +145,8 @@ class _CustomContainerForMaxDaysState extends State<CustomContainerForMaxDays> {
               ),
 
               ChoiceChip(
-                label: const Text("Val"),
+                checkmarkColor: widget.color,
+                label: Text("txt", style: TextStyle(color: widget.color)),
 
                 selected: selectedValue != "∞" && selectedValue != "~",
 
@@ -129,41 +165,45 @@ class _CustomContainerForMaxDaysState extends State<CustomContainerForMaxDays> {
           TextField(
             controller: textController,
 
+            style: TextStyle(color: AppColors.Drawer_text_color),
             decoration: InputDecoration(
               hintText: "Enter",
-
+              hintStyle: TextStyle(color: AppColors.Drawer_text_color),
               filled: true,
-              fillColor: Colors.white,
-
+              fillColor: widget.color,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(color: AppColors.Drawer_text_color),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+
+                borderSide: const BorderSide(
+                  color: Colors.white, // border color
+                  width: 2,
+                ),
               ),
             ),
 
             onChanged: (value) {
-              setState(() {
-                selectedValue = value;
-              });
-
-              print(selectedValue);
+              updateValue(value);
             },
           ),
 
-          const Gap(15),
+          const Spacer(),
 
           //-------------------------------------------------
           // result
           //-------------------------------------------------
-          Expanded(
-            child: Text(
-              "Value : $selectedValue",
+          Text(
+            "Value : $selectedValue",
 
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                overflow: TextOverflow.ellipsis,
-              ),
+            overflow: TextOverflow.ellipsis,
+
+            style: TextStyle(
+              color: AppColors.Drawer_text_color,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],

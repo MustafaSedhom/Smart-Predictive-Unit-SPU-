@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:spu_linux_app/DataBase/Settings/Max_Days_settings.dart';
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Sensors_Screen/widgets/Custom_container_for_max_days.dart';
 import 'package:spu_linux_app/widgets/changes_color_container.dart';
@@ -14,6 +15,62 @@ class SetMaxDaysIfNormalSetting extends StatefulWidget {
 
 class _SetMaxDaysIfNormalSettingState extends State<SetMaxDaysIfNormalSetting> {
   Color all_color = Colors.red;
+
+  //---------------------------------------------------------
+  // VALUES
+  //---------------------------------------------------------
+
+  String motorValue = "∞";
+  String pumpValue = "∞";
+  String beltValue = "∞";
+
+  //---------------------------------------------------------
+  // INIT STATE
+  //---------------------------------------------------------
+
+  @override
+  void initState() {
+    super.initState();
+
+    loadMaxDays();
+  }
+
+  //---------------------------------------------------------
+  // LOAD
+  //---------------------------------------------------------
+
+  Future<void> loadMaxDays() async {
+    MaxDaysSettings data = await loadMaxDaysSettingsFromFile();
+
+    setState(() {
+      motorValue = data.Motor_Max_Normal_Days;
+      pumpValue = data.Pump_Max_Normal_Days;
+      beltValue = data.Belt_Max_Normal_Days;
+    });
+  }
+
+  //---------------------------------------------------------
+  // SAVE
+  //---------------------------------------------------------
+
+  Future<void> saveMaxDays() async {
+    MaxDaysSettings data = MaxDaysSettings(
+      Motor_Max_Normal_Days: motorValue,
+      Pump_Max_Normal_Days: pumpValue,
+      Belt_Max_Normal_Days: beltValue,
+    );
+
+    await saveMaxDaysSettingsToFile(data);
+
+    //------------------------------------------------------
+
+    if (mounted) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Max Days Saved")));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<BoxShadow> custom_shadow = [
@@ -65,6 +122,11 @@ class _SetMaxDaysIfNormalSettingState extends State<SetMaxDaysIfNormalSetting> {
                     text: "Motor Max Days",
                     color: all_color,
                     shadow: custom_shadow,
+                    current_val: motorValue,
+                    get_value: (value) {
+                      motorValue = value;
+                      saveMaxDays();
+                    },
                   ),
                   Gap(20),
                   CustomContainerForMaxDays(
@@ -72,6 +134,11 @@ class _SetMaxDaysIfNormalSettingState extends State<SetMaxDaysIfNormalSetting> {
                     text: "Belt Max Days",
                     color: all_color,
                     shadow: custom_shadow,
+                    get_value: (value) {
+                      beltValue = value;
+                      saveMaxDays();
+                    },
+                    current_val: beltValue,
                   ),
                   Gap(20),
                   CustomContainerForMaxDays(
@@ -79,6 +146,11 @@ class _SetMaxDaysIfNormalSettingState extends State<SetMaxDaysIfNormalSetting> {
                     text: "Pump Max Days",
                     color: all_color,
                     shadow: custom_shadow,
+                    get_value: (value) {
+                      pumpValue = value;
+                      saveMaxDays();
+                    },
+                    current_val: pumpValue,
                   ),
                   Gap(20),
                 ],
