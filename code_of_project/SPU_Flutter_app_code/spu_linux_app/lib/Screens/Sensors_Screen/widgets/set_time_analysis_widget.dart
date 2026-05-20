@@ -94,9 +94,12 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
     // Message
 
     if (mounted) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text("Analysis Time Saved")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.green,
+          content: Text("Analysis Time Saved"),
+        ),
+      );
     }
   }
 

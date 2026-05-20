@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, deprecated_member_use, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/DataBase/Settings/Health_threshold_setting/Belt_Health_threashold.dart';
 import 'package:spu_linux_app/DataBase/Settings/Health_threshold_setting/Motor_Health_threashold.dart';
@@ -290,7 +291,10 @@ class _HealthThresholdState extends State<HealthThreshold> {
           // Warning
           TextField(
             controller: warning_controller,
-            keyboardType: TextInputType.number,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+            ],
             style: TextStyle(
               color: AppColors.Drawer_text_color,
               fontWeight: FontWeight.bold,
@@ -322,7 +326,10 @@ class _HealthThresholdState extends State<HealthThreshold> {
           // Alert
           TextField(
             controller: alert_controller,
-            keyboardType: TextInputType.number,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')),
+            ],
             style: TextStyle(
               color: AppColors.Drawer_text_color,
               fontWeight: FontWeight.bold,
