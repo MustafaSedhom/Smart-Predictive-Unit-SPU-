@@ -3,7 +3,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spu_linux_app/DataBase/json_file_path.dart';
+import 'package:spu_linux_app/DataBase/File_Paths.dart';
 import 'package:spu_linux_app/call_all_screens.dart';
 import 'package:flutter/services.dart';
 import 'package:window_manager/window_manager.dart';
@@ -14,7 +14,7 @@ Future<void> initApp() async {
   String? path = prefs.getString("file_path");
 
   if (path != null) {
-    JsonFilePath.path = path;
+    FilePaths.json_path = path;
   }
 }
 

@@ -2,7 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:spu_linux_app/DataBase/json_file_path.dart';
+import 'package:spu_linux_app/DataBase/File_Paths.dart';
 import 'package:spu_linux_app/Screens/Advanced_settings_screen/widgets/Custom_changes.dart';
 import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
@@ -70,7 +70,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
     if (path != null) {
       setState(() {
         filePathController.text = path;
-        JsonFilePath.path = path;
+        FilePaths.json_path = path;
       });
     }
   }
@@ -125,7 +125,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                     try {
                       if (filePathController.text.isNotEmpty) {
                         await saveFilePath(filePathController.text);
-                        JsonFilePath.path = filePathController.text;
+                        FilePaths.json_path = filePathController.text;
                       }
 
                       await Future.delayed(Duration(milliseconds: 500));

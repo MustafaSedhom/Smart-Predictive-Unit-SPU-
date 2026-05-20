@@ -12,7 +12,7 @@
     "Motor": {
       "status": "normal",
       "Predicted_fault": "âˆž",
-      "Health": 76,
+      "Health": 75,
       "Sensors": {
         "Temperature": 49.0,
         "Vibration": 2.1,
@@ -28,7 +28,7 @@
     "Belt_Driver": {
       "status": "warning",
       "Predicted_fault": "99",
-      "Health": 53,
+      "Health": 33,
       "Sensors": {
         "Tension": 1122.0,
         "Alignment": 3.5,
@@ -36,9 +36,9 @@
       }
     },
     "Pump": {
-      "status": "alert",
-      "Predicted_fault": "99",
-      "Health": 75,
+      "status": "normal",
+      "Predicted_fault": "âˆž",
+      "Health": 96,
       "Sensors": {
         "Pressure_In": 18.3,
         "Flow_Rate": 22.4,

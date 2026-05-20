@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:spu_linux_app/DataBase/json_file_path.dart';
+import 'package:spu_linux_app/DataBase/File_Paths.dart';
 
 ///////////////////////////////////////////////////////////////////////
 ///// read point analysis data
@@ -36,11 +36,11 @@ PointAnalysisModel nonePointAnalysisModel = PointAnalysisModel(
 //  load file
 Future<PointAnalysisModel> loadPointAnalysisFromFile() async {
   try {
-    if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
+    if (FilePaths.json_path == null || FilePaths.json_path!.isEmpty) {
       throw Exception("File path is not set");
     }
 
-    final file = File(JsonFilePath.path!);
+    final file = File(FilePaths.json_path!);
 
     if (!await file.exists()) {
       return nonePointAnalysisModel;
@@ -101,11 +101,11 @@ LabelAnalysisModel none_label_analysis = LabelAnalysisModel(
 // load file
 Future<LabelAnalysisModel> loadLabelAnalysisFromFile() async {
   try {
-    if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
+    if (FilePaths.json_path == null || FilePaths.json_path!.isEmpty) {
       throw Exception("File path is not set");
     }
 
-    final file = File(JsonFilePath.path!);
+    final file = File(FilePaths.json_path!);
 
     if (!await file.exists()) {
       return none_label_analysis;
@@ -141,11 +141,11 @@ AnalysisSpacing none_analysis_spacing = AnalysisSpacing(Spacing: 0);
 // load file
 Future<AnalysisSpacing> loadAnalysisSpacingFromFile() async {
   try {
-    if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
+    if (FilePaths.json_path == null || FilePaths.json_path!.isEmpty) {
       throw Exception("File path is not set");
     }
 
-    final file = File(JsonFilePath.path!);
+    final file = File(FilePaths.json_path!);
 
     if (!await file.exists()) {
       return none_analysis_spacing;

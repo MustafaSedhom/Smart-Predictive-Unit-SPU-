@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 import 'dart:convert';
 import 'dart:io';
-import 'package:spu_linux_app/DataBase/json_file_path.dart';
+import 'package:spu_linux_app/DataBase/File_Paths.dart';
 
 class AlertsData {
   final int count;
@@ -80,7 +80,7 @@ List<AlertsListData> parseAlertsList(List<dynamic> list) {
 // load file
 Future<AlertsData> loadAlertsDataFromFile() async {
   try {
-    final path = JsonFilePath.path;
+    final path = FilePaths.json_path;
 
     if (path == null || path.isEmpty) {
       return none_alert_data;
@@ -103,7 +103,7 @@ Future<AlertsData> loadAlertsDataFromFile() async {
 }
 
 Future<void> clearAlerts() async {
-  final path = JsonFilePath.path;
+  final path = FilePaths.json_path;
 
   if (path == null || path.isEmpty) return;
 

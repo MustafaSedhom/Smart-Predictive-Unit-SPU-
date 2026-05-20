@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:spu_linux_app/DataBase/json_file_path.dart';
+import 'package:spu_linux_app/DataBase/File_Paths.dart';
 
 class GearSetting {
   // ignore: non_constant_identifier_names
@@ -83,14 +83,14 @@ Future<GearSetting> loadGearSettingFromFile() async {
     //------------------------------------------------------
     /// CHECK PATH
 
-    if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
+    if (FilePaths.json_path == null || FilePaths.json_path!.isEmpty) {
       throw Exception("File path is not set");
     }
 
     //------------------------------------------------------
     /// FILE
 
-    final file = File(JsonFilePath.path!);
+    final file = File(FilePaths.json_path!);
 
     //------------------------------------------------------
     /// EXISTS
@@ -132,14 +132,14 @@ Future<void> saveGearSettingToFile(GearSetting gear) async {
     //------------------------------------------------------
     /// CHECK PATH
 
-    if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
+    if (FilePaths.json_path == null || FilePaths.json_path!.isEmpty) {
       throw Exception("File path is not set");
     }
 
     //------------------------------------------------------
     /// FILE
 
-    final file = File(JsonFilePath.path!);
+    final file = File(FilePaths.json_path!);
 
     //------------------------------------------------------
     /// JSON DATA

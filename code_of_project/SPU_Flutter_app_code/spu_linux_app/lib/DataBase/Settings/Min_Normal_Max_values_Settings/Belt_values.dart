@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:spu_linux_app/DataBase/json_file_path.dart';
+import 'package:spu_linux_app/DataBase/File_Paths.dart';
 
 ////////////////////////////////////////////////////////////
 /// MODEL
@@ -159,14 +159,14 @@ Future<BeltDriverValues> loadBeltDriverValuesFromFile() async {
     //------------------------------------------------------
     // Check Path
 
-    if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
+    if (FilePaths.json_path == null || FilePaths.json_path!.isEmpty) {
       throw Exception("File Path Is Null");
     }
 
     //------------------------------------------------------
     // File
 
-    final file = File(JsonFilePath.path!);
+    final file = File(FilePaths.json_path!);
 
     //------------------------------------------------------
     // Check Exists
@@ -212,14 +212,14 @@ Future<void> saveBeltDriverValuesToFile(BeltDriverValues beltData) async {
     //------------------------------------------------------
     // Check Path
 
-    if (JsonFilePath.path == null || JsonFilePath.path!.isEmpty) {
+    if (FilePaths.json_path == null || FilePaths.json_path!.isEmpty) {
       throw Exception("File Path Is Null");
     }
 
     //------------------------------------------------------
     // File
 
-    final file = File(JsonFilePath.path!);
+    final file = File(FilePaths.json_path!);
 
     //------------------------------------------------------
     // Json Data
