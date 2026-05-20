@@ -11,11 +11,13 @@ import 'package:window_manager/window_manager.dart';
 // start the app
 Future<void> initApp() async {
   final prefs = await SharedPreferences.getInstance();
-  String? path = prefs.getString("file_path");
 
-  if (path != null) {
-    FilePaths.json_path = path;
-  }
+  FilePaths.json_path = prefs.getString("json") ?? "";
+  FilePaths.motor_last_Data_path = prefs.getString("motor") ?? "";
+  FilePaths.pump_last_Data_path = prefs.getString("pump") ?? "";
+  FilePaths.belt_last_Data_path = prefs.getString("belt") ?? "";
+  FilePaths.health_last_Data_path = prefs.getString("health") ?? "";
+  FilePaths.alarm_last_Data_path = prefs.getString("alarm") ?? "";
 }
 
 void main() async {

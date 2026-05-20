@@ -1,72 +1,9 @@
-// ignore_for_file: non_constant_identifier_names
-
-import 'dart:io';
+// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:csv/csv.dart';
-
-import 'package:spu_linux_app/DataBase/file_paths.dart';
-
-////////////////////////////////////////////////////////////
-/// RESULT MODEL
-
-class FileResult {
-  final bool hasData;
-  final String message;
-  final String rawData;
-
-  FileResult({
-    required this.hasData,
-    required this.message,
-    required this.rawData,
-  });
-}
-
-////////////////////////////////////////////////////////////
-/// FILE READER
-
-class MotorFileReader {
-  static Future<FileResult> readMotorFile() async {
-    try {
-      final path = FilePaths.motor_last_Data_path;
-
-      if (path == null || path.isEmpty) {
-        return FileResult(
-          hasData: false,
-          message: "No Data (Empty Path)",
-          rawData: "",
-        );
-      }
-
-      final file = File(path);
-
-      if (!await file.exists()) {
-        return FileResult(
-          hasData: false,
-          message: "No Data (File Not Found)",
-          rawData: "",
-        );
-      }
-
-      final data = await file.readAsString();
-
-      if (data.isEmpty) {
-        return FileResult(
-          hasData: false,
-          message: "No Data (Empty File)",
-          rawData: "",
-        );
-      }
-
-      return FileResult(hasData: true, message: "Success", rawData: data);
-    } catch (e) {
-      return FileResult(hasData: false, message: "Error: $e", rawData: "");
-    }
-  }
-}
-
-////////////////////////////////////////////////////////////
-/// UI SCREEN
+import 'package:spu_linux_app/DataBase/File_Paths.dart';
+import 'package:spu_linux_app/DataBase/Last_Data/file_read.dart';
+import 'package:spu_linux_app/DataBase/Last_Data/file_result.dart';
 
 class MotorLastDataScreen extends StatefulWidget {
   const MotorLastDataScreen({super.key});
@@ -76,100 +13,43 @@ class MotorLastDataScreen extends StatefulWidget {
 }
 
 class _MotorLastDataScreenState extends State<MotorLastDataScreen> {
-  //////////////////////////////////////////////////////////
-  /// DATA
-
-  List<List<dynamic>> csvData = [];
-  bool isLoading = true;
-  String message = "";
-
-  //////////////////////////////////////////////////////////
-  /// INIT
+  late Future<FileResult> fileFuture;
 
   @override
   void initState() {
     super.initState();
-    loadMotorData();
+
+    // fileFuture = MotorFileReader.readMotorFile();
+    fileFuture = FileReader.readFile(FilePaths.motor_last_Data_path);
   }
-
-  //////////////////////////////////////////////////////////
-  /// LOAD DATA
-
-  Future<void> loadMotorData() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    final result = await MotorFileReader.readMotorFile();
-
-    if (result.hasData) {
-      final List<List<dynamic>> data = const CsvToListConverter().convert(
-        result.rawData,
-      );
-
-      setState(() {
-        csvData = data;
-        isLoading = false;
-      });
-    } else {
-      setState(() {
-        message = result.message;
-        isLoading = false;
-      });
-    }
-  }
-
-  //////////////////////////////////////////////////////////
-  /// UI
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Motor Last Data"),
-        actions: [
-          IconButton(
-            onPressed: () {
-              loadMotorData();
-            },
-            icon: const Icon(Icons.refresh),
-          ),
-        ],
+      appBar: AppBar(title: const Text("Motor Last Data")),
+      body: FutureBuilder<FileResult>(
+        future: fileFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (!snapshot.hasData) {
+            return const Center(child: Text("No Data"));
+          }
+
+          final result = snapshot.data!;
+
+          if (!result.hasData) {
+            return Center(child: Text(result.message));
+          }
+
+          return SingleChildScrollView(
+            padding: const EdgeInsets.all(16),
+            child: Text(result.rawData, style: const TextStyle(fontSize: 14)),
+          );
+        },
       ),
-
-      body: isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : csvData.isEmpty
-          ? Center(
-              child: Text(
-                message.isEmpty ? "No Data" : message,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )
-          : ListView.builder(
-              itemCount: csvData.length,
-
-              itemBuilder: (context, index) {
-                final row = csvData[index];
-
-                return Card(
-                  margin: const EdgeInsets.all(10),
-
-                  child: ListTile(
-                    leading: const Icon(Icons.settings),
-
-                    title: Text(
-                      row.isNotEmpty ? row[0].toString() : "Empty Row",
-                    ),
-
-                    subtitle: Text(row.toString()),
-                  ),
-                );
-              },
-            ),
     );
   }
 }
