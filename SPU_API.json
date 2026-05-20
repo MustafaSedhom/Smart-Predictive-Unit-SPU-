@@ -218,16 +218,16 @@
     },
     "Health_Thresholds": {
       "Motor": {
-        "warning": 55,
-        "alert": 20
+        "warning": 60,
+        "alert": 30
       },
       "Belt_Driver": {
         "warning": 55,
-        "alert": 30
+        "alert": 20
       },
       "Pump": {
-        "warning": 90,
-        "alert": 80
+        "warning": 70,
+        "alert": 20
       }
     },
     "min_normal_max_values": {
