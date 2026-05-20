@@ -95,15 +95,17 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
     required VoidCallback setLoadingOn,
     required VoidCallback setLoadingOff,
   }) async {
-    if (path.isEmpty) return;
-
-    setLoadingOn();
+    setState(() {
+      setLoadingOn();
+    });
 
     try {
       await savePath(key, path);
       onDone();
     } finally {
-      setLoadingOff();
+      setState(() {
+        setLoadingOff();
+      });
     }
   }
 
@@ -154,7 +156,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
           /// JSON
           CustomChanges(
             controller: jsonController,
-            title: "JSON File",
+            title: "JSON File : ",
             hint: "Path",
             is_saved: jsonLoading,
             ontap_prefix_icon: () async {
@@ -163,30 +165,32 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                 setState(() => jsonController.text = path);
               }
             },
-            save_operation: () async {
-              await saveFile(
-                key: "json",
-                path: jsonController.text,
-                setLoadingOn: () => setState(() => jsonLoading = true),
-                setLoadingOff: () => setState(() => jsonLoading = false),
-                onDone: () {
-                  FilePaths.json_path = jsonController.text;
+            save_operation: jsonLoading
+                ? () {}
+                : () async {
+                    await saveFile(
+                      key: "json",
+                      path: jsonController.text,
+                      setLoadingOn: () => setState(() => jsonLoading = true),
+                      setLoadingOff: () => setState(() => jsonLoading = false),
+                      onDone: () {
+                        FilePaths.json_path = jsonController.text;
 
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(const SnackBar(content: Text("JSON Saved ✅")));
-                },
-              );
-            },
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("JSON Saved ✅")),
+                        );
+                       },
+                    );
+                  },
           ),
 
-          CustomDivider(),
+          // CustomDivider(),
 
           //////////////////////////////////////////////////
           /// MOTOR
           CustomChanges(
             controller: motorController,
-            title: "Motor CSV",
+            title: "Motor CSV :",
             hint: "Path",
             is_saved: motorLoading,
             ontap_prefix_icon: () async {
@@ -212,13 +216,13 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
             },
           ),
 
-          CustomDivider(),
+          // CustomDivider(),
 
           //////////////////////////////////////////////////
           /// PUMP
           CustomChanges(
             controller: pumpController,
-            title: "Pump CSV",
+            title: "Pump CSV :",
             hint: "Path",
             is_saved: pumpLoading,
             ontap_prefix_icon: () async {
@@ -244,13 +248,13 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
             },
           ),
 
-          CustomDivider(),
+          // CustomDivider(),
 
           //////////////////////////////////////////////////
           /// BELT
           CustomChanges(
             controller: beltController,
-            title: "Belt CSV",
+            title: "Belt CSV :   ",
             hint: "Path",
             is_saved: beltLoading,
             ontap_prefix_icon: () async {
@@ -276,13 +280,13 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
             },
           ),
 
-          CustomDivider(),
+          // CustomDivider(),
 
           //////////////////////////////////////////////////
           /// HEALTH
           CustomChanges(
             controller: healthController,
-            title: "Health CSV",
+            title: "Health CSV :",
             hint: "Path",
             is_saved: healthLoading,
             ontap_prefix_icon: () async {
@@ -308,13 +312,13 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
             },
           ),
 
-          CustomDivider(),
+          // CustomDivider(),
 
           //////////////////////////////////////////////////
           /// ALARM
           CustomChanges(
             controller: alarmController,
-            title: "Alarm CSV",
+            title: "Alarm CSV : ",
             hint: "Path",
             is_saved: alarmLoading,
             ontap_prefix_icon: () async {
@@ -340,14 +344,14 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
             },
           ),
 
-          CustomDivider(),
+          // CustomDivider(),
 
           //////////////////////////////////////////////////
           /// PASSWORD
           CustomChanges(
             controller: passwordController,
             prefix_icon: Icons.password,
-            title: "Password",
+            title: "Password :   ",
             hint: "New password",
             is_saved: passLoading,
             ontap_prefix_icon: () {},
@@ -358,7 +362,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
             },
           ),
 
-          CustomDivider(),
+          // CustomDivider(),
         ],
       ),
     );
