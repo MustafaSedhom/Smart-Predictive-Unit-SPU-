@@ -27,7 +27,7 @@
         },
         "Belt_Driver": {
             "status": "warning",
-            "Predicted_fault": "152.75",
+            "Predicted_fault": "154.92",
             "Health": 33,
             "Sensors": {
                 "Tension": 1122.0,
