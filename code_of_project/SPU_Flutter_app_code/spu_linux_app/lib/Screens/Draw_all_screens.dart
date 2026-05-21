@@ -109,6 +109,12 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
       icon: Icons.analytics,
       page: AnalysisScreen(),
     ),
+    // SettingScreen
+    DrawerItem(
+      title: "Data",
+      icon: Icons.storage_rounded,
+      page: ActuatorsLastDataScreen(),
+    ),
     // AdminScreen
     DrawerItem(
       title: "Admin",
@@ -132,12 +138,6 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
           }
         },
       ),
-    ),
-    // SettingScreen
-    DrawerItem(
-      title: "Data",
-      icon: Icons.storage_rounded,
-      page: ActuatorsLastDataScreen(),
     ),
     // SettingScreen
     DrawerItem(title: "Settings", icon: Icons.settings, page: SensorsScreen()),

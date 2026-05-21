@@ -87,9 +87,22 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
 
     lines.removeWhere((e) => e.trim().isEmpty);
 
+    /// get header
+    String? header;
+
+    for (var line in lines) {
+      if (line.contains("Date,Time")) {
+        header = line;
+        break;
+      }
+    }
+
+    /// remove header from data
+    lines.removeWhere((e) => e.contains("Date,Time"));
+
     lines.sort((a, b) {
       try {
-        final regex = RegExp(r'(\d{4}-\d{2}-\d{2}).*?(\d{2}:\d{2}:\d{2})');
+        final regex = RegExp(r'(\d{4}-\d{2}-\d{2}),(\d{2}:\d{2}:\d{2})');
 
         final matchA = regex.firstMatch(a);
         final matchB = regex.firstMatch(b);
@@ -109,6 +122,11 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
         return 0;
       }
     });
+
+    /// put header first
+    if (header != null) {
+      lines.insert(0, header);
+    }
 
     return lines;
   }
@@ -130,7 +148,7 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              /// Custom AppBar
+              // Custom AppBar
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -178,8 +196,7 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
                 ],
               ),
               Gap(10),
-
-              /// Select Data Type
+              // Select Data Type
               SizedBox(
                 height: 50,
                 child: ListView.builder(
@@ -246,8 +263,7 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
               Gap(5),
               CustomDivider(),
               Gap(5),
-
-              /// Data
+              // Data
               Expanded(
                 child: FutureBuilder<FileResult>(
                   future: fileFuture,
@@ -282,7 +298,7 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
                     }
                     // real data
                     List<String> sortedData = sortData(result.rawData);
-
+                    print(sortedData);
                     return ListLastData(Data: sortedData);
                   },
                 ),
