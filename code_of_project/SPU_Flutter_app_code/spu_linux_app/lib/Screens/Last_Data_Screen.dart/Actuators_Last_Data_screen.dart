@@ -10,6 +10,7 @@ import 'package:spu_linux_app/DataBase/File_Paths.dart';
 import 'package:spu_linux_app/DataBase/Last_Data/file_read.dart';
 import 'package:spu_linux_app/DataBase/Last_Data/file_result.dart';
 import 'package:spu_linux_app/Images/images_and_icons.dart';
+import 'package:spu_linux_app/Screens/Last_Data_Screen.dart/widgets/List_Last_Data.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
@@ -177,6 +178,7 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
                 ],
               ),
               Gap(10),
+
               /// Select Data Type
               SizedBox(
                 height: 50,
@@ -244,6 +246,7 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
               Gap(5),
               CustomDivider(),
               Gap(5),
+
               /// Data
               Expanded(
                 child: FutureBuilder<FileResult>(
@@ -279,64 +282,8 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
                     }
                     // real data
                     List<String> sortedData = sortData(result.rawData);
-                    
-                    return ListView.builder(
-                      itemCount: sortedData.length,
-                      itemBuilder: (context, index) {
-                        final data = sortedData[index];
 
-                        return Container(
-                          margin: const EdgeInsets.only(bottom: 14),
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.06),
-
-                            borderRadius: BorderRadius.circular(20),
-
-                            border: Border.all(color: Colors.white12),
-
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
-                                blurRadius: 10,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(12),
-                                decoration: BoxDecoration(
-                                  color: const Color(
-                                    0xff22C55E,
-                                  ).withOpacity(0.15),
-                                  shape: BoxShape.circle,
-                                ),
-                                child: const Icon(
-                                  Icons.analytics,
-                                  color: Color(0xff22C55E),
-                                ),
-                              ),
-
-                              const SizedBox(width: 14),
-
-                              Expanded(
-                                child: Text(
-                                  data,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    height: 1.5,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
+                    return ListLastData(Data: sortedData);
                   },
                 ),
               ),
