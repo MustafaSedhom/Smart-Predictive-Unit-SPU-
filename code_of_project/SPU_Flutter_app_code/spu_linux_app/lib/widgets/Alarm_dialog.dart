@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:simple_shadow/simple_shadow.dart';
@@ -6,22 +8,23 @@ import 'package:spu_linux_app/colors/App_colors.dart';
 
 Future<void> showAlarmDialog(
   BuildContext context, {
-  String message = "Massage",
-  // ignore: non_constant_identifier_names
+  String message = "Message",
+  String status = "normal",
   int close_time_seconds = 2,
-  // ignore: non_constant_identifier_names
   bool auto_close = false,
   String img = AppIcons.motor_Icon,
-  // ignore: non_constant_identifier_names
   Color alarm_color = Colors.red,
-  // ignore: non_constant_identifier_names
   Color box_color = Colors.black87,
 }) {
+  if (status.toUpperCase() == "NONE") {
+    return Future.value();
+  }
+
   return showDialog(
     context: context,
     barrierDismissible: false,
     builder: (dialogContext) {
-      // ✅ safe auto close
+      /// ✅ AUTO CLOSE HERE
       if (auto_close) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           Future.delayed(Duration(seconds: close_time_seconds), () {
@@ -35,10 +38,9 @@ Future<void> showAlarmDialog(
       return SimpleShadow(
         opacity: 0.9,
         color: alarm_color,
-        offset: Offset(0, 0),
+        offset: const Offset(0, 0),
         sigma: 30,
         child: AlertDialog(
-          // ignore: deprecated_member_use
           backgroundColor: box_color.withOpacity(0.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
@@ -46,11 +48,9 @@ Future<void> showAlarmDialog(
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // icon
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  // ignore: deprecated_member_use
                   color: alarm_color.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: alarm_color, width: 2),
@@ -62,12 +62,12 @@ Future<void> showAlarmDialog(
                   height: 30,
                 ),
               ),
-              Gap(10),
-              // massage
+
+              const Gap(10),
+
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  // ignore: deprecated_member_use
                   color: alarm_color.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -83,6 +83,7 @@ Future<void> showAlarmDialog(
               ),
             ],
           ),
+
           actions: [
             TextButton(
               onPressed: () {
@@ -91,7 +92,6 @@ Future<void> showAlarmDialog(
               child: Text(
                 "Close",
                 style: TextStyle(
-                  // ignore: deprecated_member_use
                   color: AppColors.Drawer_text_color.withOpacity(0.8),
                 ),
               ),

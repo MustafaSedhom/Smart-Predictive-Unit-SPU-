@@ -13,7 +13,11 @@ import 'package:spu_linux_app/widgets/Alarm_dialog.dart';
 class HomeScreenMasterCard extends StatefulWidget {
   final VoidCallback details;
   final VoidCallback alarm;
-  const HomeScreenMasterCard({super.key, required this.details, required this.alarm});
+  const HomeScreenMasterCard({
+    super.key,
+    required this.details,
+    required this.alarm,
+  });
 
   @override
   State<HomeScreenMasterCard> createState() => _HomeScreenMasterCardState();
@@ -32,12 +36,39 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
   String? belt_driver_temp_state;
 
   String? pump_temp_state;
+  bool isDialogShowing = false;
+  Future<void> showSafeAlarm({
+    required String status,
+    required String img,
+    required Color color,
+    required String message,
+  }) async {
+    if (isDialogShowing) return;
+
+    if (status.trim().toUpperCase() == "NONE") return;
+
+    isDialogShowing = true;
+
+    try {
+      await showAlarmDialog(
+        context,
+        status: status,
+        img: img,
+        auto_close: true,
+        close_time_seconds: 1,
+        alarm_color: color,
+        message: message,
+      );
+    } finally {
+      isDialogShowing = false;
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     // load data
-    Timer.periodic(const Duration(milliseconds: 100), (_) async {
+    Timer.periodic(const Duration(seconds: 2), (_) async {
       await loadData();
       if (!mounted) return;
       // check status
@@ -49,14 +80,12 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
         } else if (motor!.status != motor_temp_state) {
           motor_temp_state = motor!.status;
 
-          showAlarmDialog(
-            context,
+          showSafeAlarm(
             img: AppIcons.motor_Icon,
-            auto_close: true,
-            close_time_seconds: 1,
-            alarm_color: getColor(motor!.status),
+            color: getColor(motor!.status),
             message:
-                "motor State changed \n now status is ${motor!.status.toUpperCase()}",
+                "Motor State Changed\nNow status is ${motor!.status.toUpperCase()}",
+            status: motor!.status,
           );
         }
       }
@@ -68,12 +97,10 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
         } else if (beltDriver!.status != belt_driver_temp_state) {
           belt_driver_temp_state = beltDriver!.status;
 
-          showAlarmDialog(
-            context,
+          showSafeAlarm(
             img: AppIcons.motor_belt_Icon,
-            auto_close: true,
-            close_time_seconds: 1,
-            alarm_color: getColor(beltDriver!.status),
+            status: beltDriver!.status,
+            color: getColor(beltDriver!.status),
             message:
                 "Belt Driver State changed \n now status is ${beltDriver!.status.toUpperCase()}",
           );
@@ -85,13 +112,10 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
           pump_temp_state = pump!.status;
         } else if (pump!.status != pump_temp_state) {
           pump_temp_state = pump!.status;
-
-          showAlarmDialog(
-            context,
+          showSafeAlarm(
+            status: pump!.status,
             img: AppIcons.motor_pump_Icon,
-            auto_close: true,
-            close_time_seconds: 1,
-            alarm_color: getColor(pump!.status),
+            color: getColor(pump!.status),
             message:
                 "Pump State changed \n now status is ${pump!.status.toUpperCase()}",
           );
