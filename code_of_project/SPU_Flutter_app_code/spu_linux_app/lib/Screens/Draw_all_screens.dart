@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spu_linux_app/Screens/Advanced_settings_screen/Advanced_settings_screen.dart';
-import 'package:spu_linux_app/Screens/Last_Data_Screen.dart/Motor_Last_Data_screen.dart';
+import 'package:spu_linux_app/Screens/Last_Data_Screen.dart/Actuators_Last_Data_screen.dart';
 import 'package:spu_linux_app/Screens/Sensors_Screen/Sensors_Screen.dart';
 import 'package:spu_linux_app/widgets/Password_dialog.dart';
 import 'package:spu_linux_app/Screens/Alarm_screen/Alarm_Screen.dart';
@@ -137,7 +137,7 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
     DrawerItem(
       title: "Data",
       icon: Icons.storage_rounded,
-      page: MotorLastDataScreen(),
+      page: ActuatorsLastDataScreen(),
     ),
     // SettingScreen
     DrawerItem(title: "Settings", icon: Icons.settings, page: SensorsScreen()),
