@@ -298,8 +298,7 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
                     }
                     // real data
                     List<String> sortedData = sortData(result.rawData);
-                    print(sortedData);
-                    return ListLastData(Data: sortedData);
+                    return ListLastData(data: sortedData);
                   },
                 ),
               ),
