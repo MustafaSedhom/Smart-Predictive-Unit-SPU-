@@ -16,10 +16,6 @@ Future<void> showAlarmDialog(
   Color alarm_color = Colors.red,
   Color box_color = Colors.black87,
 }) {
-  if (status.toUpperCase() == "NONE") {
-    return Future.value();
-  }
-
   return showDialog(
     context: context,
     barrierDismissible: false,

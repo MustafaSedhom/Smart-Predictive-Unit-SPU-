@@ -24,5 +24,6 @@ class AppIcons {
   static String End_Time_Icon = "assets/Icons/clock_end.png";
   static String time_Icon = "assets/Icons/hourglass.png";
   static String Gear_Icon = "assets/Icons/Gears.png";
+  static String System_Icon = "assets/Icons/System.png";
   static String Last_Data_from_Files_Icon = "assets/Icons/Last_Data_From_Files_icon.png";
 }

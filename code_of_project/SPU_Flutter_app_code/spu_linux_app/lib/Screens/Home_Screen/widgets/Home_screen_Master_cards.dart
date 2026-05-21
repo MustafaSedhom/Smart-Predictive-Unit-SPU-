@@ -8,6 +8,7 @@ import 'package:spu_linux_app/DataBase/Motor_Card_Data.dart';
 import 'package:spu_linux_app/DataBase/Pump_Card_Data.dart';
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_Master_custom_cards.dart';
+import 'package:spu_linux_app/Screens/Home_Screen/widgets/alert_items.dart';
 import 'package:spu_linux_app/widgets/Alarm_dialog.dart';
 
 class HomeScreenMasterCard extends StatefulWidget {
@@ -36,32 +37,52 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
   String? belt_driver_temp_state;
 
   String? pump_temp_state;
-  bool isDialogShowing = false;
-  Future<void> showSafeAlarm({
-    required String status,
-    required String img,
-    required Color color,
-    required String message,
-  }) async {
-    if (isDialogShowing) return;
-
-    if (status.trim().toUpperCase() == "NONE") return;
-
-    isDialogShowing = true;
-
-    try {
-      await showAlarmDialog(
-        context,
-        status: status,
-        img: img,
-        auto_close: true,
-        close_time_seconds: 1,
-        alarm_color: color,
-        message: message,
-      );
-    } finally {
-      isDialogShowing = false;
+  //////////////////////////////////
+  bool i_showed = false;
+  List<AlarmItem> alarms = [];
+  void addAlarm(AlarmItem item) {
+    if (item.status.toUpperCase() == "NONE") {
+      if (i_showed) return;
+      i_showed = true;
+      // showAlarmDialog(
+      //   context,
+      //   status: item.status,
+      //   img: AppIcons.System_Icon,
+      //   auto_close: true,
+      //   close_time_seconds: 2,
+      //   alarm_color: AppColors.Drawer_icon_selected_color,
+      //   message: "There Is Wrong In API.json",
+      // );
+      return;
     }
+    i_showed = false;
+    // alarms.add(item);
+    // processAlarms();
+    show_alarm(item);
+  }
+
+  void processAlarms() async {
+    if (alarms.isEmpty) return;
+
+    while (alarms.isNotEmpty) {
+      final item = alarms.removeAt(0);
+
+      show_alarm(item);
+
+      await Future.delayed(const Duration(seconds: 1));
+    }
+  }
+
+  void show_alarm(AlarmItem item) {
+    showAlarmDialog(
+      context,
+      status: item.status,
+      img: item.img,
+      auto_close: true,
+      close_time_seconds: 2,
+      alarm_color: item.color,
+      message: item.message,
+    );
   }
 
   @override
@@ -80,12 +101,13 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
         } else if (motor!.status != motor_temp_state) {
           motor_temp_state = motor!.status;
 
-          showSafeAlarm(
-            img: AppIcons.motor_Icon,
-            color: getColor(motor!.status),
-            message:
-                "Motor State Changed\nNow status is ${motor!.status.toUpperCase()}",
-            status: motor!.status,
+          addAlarm(
+            AlarmItem(
+              status: motor!.status,
+              img: AppIcons.motor_Icon,
+              color: getColor(motor!.status),
+              message: "Motor changed to ${motor!.status.toUpperCase()}",
+            ),
           );
         }
       }
@@ -97,12 +119,14 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
         } else if (beltDriver!.status != belt_driver_temp_state) {
           belt_driver_temp_state = beltDriver!.status;
 
-          showSafeAlarm(
-            img: AppIcons.motor_belt_Icon,
-            status: beltDriver!.status,
-            color: getColor(beltDriver!.status),
-            message:
-                "Belt Driver State changed \n now status is ${beltDriver!.status.toUpperCase()}",
+          addAlarm(
+            AlarmItem(
+              status: beltDriver!.status,
+              img: AppIcons.motor_belt_Icon,
+              color: getColor(beltDriver!.status),
+              message:
+                  "Belt Driver changed to ${beltDriver!.status.toUpperCase()}",
+            ),
           );
         }
       }
@@ -112,12 +136,13 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
           pump_temp_state = pump!.status;
         } else if (pump!.status != pump_temp_state) {
           pump_temp_state = pump!.status;
-          showSafeAlarm(
-            status: pump!.status,
-            img: AppIcons.motor_pump_Icon,
-            color: getColor(pump!.status),
-            message:
-                "Pump State changed \n now status is ${pump!.status.toUpperCase()}",
+          addAlarm(
+            AlarmItem(
+              status: pump!.status,
+              img: AppIcons.motor_pump_Icon,
+              color: getColor(pump!.status),
+              message: "Pump changed to ${pump!.status.toUpperCase()}",
+            ),
           );
         }
       }
