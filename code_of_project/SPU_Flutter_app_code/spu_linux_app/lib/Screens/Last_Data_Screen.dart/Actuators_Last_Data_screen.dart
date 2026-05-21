@@ -156,38 +156,88 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
                     "Last System Data",
                     style: CustomAppBarTextStyle.appbar_text_style(size: 30),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: InkWell(
-                      onTap: () {
-                        setState(() {
-                          newestFirst = !newestFirst;
-                        });
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            newestFirst
-                                ? Icons.arrow_downward
-                                : Icons.arrow_upward,
-                            color: Colors.white,
+                  // sort button
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        newestFirst = !newestFirst;
+                      });
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 18,
+                        vertical: 12,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+
+                        gradient: LinearGradient(
+                          colors: newestFirst
+                              ? [
+                                  const Color(0xff22C55E),
+                                  const Color(0xff16A34A),
+                                ]
+                              : [
+                                  const Color(0xff3B82F6),
+                                  const Color(0xff2563EB),
+                                ],
+                        ),
+
+                        boxShadow: [
+                          BoxShadow(
+                            color:
+                                (newestFirst
+                                        ? const Color(0xff22C55E)
+                                        : const Color(0xff3B82F6))
+                                    .withOpacity(0.35),
+
+                            blurRadius: 12,
+                            offset: const Offset(0, 5),
                           ),
+                        ],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AnimatedRotation(
+                            turns: newestFirst ? 0 : 0.5,
+                            duration: const Duration(milliseconds: 300),
 
-                          const SizedBox(width: 8),
-
-                          Text(
-                            newestFirst ? "Newest" : "Oldest",
-                            style: const TextStyle(
+                            child: const Icon(
+                              Icons.sync_alt_rounded,
                               color: Colors.white,
-                              fontWeight: FontWeight.w600,
+                              size: 22,
                             ),
+                          ),
+                          Gap(10),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                newestFirst ? "Newest First" : "Oldest First",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13,
+                                ),
+                              ),
+
+                              const SizedBox(height: 2),
+
+                              Text(
+                                newestFirst
+                                    ? "Latest data on top"
+                                    : "Old data on top",
+
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.8),
+                                  fontSize: 10,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

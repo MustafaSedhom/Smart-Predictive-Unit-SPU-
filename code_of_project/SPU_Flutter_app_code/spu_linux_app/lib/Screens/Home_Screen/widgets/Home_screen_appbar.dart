@@ -57,7 +57,7 @@ class _HomeScreenAppbarState extends State<HomeScreenAppbar> {
               ),
             ),
 
-            Gap(screenWidth * 0.23),
+            Gap(screenWidth * 0.2),
             DigitalClockWidget(),
             Gap(10),
             CircleAvatar(
