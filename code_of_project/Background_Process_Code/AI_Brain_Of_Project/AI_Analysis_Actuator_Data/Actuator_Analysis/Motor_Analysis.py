@@ -6,7 +6,10 @@ from ...AI_Store_and_Read_process_Data.AI_Read_Process_Data import (
     Read_All_Last_Data_to_One_Actuator,
     Read_Last_Motor_Data,
     Read_All_Last_Health_Data
-)  
+) 
+from .calc_predicated_fault_of_actuator.calc_predicated_fault_of_actuator import (
+    calc_Actuator_predict_fault_days,
+) 
 import pandas as pd
 class Motor_Analysis:
     def __init__(self,DB:Access_data_Base,file_path_last_motor_data:str,file_path_last_health_data:str):
@@ -41,6 +44,7 @@ class Motor_Analysis:
             (df["DateTime"] <= end_time)
         ]
     def set_status_based_on_health(self,health):
+        health = float(health)
         status = "normal"
         if health < self.Data_Base.Data_Base.health_thresholds.get_motor_health_thresholds_alert():
             self.Data_Base.Data_Base.motor.set_status("alert")
@@ -62,10 +66,10 @@ class Motor_Analysis:
             print("No data available")
             return 0
 
-        avg_temp = df["Temperature"].mean()
+        avg_temp = float(df["Temperature"].mean())
 
-        normal = self.Data_Base.Data_Base.min_normal_max_values.get_motor_min_normal_max_values_Temperature_normal()
-        max_t = self.Data_Base.Data_Base.min_normal_max_values.get_motor_min_normal_max_values_Temperature_max()
+        normal = float(self.Data_Base.Data_Base.min_normal_max_values.get_motor_min_normal_max_values_Temperature_normal())
+        max_t = float(self.Data_Base.Data_Base.min_normal_max_values.get_motor_min_normal_max_values_Temperature_max())
 
         health = 100 - ((avg_temp - normal) / (max_t - normal)) * 100
 
@@ -149,23 +153,7 @@ class Motor_Analysis:
             print("No data in selected range")
             return None
 
-        return filtered_df
-    def calc_motor_predict_fault_days(self, health_values):
-        if len(health_values) < 2:
-            return None
-        # health loss per day
-        daily_drop = health_values[0] - health_values[-1]
-        number_of_days = len(health_values) - 1
-        avg_drop_per_day = daily_drop / number_of_days
-        current_health = health_values[-1]
-        critical_health = 20
-        if avg_drop_per_day <= 0:
-            return 99
-        predicted_days = (
-            current_health - critical_health
-        ) / avg_drop_per_day
-
-        return round(predicted_days, 2)
+        return filtered_df   
     def analyse_motor_data(self): 
         max_days_if_normal = self.Data_Base.Data_Base.max_days_if_normal.get_motor_max_days_if_normal()
         health = self.calc_motor_overall_Health()
@@ -174,12 +162,11 @@ class Motor_Analysis:
         if filtered_df is None:
             return
         health_values = filtered_df["Motor_Health"].tolist()
-
-        days = self.calc_motor_predict_fault_days(
+        days = calc_Actuator_predict_fault_days(
             health_values
         )
         status = self.set_status_based_on_health(health)
         if status == "alert" or status == "warning":
-            self.Data_Base.Data_Base.motor.set_Predicted_fault(str(days))
+            self.Data_Base.Data_Base.motor.set_Predicted_fault(str(int(days)))
         elif status == "normal":
             self.Data_Base.Data_Base.motor.set_Predicted_fault(str(max_days_if_normal))

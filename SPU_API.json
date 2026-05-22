@@ -11,7 +11,7 @@
     "Actuators": {
         "Motor": {
             "status": "normal",
-            "Predicted_fault": "\u00e2\u02c6\u017e",
+            "Predicted_fault": "~",
             "Health": 75,
             "Sensors": {
                 "Temperature": 49.0,
@@ -27,7 +27,7 @@
         },
         "Belt_Driver": {
             "status": "warning",
-            "Predicted_fault": "157.08",
+            "Predicted_fault": "267",
             "Health": 33,
             "Sensors": {
                 "Tension": 1122.0,
@@ -37,7 +37,7 @@
         },
         "Pump": {
             "status": "normal",
-            "Predicted_fault": "\u00e2\u02c6\u017e",
+            "Predicted_fault": "~",
             "Health": 96,
             "Sensors": {
                 "Pressure_In": 18.3,
@@ -52,79 +52,46 @@
             {
                 "id": 1,
                 "device": "motor",
-                "timestamp": "2002-02-22T11:15:04",
-                "period_name": "PM",
-                "type": "Current",
-                "message": "Motor overheating",
-                "level": "high",
-                "value": 80,
-                "uint": "mm"
-            },
-            {
-                "id": 1,
-                "device": "motor",
-                "timestamp": "2006-02-22T11:15:04",
-                "period_name": "PM",
-                "type": "Current",
-                "message": "Motor overheating",
-                "level": "high",
-                "value": 80,
-                "uint": "mm"
+                "timestamp": "2026-05-22 17:16:04.785941",
+                "type": "temp",
+                "message": "mustafa",
+                "level": "low",
+                "value": 45,
+                "unit": "C",
+                "period_name": "PM"
             },
             {
                 "id": 2,
-                "device": "belt driver",
-                "timestamp": "2006-02-22T11:20:11",
-                "period_name": "AM",
-                "type": "temperature",
-                "message": "Temperature still high",
+                "device": "motor",
+                "timestamp": "2026-05-22 17:16:53.358655",
+                "type": "noise",
+                "message": "mustafa",
                 "level": "low",
-                "value": 82,
-                "uint": "mm"
+                "value": 45,
+                "unit": "C",
+                "period_name": "PM"
             },
             {
                 "id": 3,
-                "device": "PUMP",
-                "timestamp": "2026-04-26T11:20:11",
-                "period_name": "PM",
-                "type": "Alignment",
-                "message": "Temperature still high",
-                "level": "high",
-                "value": 12,
-                "uint": "mm"
+                "device": "motor",
+                "timestamp": "2026-05-22 17:17:06.734533",
+                "type": "current",
+                "message": "ffff",
+                "level": "High",
+                "value": 45,
+                "unit": "A",
+                "period_name": "PM"
             },
             {
                 "id": 4,
-                "device": "PUMP",
-                "timestamp": "2026-04-26T11:20:10",
-                "period_name": "PM",
-                "type": "Alignment",
-                "message": "Temperature still high",
-                "level": "high",
-                "value": 12,
-                "uint": "mm"
-            },
-            {
-                "id": 5,
-                "device": "PUMP",
-                "timestamp": "2026-04-26T11:20:15",
-                "period_name": "PM",
-                "type": "Alignment",
-                "message": "Temperature still high",
-                "level": "high",
-                "value": 12,
-                "uint": "mm"
-            },
-            {
-                "id": 6,
-                "device": "Motor",
-                "timestamp": "2026-04-26T11:20:10",
-                "period_name": "PM",
-                "type": "Alignment",
-                "message": "Temperature still high",
-                "level": "high",
-                "value": 12,
-                "uint": "mm"
+                "device": "motor",
+                "timestamp": "2026-05-22 17:25:36.722712",
+                "type": "temp",
+                "message": "mustafa",
+                "level": "low",
+                "value": 45,
+                "unit": "C",
+                "period_name": "PM"
             }
         ]
     },
@@ -208,9 +175,9 @@
             "Gear_setting_unit": "mm"
         },
         "max_Days_if_normal": {
-            "Motor": "\u00e2\u02c6\u017e",
-            "Belt_Driver": "\u00e2\u02c6\u017e",
-            "Pump": "\u00e2\u02c6\u017e"
+            "Motor": "~",
+            "Belt_Driver": "~",
+            "Pump": "~"
         },
         "Time_Date_Analysis": {
             "start_time_analysis": "2025-08-22T00:00:00.000",

@@ -5,3 +5,6 @@ Date,Time,id,device,type,message,level,value,unit
 2026-05-18,06:52:03,0,pump,speed,Speed is very high,Low,121,RPM
 2026-05-18,07:03:53,0,pump,speed,Speed is very high,Low,121,RPM
 2026-05-18,07:04:09,0,pump,speed,Speed is very high,Low,121,RPM
+2026-05-22,15:40:31,0,motor,temp,mustafa,low,45,55
+2026-05-22,15:41:37,0,motor,temp,mustafa,low,45,km
+2026-05-22,15:42:54,0,motor,temp,mustafa,low,45,km

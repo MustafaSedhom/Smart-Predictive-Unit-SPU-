@@ -1,29 +1,27 @@
 
+from datetime import datetime
 class AlertStruct:
-    def __init__(self, id:int=0, device:str="", timestamp:str="", type:str="", message:str="", level:str="", value:float=0, unit:str="",period_name:str=""):
+    def __init__(self, id:int=0, device:str="", type:str="", message:str="", level:str="", value:float=0, unit:str=""):
         self.id = id
         self.device = device
-        self.timestamp = timestamp
         self.type = type
         self.message = message
         self.level = level
         self.value = value
         self.unit = unit
-        self.period_name = period_name
 
     def to_dict(self):
         return {
             "id": self.id,
             "device": self.device,
-            "timestamp": self.timestamp,
+            "timestamp": str(datetime.now()),
             "type": self.type,
             "message": self.message,
             "level": self.level,
             "value": self.value,
             "unit": self.unit,
-            "period_name": self.period_name,
+            "period_name": str(datetime.now().strftime("%p")),
         }
-
 class Alerts_Data:
     def __init__(self, data):
         self.__data =data
@@ -39,8 +37,6 @@ class Alerts_Data:
     # SET METHODS
     # ======================
     def add_alert(self, alert: AlertStruct):
-        if not isinstance(alert, AlertStruct):
-            return
 
         data = self.__data.json_data_access.setdefault("Alerts", {})
         alerts = data.setdefault("Alert_List", [])

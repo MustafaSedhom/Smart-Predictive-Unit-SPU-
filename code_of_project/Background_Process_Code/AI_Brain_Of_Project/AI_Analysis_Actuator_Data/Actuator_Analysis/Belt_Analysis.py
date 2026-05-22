@@ -7,6 +7,9 @@ from ...AI_Store_and_Read_process_Data.AI_Read_Process_Data import (
     Read_Last_Belt_Data,
     Read_All_Last_Health_Data
 )  
+from .calc_predicated_fault_of_actuator.calc_predicated_fault_of_actuator import (
+    calc_Actuator_predict_fault_days,
+)
 import pandas as pd
 class Belt_Analysis:
     def __init__(self,DB:Access_data_Base,file_path_last_belt_data:str,file_path_last_health_data:str):
@@ -179,21 +182,6 @@ class Belt_Analysis:
             print("No data in selected range")
             return None
         return filtered_df
-    def calc_belt_Predict_Fault_Days(self, health_values):
-        if len(health_values) < 2:
-            return None
-        # health loss per day
-        daily_drop = health_values[0] - health_values[-1]
-        number_of_days = len(health_values) - 1
-        avg_drop_per_day = daily_drop / number_of_days
-        current_health = health_values[-1]
-        critical_health = 20
-        if avg_drop_per_day <= 0:
-            return 99
-        predicted_days = (
-            current_health - critical_health
-        ) / avg_drop_per_day
-        return round(predicted_days, 2)
     def analyse_belt_data(self):
         max_days_if_normal = self.Data_Base.Data_Base.max_days_if_normal.get_belt_driver_max_days_if_normal()
         health = self.calc_belt_Overall_Health()
@@ -203,11 +191,11 @@ class Belt_Analysis:
             return
         health_values = filtered_df["Belt_Health"].tolist()
 
-        days = self.calc_belt_Predict_Fault_Days(
+        days = calc_Actuator_predict_fault_days(
             health_values
         )
         status = self.set_status_based_on_health(health)
         if status == "alert" or status == "warning":
-            self.Data_Base.Data_Base.belt.set_Predicted_fault(str(days))
+            self.Data_Base.Data_Base.belt.set_Predicted_fault(str(int(days)))
         elif status == "normal":
             self.Data_Base.Data_Base.belt.set_Predicted_fault(str(max_days_if_normal))
