@@ -27,6 +27,25 @@ class Over_All_Analysis:
         self.Data_Base.Data_Base.overall.set_overall_Health(int(overall_health))
 
         return overall_health
+    def over_all_maintenance(self):
+        motor = self.Data_Base.Data_Base.motor.get_Predicted_fault()
+        belt = self.Data_Base.Data_Base.belt.get_Predicted_fault()
+        pump = self.Data_Base.Data_Base.pump.get_Predicted_fault()
 
+        # nearest maintenance time
+        next_maintenance = min(motor, belt, pump)
+
+        self.Data_Base.Data_Base.overall.set_Next_Maintenance(
+            int(next_maintenance)
+        )
+
+        return next_maintenance
+    def over_all_alarms(self):
+        pass
+    def over_all_active_sensors(self):
+        pass
     def over_all_analysis(self):
-        return self.over_all_health()
+        self.over_all_health()
+        self.over_all_maintenance()
+        self.over_all_alarms()
+        self.over_all_active_sensors()

@@ -6,7 +6,7 @@
             "active": 3,
             "total": 20
         },
-        "Next_Maintenance": 2
+        "Next_Maintenance": 99
     },
     "Actuators": {
         "Motor": {
@@ -207,6 +207,39 @@
                 "id": 15,
                 "device": "motor",
                 "timestamp": "2026-05-22 20:53:44.055527",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 7.7,
+                "unit": "A",
+                "period_name": "PM"
+            },
+            {
+                "id": 16,
+                "device": "motor",
+                "timestamp": "2026-05-22 21:02:13.992089",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 7.7,
+                "unit": "A",
+                "period_name": "PM"
+            },
+            {
+                "id": 17,
+                "device": "motor",
+                "timestamp": "2026-05-22 21:02:46.949880",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 7.7,
+                "unit": "A",
+                "period_name": "PM"
+            },
+            {
+                "id": 18,
+                "device": "motor",
+                "timestamp": "2026-05-22 21:03:50.413122",
                 "type": "current",
                 "message": "Motor Current is LOW",
                 "level": "LOW",
