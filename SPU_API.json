@@ -26,9 +26,9 @@
             }
         },
         "Belt_Driver": {
-            "status": "warning",
-            "Predicted_fault": "267",
-            "Health": 33,
+            "status": "normal",
+            "Predicted_fault": "~",
+            "Health": 55,
             "Sensors": {
                 "Tension": 1122.0,
                 "Alignment": 3.5,
@@ -52,45 +52,34 @@
             {
                 "id": 1,
                 "device": "motor",
-                "timestamp": "2026-05-22 17:16:04.785941",
-                "type": "temp",
-                "message": "mustafa",
-                "level": "low",
-                "value": 45,
-                "unit": "C",
+                "timestamp": "2026-05-22 20:14:46.801252",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 7.7,
+                "unit": "A",
                 "period_name": "PM"
             },
             {
                 "id": 2,
                 "device": "motor",
-                "timestamp": "2026-05-22 17:16:53.358655",
-                "type": "noise",
-                "message": "mustafa",
-                "level": "low",
-                "value": 45,
-                "unit": "C",
+                "timestamp": "2026-05-22 20:14:53.372844",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 7.7,
+                "unit": "A",
                 "period_name": "PM"
             },
             {
                 "id": 3,
                 "device": "motor",
-                "timestamp": "2026-05-22 17:17:06.734533",
+                "timestamp": "2026-05-22 20:15:28.681393",
                 "type": "current",
-                "message": "ffff",
-                "level": "High",
-                "value": 45,
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 7.7,
                 "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 4,
-                "device": "motor",
-                "timestamp": "2026-05-22 17:25:36.722712",
-                "type": "temp",
-                "message": "mustafa",
-                "level": "low",
-                "value": 45,
-                "unit": "C",
                 "period_name": "PM"
             }
         ]
@@ -200,56 +189,56 @@
         "min_normal_max_values": {
             "Motor": {
                 "Temperature": {
-                    "min": 10.0,
+                    "min": 0.0,
                     "normal": 50.0,
                     "max": 100.0
                 },
                 "Vibration": {
-                    "min": 10.0,
+                    "min": 0.0,
                     "normal": 50.0,
                     "max": 100.0
                 },
                 "Current": {
-                    "min": 10.0,
+                    "min": 30.0,
                     "normal": 50.0,
                     "max": 100.0
                 },
                 "Volt": {
-                    "min": 10.0,
+                    "min": 0.0,
                     "normal": 50.0,
                     "max": 100.0
                 }
             },
             "Belt_Driver": {
                 "Tension": {
-                    "min": 10.0,
+                    "min": 0.0,
                     "normal": 50.0,
-                    "max": 100.0
+                    "max": 2000.0
                 },
                 "Alignment": {
-                    "min": 10.0,
+                    "min": 0.0,
                     "normal": 50.0,
                     "max": 100.0
                 },
                 "Speed": {
-                    "min": 10.0,
+                    "min": 0.0,
                     "normal": 50.0,
-                    "max": 100.0
+                    "max": 700.0
                 }
             },
             "Pump": {
                 "Pressure_In": {
-                    "min": 10.0,
+                    "min": 0.0,
                     "normal": 50.0,
                     "max": 100.0
                 },
                 "Flow_Rate": {
-                    "min": 10.0,
+                    "min": 0.0,
                     "normal": 50.0,
                     "max": 100.0
                 },
                 "Temperature": {
-                    "min": 10.0,
+                    "min": 0.0,
                     "normal": 50.0,
                     "max": 100.0
                 }

@@ -8,3 +8,23 @@ Date,Time,id,device,type,message,level,value,unit
 2026-05-22,15:40:31,0,motor,temp,mustafa,low,45,55
 2026-05-22,15:41:37,0,motor,temp,mustafa,low,45,km
 2026-05-22,15:42:54,0,motor,temp,mustafa,low,45,km
+2026-05-22,20:06:47,6,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:06:47,7,belt,tension,Belt Tension is HIGH,HIGH,1122.0,N
+2026-05-22,20:07:03,1,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:07:03,2,belt,tension,Belt Tension is HIGH,HIGH,1122.0,N
+2026-05-22,20:10:08,1,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:10:08,2,belt,speed,Belt Speed is HIGH,HIGH,555.0,m/s
+2026-05-22,20:10:19,3,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:10:19,4,belt,speed,Belt Speed is HIGH,HIGH,555.0,m/s
+2026-05-22,20:10:33,1,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:10:33,2,belt,speed,Belt Speed is HIGH,HIGH,555.0,m/s
+2026-05-22,20:11:02,1,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:11:02,2,belt,alignment,Belt Alignment IS : LOW,LOW,3.5,mm
+2026-05-22,20:11:41,1,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:12:09,1,motor,current,Motor Volt is HIGH,HIGH,221.3,V
+2026-05-22,20:12:47,2,motor,volt,Motor Volt is HIGH,HIGH,221.3,V
+2026-05-22,20:12:56,3,motor,volt,Motor Volt is HIGH,HIGH,221.3,V
+2026-05-22,20:13:21,1,motor,volt,Motor Volt is HIGH,HIGH,221.3,V
+2026-05-22,20:14:46,1,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:14:53,2,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:15:28,3,motor,current,Motor Current is LOW,LOW,7.7,A

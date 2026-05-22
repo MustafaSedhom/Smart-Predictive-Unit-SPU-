@@ -12,31 +12,15 @@ from ...AI_Store_and_Read_process_Data.AI_Read_Process_Data import (
 from ...AI_Store_and_Read_process_Data.AI_Store_Process_Data import (
     Store_Alarms_Data
 )
-###################
-
-#   IconData alert_problem_icon(String problem) {
-#     String my_problem = problem.toUpperCase();
-#     if (my_problem == "TEMP" || my_problem == "TEMPERATURE") {
-#       return Icons.thermostat_rounded;
-#     } else if (my_problem == "CURRENT") {
-#       return Icons.bolt;
-#     } else if (my_problem == "NOISE") {
-#       return Icons.graphic_eq;
-#     } else if (my_problem == "SPEED") {
-#       return Icons.speed;
-#     } else if (my_problem == "TENSION") {
-#       return Icons.compress;
-#     } else if (my_problem == "ALIGN" || my_problem == "ALIGNMENT") {
-#       return Icons.straighten;
-#     } else if (my_problem == "FLOW RATE" || my_problem == "FLOW_RATE") {
-#       return Icons.waves_rounded;
-#     } else if (my_problem == "PRESSURE") {
-#       return Icons.compress;
-#     }
-#     return Icons.circle;
-#   }
-
-###################
+from .Actuators_Alarms.Motor_alarm_get import (
+    motor_alarms_detect,
+)
+from .Actuators_Alarms.Belt_Alarm_get import (
+    belt_alarm_detect,
+)
+from .Actuators_Alarms.Pump_alarms_get import (
+    pump_alarm_detect,
+)
 class Alarm_Analysis:
 
     def __init__(
@@ -64,20 +48,21 @@ class Alarm_Analysis:
         self.DataBase.Data_Base.alert.add_alert(alarm)
 
     def detect_new_alarm(self):
-        pass
+        alarms = [
+            motor_alarms_detect(self.DataBase),
+            belt_alarm_detect(self.DataBase),
+            pump_alarm_detect(self.DataBase),
+        ]
 
+        active_alarms = [a for a in alarms if a is not None]
+
+        for alarm in active_alarms:
+            self.Add_Alarm_to_App(alarm)
+            self.Add_Alarm_to_file(alarm)
+
+        return active_alarms
+    ###########################################################
+    # master function
     def alarm_analysis(self):
-
-        print(self.all_alarm_last_data)
-
-        self.Add_Alarm_to_App(
-            AlertStruct(
-                id=0,
-                device="motor",
-                type="temp",
-                message="mustafa",
-                level="low",
-                value=45,
-                unit="C",
-            )
-        )
+        self.detect_new_alarm()
+        
