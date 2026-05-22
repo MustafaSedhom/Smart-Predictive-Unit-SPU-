@@ -10,7 +10,7 @@
     },
     "Actuators": {
         "Motor": {
-            "status": "alert",
+            "status": "normal",
             "Predicted_fault": "\u00e2\u02c6\u017e",
             "Health": 75,
             "Sensors": {
@@ -26,8 +26,8 @@
             }
         },
         "Belt_Driver": {
-            "status": "normal",
-            "Predicted_fault": "154.92",
+            "status": "warning",
+            "Predicted_fault": "157.08",
             "Health": 33,
             "Sensors": {
                 "Tension": 1122.0,
@@ -36,7 +36,7 @@
             }
         },
         "Pump": {
-            "status": "warning",
+            "status": "normal",
             "Predicted_fault": "\u00e2\u02c6\u017e",
             "Health": 96,
             "Sensors": {
