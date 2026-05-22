@@ -28,3 +28,15 @@ Date,Time,id,device,type,message,level,value,unit
 2026-05-22,20:14:46,1,motor,current,Motor Current is LOW,LOW,7.7,A
 2026-05-22,20:14:53,2,motor,current,Motor Current is LOW,LOW,7.7,A
 2026-05-22,20:15:28,3,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:19:37,4,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:20:57,5,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:21:06,6,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:24:30,7,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:24:36,8,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:24:43,9,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:38:17,10,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:38:48,11,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:49:44,12,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:51:37,13,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:53:06,14,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-22,20:53:44,15,motor,current,Motor Current is LOW,LOW,7.7,A
