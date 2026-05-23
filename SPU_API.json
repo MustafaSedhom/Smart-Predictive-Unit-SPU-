@@ -1,7 +1,7 @@
 {
     "Over_All": {
         "overall_Health": 77,
-        "Active_Alarms": 5,
+        "Active_Alarms": 8,
         "sensors_online": {
             "active": 9,
             "total": 13
@@ -97,6 +97,39 @@
                 "id": 5,
                 "device": "motor",
                 "timestamp": "2026-05-23 18:25:58.440721",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 7.7,
+                "unit": "A",
+                "period_name": "PM"
+            },
+            {
+                "id": 6,
+                "device": "motor",
+                "timestamp": "2026-05-23 18:33:27.307060",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 7.7,
+                "unit": "A",
+                "period_name": "PM"
+            },
+            {
+                "id": 7,
+                "device": "motor",
+                "timestamp": "2026-05-23 18:33:44.063197",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 7.7,
+                "unit": "A",
+                "period_name": "PM"
+            },
+            {
+                "id": 8,
+                "device": "motor",
+                "timestamp": "2026-05-23 18:36:54.212562",
                 "type": "current",
                 "message": "Motor Current is LOW",
                 "level": "LOW",

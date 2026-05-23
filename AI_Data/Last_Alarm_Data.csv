@@ -63,3 +63,6 @@ Date,Time,id,device,type,message,level,value,unit
 2026-05-23,07:35:13,3,motor,current,Motor Current is LOW,LOW,7.7,A
 2026-05-23,18:25:51,4,motor,current,Motor Current is LOW,LOW,7.7,A
 2026-05-23,18:25:58,5,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-23,18:33:27,6,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-23,18:33:44,7,motor,current,Motor Current is LOW,LOW,7.7,A
+2026-05-23,18:36:54,8,motor,current,Motor Current is LOW,LOW,7.7,A
