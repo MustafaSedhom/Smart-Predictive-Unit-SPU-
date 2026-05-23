@@ -26,13 +26,18 @@ class Alerts_Data:
     def __init__(self, data):
         self.__data =data
         self.Alert_struct = AlertStruct()
+        self.get_alert_count = 0
     # ======================
     # GET METHODS
     # ======================
     def get_list(self):
         alerts = self.__data.json_data_access.get("Alerts", {}).get("Alert_List", [])
         return [AlertStruct(**a) for a in alerts]
-
+    def get_alerts(self):
+        return self.__data.json_data_access.get("Alerts", {})
+    def get_alarm_count_func(self):
+        alerts = self.__data.json_data_access.get("Alerts", {}).get("Alert_List", [])
+        return len(alerts)
     # ======================
     # SET METHODS
     # ======================
@@ -43,7 +48,7 @@ class Alerts_Data:
 
         next_id = max([a.get("id", 0) for a in alerts], default=0) + 1
         alert.id = next_id
-
+        self.get_alert_count = next_id
         alerts.append(alert.to_dict())
         self.save_data()
 

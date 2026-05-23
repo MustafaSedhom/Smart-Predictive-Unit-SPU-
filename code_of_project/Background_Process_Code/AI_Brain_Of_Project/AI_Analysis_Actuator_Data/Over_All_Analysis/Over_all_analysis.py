@@ -41,7 +41,8 @@ class Over_All_Analysis:
 
         return next_maintenance
     def over_all_alarms(self):
-        pass
+        active_alarms = self.Data_Base.Data_Base.alert.get_alarm_count_func()
+        self.Data_Base.Data_Base.overall.set_active_alarms(int(active_alarms))
     def over_all_active_sensors(self):
         pass
     def over_all_analysis(self):

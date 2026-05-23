@@ -1,7 +1,7 @@
 {
     "Over_All": {
         "overall_Health": 77,
-        "Active_Alarms": 20,
+        "Active_Alarms": 2,
         "sensors_online": {
             "active": 3,
             "total": 20
@@ -52,200 +52,24 @@
             {
                 "id": 1,
                 "device": "motor",
-                "timestamp": "2026-05-22 20:14:46.801252",
+                "timestamp": "2026-05-23 07:20:08.212615",
                 "type": "current",
                 "message": "Motor Current is LOW",
                 "level": "LOW",
                 "value": 7.7,
                 "unit": "A",
-                "period_name": "PM"
+                "period_name": "AM"
             },
             {
                 "id": 2,
                 "device": "motor",
-                "timestamp": "2026-05-22 20:14:53.372844",
+                "timestamp": "2026-05-23 07:20:14.455351",
                 "type": "current",
                 "message": "Motor Current is LOW",
                 "level": "LOW",
                 "value": 7.7,
                 "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 3,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:15:28.681393",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 4,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:19:37.673222",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 5,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:20:57.411962",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 6,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:21:06.397043",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 7,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:24:30.278523",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 8,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:24:36.168195",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 9,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:24:43.679438",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 10,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:38:17.796767",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 11,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:38:48.227074",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 12,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:49:44.805894",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 13,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:51:37.477072",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 14,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:53:06.245328",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 15,
-                "device": "motor",
-                "timestamp": "2026-05-22 20:53:44.055527",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 16,
-                "device": "motor",
-                "timestamp": "2026-05-22 21:02:13.992089",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 17,
-                "device": "motor",
-                "timestamp": "2026-05-22 21:02:46.949880",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
-            },
-            {
-                "id": 18,
-                "device": "motor",
-                "timestamp": "2026-05-22 21:03:50.413122",
-                "type": "current",
-                "message": "Motor Current is LOW",
-                "level": "LOW",
-                "value": 7.7,
-                "unit": "A",
-                "period_name": "PM"
+                "period_name": "AM"
             }
         ]
     },
