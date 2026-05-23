@@ -4,11 +4,13 @@
 // define functions
 void Json_Data::updateAll(const Motor& motor_data,
                     const Belt& belt_data,
-                    const Pump& pump_data)
+                    const Pump& pump_data,
+                    const OverAll& overall_data)
 {
     _motor = motor_data;
     _belt = belt_data;
     _pump = pump_data;
+    _overall = overall_data ;
 }
 void Json_Data::updateMotor(const Motor& motor_data)
 {
@@ -22,10 +24,14 @@ void Json_Data::updatePump(const Pump& pump_data)
 {
 _pump = pump_data;
 }
+void Json_Data::updateOverAll(const OverAll& overall_data)
+{
+_overall = overall_data;
+}
 void Json_Data::convert_to_json_formate()
 {
+     // ================= start json formate =================
     _json_formate = "{";
-
     // ================= MOTOR =================
     _json_formate += "\"Motor\":{";
     _json_formate += "\"temperature\":" + String(_motor.Temperature) + ",";
@@ -57,8 +63,15 @@ void Json_Data::convert_to_json_formate()
     _json_formate += "\"Pressure_In\":" + String(_pump.Pressure) + ",";
     _json_formate += "\"Flow_Rate\":" + String(_pump.Flow_Rate) + ",";
     _json_formate += "\"Temperature\":" + String(_pump.Temperature);
-    _json_formate += "}";
+    _json_formate += "},";
 
+    // ================= OVERALL =================
+    _json_formate += "\"Over_All\":{";
+    _json_formate += "\"Sensors_Count\":" + String(_overall.Sensors_Count) + ",";
+    _json_formate += "\"Sensors_Online\":" + String(_overall.Sensors_Online);
+    _json_formate += "}";
+    
+    // ================= end json formate =================
     _json_formate += "}";
 }
 String Json_Data::get_Json_formate()

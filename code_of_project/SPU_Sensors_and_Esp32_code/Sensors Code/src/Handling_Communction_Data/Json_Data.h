@@ -11,15 +11,18 @@ class Json_Data
         Motor _motor;
         Pump _pump;
         Belt _belt;
+        OverAll _overall;
         String _json_formate;
         void convert_to_json_formate();
     public:
         void updateAll(const Motor& motor_data,
                     const Belt& belt_data,
-                    const Pump& pump_data);
+                    const Pump& pump_data,
+                    const OverAll& overall_data);
         void updateMotor(const Motor& motor_data);
         void updateBelt(const Belt& belt_data);
         void updatePump(const Pump& pump_data);
+        void updateOverAll(const OverAll& overall_data);
         String get_Json_formate();
 };
 //JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ

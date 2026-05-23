@@ -133,6 +133,35 @@ class Pump
             return !(*this == other);
          }
 };
+//overall data
+class OverAll
+{
+   public:
+      int Sensors_Count;
+      int Sensors_Online;
+      OverAll()
+      {
+         Sensors_Count = 0 ;
+         Sensors_Online = 0 ;
+      }
+      OverAll(int sensors_count,int sensors_online)
+      {
+         Sensors_Count = sensors_count;
+         Sensors_Online = sensors_online;
+      }
+      bool operator==(const OverAll& other) const
+         {
+            return Sensors_Count == other.Sensors_Count &&
+                     Sensors_Online == other.Sensors_Online ;
+         }
+
+         bool operator!=(const OverAll& other) const
+         {
+            return !(*this == other);
+         }
+
+};
+
 
 //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 #endif // !ACTAUTORESSTRUCTS_H_
