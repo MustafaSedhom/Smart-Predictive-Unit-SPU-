@@ -9,6 +9,7 @@
 #include "Read_Sensor_Data/Over_All_Data/Over_All_Data.h"
 //-----------------------------------------------------------
 // defines 
+#define flow_rate_sensor_pin  2 // or 3 because interrupt  
 #define delay_time 1000
 //-----------------------------------------------------------
 // Global Variables
