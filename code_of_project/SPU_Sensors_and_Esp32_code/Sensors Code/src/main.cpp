@@ -12,6 +12,9 @@
 #define flow_rate_sensor_pin  2 // or 3 because interrupt  
 #define delay_time 1000
 //-----------------------------------------------------------
+// sensors definitions
+Pump_Sensors pump_sensor(5,6);
+//-----------------------------------------------------------
 // Global Variables
 unsigned long lastSend;
 Json_Data Json;
