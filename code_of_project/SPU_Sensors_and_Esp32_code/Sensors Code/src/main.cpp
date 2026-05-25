@@ -1,6 +1,7 @@
 //-----------------------------------------------------------
 // import librarys
 #include <Arduino.h>
+#include <SoftwareSerial.h>
 #include "Actuators_Structs/ActuatorsStructs.h"
 #include "Handling_Communction_Data/Json_Data.h"
 #include "Read_Sensor_Data/Motor_Sensors/Motor_Sensors.h"
@@ -9,6 +10,8 @@
 #include "Read_Sensor_Data/Over_All_Data/Over_All_Data.h"
 //-----------------------------------------------------------
 // defines 
+#define TX_Pin         5
+#define RX_Pin         6
 #define flow_rate_sensor_pin  2 // or 3 because interrupt  
 #define delay_time 1000
 //-----------------------------------------------------------
@@ -19,6 +22,7 @@ Belt_Sensors belt_sensor(12,31.4,20);
 //-----------------------------------------------------------
 // Global Variables
 unsigned long lastSend;
+SoftwareSerial Raspberry_PI(RX_Pin,TX_Pin);
 Json_Data Json;
 Motor motor , last_motor;
 Belt belt , last_belt;
@@ -29,6 +33,7 @@ OverAll overall , last_overall;
 void setup() 
 {
     Serial.begin(115200);
+    Raspberry_PI.begin(115200);
     motor_sensor.begin();
     pump_sensor.begin();
     belt_sensor.begin();
@@ -54,6 +59,7 @@ void loop()
         {
             Json.updateAll(motor, belt, pump,overall);
             Serial.println(Json.get_Json_formate()); 
+            Raspberry_PI.println(Json.get_Json_formate());
             last_motor = motor;
             last_pump = pump;
             last_belt = belt;
