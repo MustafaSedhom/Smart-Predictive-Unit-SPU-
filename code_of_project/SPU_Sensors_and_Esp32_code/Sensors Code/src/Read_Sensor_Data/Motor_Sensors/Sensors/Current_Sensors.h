@@ -1,23 +1,17 @@
-#ifndef TEMP_SENSOR_H_     
-#define TEMP_SENSOR_H_
+#ifndef CURRENT_SENSORS_H_     
+#define CURRENT_SENSORS_H_
 //BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 #include <Arduino.h>
-#include "OneWire.h"
-#include "DallasTemperature.h"
+
 //BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-class Pump_Temperature_Sensor
+class Motor_Current_Sensors
 {
     private:
         uint8_t _sensor_pin;
-        OneWire* oneWire;
-        DallasTemperature* sensors;
+        float _calibration;
     public:
-        Pump_Temperature_Sensor(uint8_t Connection_Pin);
+        Motor_Current_Sensors(uint8_t Connection_Pin, float calibration = 30.0);
         float Read();
-        void Pump_Sensors_Setup()
-        {
-            
-        }
 };
 //BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-#endif // !TEMP_SENSOR_H_
+#endif // !CURRENT_SENSORS_H_

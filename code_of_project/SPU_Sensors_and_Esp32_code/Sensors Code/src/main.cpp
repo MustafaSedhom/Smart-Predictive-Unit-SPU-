@@ -14,6 +14,7 @@
 //-----------------------------------------------------------
 // sensors definitions
 Pump_Sensors pump_sensor(5,6);
+Motor_Sensors motor_sensor(1,2,3,4,5,6,7);
 //-----------------------------------------------------------
 // Global Variables
 unsigned long lastSend;
@@ -27,6 +28,8 @@ OverAll overall , last_overall;
 void setup() 
 {
     Serial.begin(115200);
+    motor_sensor.begin();
+    pump_sensor.begin();
     motor = Motor(random(0, 100),2.1,Phases(221.3,220.1,33),Phases(7.7,2.1,1.0));
     pump = Pump(18.3,22.4,55);
     belt = Belt(1122,3.5,555);

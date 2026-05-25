@@ -14,6 +14,11 @@ class Pump_Sensors
         :
             Flow_Rate(flow_pin),
             Temp(temp_pin)
+        {
+            
+        }
+        void begin()
+        {}
 };
 
 //PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
