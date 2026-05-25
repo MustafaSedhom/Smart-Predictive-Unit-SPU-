@@ -68,7 +68,8 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "cSpell.words": [
-    "atmelavr"
+    "atmelavr",
+    "IRAM"
   ],
   "cmake.sourceDirectory": "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project/code_of_project/SPU_Sensors_and_Esp32_code/Sensors Code/lib/DallasTemperature"
 }

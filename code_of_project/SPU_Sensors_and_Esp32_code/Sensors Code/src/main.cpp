@@ -15,6 +15,7 @@
 // sensors definitions
 Pump_Sensors pump_sensor(5,6);
 Motor_Sensors motor_sensor(1,2,3,4,5,6,7);
+Belt_Sensors belt_sensor(12,31.4,20);
 //-----------------------------------------------------------
 // Global Variables
 unsigned long lastSend;
@@ -30,7 +31,8 @@ void setup()
     Serial.begin(115200);
     motor_sensor.begin();
     pump_sensor.begin();
-    motor = Motor(random(0, 100),2.1,Phases(221.3,220.1,33),Phases(7.7,2.1,1.0));
+    belt_sensor.begin();
+    motor = Motor(55,2.1,Phases(221.3,220.1,33),Phases(7.7,2.1,1.0));
     pump = Pump(18.3,22.4,55);
     belt = Belt(1122,3.5,555);
     overall = OverAll(13,9);
@@ -44,15 +46,12 @@ void setup()
 // program
 void loop()  
 {   
-    pump = Pump(18.3,22.4,55);
-    belt = Belt(1122,3.5,555);
     // check if it's time to send data
     if (millis() - lastSend >= delay_time)
     {
         // check temp is not above 100 to avoid overflow
         if(motor != last_motor || pump != last_pump || belt != last_belt || overall != last_overall)
         {
-            motor = Motor(random(0, 100),2.1,Phases(221.3,220.1,33),Phases(7.7,2.1,1.0));
             Json.updateAll(motor, belt, pump,overall);
             Serial.println(Json.get_Json_formate()); 
             last_motor = motor;
