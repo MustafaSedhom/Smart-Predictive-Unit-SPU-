@@ -1,19 +1,37 @@
 //-----------------------------------------------------------
 // import librarys
 #include <Arduino.h>
-#include <SoftwareSerial.h>
+#include <Wire.h>
+#include <MPU6050.h>
 #include "Actuators_Structs/ActuatorsStructs.h"
 #include "Handling_Communction_Data/Json_Data.h"
-#include "Read_Sensor_Data/Motor_Sensors/Motor_Sensors.h"
-#include "Read_Sensor_Data/Pump_Sensors/Pump_Sensors.h"
-#include "Read_Sensor_Data/Belt_Sensors/Belt_Sensors.h"
-#include "Read_Sensor_Data/Over_All_Data/Over_All_Data.h"
+// #include "Read_Sensor_Data/Motor_Sensors/Motor_Sensors.h"
+// #include "Read_Sensor_Data/Pump_Sensors/Pump_Sensors.h"
+// #include "Read_Sensor_Data/Belt_Sensors/Belt_Sensors.h"
+// #include "Read_Sensor_Data/Over_All_Data/Over_All_Data.h"
 //-----------------------------------------------------------
-// defines 
-#define TX_Pin         5
-#define RX_Pin         6
-#define flow_rate_sensor_pin  2 // or 3 because interrupt  
-#define delay_time 1000
+//////////////////////// defines 
+/////////// sensors pins
+// Motors pin
+#define Motor_Current_P_R_sensor_pin   A0 
+#define Motor_Current_P_S_sensor_pin   A1 
+#define Motor_Current_P_T_sensor_pin   A2 
+#define Motor_Volt_P_R_sensor_pin      A3 
+#define Motor_Volt_P_S_sensor_pin      A6 
+#define Motor_Volt_P_T_sensor_pin      A7 
+#define Motor_temperature_pin          10
+#define Motor_Vibration_SCL_pin        A4        // I2C protocol
+#define Motor_Vibration_SDA_pin        A5        // I2C protocol
+// Belt pins
+#define Belt_speed_A_pin               11
+#define Belt_speed_B_pin               12
+// Pump pins
+#define Pump_flow_rate_sensor_pin      2         // or 3 because interrupt  
+#define Pump_temperature_pin           10
+/////////////////
+// system
+#define delay_time_to_launch          60000     // 1 minute     
+#define delay_time                    1000      // 1 second
 //-----------------------------------------------------------
 // sensors definitions
 Pump_Sensors pump_sensor(5,6);
@@ -22,7 +40,6 @@ Belt_Sensors belt_sensor(12,31.4,20);
 //-----------------------------------------------------------
 // Global Variables
 unsigned long lastSend;
-SoftwareSerial Raspberry_PI(RX_Pin,TX_Pin);
 Json_Data Json;
 Motor motor , last_motor;
 Belt belt , last_belt;
@@ -32,8 +49,8 @@ OverAll overall , last_overall;
 // init program
 void setup() 
 {
+    delay(delay_time_to_launch);
     Serial.begin(115200);
-    Raspberry_PI.begin(115200);
     motor_sensor.begin();
     pump_sensor.begin();
     belt_sensor.begin();
@@ -59,7 +76,6 @@ void loop()
         {
             Json.updateAll(motor, belt, pump,overall);
             Serial.println(Json.get_Json_formate()); 
-            Raspberry_PI.println(Json.get_Json_formate());
             last_motor = motor;
             last_pump = pump;
             last_belt = belt;
