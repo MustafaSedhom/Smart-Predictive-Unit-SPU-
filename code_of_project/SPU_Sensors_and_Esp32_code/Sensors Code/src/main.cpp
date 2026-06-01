@@ -1,8 +1,15 @@
 //-----------------------------------------------------------
 // import librarys
+// C++11 language standard version is used in this project
 #include <Arduino.h>
+// Vibration sensor library
 #include <Wire.h>
-#include <MPU6050.h>
+#include <Adafruit_ADXL345_U.h>
+#include <Adafruit_Sensor.h>
+// temperature sensor library
+#include <OneWire.h>
+#include <DallasTemperature.h>
+// project files
 #include "Actuators_Structs/ActuatorsStructs.h"
 #include "Handling_Communction_Data/Json_Data.h"
 #include "Read_Sensor_Data/Motor_Sensors/Motor_Sensors.h"
