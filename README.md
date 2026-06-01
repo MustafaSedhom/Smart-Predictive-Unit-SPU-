@@ -2,6 +2,8 @@
 # SPU 
 ### Project Images
 #
+![SPU Home Screen UI](Project_Images/connection_pins.png)
+#
 ![SPU Home Screen UI](Project_Images/project_UI_Image.jpeg)
 #
 ![SPU Home Screen UI](Project_Images/AI_output.png)
