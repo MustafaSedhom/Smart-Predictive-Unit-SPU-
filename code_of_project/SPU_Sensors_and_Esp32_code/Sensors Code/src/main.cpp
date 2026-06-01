@@ -14,7 +14,8 @@
 // #include "Read_Sensor_Data/Belt_Sensors/Belt_Sensors.h"
 // #include "Read_Sensor_Data/Over_All_Data/Over_All_Data.h"
 //-----------------------------------------------------------
-#define Enable_Debug                       false
+#define Enable_Debug                   false
+#define communication_speed            115200
 //---------------- PINS ----------------
 #define Motor_Current_P_R_sensor_pin   A3 
 #define Motor_Current_P_S_sensor_pin   A6 
@@ -26,7 +27,7 @@
 #define Pump_temperature_pin           3
 #define Pump_flow_rate_sensor_pin      2
 //---------------- TIMING ----------------
-const unsigned long startup_delay = 60000;
+const unsigned long startup_delay = 1000;
 const unsigned long send_interval = 1000;
 //---------------- OBJECTS ----------------
 OneWire motor_temp_oneWire(Motor_temperature_pin);
@@ -113,7 +114,7 @@ void sendDataToRaspberryPi()
 void setup()
 {
     delay(startup_delay);
-    Serial.begin(115200);
+    Serial.begin(communication_speed);
     startMillis = millis();
     motor_temp.begin();
     pump_temp.begin();
@@ -121,10 +122,16 @@ void setup()
     accel.setRange(ADXL345_RANGE_16_G);
     pinMode(Pump_flow_rate_sensor_pin, INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(Pump_flow_rate_sensor_pin),pulseCounter,FALLING);
-    if (Enable_Debug)
-    {
-        Serial.println("System Booting...");
-    }
+    motor = Motor(55,2.1,Phases(221.3,220.1,33),Phases(7.7,2.1,1.0));
+    pump = Pump(18.3,22.4,55);
+    belt = Belt(1122,3.5,555);
+    overall = OverAll(13,9);
+    Json.updateMotor(motor);
+    Json.updatePump(pump);
+    Json.updateBelt(belt);
+    Json.updateOverAll(overall);
+    Serial.println("System Booting...");
+    lastSend = millis();
 }
 //-----------------------------------------------------------
 // LOOP
@@ -158,8 +165,6 @@ void loop()
         motor.Vibration = vib.rms;
         pump.Temperature = pump_temperature;
         pump.Flow_Rate = flowRate;
-        //---------------- Send data to Raspberry Pi ----------------
-        sendDataToRaspberryPi();
         //---------------- debug ----------------
         if (Enable_Debug)
         {
@@ -177,6 +182,17 @@ void loop()
             Serial.print("Voltage T: "); Serial.println(motor_voltage_t);
             Serial.println("------------------------");
         }
+        //---------------- Send data to Raspberry Pi ----------------
+        if(motor != last_motor || pump != last_pump || belt != last_belt || overall != last_overall)
+        {
+            Json.updateAll(motor, belt, pump,overall);
+            Serial.println(Json.get_Json_formate()); 
+            last_motor = motor;
+            last_pump = pump;
+            last_belt = belt;
+            last_overall = overall;
+        }
+        //////////////////
         lastSend = millis();
     }
 }
