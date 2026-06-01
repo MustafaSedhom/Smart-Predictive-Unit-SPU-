@@ -185,8 +185,9 @@ void loop()
         //---------------- Send data to Raspberry Pi ----------------
         if(motor != last_motor || pump != last_pump || belt != last_belt || overall != last_overall)
         {
-            Json.updateAll(motor, belt, pump,overall);
-            Serial.println(Json.get_Json_formate()); 
+            // Json.updateAll(motor, belt, pump,overall);
+            // Serial.println(Json.get_Json_formate()); 
+            sendDataToRaspberryPi();
             last_motor = motor;
             last_pump = pump;
             last_belt = belt;
