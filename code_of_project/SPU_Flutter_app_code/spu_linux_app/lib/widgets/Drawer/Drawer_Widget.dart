@@ -83,22 +83,54 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     });
                   },
                   child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 250),
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    width: double.maxFinite,
+                    duration: const Duration(milliseconds: 1000),
+                    curve: Curves.easeInOutCubic,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       color: is_max
                           ? const Color(0xff22C55E)
                           : Colors.white.withOpacity(0.08),
-                      borderRadius: BorderRadius.circular(18),
+                      borderRadius: BorderRadius.circular(20),
                       border: Border.all(
                         color: is_max ? Colors.greenAccent : Colors.white24,
+                        width: 1.5,
                       ),
+                      boxShadow: [
+                        if (is_max)
+                          BoxShadow(
+                            color: Colors.greenAccent.withOpacity(0.35),
+                            blurRadius: 15,
+                            spreadRadius: 2,
+                          ),
+                      ],
                     ),
-                    child: Center(
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 1000),
+                      transitionBuilder: (child, animation) {
+                        return RotationTransition(
+                          turns: Tween<double>(
+                            begin: 0.8,
+                            end: 1.0,
+                          ).animate(animation),
+                          child: ScaleTransition(
+                            scale: animation,
+                            child: child,
+                          ),
+                        );
+                      },
                       child: Icon(
-                        is_max ? Icons.fullscreen_exit : Icons.fullscreen,
-                        color: AppColors.Drawer_text_color,
-                        size: 25,
+                        is_max
+                            ? Icons.fullscreen_exit_rounded
+                            : Icons.fullscreen_rounded,
+                        key: ValueKey(is_max),
+                        color: is_max
+                            ? Colors.white
+                            : AppColors.Drawer_text_color,
+                        size: 26,
                       ),
                     ),
                   ),
