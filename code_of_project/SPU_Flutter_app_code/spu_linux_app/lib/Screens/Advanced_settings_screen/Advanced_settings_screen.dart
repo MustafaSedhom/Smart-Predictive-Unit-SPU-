@@ -81,8 +81,30 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
   /// PASSWORD
 
   Future<void> updatePassword(String pass) async {
+    if (pass.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Password cannot be empty'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    setState(() {
+      passLoading = true;
+    });
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("password", pass);
+    await Future.delayed(const Duration(seconds: 2));
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Saved New Password Successfully ✅'),
+        backgroundColor: Colors.green,
+      ),
+    );
+    setState(() {
+      passLoading = false;
+    });
   }
 
   //////////////////////////////////////////////////////////
@@ -98,7 +120,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
     setState(() {
       setLoadingOn();
     });
-
+    await Future.delayed(const Duration(seconds: 2));
     try {
       await savePath(key, path);
       onDone();
@@ -374,17 +396,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
             is_saved: passLoading,
             ontap_prefix_icon: () {},
             save_operation: () async {
-              setState(() => passLoading = true);
               await updatePassword(passwordController.text);
-              setState(() => passLoading = false);
-              if ((passwordController.text.isNotEmpty)) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("New Password Saved ✅"),
-                    backgroundColor: Colors.green,
-                  ),
-                );
-              }
             },
           ),
 

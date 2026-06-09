@@ -51,10 +51,10 @@ class _SettingScreenState extends State<SettingScreen> {
     setState(() {
       EmailLoading = true;
     });
-
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setString('admin_email', EmailController.text.trim());
+    await Future.delayed(const Duration(seconds: 2));
 
     setState(() {
       EmailLoading = false;
@@ -73,10 +73,10 @@ class _SettingScreenState extends State<SettingScreen> {
     setState(() {
       PhoneLoading = true;
     });
-
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setString('admin_phone', PhoneController.text.trim());
+    await Future.delayed(const Duration(seconds: 2));
 
     setState(() {
       PhoneLoading = false;

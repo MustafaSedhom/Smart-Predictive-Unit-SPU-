@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
@@ -68,33 +70,66 @@ class _CustomChangesState extends State<CustomChanges> {
             ),
             Gap(20),
             // Save Button
-            TextButton(
-              onPressed: () async {
-                await widget.save_operation.call();
-              },
-              style: TextButton.styleFrom(
-                backgroundColor: AppColors.button_master_card_1_color,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              height: 40,
+              width: widget.is_saved! ? 45 : 90,
+              decoration: BoxDecoration(
+                color: widget.is_saved!
+                    ? Colors.green
+                    : AppColors.button_master_card_1_color,
+                borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color:
+                        (widget.is_saved!
+                                ? Colors.green
+                                : AppColors.button_master_card_1_color)
+                            .withOpacity(0.3),
+                    blurRadius: 10,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(12),
+                  onTap: () async {
+                    await widget.save_operation.call();
+                  },
+                  child: Center(
+                    child: AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      transitionBuilder: (child, animation) {
+                        return ScaleTransition(
+                          scale: animation,
+                          child: FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          ),
+                        );
+                      },
+                      child: widget.is_saved!
+                          ? const Icon(
+                              Icons.check_rounded,
+                              key: ValueKey("saved"),
+                              color: Colors.white,
+                              size: 22,
+                            )
+                          : const Text(
+                              "Save",
+                              key: ValueKey("save"),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                    ),
+                  ),
                 ),
               ),
-              child: widget.is_saved!
-                  ? SizedBox(
-                      width: 15,
-                      height: 15,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: AppColors.Drawer_text_color,
-                      ),
-                    )
-                  : Text(
-                      "Save",
-                      style: TextStyle(
-                        color: AppColors.Drawer_text_color,
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
             ),
           ],
         ),
