@@ -24,7 +24,9 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   final TextEditingController EmailController = TextEditingController();
+  final TextEditingController PhoneController = TextEditingController();
   bool EmailLoading = false;
+  bool PhoneLoading = false;
   Future<void> loadEmail() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -32,6 +34,16 @@ class _SettingScreenState extends State<SettingScreen> {
 
     setState(() {
       EmailController.text = email;
+    });
+  }
+
+  Future<void> loadPhone() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String phone = prefs.getString('admin_phone') ?? '';
+
+    setState(() {
+      PhoneController.text = phone;
     });
   }
 
@@ -57,15 +69,39 @@ class _SettingScreenState extends State<SettingScreen> {
     }
   }
 
+  Future<void> savePhone() async {
+    setState(() {
+      PhoneLoading = true;
+    });
+
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString('admin_phone', PhoneController.text.trim());
+
+    setState(() {
+      PhoneLoading = false;
+    });
+    if (PhoneController.text.isNotEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Phone number saved successfully ✅'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     loadEmail();
+    loadPhone();
   }
 
   @override
   void dispose() {
     EmailController.dispose();
+    PhoneController.dispose();
     super.dispose();
   }
 
@@ -113,12 +149,25 @@ class _SettingScreenState extends State<SettingScreen> {
           // change email
           CustomChanges(
             controller: EmailController,
-            title: "Admin Email : ",
+            title: "    Admin Email :            ",
             hint: "Enter new email",
             prefix_icon: Icons.email,
             is_saved: EmailLoading,
             ontap_prefix_icon: () {},
             save_operation: saveEmail,
+          ),
+          //divider
+          CustomDivider(),
+          Gap(5),
+          // change phone number
+          CustomChanges(
+            controller: PhoneController,
+            title: "Admin Phone Number : ",
+            hint: "Enter new phone number",
+            prefix_icon: Icons.phone,
+            is_saved: PhoneLoading,
+            ontap_prefix_icon: () {},
+            save_operation: savePhone,
           ),
           //divider
           CustomDivider(),
