@@ -102,7 +102,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                           size: 16,
                         ),
                         Text(
-                          (is_max) ? "Minimize SPU" : "Maximize SPU",
+                          (is_max) ? "Min  SPU" : "Max  SPU",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,
@@ -115,7 +115,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   ),
                 ),
                 Text(
-                  "SPU v1.0.0",
+                  "SPU  V2.1.7",
                   style: TextStyle(
                     // ignore: deprecated_member_use
                     color: Colors.white.withOpacity(0.5),
