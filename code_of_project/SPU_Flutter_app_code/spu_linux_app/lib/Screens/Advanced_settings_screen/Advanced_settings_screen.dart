@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -177,9 +177,12 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                         FilePaths.json_path = jsonController.text;
 
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("JSON Saved ✅")),
+                          const SnackBar(
+                            content: Text("JSON Saved ✅"),
+                            backgroundColor: Colors.green,
+                          ),
                         );
-                       },
+                      },
                     );
                   },
           ),
@@ -209,7 +212,10 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                   FilePaths.motor_last_Data_path = motorController.text;
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Motor Saved ✅")),
+                    const SnackBar(
+                      content: Text("Motor Saved ✅"),
+                      backgroundColor: Colors.green,
+                    ),
                   );
                 },
               );
@@ -240,9 +246,12 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                 onDone: () {
                   FilePaths.pump_last_Data_path = pumpController.text;
 
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(const SnackBar(content: Text("Pump Saved ✅")));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Pump Saved ✅"),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
                 },
               );
             },
@@ -272,9 +281,12 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                 onDone: () {
                   FilePaths.belt_last_Data_path = beltController.text;
 
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(const SnackBar(content: Text("Belt Saved ✅")));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("Belt Saved ✅"),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
                 },
               );
             },
@@ -305,7 +317,10 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                   FilePaths.health_last_Data_path = healthController.text;
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Health Saved ✅")),
+                    const SnackBar(
+                      content: Text("Health Saved ✅"),
+                      backgroundColor: Colors.green,
+                    ),
                   );
                 },
               );
@@ -337,7 +352,10 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                   FilePaths.alarm_last_Data_path = alarmController.text;
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Alarm Saved ✅")),
+                    const SnackBar(
+                      content: Text("Alarm Saved ✅"),
+                      backgroundColor: Colors.green,
+                    ),
                   );
                 },
               );
@@ -359,6 +377,14 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
               setState(() => passLoading = true);
               await updatePassword(passwordController.text);
               setState(() => passLoading = false);
+              if ((passwordController.text.isNotEmpty)) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("New Password Saved ✅"),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              }
             },
           ),
 

@@ -1,9 +1,11 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:spu_linux_app/Images/images_and_icons.dart';
+import 'package:spu_linux_app/Screens/Advanced_settings_screen/widgets/Custom_changes.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/Admin_Setting.dart';
 
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/SPU_logo_Setting.dart';
@@ -21,13 +23,49 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  final TextEditingController EmailController = TextEditingController();
+  bool EmailLoading = false;
+  Future<void> loadEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String email = prefs.getString('admin_email') ?? '';
+
+    setState(() {
+      EmailController.text = email;
+    });
+  }
+
+  Future<void> saveEmail() async {
+    setState(() {
+      EmailLoading = true;
+    });
+
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.setString('admin_email', EmailController.text.trim());
+
+    setState(() {
+      EmailLoading = false;
+    });
+    if (EmailController.text.isNotEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Email saved successfully ✅'),
+          backgroundColor: Colors.green,
+        ),
+      );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    loadEmail();
   }
 
   @override
   void dispose() {
+    EmailController.dispose();
     super.dispose();
   }
 
@@ -68,6 +106,19 @@ class _SettingScreenState extends State<SettingScreen> {
                 ),
               ],
             ),
+          ),
+          //divider
+          CustomDivider(),
+          Gap(5),
+          // change email
+          CustomChanges(
+            controller: EmailController,
+            title: "Admin Email : ",
+            hint: "Enter new email",
+            prefix_icon: Icons.email,
+            is_saved: EmailLoading,
+            ontap_prefix_icon: () {},
+            save_operation: saveEmail,
           ),
           //divider
           CustomDivider(),
@@ -128,8 +179,6 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
             ),
           ),
-          //divider
-          // CustomDivider(),
         ],
       ),
     );
