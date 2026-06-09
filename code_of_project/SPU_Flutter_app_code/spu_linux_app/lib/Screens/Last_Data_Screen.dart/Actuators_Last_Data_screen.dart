@@ -164,7 +164,7 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
                       });
                     },
                     child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 250),
+                      duration: const Duration(milliseconds: 600),
                       curve: Curves.easeInOut,
                       padding: const EdgeInsets.symmetric(
                         horizontal: 18,
@@ -203,7 +203,7 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
                         children: [
                           AnimatedRotation(
                             turns: newestFirst ? 0 : 0.5,
-                            duration: const Duration(milliseconds: 300),
+                            duration: const Duration(milliseconds: 600),
 
                             child: const Icon(
                               Icons.sync_alt_rounded,

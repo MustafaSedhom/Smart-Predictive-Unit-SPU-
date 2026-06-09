@@ -35,7 +35,10 @@ class DigitalClockWidget extends StatelessWidget {
               colors: [const Color(0xff1E293B), const Color(0xff0F172A)],
             ),
 
-            border: Border.all(color: Colors.white.withOpacity(0.08)),
+            border: Border.all(
+              color: Colors.white.withOpacity(0.3),
+              width: 1.5,
+            ),
 
             boxShadow: [
               BoxShadow(
