@@ -1,1 +1,214 @@
-{"Over_All":{"overall_Health":77,"Active_Alarms":8,"sensors_online":{"active":9,"total":13},"Next_Maintenance":99},"Actuators":{"Motor":{"status":"normal","Predicted_fault":"~","Health":75,"Sensors":{"Temperature":49.0,"Vibration":2.1,"Current":7.7,"Current_p1":7.7,"Current_p2":2.1,"Current_p3":1.0,"volt_p1":221.3,"volt_p2":220.1,"volt_p3":33.0}},"Belt_Driver":{"status":"warning","Predicted_fault":"99","Health":55,"Sensors":{"Tension":1122.0,"Alignment":3.5,"Speed":555.0}},"Pump":{"status":"normal","Predicted_fault":"~","Health":96,"Sensors":{"Pressure_In":18.3,"Flow_Rate":22.4,"Temperature":55.0}}},"Alerts":{"List_item_count":0,"Alert_List":[]},"Analysis":{"Spacing":1,"labels":{"x_labels":["0","1","2","3","4","5","6","7","8","9","10","11","12","13","15","16"],"y_labels":["0","1","2","3","4","5","6","7","8","9","10","11","12","13","15","16"]},"points":{"x_points":[0,1,2,3,4,5,6,7,8,9,10,13,13],"y_points":[0,4,2,6,9,4,1,7,5,5,3,0,0]}},"Settings":{"Gear_Setting":{"Big_Gear":15.1,"Small_Gear":7.3,"Gear_setting_unit":"mm"},"max_Days_if_normal":{"Motor":"~","Belt_Driver":"~","Pump":"~"},"Time_Date_Analysis":{"start_time_analysis":"2025-08-22T00:00:00.000","end_time_analysis":"2027-11-19T21:38:00.000"},"Health_Thresholds":{"Motor":{"warning":60,"alert":20},"Belt_Driver":{"warning":60,"alert":20},"Pump":{"warning":60,"alert":20}},"min_normal_max_values":{"Motor":{"Temperature":{"min":0.0,"normal":50.0,"max":100.0},"Vibration":{"min":0.0,"normal":50.0,"max":100.0},"Current":{"min":30.0,"normal":50.0,"max":100.0},"Volt":{"min":0.0,"normal":50.0,"max":100.0}},"Belt_Driver":{"Tension":{"min":0.0,"normal":50.0,"max":2000.0},"Alignment":{"min":0.0,"normal":50.0,"max":100.0},"Speed":{"min":0.0,"normal":50.0,"max":700.0}},"Pump":{"Pressure_In":{"min":0.0,"normal":50.0,"max":100.0},"Flow_Rate":{"min":0.0,"normal":50.0,"max":100.0},"Temperature":{"min":0.0,"normal":50.0,"max":100.0}}}}}
+{
+  "Over_All": {
+    "overall_Health": 77,
+    "Active_Alarms": 8,
+    "sensors_online": {
+      "active": 9,
+      "total": 13
+    },
+    "Next_Maintenance": 99
+  },
+  "Actuators": {
+    "Motor": {
+      "status": "normal",
+      "Predicted_fault": "~",
+      "Health": 75,
+      "Sensors": {
+        "Temperature": 49.0,
+        "Vibration": 2.1,
+        "Current": 7.7,
+        "Current_p1": 7.7,
+        "Current_p2": 2.1,
+        "Current_p3": 1.0,
+        "volt_p1": 221.3,
+        "volt_p2": 220.1,
+        "volt_p3": 33.0
+      }
+    },
+    "Belt_Driver": {
+      "status": "warning",
+      "Predicted_fault": "99",
+      "Health": 55,
+      "Sensors": {
+        "Tension": 1122.0,
+        "Alignment": 3.5,
+        "Speed": 555.0
+      }
+    },
+    "Pump": {
+      "status": "normal",
+      "Predicted_fault": "~",
+      "Health": 96,
+      "Sensors": {
+        "Pressure_In": 18.3,
+        "Flow_Rate": 22.4,
+        "Temperature": 55.0
+      }
+    }
+  },
+  "Alerts": {
+    "List_item_count": 0,
+    "Alert_List": []
+  },
+  "Analysis": {
+    "Spacing": 1,
+    "labels": {
+      "x_labels": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "15",
+        "16"
+      ],
+      "y_labels": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "15",
+        "16"
+      ]
+    },
+    "points": {
+      "x_points": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        13,
+        13
+      ],
+      "y_points": [
+        0,
+        4,
+        2,
+        6,
+        9,
+        4,
+        1,
+        7,
+        5,
+        5,
+        3,
+        0,
+        0
+      ]
+    }
+  },
+  "Settings": {
+    "Gear_Setting": {
+      "Big_Gear": 15.1,
+      "Small_Gear": 7.3,
+      "Gear_setting_unit": "mm"
+    },
+    "max_Days_if_normal": {
+      "Motor": "~",
+      "Belt_Driver": "~",
+      "Pump": "~"
+    },
+    "Time_Date_Analysis": {
+      "start_time_analysis": "2025-08-22T00:00:00.000",
+      "end_time_analysis": "2027-11-19T21:38:00.000"
+    },
+    "Health_Thresholds": {
+      "Motor": {
+        "warning": 60,
+        "alert": 20
+      },
+      "Belt_Driver": {
+        "warning": 60,
+        "alert": 20
+      },
+      "Pump": {
+        "warning": 60,
+        "alert": 20
+      }
+    },
+    "min_normal_max_values": {
+      "Motor": {
+        "Temperature": {
+          "min": 0.0,
+          "normal": 50.0,
+          "max": 100.0
+        },
+        "Vibration": {
+          "min": 0.0,
+          "normal": 50.0,
+          "max": 100.0
+        },
+        "Current": {
+          "min": 30.0,
+          "normal": 50.0,
+          "max": 100.0
+        },
+        "Volt": {
+          "min": 0.0,
+          "normal": 50.0,
+          "max": 100.0
+        }
+      },
+      "Belt_Driver": {
+        "Tension": {
+          "min": 0.0,
+          "normal": 50.0,
+          "max": 2000.0
+        },
+        "Alignment": {
+          "min": 0.0,
+          "normal": 50.0,
+          "max": 100.0
+        },
+        "Speed": {
+          "min": 0.0,
+          "normal": 50.0,
+          "max": 700.0
+        }
+      },
+      "Pump": {
+        "Pressure_In": {
+          "min": 0.0,
+          "normal": 50.0,
+          "max": 100.0
+        },
+        "Flow_Rate": {
+          "min": 0.0,
+          "normal": 50.0,
+          "max": 100.0
+        },
+        "Temperature": {
+          "min": 0.0,
+          "normal": 50.0,
+          "max": 100.0
+        }
+      }
+    }
+  }
+}

@@ -66,15 +66,17 @@ class _SetMaxDaysIfNormalSettingState extends State<SetMaxDaysIfNormalSetting> {
     //------------------------------------------------------
 
     if (mounted) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Max Days Saved")));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Max Days Saved Successfully ✅"),
+          backgroundColor: Colors.green,
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-   
     return ChangesColorContainer(
       onColorChanged: (return_color) async {
         setState(() {

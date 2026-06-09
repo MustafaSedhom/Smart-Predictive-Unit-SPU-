@@ -246,7 +246,7 @@ class _MinNormalMaxSettingState extends State<MinNormalMaxSetting> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.green,
-          content: Text("Min Normal Max Values Saved"),
+          content: Text("Min Normal Max Values Saved Successfully ✅"),
         ),
       );
     }

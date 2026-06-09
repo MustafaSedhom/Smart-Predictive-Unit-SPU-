@@ -130,7 +130,7 @@ class _HealthThresholdState extends State<HealthThreshold> {
       SnackBar(
         backgroundColor: Colors.green,
         content: Text(
-          "Threshold Saved Successfully",
+          "Threshold Saved Successfully ✅",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),

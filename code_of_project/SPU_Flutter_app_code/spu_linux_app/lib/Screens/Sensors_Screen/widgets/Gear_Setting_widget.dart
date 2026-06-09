@@ -81,7 +81,7 @@ class _GearSettingScreenState extends State<GearSettingScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: Colors.green,
-          content: Text("Gear Setting Saved"),
+          content: Text("Gear Setting Saved Successfully ✅"),
         ),
       );
     }

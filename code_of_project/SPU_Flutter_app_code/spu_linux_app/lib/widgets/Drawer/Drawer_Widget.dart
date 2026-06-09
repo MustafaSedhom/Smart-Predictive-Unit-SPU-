@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, unused_local_variable, dead_code
+// ignore_for_file: non_constant_identifier_names, unused_local_variable, dead_code, deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -82,42 +82,32 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       is_max = newState;
                     });
                   },
-                  child: Container(
-                    width: double.infinity,
-                    alignment: Alignment.center,
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 250),
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: (is_max)
-                          ? Colors.green.shade900
-                          : Colors.red.shade900,
+                      color: is_max
+                          ? const Color(0xff22C55E)
+                          : Colors.white.withOpacity(0.08),
+                      borderRadius: BorderRadius.circular(18),
+                      border: Border.all(
+                        color: is_max ? Colors.greenAccent : Colors.white24,
+                      ),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(
-                          is_max ? Icons.fullscreen_exit : Icons.fullscreen,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                        Text(
-                          (is_max) ? "Min  SPU" : "Max  SPU",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                    child: Center(
+                      child: Icon(
+                        is_max ? Icons.fullscreen_exit : Icons.fullscreen,
+                        color: AppColors.Drawer_text_color,
+                        size: 25,
+                      ),
                     ),
                   ),
                 ),
+                Gap(5),
+                // version
                 Text(
                   "SPU  V2.1.7",
                   style: TextStyle(
-                    // ignore: deprecated_member_use
                     color: Colors.white.withOpacity(0.5),
                     fontSize: 10,
                   ),
