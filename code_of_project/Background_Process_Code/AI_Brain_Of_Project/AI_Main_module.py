@@ -41,8 +41,8 @@ if __name__ == "__main__":
     Data_Base = Access_data_Base(APIJsonFilePath)
     send_email(
         database=Data_Base,
-        subject="SPU AI Brain Started",
-        message="The AI Brain of SPU has been started successfully."
+        subject="SPU SYSTEM Started",
+        message="The AI Brain of SPU has been started successfully. and APP is connected to it."
     )
     # # UART object
     Slave_Data = None
