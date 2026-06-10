@@ -48,7 +48,74 @@
   },
   "Alerts": {
     "List_item_count": 0,
-    "Alert_List": []
+    "Alert_List": [
+      {
+        "id": 1,
+        "device": "motor",
+        "timestamp": "2006-02-22T11:15:04",
+        "period_name": "PM",
+        "type": "Current",
+        "message": "Motor overheating",
+        "level": "high",
+        "value": 80,
+        "uint": " °C"
+      },
+      {
+        "id": 2,
+        "device": "belt driver",
+        "timestamp": "2006-02-22T11:20:11",
+        "period_name": "AM",
+        "type": "temperature",
+        "message": "Temperature still high",
+        "level": "low",
+        "value": 82,
+        "uint": " °C"
+      },
+      {
+        "id": 3,
+        "device": "PUMP",
+        "timestamp": "2026-04-26T11:20:11",
+        "period_name": "PM",
+        "type": "Alignment",
+        "message": "Temperature still high",
+        "level": "high",
+        "value": 12,
+        "uint": " °C"
+      },
+      {
+        "id": 4,
+        "device": "PUMP",
+        "timestamp": "2026-04-26T11:20:10",
+        "period_name": "PM",
+        "type": "Alignment",
+        "message": "Temperature still high",
+        "level": "high",
+        "value": 12,
+        "uint": " °C"
+      },
+      {
+        "id": 5,
+        "device": "PUMP",
+        "timestamp": "2026-04-26T11:20:15",
+        "period_name": "PM",
+        "type": "Alignment",
+        "message": "Temperature still high",
+        "level": "high",
+        "value": 12,
+        "uint": " °C"
+      },
+      {
+        "id": 6,
+        "device": "Motor",
+        "timestamp": "2026-04-26T11:20:10",
+        "period_name": "PM",
+        "type": "Alignment",
+        "message": "Temperature still high",
+        "level": "high",
+        "value": 12,
+        "uint": " °C"
+      }
+    ]
   },
   "Analysis": {
     "Spacing": 1,
@@ -209,6 +276,10 @@
           "max": 100.0
         }
       }
+    },
+    "Admin": {
+      "Email": "elmohandes24680@gmail.com",
+      "Phone": "+201144962908"
     }
   }
 }

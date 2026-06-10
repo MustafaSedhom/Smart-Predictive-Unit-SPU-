@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:spu_linux_app/DataBase/Admin/Admin_Settings.dart';
 
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Advanced_settings_screen/widgets/Custom_changes.dart';
@@ -27,6 +28,22 @@ class _SettingScreenState extends State<SettingScreen> {
   final TextEditingController PhoneController = TextEditingController();
   bool EmailLoading = false;
   bool PhoneLoading = false;
+
+  Future<void> saveAdminData() async {
+    final email = EmailController.text.trim();
+    final phone = PhoneController.text.trim();
+
+    // 1. Save in JSON file
+    final admin = await loadAdminSettingsFromFile();
+
+    admin.Email = email;
+    admin.Phone = phone;
+
+    await saveAdminSettingsToFile(admin);
+
+    // 2. Save in SharedPreferences (cache / quick access)
+  }
+
   Future<void> loadEmail() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -48,47 +65,59 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   Future<void> saveEmail() async {
-    setState(() {
-      EmailLoading = true;
-    });
+    setState(() => EmailLoading = true);
+
+    final email = EmailController.text.trim();
     final prefs = await SharedPreferences.getInstance();
 
-    await prefs.setString('admin_email', EmailController.text.trim());
-    await Future.delayed(const Duration(seconds: 2));
+    // 1. Update JSON
+    final admin = await loadAdminSettingsFromFile();
+    admin.Email = email;
+    await saveAdminSettingsToFile(admin);
 
-    setState(() {
-      EmailLoading = false;
-    });
-    if (EmailController.text.isNotEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Email saved successfully ✅'),
-          backgroundColor: Colors.green,
-        ),
-      );
-    }
+    // 2. Update SharedPreferences
+    await prefs.setString('admin_email', email);
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    if (!mounted) return;
+
+    setState(() => EmailLoading = false);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Email saved successfully ✅'),
+        backgroundColor: Colors.green,
+      ),
+    );
   }
 
   Future<void> savePhone() async {
-    setState(() {
-      PhoneLoading = true;
-    });
+    setState(() => PhoneLoading = true);
+
+    final phone = PhoneController.text.trim();
     final prefs = await SharedPreferences.getInstance();
 
-    await prefs.setString('admin_phone', PhoneController.text.trim());
-    await Future.delayed(const Duration(seconds: 2));
+    // 1. Update JSON
+    final admin = await loadAdminSettingsFromFile();
+    admin.Phone = phone;
+    await saveAdminSettingsToFile(admin);
 
-    setState(() {
-      PhoneLoading = false;
-    });
-    if (PhoneController.text.isNotEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Phone number saved successfully ✅'),
-          backgroundColor: Colors.green,
-        ),
-      );
-    }
+    // 2. Update SharedPreferences
+    await prefs.setString('admin_phone', phone);
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    if (!mounted) return;
+
+    setState(() => PhoneLoading = false);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Phone number saved successfully ✅'),
+        backgroundColor: Colors.green,
+      ),
+    );
   }
 
   @override
