@@ -19,7 +19,7 @@ class AlertStruct:
             "message": self.message,
             "level": self.level,
             "value": self.value,
-            "unit": self.unit,
+            "uint": self.unit,
             "period_name": str(datetime.now().strftime("%p")),
         }
 class Alerts_Data:
