@@ -21,7 +21,8 @@ Future<void> initApp() async {
 }
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // control the app window
+  //////////////////////////////////////////////////////////////////////////////////////////////
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
 
@@ -29,6 +30,7 @@ void main() async {
     size: Size(1024, 600),
     minimumSize: Size(800, 480),
     center: true,
+    fullScreen: false,
   );
 
   windowManager.waitUntilReadyToShow(windowOptions, () async {
@@ -36,6 +38,7 @@ void main() async {
     await windowManager.focus();
     await windowManager.setFullScreen(true);
   });
+  //////////////////////////////////////////////////////////////////////////////////////////////
   await initApp();
   runApp(SPU_Linux_APP());
 }
