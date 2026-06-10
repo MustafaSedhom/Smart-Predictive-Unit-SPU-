@@ -1,3 +1,10 @@
+from datetime import datetime
+
+now = datetime.now()
+
+date = now.strftime("%Y-%m-%d")
+time = now.strftime("%I:%M:%S %p")  # 12-hour format
+
 from ....Handle_Data_Base_Code.Data_Base_Python.Alerts_Data.Alerts_Data import (
     Alerts_Data,
     AlertStruct,
@@ -20,6 +27,9 @@ from .Actuators_Alarms.Belt_Alarm_get import (
 )
 from .Actuators_Alarms.Pump_alarms_get import (
     pump_alarm_detect,
+)
+from .Send_Notification.Gmail_Massage import (
+    send_email
 )
 class Alarm_Analysis:
 
@@ -59,7 +69,24 @@ class Alarm_Analysis:
         for alarm in active_alarms:
             self.Add_Alarm_to_App(alarm)
             self.Add_Alarm_to_file(alarm)
+            send_email(
+                database=self.DataBase,
+                subject=f"SPU Alarm - {alarm.device} - {alarm.type}",
+                message=f"""
+                    SPU SYSTEM ALARM
 
+                    Device      : {alarm.device}
+                    Alarm Type  : {alarm.type}
+                    Level       : {alarm.level}
+                    Value       : {alarm.value} {alarm.unit}
+
+                    Date        : {date}
+                    Time        : {time}
+
+                    Description :
+                    {alarm.message}
+                """
+            )
         return active_alarms
     ###########################################################
     # master function

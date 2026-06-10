@@ -1,285 +1,1385 @@
 {
-  "Over_All": {
-    "overall_Health": 77,
-    "Active_Alarms": 8,
-    "sensors_online": {
-      "active": 9,
-      "total": 13
-    },
-    "Next_Maintenance": 99
-  },
-  "Actuators": {
-    "Motor": {
-      "status": "normal",
-      "Predicted_fault": "~",
-      "Health": 75,
-      "Sensors": {
-        "Temperature": 49.0,
-        "Vibration": 2.1,
-        "Current": 7.7,
-        "Current_p1": 7.7,
-        "Current_p2": 2.1,
-        "Current_p3": 1.0,
-        "volt_p1": 221.3,
-        "volt_p2": 220.1,
-        "volt_p3": 33.0
-      }
-    },
-    "Belt_Driver": {
-      "status": "warning",
-      "Predicted_fault": "99",
-      "Health": 55,
-      "Sensors": {
-        "Tension": 1122.0,
-        "Alignment": 3.5,
-        "Speed": 555.0
-      }
-    },
-    "Pump": {
-      "status": "normal",
-      "Predicted_fault": "~",
-      "Health": 96,
-      "Sensors": {
-        "Pressure_In": 18.3,
-        "Flow_Rate": 22.4,
-        "Temperature": 55.0
-      }
-    }
-  },
-  "Alerts": {
-    "List_item_count": 0,
-    "Alert_List": [
-      {
-        "id": 1,
-        "device": "motor",
-        "timestamp": "2006-02-22T11:15:04",
-        "period_name": "PM",
-        "type": "Current",
-        "message": "Motor overheating",
-        "level": "high",
-        "value": 80,
-        "uint": " °C"
-      },
-      {
-        "id": 2,
-        "device": "belt driver",
-        "timestamp": "2006-02-22T11:20:11",
-        "period_name": "AM",
-        "type": "temperature",
-        "message": "Temperature still high",
-        "level": "low",
-        "value": 82,
-        "uint": " °C"
-      },
-      {
-        "id": 3,
-        "device": "PUMP",
-        "timestamp": "2026-04-26T11:20:11",
-        "period_name": "PM",
-        "type": "Alignment",
-        "message": "Temperature still high",
-        "level": "high",
-        "value": 12,
-        "uint": " °C"
-      },
-      {
-        "id": 4,
-        "device": "PUMP",
-        "timestamp": "2026-04-26T11:20:10",
-        "period_name": "PM",
-        "type": "Alignment",
-        "message": "Temperature still high",
-        "level": "high",
-        "value": 12,
-        "uint": " °C"
-      },
-      {
-        "id": 5,
-        "device": "PUMP",
-        "timestamp": "2026-04-26T11:20:15",
-        "period_name": "PM",
-        "type": "Alignment",
-        "message": "Temperature still high",
-        "level": "high",
-        "value": 12,
-        "uint": " °C"
-      },
-      {
-        "id": 6,
-        "device": "Motor",
-        "timestamp": "2026-04-26T11:20:10",
-        "period_name": "PM",
-        "type": "Alignment",
-        "message": "Temperature still high",
-        "level": "high",
-        "value": 12,
-        "uint": " °C"
-      }
-    ]
-  },
-  "Analysis": {
-    "Spacing": 1,
-    "labels": {
-      "x_labels": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "15",
-        "16"
-      ],
-      "y_labels": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "15",
-        "16"
-      ]
-    },
-    "points": {
-      "x_points": [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        13,
-        13
-      ],
-      "y_points": [
-        0,
-        4,
-        2,
-        6,
-        9,
-        4,
-        1,
-        7,
-        5,
-        5,
-        3,
-        0,
-        0
-      ]
-    }
-  },
-  "Settings": {
-    "Gear_Setting": {
-      "Big_Gear": 15.1,
-      "Small_Gear": 7.3,
-      "Gear_setting_unit": "mm"
-    },
-    "max_Days_if_normal": {
-      "Motor": "~",
-      "Belt_Driver": "~",
-      "Pump": "~"
-    },
-    "Time_Date_Analysis": {
-      "start_time_analysis": "2025-08-22T00:00:00.000",
-      "end_time_analysis": "2027-11-19T21:38:00.000"
-    },
-    "Health_Thresholds": {
-      "Motor": {
-        "warning": 60,
-        "alert": 20
-      },
-      "Belt_Driver": {
-        "warning": 60,
-        "alert": 20
-      },
-      "Pump": {
-        "warning": 60,
-        "alert": 20
-      }
-    },
-    "min_normal_max_values": {
-      "Motor": {
-        "Temperature": {
-          "min": 0.0,
-          "normal": 50.0,
-          "max": 100.0
+    "Over_All": {
+        "overall_Health": 78,
+        "Active_Alarms": 105,
+        "sensors_online": {
+            "active": 9,
+            "total": 13
         },
-        "Vibration": {
-          "min": 0.0,
-          "normal": 50.0,
-          "max": 100.0
+        "Next_Maintenance": 99
+    },
+    "Actuators": {
+        "Motor": {
+            "status": "normal",
+            "Predicted_fault": "~",
+            "Health": 75,
+            "Sensors": {
+                "Temperature": -127.0,
+                "Vibration": 8.2,
+                "Current": 5.0,
+                "Current_p1": 5.0,
+                "Current_p2": 5.0,
+                "Current_p3": 5.0,
+                "volt_p1": 5.0,
+                "volt_p2": 5.0,
+                "volt_p3": 5.0
+            }
         },
-        "Current": {
-          "min": 30.0,
-          "normal": 50.0,
-          "max": 100.0
+        "Belt_Driver": {
+            "status": "warning",
+            "Predicted_fault": "99",
+            "Health": 55,
+            "Sensors": {
+                "Tension": 1122.0,
+                "Alignment": 3.5,
+                "Speed": 555.0
+            }
         },
-        "Volt": {
-          "min": 0.0,
-          "normal": 50.0,
-          "max": 100.0
+        "Pump": {
+            "status": "normal",
+            "Predicted_fault": "~",
+            "Health": 100,
+            "Sensors": {
+                "Pressure_In": 18.3,
+                "Flow_Rate": 0.0,
+                "Temperature": -127.0
+            }
         }
-      },
-      "Belt_Driver": {
-        "Tension": {
-          "min": 0.0,
-          "normal": 50.0,
-          "max": 2000.0
-        },
-        "Alignment": {
-          "min": 0.0,
-          "normal": 50.0,
-          "max": 100.0
-        },
-        "Speed": {
-          "min": 0.0,
-          "normal": 50.0,
-          "max": 700.0
-        }
-      },
-      "Pump": {
-        "Pressure_In": {
-          "min": 0.0,
-          "normal": 50.0,
-          "max": 100.0
-        },
-        "Flow_Rate": {
-          "min": 0.0,
-          "normal": 50.0,
-          "max": 100.0
-        },
-        "Temperature": {
-          "min": 0.0,
-          "normal": 50.0,
-          "max": 100.0
-        }
-      }
     },
-    "Admin": {
-      "Email": "shawkysedhom2299@gmail.com",
-      "Phone": "+201144962908"
+    "Alerts": {
+        "List_item_count": 0,
+        "Alert_List": [
+            {
+                "id": 1,
+                "device": "motor",
+                "timestamp": "2006-02-22T11:15:04",
+                "period_name": "PM",
+                "type": "Current",
+                "message": "Motor overheating",
+                "level": "high",
+                "value": 80,
+                "uint": " \u00c2\u00b0C"
+            },
+            {
+                "id": 2,
+                "device": "belt driver",
+                "timestamp": "2006-02-22T11:20:11",
+                "period_name": "AM",
+                "type": "temperature",
+                "message": "Temperature still high",
+                "level": "low",
+                "value": 82,
+                "uint": " \u00c2\u00b0C"
+            },
+            {
+                "id": 3,
+                "device": "PUMP",
+                "timestamp": "2026-04-26T11:20:11",
+                "period_name": "PM",
+                "type": "Alignment",
+                "message": "Temperature still high",
+                "level": "high",
+                "value": 12,
+                "uint": " \u00c2\u00b0C"
+            },
+            {
+                "id": 4,
+                "device": "PUMP",
+                "timestamp": "2026-04-26T11:20:10",
+                "period_name": "PM",
+                "type": "Alignment",
+                "message": "Temperature still high",
+                "level": "high",
+                "value": 12,
+                "uint": " \u00c2\u00b0C"
+            },
+            {
+                "id": 5,
+                "device": "PUMP",
+                "timestamp": "2026-04-26T11:20:15",
+                "period_name": "PM",
+                "type": "Alignment",
+                "message": "Temperature still high",
+                "level": "high",
+                "value": 12,
+                "uint": " \u00c2\u00b0C"
+            },
+            {
+                "id": 6,
+                "device": "Motor",
+                "timestamp": "2026-04-26T11:20:10",
+                "period_name": "PM",
+                "type": "Alignment",
+                "message": "Temperature still high",
+                "level": "high",
+                "value": 12,
+                "uint": " \u00c2\u00b0C"
+            },
+            {
+                "id": 7,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:33:15.872301",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.45,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 8,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:33:18.469759",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 9,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:33:20.885393",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 1.8,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 10,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:33:23.378571",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 4.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 11,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:33:25.883061",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 12,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:33:28.389348",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 13,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:33:33.385647",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 14,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:34:46.100051",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 15,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:34:47.800783",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 16,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:34:51.058867",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 17,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:34:52.755632",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 18,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:34:54.942004",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.62,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 19,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:34:56.751188",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 20,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:34:58.974526",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 3.72,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 21,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:00.782931",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 22,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:02.724769",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 4.47,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 23,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:04.217594",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 24,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:06.272305",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 25,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:07.953332",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 26,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:10.138131",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.47,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 27,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:11.799468",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 28,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:13.910474",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 4.27,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 29,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:15.627546",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 30,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:17.666233",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 31,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:19.294784",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 32,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:21.441478",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 1.34,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 33,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:23.206338",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 34,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:25.230597",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.02,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 35,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:26.969415",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 36,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:28.973797",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 1.33,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 37,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:30.769284",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 38,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:32.970984",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 39,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:34.775171",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 40,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:36.831938",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 2.45,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 41,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:38.555108",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 42,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:40.800969",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.29,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 43,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:42.576214",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 44,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:44.854295",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 2.47,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 45,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:46.567922",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 46,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:48.754011",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 47,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:50.654072",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 48,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:52.751021",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 3.63,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 49,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:54.311050",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 50,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:35:56.328542",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.02,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 51,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:35:57.993865",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 52,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:38:57.525773",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 53,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:38:59.401468",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 54,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:01.931255",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 55,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:03.767376",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 56,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:06.197745",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 4.98,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 57,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:08.000067",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 58,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:10.352054",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 3.08,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 59,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:12.130637",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 60,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:14.390315",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 2.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 61,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:16.226286",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 62,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:18.458932",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 1.7,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 63,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:20.146732",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 64,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:22.452413",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.29,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 65,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:24.086262",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 66,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:33.496894",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 3.64,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 67,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:35.246123",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 68,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:37.602766",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 4.3,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 69,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:39.336426",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 70,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:41.632732",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 71,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:43.584827",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 72,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:45.601874",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 73,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:47.239037",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 74,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:49.315786",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.43,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 75,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:51.021864",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 76,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:53.329035",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 2.42,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 77,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:55.015545",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 78,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:39:57.343731",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 4.36,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 79,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:39:58.971048",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 80,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:40:01.318888",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 81,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:40:02.790797",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 82,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:40:05.241289",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.19,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 83,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:40:07.105898",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 84,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:40:09.441717",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.47,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 85,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:40:11.200379",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 86,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:40:13.841325",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 2.06,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 87,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:40:15.374105",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 88,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:40:17.951582",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 89,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:40:19.927084",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 90,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:40:22.585542",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 0.37,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 91,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:40:24.383038",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 92,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:40:54.649347",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 4.89,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 93,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:40:56.301475",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 94,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:40:58.697736",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 4.94,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 95,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:41:00.329656",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 96,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:41:02.633186",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 97,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:41:04.307681",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 98,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:41:06.642174",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 99,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:41:08.385255",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 100,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:41:10.668733",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 101,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:41:12.468101",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 102,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:41:14.679232",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 103,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:41:16.395949",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 104,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:41:18.808263",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            },
+            {
+                "id": 105,
+                "device": "pump",
+                "timestamp": "2026-06-10 06:41:20.744153",
+                "type": "temp",
+                "message": "Pump Temperature is LOW",
+                "level": "LOW",
+                "value": -127.0,
+                "unit": "\u00b0C",
+                "period_name": "AM"
+            },
+            {
+                "id": 106,
+                "device": "motor",
+                "timestamp": "2026-06-10 06:41:23.041711",
+                "type": "current",
+                "message": "Motor Current is LOW",
+                "level": "LOW",
+                "value": 5.0,
+                "unit": "A",
+                "period_name": "AM"
+            }
+        ]
+    },
+    "Analysis": {
+        "Spacing": 1,
+        "labels": {
+            "x_labels": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "15",
+                "16"
+            ],
+            "y_labels": [
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10",
+                "11",
+                "12",
+                "13",
+                "15",
+                "16"
+            ]
+        },
+        "points": {
+            "x_points": [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                13,
+                13
+            ],
+            "y_points": [
+                0,
+                4,
+                2,
+                6,
+                9,
+                4,
+                1,
+                7,
+                5,
+                5,
+                3,
+                0,
+                0
+            ]
+        }
+    },
+    "Settings": {
+        "Gear_Setting": {
+            "Big_Gear": 15.1,
+            "Small_Gear": 7.3,
+            "Gear_setting_unit": "mm"
+        },
+        "max_Days_if_normal": {
+            "Motor": "~",
+            "Belt_Driver": "~",
+            "Pump": "~"
+        },
+        "Time_Date_Analysis": {
+            "start_time_analysis": "2025-08-22T00:00:00.000",
+            "end_time_analysis": "2027-11-19T21:38:00.000"
+        },
+        "Health_Thresholds": {
+            "Motor": {
+                "warning": 60,
+                "alert": 20
+            },
+            "Belt_Driver": {
+                "warning": 60,
+                "alert": 20
+            },
+            "Pump": {
+                "warning": 60,
+                "alert": 20
+            }
+        },
+        "min_normal_max_values": {
+            "Motor": {
+                "Temperature": {
+                    "min": 0.0,
+                    "normal": 50.0,
+                    "max": 100.0
+                },
+                "Vibration": {
+                    "min": 0.0,
+                    "normal": 50.0,
+                    "max": 100.0
+                },
+                "Current": {
+                    "min": 30.0,
+                    "normal": 50.0,
+                    "max": 100.0
+                },
+                "Volt": {
+                    "min": 0.0,
+                    "normal": 50.0,
+                    "max": 100.0
+                }
+            },
+            "Belt_Driver": {
+                "Tension": {
+                    "min": 0.0,
+                    "normal": 50.0,
+                    "max": 2000.0
+                },
+                "Alignment": {
+                    "min": 0.0,
+                    "normal": 50.0,
+                    "max": 100.0
+                },
+                "Speed": {
+                    "min": 0.0,
+                    "normal": 50.0,
+                    "max": 700.0
+                }
+            },
+            "Pump": {
+                "Pressure_In": {
+                    "min": 0.0,
+                    "normal": 50.0,
+                    "max": 100.0
+                },
+                "Flow_Rate": {
+                    "min": 0.0,
+                    "normal": 50.0,
+                    "max": 100.0
+                },
+                "Temperature": {
+                    "min": 0.0,
+                    "normal": 50.0,
+                    "max": 100.0
+                }
+            }
+        },
+        "Admin": {
+            "Email": "shawkysedhom2299@gmail.com",
+            "Phone": "+201144962908"
+        }
     }
-  }
 }

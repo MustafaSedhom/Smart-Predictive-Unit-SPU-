@@ -5,7 +5,7 @@ SPU_Master_User_email = "elmohandes24680@gmail.com"
 SPU_Master_User_email_password = "voswsjnvvmnzbxgg"
 ###############################################################################
 # UART communication details
-communication_port = "COM5"
+communication_port = "COM3"
 communication_boudrate = 115200
 ###############################################################################
 ##### main folder
