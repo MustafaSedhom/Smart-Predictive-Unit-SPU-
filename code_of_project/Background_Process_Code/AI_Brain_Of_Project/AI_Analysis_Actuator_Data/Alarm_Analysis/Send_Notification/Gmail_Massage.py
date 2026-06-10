@@ -6,16 +6,16 @@ from .....Handle_Data_Base_Code.Data_Base_Python.SPU_main_Data_handlig import (
     Access_data_Base
 )
 
+from ....AI_Config import (
+    SPU_Master_User_email,
+    SPU_Master_User_email_password
+)
 
 def send_email(
     database: Access_data_Base,
-    sender_email: str,
-    app_password: str,
     subject: str,
     message: str
 ) -> bool:
-
-
     receiver_email = (
         database.Data_Base
         .admin_settings
@@ -33,7 +33,7 @@ def send_email(
     )
 
     msg["Subject"] = subject
-    msg["From"] = f"SPU SYSTEM <{sender_email}>"
+    msg["From"] = f"SPU SYSTEM <{SPU_Master_User_email}>"
     msg["To"] = receiver_email
 
     try:
@@ -45,8 +45,8 @@ def send_email(
 
             server.starttls()
             server.login(
-                sender_email,
-                app_password
+                SPU_Master_User_email,
+                SPU_Master_User_email_password
             )
 
             server.send_message(msg)

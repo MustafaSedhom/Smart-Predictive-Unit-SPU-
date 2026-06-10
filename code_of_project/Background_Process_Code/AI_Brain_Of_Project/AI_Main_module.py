@@ -24,31 +24,7 @@ from .AI_Store_Data_directly.AI_Store_Data_directly import (Store_Data_Directly)
 from .AI_Analysis_Actuator_Data.Alarm_Analysis.Send_Notification.Gmail_Massage import (
     send_email
     )
-
-#########################################################################################
-# variables
-##### main folder
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# if you run on windows
-Main_Folder_Path = "C:/Users/elmoh/OneDrive/Desktop/Ibrahim_mohamed_project"
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# if you run on linux
-# Main_Folder_Path = "/home/sedhom/SPU"
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-##### main folder
-API_Json_File_name = "SPU_API"
-AI_Last_Data_Stored_folder_path = f"{Main_Folder_Path}/AI_Data"
-motor_last_data_files_name = "Last_Motor_Data.csv"
-pump_last_data_files_name = "Last_Pump_Data.csv"
-belt_last_data_files_name = "Last_Belt_Data.csv"
-alarms_last_data_files_name = "Last_Alarm_Data.csv"
-health_last_data_files_name = "Last_Health_Data.csv"
-# UART communication details
-communication_port = "COM5"
-communication_boudrate = 115200
-# SPU Master User
-SPU_Master_User_email = "elmohandes24680@gmail.com"
-SPU_Master_User_email_password = "voswsjnvvmnzbxgg"
+from .AI_Config import *
 #########################################################################################
 APIJsonFilePath = f"{Main_Folder_Path}/{API_Json_File_name}.json"
 last_data_files_paths = {
@@ -62,6 +38,12 @@ last_data_files_paths = {
 
 if __name__ == "__main__":
     ########################################
+    Data_Base = Access_data_Base(APIJsonFilePath)
+    send_email(
+        database=Data_Base,
+        subject="SPU AI Brain Started",
+        message="The AI Brain of SPU has been started successfully."
+    )
     # # UART object
     Slave_Data = None
     # Try connect UART
@@ -79,13 +61,6 @@ if __name__ == "__main__":
     while running:
         # read data base and create object
         Data_Base = Access_data_Base(APIJsonFilePath)
-        send_email(
-            database=Data_Base,
-            sender_email=SPU_Master_User_email,
-            app_password=SPU_Master_User_email_password,
-            subject="SPU AI Brain Started",
-            message="The AI Brain of SPU has been started successfully."
-        )
         # print("AI Running")
         # READ UART DATA
         if Slave_Data:
