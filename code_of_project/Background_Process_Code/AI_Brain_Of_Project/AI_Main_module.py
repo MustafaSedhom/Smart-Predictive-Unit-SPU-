@@ -11,8 +11,7 @@ from ..Handle_Data_Base_Code.Rrocess_Data_From_Slave_Board.All_Sensor_Data_After
 )
 
 from ..Handle_Data_Base_Code.Data_Base_Python.SPU_main_Data_handlig import (
-    Access_data_Base,
-    AlertStruct
+    Access_data_Base
 )
 
 from .Asign_values_to_app_directly.Asign_values_to_app_directly import (
@@ -42,7 +41,7 @@ if __name__ == "__main__":
     send_email(
         database=Data_Base,
         subject="SPU SYSTEM Started",
-        message="The AI Brain of SPU has been started successfully. and APP is connected to it."
+        message="The AI Brain of SPU has been started and APP is connected to it successfully."
     )
     # # UART object
     Slave_Data = None
@@ -56,6 +55,11 @@ if __name__ == "__main__":
     except Exception as e:
         print("UART Disabled")
         print(e)
+        send_email(
+            database=Data_Base,
+            subject="SPU SYSTEM UART Connection Failed",
+            message=f"The AI Brain of SPU failed to connect to the UART. Error: {e}"
+        )
     # Database
     running = True
     while running:
@@ -88,6 +92,11 @@ if __name__ == "__main__":
             )
         except Exception as e:
             print("Database Error:", e)
+            send_email(
+                database=Data_Base,
+                subject="SPU SYSTEM Database Update Failed",
+                message=f"The AI Brain of SPU failed to update the database with new sensor data. Error: {e}"
+            )
         try:
             Store_Data_Directly(
                 sensors = Sensors_Data,
@@ -99,10 +108,20 @@ if __name__ == "__main__":
             )
         except Exception as e:
             print("Store Error:", e)
+            send_email(
+                database=Data_Base,
+                subject="SPU SYSTEM Data Storage Failed",
+                message=f"The AI Brain of SPU failed to store the sensor data. Error: {e}"
+            )
         try:
             analysis_data.analyse_all_actuators_data()
         except Exception as e:
             print("Analysis Error:", e)
+            send_email(
+                database=Data_Base,
+                subject="SPU SYSTEM Analysis Failed",
+                message=f"The AI Brain of SPU failed to analyze the sensor data. Error: {e}"
+            )
 
         
 
