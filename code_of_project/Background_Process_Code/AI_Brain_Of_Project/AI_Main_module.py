@@ -42,6 +42,9 @@ health_last_data_files_name = "Last_Health_Data.csv"
 # UART communication details
 communication_port = "COM5"
 communication_boudrate = 115200
+# SPU Master User
+SPU_Master_User_email = "spu.master@company.com"
+SPU_Master_User_email_password = "SPU_Master_User_email_password"
 #########################################################################################
 APIJsonFilePath = f"{Main_Folder_Path}/{API_Json_File_name}.json"
 last_data_files_paths = {
