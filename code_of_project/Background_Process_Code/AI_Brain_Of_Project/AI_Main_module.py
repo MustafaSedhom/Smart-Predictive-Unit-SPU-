@@ -21,6 +21,10 @@ from .Asign_values_to_app_directly.Asign_values_to_app_directly import (
 
 from .AI_Store_Data_directly.AI_Store_Data_directly import (Store_Data_Directly)
 
+from .AI_Analysis_Actuator_Data.Alarm_Analysis.Send_Notification.Gmail_Massage import (
+    send_email
+    )
+
 #########################################################################################
 # variables
 ##### main folder
@@ -43,8 +47,8 @@ health_last_data_files_name = "Last_Health_Data.csv"
 communication_port = "COM5"
 communication_boudrate = 115200
 # SPU Master User
-SPU_Master_User_email = "spu.master@company.com"
-SPU_Master_User_email_password = "SPU_Master_User_email_password"
+SPU_Master_User_email = "elmohandes24680@gmail.com"
+SPU_Master_User_email_password = "voswsjnvvmnzbxgg"
 #########################################################################################
 APIJsonFilePath = f"{Main_Folder_Path}/{API_Json_File_name}.json"
 last_data_files_paths = {
@@ -75,6 +79,13 @@ if __name__ == "__main__":
     while running:
         # read data base and create object
         Data_Base = Access_data_Base(APIJsonFilePath)
+        send_email(
+            database=Data_Base,
+            sender_email=SPU_Master_User_email,
+            app_password=SPU_Master_User_email_password,
+            subject="SPU AI Brain Started",
+            message="The AI Brain of SPU has been started successfully."
+        )
         # print("AI Running")
         # READ UART DATA
         if Slave_Data:

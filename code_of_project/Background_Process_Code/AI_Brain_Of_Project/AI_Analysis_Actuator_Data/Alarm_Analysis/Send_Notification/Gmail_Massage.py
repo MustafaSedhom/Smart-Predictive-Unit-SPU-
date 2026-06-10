@@ -1,10 +1,6 @@
 import smtplib
 from email.mime.text import MIMEText
 
-from AI_Main_module import (
-    SPU_Master_User_email,
-    SPU_Master_User_email_password
-)
 
 from .....Handle_Data_Base_Code.Data_Base_Python.SPU_main_Data_handlig import (
     Access_data_Base
@@ -12,17 +8,16 @@ from .....Handle_Data_Base_Code.Data_Base_Python.SPU_main_Data_handlig import (
 
 
 def send_email(
+    database: Access_data_Base,
+    sender_email: str,
+    app_password: str,
     subject: str,
     message: str
 ) -> bool:
 
-    sender_email = SPU_Master_User_email
-    app_password = SPU_Master_User_email_password
-
-    DB = Access_data_Base()
 
     receiver_email = (
-        DB.Data_Base
+        database.Data_Base
         .admin_settings
         .get_email()
     )
