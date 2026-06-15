@@ -4,7 +4,7 @@ from  ..Belt_Data.Belt_Data import BeltDriver
 from  ..Motor_Data.Motor_Data import Motor
 from  ..Pump_Data.Pump_Data import Pump
 from  ..over_all_data.over_all_data import OverAll
-
+from  ..Sensor_Problem.Sensor_problem_data import Sensor_Problem_Data
 class All_Sensor_Data_After_Receiving:
     def __init__(self, Data_var: str):
 
@@ -17,3 +17,4 @@ class All_Sensor_Data_After_Receiving:
         self.pump = Pump(data.get("Pump", {}))
         self.belt = BeltDriver(data.get("Belt_Driver", {}))
         self.overall = OverAll(data.get("Over_All", {}))
+        self.sensor_problem = Sensor_Problem_Data(data.get("Sensors",{}))

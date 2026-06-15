@@ -159,9 +159,22 @@ class OverAll
          {
             return !(*this == other);
          }
-
 };
+class SensorProblem
+{
+public:
+    String List[10];
+    int Count = 0;
 
+    void Add(String Name)
+    {
+        List[Count++] = Name;
+    }
+    void Clear()
+    {
+        Count = 0;
+    }
+};
 
 //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 #endif // !ACTAUTORESSTRUCTS_H_

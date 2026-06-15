@@ -51,7 +51,6 @@ if __name__ == "__main__":
             port=communication_port,
             baud=communication_boudrate
         )
-        print("UART Connected")
     except Exception as e:
         print("UART Disabled")
         print(e)
@@ -60,6 +59,7 @@ if __name__ == "__main__":
             subject="SPU SYSTEM UART Connection Failed",
             message=f"The AI Brain of SPU failed to connect to the UART. Error: {e}"
         )
+        print("UART Connected")
     # Database
     running = True
     while running:

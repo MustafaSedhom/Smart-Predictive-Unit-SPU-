@@ -9,10 +9,6 @@
 // project files
 #include "Actuators_Structs/ActuatorsStructs.h"
 #include "Handling_Communction_Data/Json_Data.h"
-// #include "Read_Sensor_Data/Motor_Sensors/Motor_Sensors.h"
-// #include "Read_Sensor_Data/Pump_Sensors/Pump_Sensors.h"
-// #include "Read_Sensor_Data/Belt_Sensors/Belt_Sensors.h"
-// #include "Read_Sensor_Data/Over_All_Data/Over_All_Data.h"
 //-----------------------------------------------------------
 #define Enable_Debug                   false
 #define communication_speed            115200
@@ -41,6 +37,7 @@ Motor motor , last_motor;
 Belt belt , last_belt;
 Pump pump , last_pump;
 OverAll overall , last_overall;
+SensorProblem sensor_problem , last_sensor_problem;
 //---------------- FLOW ----------------
 volatile unsigned long pulseCount = 0;
 const float calibrationFactor = 7.5;
@@ -101,14 +98,6 @@ float readFlowRate()
     interrupts();
     return pulses / calibrationFactor;
 }
-// send to raspberry pi all data
-void sendDataToRaspberryPi()
-{
-    // create JSON object
-    Json.updateAll(motor, belt, pump, overall);
-    // send JSON string to Raspberry Pi (e.g., via Serial)
-    Serial.println(Json.get_Json_formate());
-}
 //-----------------------------------------------------------
 // SETUP
 void setup()
@@ -126,10 +115,13 @@ void setup()
     pump = Pump(18.3,22.4,55);
     belt = Belt(1122,3.5,555);
     overall = OverAll(13,9);
+    sensor_problem.Clear();
+    sensor_problem.Add("Motor Current Sensor P_R");
     Json.updateMotor(motor);
     Json.updatePump(pump);
     Json.updateBelt(belt);
     Json.updateOverAll(overall);
+    Json.updateSensorProblem(sensor_problem);
     Serial.println("System Booting...");
     lastSend = millis();
 }
@@ -185,9 +177,8 @@ void loop()
         //---------------- Send data to Raspberry Pi ----------------
         if(motor != last_motor || pump != last_pump || belt != last_belt || overall != last_overall)
         {
-            // Json.updateAll(motor, belt, pump,overall);
-            // Serial.println(Json.get_Json_formate()); 
-            sendDataToRaspberryPi();
+            Json.updateAll(motor, belt, pump, overall, sensor_problem);
+            Json.print_Json_formate();
             last_motor = motor;
             last_pump = pump;
             last_belt = belt;

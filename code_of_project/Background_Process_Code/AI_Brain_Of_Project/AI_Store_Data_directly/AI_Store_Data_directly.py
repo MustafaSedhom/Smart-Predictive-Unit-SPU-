@@ -7,7 +7,17 @@ from ..AI_Store_and_Read_process_Data.AI_Store_Process_Data import (
     )
 from ...Handle_Data_Base_Code.Rrocess_Data_From_Slave_Board.All_Sensor_Data_After_Processing.All_Sensor_Data_After_Processing import All_Sensor_Data_After_Receiving
 from ...Handle_Data_Base_Code.Data_Base_Python.SPU_main_Data_handlig import Access_data_Base
+from ..AI_Analysis_Actuator_Data.Actuator_Analysis.Sensor_Problem_Analysis import (
+    detect_error_in_sensor_status
+)
 def Store_Data_Directly(data_base: Access_data_Base, health_file:str, motor_file:str, pump_file:str, belt_file:str, sensors: All_Sensor_Data_After_Receiving):
+
+    try:
+        detect_error_in_sensor_status(DB=data_base,sensor=sensors)
+
+    except Exception as e:
+
+        print("sensor status Error:", e)
 
     try:
 
