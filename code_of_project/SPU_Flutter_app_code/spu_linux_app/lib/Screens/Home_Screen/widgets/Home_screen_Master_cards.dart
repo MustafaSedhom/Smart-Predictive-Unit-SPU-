@@ -101,14 +101,14 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
         } else if (motor!.status != motor_temp_state) {
           motor_temp_state = motor!.status;
 
-          addAlarm(
-            AlarmItem(
-              status: motor!.status,
-              img: AppIcons.motor_Icon,
-              color: getColor(motor!.status),
-              message: "Motor changed to ${motor!.status.toUpperCase()}",
-            ),
-          );
+          // addAlarm(
+          //   AlarmItem(
+          //     status: motor!.status,
+          //     img: AppIcons.motor_Icon,
+          //     color: getColor(motor!.status),
+          //     message: "Motor changed to ${motor!.status.toUpperCase()}",
+          //   ),
+          // );
         }
       }
 
@@ -119,15 +119,15 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
         } else if (beltDriver!.status != belt_driver_temp_state) {
           belt_driver_temp_state = beltDriver!.status;
 
-          addAlarm(
-            AlarmItem(
-              status: beltDriver!.status,
-              img: AppIcons.motor_belt_Icon,
-              color: getColor(beltDriver!.status),
-              message:
-                  "Belt Driver changed to ${beltDriver!.status.toUpperCase()}",
-            ),
-          );
+          // addAlarm(
+          //   AlarmItem(
+          //     status: beltDriver!.status,
+          //     img: AppIcons.motor_belt_Icon,
+          //     color: getColor(beltDriver!.status),
+          //     message:
+          //         "Belt Driver changed to ${beltDriver!.status.toUpperCase()}",
+          //   ),
+          // );
         }
       }
       // ================= PUMP =================
@@ -136,14 +136,14 @@ class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
           pump_temp_state = pump!.status;
         } else if (pump!.status != pump_temp_state) {
           pump_temp_state = pump!.status;
-          addAlarm(
-            AlarmItem(
-              status: pump!.status,
-              img: AppIcons.motor_pump_Icon,
-              color: getColor(pump!.status),
-              message: "Pump changed to ${pump!.status.toUpperCase()}",
-            ),
-          );
+          // addAlarm(
+          //   AlarmItem(
+          //     status: pump!.status,
+          //     img: AppIcons.motor_pump_Icon,
+          //     color: getColor(pump!.status),
+          //     message: "Pump changed to ${pump!.status.toUpperCase()}",
+          //   ),
+          // );
         }
       }
     });

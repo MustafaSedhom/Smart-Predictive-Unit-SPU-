@@ -351,3 +351,9 @@ Date,Time,id,device,type,message,level,value,unit
 2026-06-15,12:40:29,165,pump,temp,Pump Temperature is LOW,LOW,-127.0,°C
 2026-06-15,12:40:35,166,motor,current,Motor Current is LOW,LOW,1.27,A
 2026-06-15,12:40:36,167,pump,temp,Pump Temperature is LOW,LOW,-127.0,°C
+2026-06-15,12:48:52,168,motor,current,Motor Current is LOW,LOW,1.27,A
+2026-06-15,12:48:54,169,pump,temp,Pump Temperature is LOW,LOW,-127.0,°C
+2026-06-15,12:49:00,170,motor,current,Motor Current is LOW,LOW,0.29,A
+2026-06-15,12:49:01,171,pump,temp,Pump Temperature is LOW,LOW,-127.0,°C
+2026-06-15,12:49:08,172,motor,current,Motor Current is LOW,LOW,1.28,A
+2026-06-15,12:49:09,173,pump,temp,Pump Temperature is LOW,LOW,-127.0,°C
