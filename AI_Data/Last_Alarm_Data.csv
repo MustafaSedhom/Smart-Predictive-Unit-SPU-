@@ -356,4 +356,6 @@ Date,Time,id,device,type,message,level,value,unit
 2026-06-15,12:49:00,170,motor,current,Motor Current is LOW,LOW,0.29,A
 2026-06-15,12:49:01,171,pump,temp,Pump Temperature is LOW,LOW,-127.0,°C
 2026-06-15,12:49:08,172,motor,current,Motor Current is LOW,LOW,1.28,A
-2026-06-15,12:49:09,173,pump,temp,Pump Temperature is LOW,LOW,-127.0,°C
+2026-06-15,12:49:09,173,pump,temp,Pump Temperature is LOW,LOW,-127.0,°C2026-06-24,17:10:59,27,AC motor,current,AC Motor Current is LOW,LOW,0.0,A
+2026-06-24,17:11:01,28,belt,speed,Belt Speed is LOW,LOW,0.0,m/s
+2026-06-24,17:11:02,29,DC Motor,Vibration,DC Motor Vibration is LOW,LOW,0.0,m/s²

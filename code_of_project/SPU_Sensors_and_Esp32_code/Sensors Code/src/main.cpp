@@ -147,33 +147,27 @@ void loop()
         float flowRate = readFlowRate();
         totalLiters += flowRate / 60.0;
         //---------------- Assign data in classes for actuators from sensors ----------------
-        motor.Current.Phase_R = motor_current_r;
-        motor.Current.Phase_S = motor_current_s;
-        motor.Current.Phase_T = motor_current_t;
-        motor.Volt.Phase_R = motor_voltage_r;
-        motor.Volt.Phase_S = motor_voltage_s;
-        motor.Volt.Phase_T = motor_voltage_t;
-        motor.Temperature = motor_temperature;
-        motor.Vibration = vib.rms;
-        pump.Temperature = pump_temperature;
-        pump.Flow_Rate = flowRate;
-        //---------------- debug ----------------
-        if (Enable_Debug)
-        {
-            Serial.println("------ SENSOR DATA ------");
-            Serial.print("Motor Temp: "); Serial.println(motor_temperature);
-            Serial.print("Pump Temp: "); Serial.println(pump_temperature);
-            Serial.print("Flow Rate: "); Serial.println(flowRate);
-            Serial.print("Total L: "); Serial.println(totalLiters);
-            Serial.print("Vib RMS: "); Serial.println(vib.rms);
-            Serial.print("Current R: "); Serial.println(motor_current_r);
-            Serial.print("Current S: "); Serial.println(motor_current_s);
-            Serial.print("Current T: "); Serial.println(motor_current_t);
-            Serial.print("Voltage R: "); Serial.println(motor_voltage_r);
-            Serial.print("Voltage S: "); Serial.println(motor_voltage_s);
-            Serial.print("Voltage T: "); Serial.println(motor_voltage_t);
-            Serial.println("------------------------");
-        }
+        // motor.Current.Phase_R = motor_current_r;
+        // motor.Current.Phase_S = motor_current_s;
+        // motor.Current.Phase_T = motor_current_t;
+        // motor.Volt.Phase_R = motor_voltage_r;
+        // motor.Volt.Phase_S = motor_voltage_s;
+        // motor.Volt.Phase_T = motor_voltage_t;
+        // motor.Temperature = motor_temperature;
+        // motor.Vibration = vib.rms;
+        // pump.Temperature = pump_temperature;
+        // pump.Flow_Rate = flowRate;
+        motor.Current.Phase_R = 0;
+        motor.Current.Phase_S = 0;
+        motor.Current.Phase_T = 0;
+        motor.Volt.Phase_R = 0;
+        motor.Volt.Phase_S = 0;
+        motor.Volt.Phase_T = 0;
+        motor.Temperature = 0;
+        motor.Vibration = 0;
+        pump.Temperature = 0;
+        pump.Flow_Rate = 0;
+        belt.Speed = 0;
         //---------------- Send data to Raspberry Pi ----------------
         if(motor != last_motor || pump != last_pump || belt != last_belt || overall != last_overall)
         {

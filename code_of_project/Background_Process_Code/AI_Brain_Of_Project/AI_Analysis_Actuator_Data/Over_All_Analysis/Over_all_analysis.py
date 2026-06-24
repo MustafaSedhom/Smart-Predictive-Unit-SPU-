@@ -28,15 +28,23 @@ class Over_All_Analysis:
 
         return overall_health
     def over_all_maintenance(self):
+        values = []
         motor = self.Data_Base.Data_Base.motor.get_Predicted_fault()
         belt = self.Data_Base.Data_Base.belt.get_Predicted_fault()
         pump = self.Data_Base.Data_Base.pump.get_Predicted_fault()
+        for v in [motor, belt, pump]:
+            try:
+                values.append(int(v))
+            except (ValueError, TypeError):
+                pass
 
-        # nearest maintenance time
-        next_maintenance = min(motor, belt, pump)
+        if values:
+            next_maintenance = min(values)
+        else:
+            next_maintenance = 0
 
         self.Data_Base.Data_Base.overall.set_Next_Maintenance(
-            int(next_maintenance)
+            next_maintenance
         )
 
         return next_maintenance

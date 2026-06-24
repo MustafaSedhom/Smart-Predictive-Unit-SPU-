@@ -76,9 +76,9 @@ def Store_Pump_Data(
             "Date": now.strftime("%Y-%m-%d"),
             "Time": now.strftime("%H:%M:%S"),
 
-            "Pressure_In": Pressure_In,
-            "Flow_Rate": Flow_Rate,
-            "Temperature": Temperature
+            "Volt": Pressure_In,
+            "Current": Flow_Rate,
+            "Vibration": Temperature
         }
 
         data = pd.DataFrame([data_dict])
@@ -194,8 +194,8 @@ def Store_Health_Data(
             "Date": now.strftime("%Y-%m-%d"),
             "Time": now.strftime("%H:%M:%S"),
 
-            "Motor_Health": Motor_Health,
-            "Pump_Health": Pump_Health,
+            "AC_Motor_Health": Motor_Health,
+            "DC_Motor_Health": Pump_Health,
             "Belt_Health": Belt_Health
         }
 

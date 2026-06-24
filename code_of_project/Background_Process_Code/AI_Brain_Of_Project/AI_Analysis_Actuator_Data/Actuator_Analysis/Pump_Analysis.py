@@ -35,10 +35,10 @@ class Pump_Analysis:
 
         # Convert numeric columns
         numeric_cols = [
-            "Temperature",
-            "Pressure_In",
-            "Flow_Rate",
-            "Pump_Health"
+            "Vibration",
+            "Volt",
+            "Current",
+            "DC_Motor_Health"
         ]
 
         for col in numeric_cols:
@@ -92,7 +92,7 @@ class Pump_Analysis:
             print("No data available")
             return 0
 
-        avg_temp = df["Temperature"].mean()
+        avg_temp = df["Vibration"].mean()
 
         normal = self.Data_Base.Data_Base.min_normal_max_values.get_pump_min_normal_max_values_Temperature_normal()
         max_t = self.Data_Base.Data_Base.min_normal_max_values.get_pump_min_normal_max_values_Temperature_max()
@@ -112,12 +112,12 @@ class Pump_Analysis:
             return 0
 
         # convert column to numeric
-        df["Pressure_In"] = pd.to_numeric(
-            df["Pressure_In"],
+        df["Volt"] = pd.to_numeric(
+            df["Volt"],
             errors="coerce"
         )
 
-        avg_pressure = float(df["Pressure_In"].mean())
+        avg_pressure = float(df["Volt"].mean())
 
         normal = float(
             self.Data_Base.Data_Base.min_normal_max_values
@@ -142,7 +142,7 @@ class Pump_Analysis:
         if df.empty:
             print("No data available")
             return 0
-        avg_flow_rate = df["Flow_Rate"].mean()
+        avg_flow_rate = df["Current"].mean()
         normal = self.Data_Base.Data_Base.min_normal_max_values.get_pump_min_normal_max_values_Flow_Rate_normal()
         max_f = self.Data_Base.Data_Base.min_normal_max_values.get_pump_min_normal_max_values_Flow_Rate_max()
         health = 100 - ((avg_flow_rate - normal) / (max_f - normal)) * 100
@@ -189,7 +189,7 @@ class Pump_Analysis:
         filtered_df = self.calc_health_between_days()
         if filtered_df is None:
             return
-        health_values = filtered_df["Pump_Health"].tolist()
+        health_values = filtered_df["DC_Motor_Health"].tolist()
 
         days = calc_Actuator_predict_fault_days(
             health_values

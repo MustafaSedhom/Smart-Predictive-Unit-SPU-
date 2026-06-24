@@ -54,9 +54,9 @@ def Store_Data_Directly(data_base: Access_data_Base, health_file:str, motor_file
 
         Store_Pump_Data(
             file_path=pump_file,
-            Pressure_In=sensors.pump.get_pressure_in(),
-            Flow_Rate=sensors.pump.get_flow_rate(),
-            Temperature=sensors.pump.get_temperature()
+            Pressure_In=sensors.dc_motor.get_pressure_in(),
+            Flow_Rate=sensors.dc_motor.get_flow_rate(),
+            Temperature=sensors.dc_motor.get_temperature()
         )
 
     except Exception as e:

@@ -161,12 +161,14 @@ class Motor_Analysis:
         filtered_df = self.calc_health_between_days()
         if filtered_df is None:
             return
-        health_values = filtered_df["Motor_Health"].tolist()
+        health_values = filtered_df["AC_Motor_Health"].tolist()
         days = calc_Actuator_predict_fault_days(
             health_values
         )
         status = self.set_status_based_on_health(health)
         if status == "alert" or status == "warning":
             self.Data_Base.Data_Base.motor.set_Predicted_fault(str(int(days)))
+            pass
         elif status == "normal":
             self.Data_Base.Data_Base.motor.set_Predicted_fault(str(max_days_if_normal))
+        pass

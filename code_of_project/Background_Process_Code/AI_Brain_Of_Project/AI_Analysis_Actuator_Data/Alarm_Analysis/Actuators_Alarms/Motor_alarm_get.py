@@ -41,9 +41,9 @@ def motor_current_alarm(DB: Access_data_Base) -> AlertStruct | None:
         return None  # normal state
 
     return AlertStruct(
-        device="motor",
+        device="AC motor",
         type="current",
-        message=f"Motor Current is {current_level}",
+        message=f"AC Motor Current is {current_level}",
         level=current_level,
         value=float(motor_now_current),
         unit="A",
@@ -69,9 +69,9 @@ def motor_volt_alarm(DB: Access_data_Base) -> AlertStruct | None:
         return None  # normal state
 
     return AlertStruct(
-        device="motor",
+        device="AC motor",
         type="volt",
-        message=f"Motor Volt is {volt_level}",
+        message=f"AC Motor Volt is {volt_level}",
         level=volt_level,
         value=float(motor_now_volt),
         unit="V",
@@ -92,9 +92,9 @@ def motor_temp_alarm(DB: Access_data_Base) -> AlertStruct | None:
         return None  # normal state
 
     return AlertStruct(
-        device="motor",
+        device="AC motor",
         type="temp",
-        message=f"Motor Temperature is {temp_level}",
+        message=f"AC Motor Temperature is {temp_level}",
         level=temp_level,
         value=float(motor_temp),
         unit="°C",
@@ -115,9 +115,9 @@ def motor_vibration_alarm(DB: Access_data_Base) -> AlertStruct | None:
         return None  # normal state
 
     return AlertStruct(
-        device="motor",
+        device="AC motor",
         type="noise",
-        message=f"Motor Vibration is {vib_level}",
+        message=f"AC Motor Vibration is {vib_level}",
         level=vib_level,
         value=float(motor_vibration),
         unit="m/s²",

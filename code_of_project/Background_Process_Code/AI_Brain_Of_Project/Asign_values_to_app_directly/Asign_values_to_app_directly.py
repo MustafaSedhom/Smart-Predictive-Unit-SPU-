@@ -26,9 +26,9 @@ def put_belt_sensor(db:Access_data_Base, sensors:All_Sensor_Data_After_Receiving
     belt.set_Alignment(b.get_alignment())
     belt.set_Speed(b.get_speed())
 # pump values
-def put_pump_sensor(db:Access_data_Base, sensors:All_Sensor_Data_After_Receiving):
+def put_dc_motor_sensor(db:Access_data_Base, sensors:All_Sensor_Data_After_Receiving):
     pump = db.Data_Base.pump
-    p = sensors.pump
+    p = sensors.dc_motor
     pump.set_Pressure_In(p.get_pressure_in())
     pump.set_Flow_Rate(p.get_flow_rate())
     pump.set_Temperature(p.get_temperature())
@@ -41,5 +41,5 @@ def put_overall_values(db:Access_data_Base, sensors:All_Sensor_Data_After_Receiv
 def put_sensors_value_and_send_it_to_app_directly(Data:Access_data_Base, sensors:All_Sensor_Data_After_Receiving):
     put_motor_sensors(Data, sensors)
     put_belt_sensor(Data, sensors)
-    put_pump_sensor(Data, sensors)
+    put_dc_motor_sensor(Data, sensors)
     put_overall_values(Data, sensors)

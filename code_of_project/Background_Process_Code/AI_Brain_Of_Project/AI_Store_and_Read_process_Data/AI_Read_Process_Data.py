@@ -70,9 +70,9 @@ def Read_Last_Pump_Data(file_path):
             "Date": last_row["Date"],
             "Time": last_row["Time"],
 
-            "Pressure_In": last_row["Pressure_In"],
-            "Flow_Rate": last_row["Flow_Rate"],
-            "Temperature": last_row["Temperature"]
+            "Volt": last_row["Volt"],
+            "Current": last_row["Current"],
+            "Vibration": last_row["Vibration"]
         }
         pump_data = {k: float(v) if hasattr(v, "item") else v
               for k, v in pump_data.items()}
@@ -129,8 +129,8 @@ def Read_Last_Alarms_Data(file_path):
             "Date": last_row["Date"],
             "Time": last_row["Time"],
 
-            "Motor_Alarm": last_row["Motor_Alarm"],
-            "Pump_Alarm": last_row["Pump_Alarm"],
+            "AC_Motor_Alarm": last_row["AC_Motor_Alarm"],
+            "DC_Motor_Alarm": last_row["DC_Motor_Alarm"],
             "Belt_Alarm": last_row["Belt_Alarm"]
         }
         alarms_data = {k: float(v) if hasattr(v, "item") else v

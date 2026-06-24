@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously, unused_local_variable, unnecessary_nullable_for_final_variable_declarations
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,11 +35,11 @@ class DrawAllScreens extends StatefulWidget {
 
 class _DrawAllScreensState extends State<DrawAllScreens> {
   List<MachineCardData> default_cards = [];
+  Timer? _dataTimer;
   void loadData() async {
     final Motor? motorData = await loadMotorFromFile();
     final Pump? pumpData = await loadPumpFromFile();
     final BeltDriver? beltDriverData = await loadBeltDriverFromFile();
-
     if (!mounted) return;
 
     final cards = [
@@ -92,6 +94,15 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
     super.initState();
     initPassword();
     loadData();
+    _dataTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      loadData();
+    });
+  }
+
+  @override
+  void dispose() {
+    _dataTimer?.cancel();
+    super.dispose();
   }
 
   Future<void> initPassword() async {

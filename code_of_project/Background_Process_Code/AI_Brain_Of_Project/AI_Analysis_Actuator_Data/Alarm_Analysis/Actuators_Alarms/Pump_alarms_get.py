@@ -34,12 +34,12 @@ def pump_temp_alarm(DB: Access_data_Base) -> AlertStruct | None:
         return None
 
     return AlertStruct(
-        device="pump",
-        type="temp",
-        message=f"Pump Temperature is {temp_level}",
+        device="DC Motor",
+        type="Vibration",
+        message=f"DC Motor Vibration is {temp_level}",
         level=temp_level,
         value=float(pump_temp),
-        unit="°C",
+        unit="m/s²",
     )
 
 def pump_flow_alarm(DB: Access_data_Base) -> AlertStruct | None:
@@ -58,12 +58,12 @@ def pump_flow_alarm(DB: Access_data_Base) -> AlertStruct | None:
         return None
 
     return AlertStruct(
-        device="pump",
-        type="FLOW_RATE",
-        message=f"Pump Flow Rate is {flow_level}",
+        device="DC Motor",
+        type="Current",
+        message=f"DC Motor Current Rate is {flow_level}",
         level=flow_level,
         value=float(flow_rate),
-        unit="L/min",
+        unit="A",
     )
 
 def pump_pressure_alarm(DB: Access_data_Base) -> AlertStruct | None:
@@ -82,12 +82,12 @@ def pump_pressure_alarm(DB: Access_data_Base) -> AlertStruct | None:
         return None
 
     return AlertStruct(
-        device="pump",
-        type="pressure",
-        message=f"Pump Pressure is {pressure_level}",
+        device="DC Motor",
+        type="Volt",
+        message=f"DC Motor Volt is {pressure_level}",
         level=pressure_level,
         value=float(pressure),
-        unit="bar",
+        unit="V",
     )
 
 

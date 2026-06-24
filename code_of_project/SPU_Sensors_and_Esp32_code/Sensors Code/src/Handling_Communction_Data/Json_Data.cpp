@@ -39,7 +39,7 @@ void Json_Data::convert_to_json_formate()
     Serial.print("{");
 
     // ================= MOTOR =================
-    Serial.print("\"Motor\":{");
+    Serial.print("\"AC_Motor\":{");
     Serial.print("\"temperature\":");
     Serial.print(_motor.Temperature);
 
@@ -83,14 +83,14 @@ void Json_Data::convert_to_json_formate()
     Serial.print("}");
 
     // ================= PUMP =================
-    Serial.print(",\"Pump\":{");
-    Serial.print("\"Pressure_In\":");
+    Serial.print(",\"DC_Motor\":{");
+    Serial.print("\"Volt\":");
     Serial.print(_pump.Pressure);
 
-    Serial.print(",\"Flow_Rate\":");
+    Serial.print(",\"Current\":");
     Serial.print(_pump.Flow_Rate);
 
-    Serial.print(",\"Temperature\":");
+    Serial.print(",\"Vibration\":");
     Serial.print(_pump.Temperature);
     Serial.print("}");
 
