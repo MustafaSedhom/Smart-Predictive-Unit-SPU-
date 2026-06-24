@@ -67,7 +67,7 @@ class _MotorDetailsState extends State<MotorDetails> {
                   Spacer(),
                   // image
                   Text(
-                    "Motor Details",
+                    "AC Motor Details",
                     style: TextStyle(
                       color: AppColors.Drawer_text_color,
                       fontSize: 27,
@@ -90,7 +90,7 @@ class _MotorDetailsState extends State<MotorDetails> {
             Column(
               children: [
                 Text(
-                  "Motor State",
+                  "AC Motor State",
                   style: TextStyle(
                     color: Colors.amber,
                     fontSize: 20,
@@ -143,19 +143,19 @@ class _MotorDetailsState extends State<MotorDetails> {
                   child: Row(
                     children: [
                       CustomValueSensorCard(
-                        name: 'Volt P1',
+                        name: 'Volt P R',
                         value: '${motor?.Volt_p1 ?? 0}',
                         uint: 'V',
                       ),
                       Gap(0.05 * screen_width),
                       CustomValueSensorCard(
-                        name: 'Volt P2',
+                        name: 'Volt P S',
                         value: '${motor?.Volt_p2 ?? 0}',
                         uint: 'V',
                       ),
                       Gap(0.05 * screen_width),
                       CustomValueSensorCard(
-                        name: 'Volt P3',
+                        name: 'Volt P T',
                         value: '${motor?.Volt_p3 ?? 0}',
                         uint: 'V',
                       ),
@@ -183,19 +183,19 @@ class _MotorDetailsState extends State<MotorDetails> {
                   child: Row(
                     children: [
                       CustomValueSensorCard(
-                        name: "Current P1",
+                        name: "Cur P R",
                         value: '${motor?.Current_p1 ?? 0}',
                         uint: 'A',
                       ),
                       Gap(0.04 * screen_width),
                       CustomValueSensorCard(
-                        name: "Current P2",
+                        name: "Cur P S",
                         value: '${motor?.Current_p2 ?? 0}',
                         uint: 'A',
                       ),
                       Gap(0.04 * screen_width),
                       CustomValueSensorCard(
-                        name: "Current P3",
+                        name: "Cur P T",
                         value: '${motor?.Current_p3 ?? 0}',
                         uint: 'A',
                       ),

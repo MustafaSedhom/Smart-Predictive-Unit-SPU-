@@ -52,7 +52,7 @@ class _BPumpDetailsState extends State<PumpDetails> {
       padding: const EdgeInsets.all(8.0),
       child: ChangesColorContainer(
         shadow: AppColors.shadow_list,
-       colors: AppColors.color_list,
+        colors: AppColors.color_list,
         saveKey: 'Pump_Details_Color',
         child: Column(
           children: [
@@ -66,7 +66,7 @@ class _BPumpDetailsState extends State<PumpDetails> {
                   Spacer(),
                   // image
                   Text(
-                    "Pump Details",
+                    "DC Motor Details",
                     style: TextStyle(
                       color: AppColors.Drawer_text_color,
                       fontSize: 27,
@@ -89,7 +89,7 @@ class _BPumpDetailsState extends State<PumpDetails> {
             Column(
               children: [
                 Text(
-                  "Pump State",
+                  "DC Motor State",
                   style: TextStyle(
                     color: Colors.amber,
                     fontSize: 20,
@@ -142,21 +142,21 @@ class _BPumpDetailsState extends State<PumpDetails> {
                   child: Row(
                     children: [
                       CustomValueSensorCard(
-                        name: 'Pressure',
+                        name: 'Volt',
                         value: '${pump?.Pressure_In ?? 0}',
-                        uint: 'Bar',
+                        uint: 'V',
                       ),
                       Gap(0.03 * screen_width),
                       CustomValueSensorCard(
-                        name: 'Flow Rate',
+                        name: 'Current',
                         value: '${pump?.Flow_Rate ?? 0}',
-                        uint: 'L/min',
+                        uint: 'A',
                       ),
                       Gap(0.03 * screen_width),
                       CustomValueSensorCard(
-                        name: 'Temperature',
+                        name: 'Vibration',
                         value: '${pump?.Temperature ?? 0}',
-                        uint: '°C',
+                        uint: 'm/s²',
                       ),
                     ],
                   ),

@@ -1,124 +1,29 @@
-// ignore_for_file: non_constant_identifier_names, use_build_context_synchronously
+// ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spu_linux_app/DataBase/Admin/Admin_Settings.dart';
-
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Advanced_settings_screen/widgets/Custom_changes.dart';
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/Admin_Setting.dart';
-
 import 'package:spu_linux_app/Screens/Setting_screen/widgets/SPU_logo_Setting.dart';
-import 'package:spu_linux_app/colors/App_colors.dart';
-import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
+import 'package:spu_linux_app/widgets/custom_snake_bar.dart';
 
-// ignore: must_be_immutable
 class SettingScreen extends StatefulWidget {
-  final VoidCallback? advanced_setting_ontap;
-  const SettingScreen({super.key, this.advanced_setting_ontap});
+  final VoidCallback? advancedSettingOnTap;
+  const SettingScreen({super.key, this.advancedSettingOnTap});
 
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  final TextEditingController EmailController = TextEditingController();
-  final TextEditingController PhoneController = TextEditingController();
-  bool EmailLoading = false;
-  bool PhoneLoading = false;
-
-  Future<void> saveAdminData() async {
-    final email = EmailController.text.trim();
-    final phone = PhoneController.text.trim();
-
-    // 1. Save in JSON file
-    final admin = await loadAdminSettingsFromFile();
-
-    admin.Email = email;
-    admin.Phone = phone;
-
-    await saveAdminSettingsToFile(admin);
-
-    // 2. Save in SharedPreferences (cache / quick access)
-  }
-
-  Future<void> loadEmail() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    String email = prefs.getString('admin_email') ?? '';
-
-    setState(() {
-      EmailController.text = email;
-    });
-  }
-
-  Future<void> loadPhone() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    String phone = prefs.getString('admin_phone') ?? '';
-
-    setState(() {
-      PhoneController.text = phone;
-    });
-  }
-
-  Future<void> saveEmail() async {
-    setState(() => EmailLoading = true);
-
-    final email = EmailController.text.trim();
-    final prefs = await SharedPreferences.getInstance();
-
-    // 1. Update JSON
-    final admin = await loadAdminSettingsFromFile();
-    admin.Email = email;
-    await saveAdminSettingsToFile(admin);
-
-    // 2. Update SharedPreferences
-    await prefs.setString('admin_email', email);
-
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    if (!mounted) return;
-
-    setState(() => EmailLoading = false);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Email saved successfully ✅'),
-        backgroundColor: Colors.green,
-      ),
-    );
-  }
-
-  Future<void> savePhone() async {
-    setState(() => PhoneLoading = true);
-
-    final phone = PhoneController.text.trim();
-    final prefs = await SharedPreferences.getInstance();
-
-    // 1. Update JSON
-    final admin = await loadAdminSettingsFromFile();
-    admin.Phone = phone;
-    await saveAdminSettingsToFile(admin);
-
-    // 2. Update SharedPreferences
-    await prefs.setString('admin_phone', phone);
-
-    await Future.delayed(const Duration(milliseconds: 500));
-
-    if (!mounted) return;
-
-    setState(() => PhoneLoading = false);
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Phone number saved successfully ✅'),
-        backgroundColor: Colors.green,
-      ),
-    );
-  }
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  bool emailLoading = false;
+  bool phoneLoading = false;
 
   @override
   void initState() {
@@ -129,132 +34,274 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   void dispose() {
-    EmailController.dispose();
-    PhoneController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
     super.dispose();
+  }
+
+  Future<void> loadEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      emailController.text = prefs.getString('admin_email') ?? '';
+    });
+  }
+
+  Future<void> loadPhone() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      phoneController.text = prefs.getString('admin_phone') ?? '';
+    });
+  }
+
+  Future<void> saveEmail() async {
+    setState(() => emailLoading = true);
+    final email = emailController.text.trim();
+    final prefs = await SharedPreferences.getInstance();
+
+    final admin = await loadAdminSettingsFromFile();
+    admin.Email = email;
+    await saveAdminSettingsToFile(admin);
+
+    await prefs.setString('admin_email', email);
+    await Future.delayed(const Duration(milliseconds: 400));
+
+    if (!mounted) return;
+    setState(() => emailLoading = false);
+
+    custom_snake_bar(
+      context,
+      'Email config updated successfully',
+      const Color(0xFF00F5D4),
+    );
+  }
+
+  Future<void> savePhone() async {
+    setState(() => phoneLoading = true);
+    final phone = phoneController.text.trim();
+    final prefs = await SharedPreferences.getInstance();
+
+    final admin = await loadAdminSettingsFromFile();
+    admin.Phone = phone;
+    await saveAdminSettingsToFile(admin);
+
+    await prefs.setString('admin_phone', phone);
+    await Future.delayed(const Duration(milliseconds: 400));
+
+    if (!mounted) return;
+    setState(() => phoneLoading = false);
+
+    custom_snake_bar(
+      context,
+      'Comms pipeline phone saved',
+      const Color(0xFF00F5D4),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    double screen_width = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Gap(10),
-          //Appbar
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Admin Setting",
-                  style: CustomAppBarTextStyle.appbar_text_style(size: 25),
-                ),
-                InkWell(
-                  // ignore: deprecated_member_use
-                  hoverColor: AppColors.Drawer_icon_selected_color.withOpacity(
-                    0.5,
+    return Scaffold(
+      backgroundColor: const Color(0xFF0F111A),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF1A1F38), Color(0xFF0F111A)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.4),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: AppBar(
+            title: const Text(
+              'ADMIN CONTROL PANEL',
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+                letterSpacing: 1.5,
+                fontSize: 16,
+              ),
+            ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            centerTitle: true,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Material(
+                      color: Colors.white.withOpacity(0.04),
+                      child: InkWell(
+                        hoverColor: const Color(0xFF3B82F6).withOpacity(0.15),
+                        onTap: widget.advancedSettingOnTap,
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          // decoration: Border.all(
+                          //   color: Colors.white10,
+                          // ),//.wrap(BoxDecoration), // compatibility fallback
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Image.asset(
+                                AppIcons.Advance_setting_Icon,
+                                width: 18,
+                                height: 18,
+                                color: const Color(0xFF3B82F6),
+                              ),
+                              const Gap(8),
+                              const Text(
+                                "Advanced",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-
-                  radius: 50,
-                  borderRadius: BorderRadius.circular(50),
-                  onTap: widget.advanced_setting_ontap,
-                  child: Image.asset(
-                    AppIcons.Advance_setting_Icon,
-                    width: 30,
-                    color: AppColors.Drawer_text_color,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSectionHeader("GATEWAY SYSTEM CONTACTS", Icons.hub_outlined),
+            const Gap(12),
+            Container(
+              decoration: BoxDecoration(
+                color: const Color(0xFF141726),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.white.withOpacity(0.05)),
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+              child: Column(
+                children: [
+                  CustomChanges(
+                    controller: emailController,
+                    title: "System Admin Email",
+                    hint: "Enter alert routing email",
+                    prefix_icon: Icons.alternate_email_rounded,
+                    is_saved: emailLoading,
+                    ontap_prefix_icon: () {},
+                    save_operation: saveEmail,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: CustomDivider(),
+                  ),
+                  CustomChanges(
+                    controller: phoneController,
+                    title: "SMS Gateway Phone",
+                    hint: "Enter telemetry phone number",
+                    prefix_icon: Icons.phone_android_rounded,
+                    is_saved: phoneLoading,
+                    ontap_prefix_icon: () {},
+                    save_operation: savePhone,
+                  ),
+                ],
+              ),
+            ),
+            const Gap(28),
+            _buildSectionHeader("HMI DISPLAY GRAPHICS", Icons.layers_outlined),
+            const Gap(12),
+            Row(
+              children: [
+                Expanded(
+                  child: _buildGraphicCard(
+                    "Home Screen Wallpaper",
+                    const AdminSetting(),
+                  ),
+                ),
+                const Gap(16),
+                Expanded(
+                  child: _buildGraphicCard(
+                    "Corporate SPU Identifier",
+                    const SpuLogoSetting(),
                   ),
                 ),
               ],
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionHeader(String title, IconData icon) {
+    return Row(
+      children: [
+        Icon(icon, color: const Color(0xFF00F5D4), size: 18),
+        const Gap(8),
+        Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white60,
+            fontSize: 12,
+            fontWeight: FontWeight.w800,
+            letterSpacing: 1.2,
           ),
-          //divider
-          CustomDivider(),
-          Gap(5),
-          // change email
-          CustomChanges(
-            controller: EmailController,
-            title: "    Admin Email :            ",
-            hint: "Enter new email",
-            prefix_icon: Icons.email,
-            is_saved: EmailLoading,
-            ontap_prefix_icon: () {},
-            save_operation: saveEmail,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildGraphicCard(String title, Widget settingWidget) {
+    return Container(
+      height: 220,
+      decoration: BoxDecoration(
+        color: const Color(0xFF141726),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white.withOpacity(0.05)),
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
           ),
-          //divider
-          CustomDivider(),
-          Gap(5),
-          // change phone number
-          CustomChanges(
-            controller: PhoneController,
-            title: "Admin Phone Number : ",
-            hint: "Enter new phone number",
-            prefix_icon: Icons.phone,
-            is_saved: PhoneLoading,
-            ontap_prefix_icon: () {},
-            save_operation: savePhone,
+          const Gap(4),
+          Text(
+            "Modify interface asset file",
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.3),
+              fontSize: 11,
+            ),
           ),
-          //divider
-          CustomDivider(),
-          Gap(5),
-          // change images
-          SizedBox(
-            width: screen_width,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Gap(0.05 * screen_width),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Home Screen Image",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: AppColors.Drawer_icon_selected_color,
-                          ),
-                        ),
-                        Gap(5),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: AdminSetting(),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Gap(0.15 * screen_width),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "SPU Logo Image",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                            color: AppColors.Drawer_icon_selected_color,
-                          ),
-                        ),
-                        Gap(5),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: SpuLogoSetting(),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+          const Gap(14),
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color(0xFF0F111A),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.white.withOpacity(0.02)),
               ),
+              clipBehavior: Clip.antiAlias,
+              child: Center(child: settingWidget),
             ),
           ),
         ],

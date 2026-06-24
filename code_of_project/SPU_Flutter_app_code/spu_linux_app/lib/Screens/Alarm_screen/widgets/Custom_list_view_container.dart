@@ -22,6 +22,10 @@ class CustomListViewContainer extends StatelessWidget {
       return AppIcons.motor_belt_Icon;
     } else if (my_device == "PUMP") {
       return AppIcons.motor_pump_Icon;
+    } else if (my_device == "DC" ||
+        my_device == "DC MOTOR" ||
+        my_device == "DC_MOTOR") {
+      return AppIcons.motor_Icon;
     }
     return AppIcons.motor_Icon;
   }
@@ -30,7 +34,7 @@ class CustomListViewContainer extends StatelessWidget {
     String my_problem = problem.toUpperCase();
     if (my_problem == "TEMP" || my_problem == "TEMPERATURE") {
       return Icons.thermostat_rounded;
-    } else if (my_problem == "CURRENT") {
+    } else if (my_problem == "CURRENT" || my_problem == "VOLT") {
       return Icons.bolt;
     } else if (my_problem == "NOISE") {
       return Icons.graphic_eq;

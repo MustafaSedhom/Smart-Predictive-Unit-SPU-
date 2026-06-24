@@ -9,6 +9,7 @@ import 'package:spu_linux_app/DataBase/Settings/Health_threshold_setting/Pump_He
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/changes_color_container.dart';
+import 'package:spu_linux_app/widgets/custom_snake_bar.dart';
 
 class HealthThreshold extends StatefulWidget {
   const HealthThreshold({super.key});
@@ -126,15 +127,7 @@ class _HealthThresholdState extends State<HealthThreshold> {
     //------------------------------------------------------
     // SnackBar
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Colors.green,
-        content: Text(
-          "Threshold Saved Successfully ✅",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
+    custom_snake_bar(context, "Threshold Saved Successfully", Colors.green);
   }
 
   // =========================
@@ -191,7 +184,7 @@ class _HealthThresholdState extends State<HealthThreshold> {
               // Motor
               // =========================
               actuator_box(
-                title: "Motor",
+                title: "AC Motor",
                 icon: AppIcons.motor_Icon,
                 warning_controller: motor_warning_controller,
                 alert_controller: motor_alert_controller,
@@ -208,7 +201,7 @@ class _HealthThresholdState extends State<HealthThreshold> {
               ),
               Gap(20),
               actuator_box(
-                title: "Pump",
+                title: "DC Motor",
                 icon: AppIcons.motor_pump_Icon,
                 warning_controller: pump_warning_controller,
                 alert_controller: pump_alert_controller,

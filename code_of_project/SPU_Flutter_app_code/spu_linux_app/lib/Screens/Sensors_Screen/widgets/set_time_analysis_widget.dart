@@ -9,6 +9,7 @@ import 'package:spu_linux_app/DataBase/Settings/Time_Date_analysis.dart';
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/changes_color_container.dart';
+import 'package:spu_linux_app/widgets/custom_snake_bar.dart';
 import 'package:spu_linux_app/widgets/selsect_date_and_time.dart';
 
 class SetTimeAnalysisWidget extends StatefulWidget {
@@ -94,11 +95,10 @@ class _SetTimeAnalysisWidgetState extends State<SetTimeAnalysisWidget> {
     // Message
 
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: Colors.green,
-          content: Text("Analysis Time Saved Successfully ✅"),
-        ),
+      custom_snake_bar(
+        context,
+        "Analysis Time Saved Successfully ",
+        Colors.green,
       );
     }
   }

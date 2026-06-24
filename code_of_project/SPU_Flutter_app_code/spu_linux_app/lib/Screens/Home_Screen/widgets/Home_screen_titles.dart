@@ -66,7 +66,7 @@ class _HomeScreenTitlesState extends State<HomeScreenTitles> {
             icon_img: AppIcons.bell_Icon,
             title_upper: "Active Alarms",
             title_down: "${global?.activeAlarms ?? "∞"}",
-            card_color: AppColors.home_screen_title_alarm_color,
+            card_color: Colors.red,
           ),
 
           Gap(screen_width * 0.05),

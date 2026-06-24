@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -40,38 +42,36 @@ class _HomeScreenAppbarState extends State<HomeScreenAppbar> {
     return SizedBox(
       height: 40,
       width: double.infinity,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        child: Row(
-          children: [
-            // 1. Titles
-            Gap(25),
+      child: Row(
+        children: [
+          const Gap(25),
 
-            Text(
-              "SMART PREDICTIVE UNIT (SPU)",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: AppColors.Drawer_logo_text_color,
-              ),
+          Text(
+            "SMART PREDICTIVE UNIT (SPU)",
+            style: TextStyle(
+              fontSize: screenWidth < 700 ? 14 : 18,
+              fontWeight: FontWeight.bold,
+              color: AppColors.Drawer_logo_text_color,
             ),
+          ),
 
-            Gap(screenWidth * 0.17),
-            DigitalClockWidget(),
-            Gap(10),
-            CircleAvatar(
-              // radius: 30,
-              backgroundImage: image != null
-                  ? FileImage(image!, scale: 1)
-                  : null,
-            ),
+          const Spacer(),
 
-            const Gap(10),
-            _buildStatusIndicator(),
-            const Gap(10),
-          ],
-        ),
+          const DigitalClockWidget(),
+          const Gap(10),
+
+          CircleAvatar(
+            radius: 18,
+            backgroundImage: image != null ? FileImage(image!) : null,
+            child: image == null ? const Icon(Icons.person) : null,
+          ),
+
+          const Gap(10),
+
+          _buildStatusIndicator(),
+
+          const Gap(20),
+        ],
       ),
     );
   }
@@ -81,10 +81,9 @@ class _HomeScreenAppbarState extends State<HomeScreenAppbar> {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        // ignore: deprecated_member_use
         color: AppColors.Start_indicator_background_color.withOpacity(0.7),
         border: Border.all(
-          // ignore: deprecated_member_use
+
           color: AppColors.Start_indicator_color.withOpacity(0.3),
         ),
       ),
@@ -112,4 +111,57 @@ class _HomeScreenAppbarState extends State<HomeScreenAppbar> {
       ),
     );
   }
+}
+
+Widget addCardButton(VoidCallback onTap) {
+  return InkWell(
+    onTap: onTap,
+    borderRadius: BorderRadius.circular(22),
+    child: Container(
+      width: 220,
+      height: 80,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(22),
+        gradient: const LinearGradient(
+          colors: [Color(0xff2563EB), Color(0xff06B6D4)],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.blue.withOpacity(0.3),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      child: const Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            radius: 22,
+            backgroundColor: Colors.white24,
+            child: Icon(Icons.add, color: Colors.white, size: 28),
+          ),
+          SizedBox(width: 15),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Add Card",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                "Create new machine",
+                style: TextStyle(color: Colors.white70, fontSize: 12),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ),
+  );
 }

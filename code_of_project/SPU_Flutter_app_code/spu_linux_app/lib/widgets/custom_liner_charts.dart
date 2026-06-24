@@ -9,30 +9,20 @@ class CustomLineChart extends StatefulWidget {
   final double minY;
   final double maxY;
   final bool show;
-  // ignore: non_constant_identifier_names
   final bool show_color_under;
   final List<String> xLabels;
   final List<String> yLabels;
   final TextStyle style;
-  // ignore: non_constant_identifier_names
   final Color point_color;
-  // ignore: non_constant_identifier_names
   final double point_radius;
-  // ignore: non_constant_identifier_names
   final double padding_int_v;
-  // ignore: non_constant_identifier_names
   final double padding_int_h;
   final double spacing;
+
   const CustomLineChart({
     super.key,
     required this.spots,
-    this.colors = const [
-      Colors.red,
-      Colors.orange,
-      Colors.green,
-      Colors.blue,
-      Colors.deepPurple,
-    ],
+    this.colors = const [Color(0xFF00F5D4), Color(0xFF7B2CBF)],
     this.minX = 0,
     this.maxX = 10,
     this.minY = 0,
@@ -64,18 +54,16 @@ class CustomLineChart extends StatefulWidget {
       "9",
       "10",
     ],
-    this.style = const TextStyle(color: Colors.white),
-    // ignore: non_constant_identifier_names
+    this.style = const TextStyle(
+      color: Colors.white70,
+      fontSize: 10,
+      fontWeight: FontWeight.bold,
+    ),
     this.show_color_under = true,
-    // ignore: non_constant_identifier_names
-    this.point_color = Colors.white,
-    // ignore: non_constant_identifier_names
-    this.point_radius = 5,
-    // ignore: non_constant_identifier_names
+    this.point_color = const Color(0xFF00F5D4),
+    this.point_radius = 4,
     this.padding_int_v = 2,
-    // ignore: non_constant_identifier_names
     this.padding_int_h = 2,
-    // ignore: non_constant_identifier_names
     this.spacing = 1,
   });
 
@@ -107,25 +95,25 @@ class _CustomLineChartState extends State<CustomLineChart> {
       maxX: widget.maxX,
       minY: widget.minY,
       maxY: widget.maxY,
-
       gridData: const FlGridData(
         show: true,
         drawHorizontalLine: false,
         drawVerticalLine: false,
       ),
-
+      borderData: FlBorderData(show: false),
       lineBarsData: [
         LineChartBarData(
           spots: widget.spots,
           isCurved: true,
-          barWidth: 5,
-          color: Colors.amber,
+          curveSmoothness: 0.35,
+          barWidth: 4,
           gradient: LinearGradient(colors: widget.colors),
           belowBarData: BarAreaData(
             show: widget.show_color_under,
             gradient: LinearGradient(
-              // ignore: deprecated_member_use
-              colors: widget.colors.map((c) => c.withOpacity(0.3)).toList(),
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: widget.colors.map((c) => c.withOpacity(0.15)).toList(),
             ),
           ),
           dotData: FlDotData(
@@ -134,38 +122,41 @@ class _CustomLineChartState extends State<CustomLineChart> {
               return FlDotCirclePainter(
                 radius: widget.point_radius,
                 color: widget.point_color,
-                strokeWidth: 0,
-                strokeColor: Colors.blue,
+                strokeWidth: 2,
+                strokeColor: const Color(0xFF16192B),
               );
             },
           ),
         ),
       ],
       titlesData: FlTitlesData(
-        //  X axis
         bottomTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
+            reservedSize: 30,
             interval: widget.spacing == 0 ? 1 : widget.spacing,
             getTitlesWidget: (value, meta) {
-              return Text(safeXLabel(value), style: widget.style);
+              return Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(safeXLabel(value), style: widget.style),
+              );
             },
           ),
         ),
-
-        //  Y axis
         leftTitles: AxisTitles(
           sideTitles: SideTitles(
             showTitles: true,
+            reservedSize: 40,
             interval: widget.spacing == 0 ? 1 : widget.spacing,
             getTitlesWidget: (value, meta) {
               return Text(safeYLabel(value), style: widget.style);
             },
           ),
         ),
-
-        rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: true)),
-        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: true)),
+        rightTitles: const AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       ),
     );
   }

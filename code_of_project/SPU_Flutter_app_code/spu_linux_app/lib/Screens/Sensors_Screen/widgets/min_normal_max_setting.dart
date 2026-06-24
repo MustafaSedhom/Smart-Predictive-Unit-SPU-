@@ -9,6 +9,7 @@ import 'package:spu_linux_app/DataBase/Settings/Min_Normal_Max_values_Settings/P
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/changes_color_container.dart';
+import 'package:spu_linux_app/widgets/custom_snake_bar.dart';
 
 class MinNormalMaxSetting extends StatefulWidget {
   const MinNormalMaxSetting({super.key});
@@ -243,11 +244,10 @@ class _MinNormalMaxSettingState extends State<MinNormalMaxSetting> {
     //--------------------------------------------------------
 
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.green,
-          content: Text("Min Normal Max Values Saved Successfully ✅"),
-        ),
+      custom_snake_bar(
+        context,
+        "Min Normal Max Values Saved Successfully",
+        Colors.green,
       );
     }
   }
@@ -427,7 +427,7 @@ class _MinNormalMaxSettingState extends State<MinNormalMaxSetting> {
             //////////////////////////////////////////////////
             /// MOTOR
             actuator_container(
-              actuator_name: "Motor",
+              actuator_name: "AC Motor",
 
               actuator_icon: AppIcons.motor_Icon,
 
@@ -535,16 +535,16 @@ class _MinNormalMaxSettingState extends State<MinNormalMaxSetting> {
             //////////////////////////////////////////////////
             /// PUMP
             actuator_container(
-              actuator_name: "Pump",
+              actuator_name: "DC Motor",
 
               actuator_icon: AppIcons.motor_pump_Icon,
 
               child: Column(
                 children: [
                   parameter_container(
-                    title: "Pressure In",
+                    title: "Volt",
 
-                    icon: Icons.compress_rounded,
+                    icon: Icons.electric_bolt_rounded,
 
                     min_controller: pump_pressure_min,
                     normal_controller: pump_pressure_normal,
@@ -554,9 +554,9 @@ class _MinNormalMaxSettingState extends State<MinNormalMaxSetting> {
                   Gap(20),
 
                   parameter_container(
-                    title: "Flow Rate",
+                    title: "Current ",
 
-                    icon: Icons.water_drop_rounded,
+                    icon: Icons.electric_bolt_rounded,
 
                     min_controller: pump_flow_min,
                     normal_controller: pump_flow_normal,
@@ -566,9 +566,9 @@ class _MinNormalMaxSettingState extends State<MinNormalMaxSetting> {
                   Gap(20),
 
                   parameter_container(
-                    title: "Temperature",
+                    title: "Vibration",
 
-                    icon: Icons.thermostat_rounded,
+                    icon: Icons.vibration_rounded,
 
                     min_controller: pump_temp_min,
                     normal_controller: pump_temp_normal,

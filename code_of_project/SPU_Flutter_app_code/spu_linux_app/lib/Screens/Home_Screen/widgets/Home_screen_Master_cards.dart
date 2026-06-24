@@ -1,23 +1,19 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, unused_local_variable
 
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
-import 'package:spu_linux_app/DataBase/Belt_Driver_Card_Data.dart';
-import 'package:spu_linux_app/DataBase/Motor_Card_Data.dart';
-import 'package:spu_linux_app/DataBase/Pump_Card_Data.dart';
-import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Home_Screen/widgets/Home_screen_Master_custom_cards.dart';
-import 'package:spu_linux_app/Screens/Home_Screen/widgets/alert_items.dart';
-import 'package:spu_linux_app/widgets/Alarm_dialog.dart';
+import 'package:spu_linux_app/Screens/Home_Screen/widgets/machine_card_data.dart';
+import 'package:spu_linux_app/widgets/remove_dalaog_card.dart';
 
 class HomeScreenMasterCard extends StatefulWidget {
   final VoidCallback details;
   final VoidCallback alarm;
+  final List<MachineCardData> cards;
   const HomeScreenMasterCard({
     super.key,
     required this.details,
     required this.alarm,
+    required this.cards,
   });
 
   @override
@@ -25,223 +21,56 @@ class HomeScreenMasterCard extends StatefulWidget {
 }
 
 class _HomeScreenMasterCardState extends State<HomeScreenMasterCard> {
-  String? motor_status = "";
-
-  Motor? motor;
-  BeltDriver? beltDriver;
-  Pump? pump;
-  Timer? timer;
-
-  String? motor_temp_state;
-
-  String? belt_driver_temp_state;
-
-  String? pump_temp_state;
-  //////////////////////////////////
-  bool i_showed = false;
-  List<AlarmItem> alarms = [];
-  void addAlarm(AlarmItem item) {
-    if (item.status.toUpperCase() == "NONE") {
-      if (i_showed) return;
-      i_showed = true;
-      // showAlarmDialog(
-      //   context,
-      //   status: item.status,
-      //   img: AppIcons.System_Icon,
-      //   auto_close: true,
-      //   close_time_seconds: 2,
-      //   alarm_color: AppColors.Drawer_icon_selected_color,
-      //   message: "There Is Wrong In API.json",
-      // );
-      return;
-    }
-    i_showed = false;
-    // alarms.add(item);
-    // processAlarms();
-    show_alarm(item);
-  }
-
-  void processAlarms() async {
-    if (alarms.isEmpty) return;
-
-    while (alarms.isNotEmpty) {
-      final item = alarms.removeAt(0);
-
-      show_alarm(item);
-
-      await Future.delayed(const Duration(seconds: 1));
-    }
-  }
-
-  void show_alarm(AlarmItem item) {
-    showAlarmDialog(
-      context,
-      status: item.status,
-      img: item.img,
-      auto_close: true,
-      close_time_seconds: 2,
-      alarm_color: item.color,
-      message: item.message,
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // load data
-    Timer.periodic(const Duration(milliseconds: 100), (_) async {
-      await loadData();
-      if (!mounted) return;
-      // check status
-      if (motor == null) return;
-      // ================= MOTOR =================
-      if (motor != null) {
-        if (motor_temp_state == null) {
-          motor_temp_state = motor!.status;
-        } else if (motor!.status != motor_temp_state) {
-          motor_temp_state = motor!.status;
-
-          // addAlarm(
-          //   AlarmItem(
-          //     status: motor!.status,
-          //     img: AppIcons.motor_Icon,
-          //     color: getColor(motor!.status),
-          //     message: "Motor changed to ${motor!.status.toUpperCase()}",
-          //   ),
-          // );
-        }
-      }
-
-      // ================= BELT =================
-      if (beltDriver != null) {
-        if (belt_driver_temp_state == null) {
-          belt_driver_temp_state = beltDriver!.status;
-        } else if (beltDriver!.status != belt_driver_temp_state) {
-          belt_driver_temp_state = beltDriver!.status;
-
-          // addAlarm(
-          //   AlarmItem(
-          //     status: beltDriver!.status,
-          //     img: AppIcons.motor_belt_Icon,
-          //     color: getColor(beltDriver!.status),
-          //     message:
-          //         "Belt Driver changed to ${beltDriver!.status.toUpperCase()}",
-          //   ),
-          // );
-        }
-      }
-      // ================= PUMP =================
-      if (pump != null) {
-        if (pump_temp_state == null) {
-          pump_temp_state = pump!.status;
-        } else if (pump!.status != pump_temp_state) {
-          pump_temp_state = pump!.status;
-          // addAlarm(
-          //   AlarmItem(
-          //     status: pump!.status,
-          //     img: AppIcons.motor_pump_Icon,
-          //     color: getColor(pump!.status),
-          //     message: "Pump changed to ${pump!.status.toUpperCase()}",
-          //   ),
-          // );
-        }
-      }
-    });
-  }
-
-  Future<void> loadData() async {
-    final motorData = await loadMotorFromFile();
-    final pumpData = await loadPumpFromFile();
-    final beltDriverData = await loadBeltDriverFromFile();
-
-    if (!mounted) return;
-
-    setState(() {
-      motor = motorData;
-      pump = pumpData;
-      beltDriver = beltDriverData;
-    });
-  }
-
-  Color getColor(String status) {
-    switch (status.toUpperCase()) {
-      case "NORMAL":
-        return Colors.green;
-      case "WARNING":
-        return Colors.amber;
-      case "ALERT":
-      default:
-        return Colors.red;
-    }
-  }
-
-  @override
-  void dispose() {
-    timer?.cancel();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      physics: const BouncingScrollPhysics(),
-      child: Row(
-        children: [
-          HomeScreenMasterCustomCards(
-            value: motor?.Health ?? 0,
-            name: 'MOTOR',
-            img: AppImages.motor_Image,
-            img_icon: AppIcons.motor_Icon,
-            icon: Icons.macro_off,
-            status_name: motor?.status ?? "None",
-            txt_1_up: 'Temperature',
-            txt_1_down: '${motor?.Temperature ?? 0} \u00B0C',
-            txt_2_up: 'Vibration',
-            txt_2_down: '${motor?.Vibration ?? 0} m/s²',
-            txt_3_up: 'Current',
-            txt_3_down: '${motor?.Current ?? 0} A',
-            Days: motor?.Predicted_fault ?? "None",
-            view_details: widget.details,
-            alarm: widget.alarm,
-          ),
-          const Gap(20),
-          HomeScreenMasterCustomCards(
-            value: beltDriver?.Health ?? 0,
-            name: 'BELT DRIVE',
-            img: AppImages.motor_belt_Image,
-            img_icon: AppIcons.motor_belt_Icon,
-            icon: Icons.macro_off,
-            status_name: beltDriver?.status ?? "None",
-            txt_1_up: 'Tension',
-            txt_1_down: '${beltDriver?.Tension ?? 0} N',
-            txt_2_up: 'Alignment',
-            txt_2_down: '${beltDriver?.Alignment ?? 0} mm',
-            txt_3_up: 'Speed',
-            txt_3_down: '${beltDriver?.Speed ?? 0} RPM',
-            Days: beltDriver?.Predicted_fault ?? "None",
-            view_details: widget.details,
-            alarm: widget.alarm,
-          ),
-          const Gap(20),
-          HomeScreenMasterCustomCards(
-            value: pump?.Health ?? 0,
-            name: 'PUMP',
-            img: AppImages.motor_pump_Image,
-            img_icon: AppIcons.motor_pump_Icon,
-            icon: Icons.macro_off,
-            status_name: pump?.status ?? "None",
-            txt_1_up: 'Pressure In',
-            txt_1_down: '${pump?.Pressure_In ?? 0} bar',
-            txt_2_up: 'Flow Rate',
-            txt_2_down: '${pump?.Flow_Rate ?? 0} L/min',
-            txt_3_up: 'Temperature',
-            txt_3_down: '${pump?.Temperature ?? 0} \u00B0C',
-            Days: pump?.Predicted_fault ?? "None",
-            view_details: widget.details,
-            alarm: widget.alarm,
-          ),
-        ],
+    final width = MediaQuery.of(context).size.width;
+
+    int crossAxisCount;
+
+    if (width >= 1400) {
+      crossAxisCount = 3;
+    } else if (width >= 800) {
+      crossAxisCount = 2;
+    } else {
+      crossAxisCount = 1;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 20,
+        children: widget.cards.asMap().entries.map((entry) {
+          final index = entry.key;
+          final item = entry.value;
+
+          return GestureDetector(
+            onLongPress: () {
+              removeDialogCard(context, index);
+            },
+            child: SizedBox(
+              width: 260,
+              height: 310,
+              child: HomeScreenMasterCustomCards(
+                value: item.value.toInt(),
+                name: item.name,
+                img: item.img,
+                img_icon: item.imgIcon,
+                icon: Icons.macro_off,
+                status_name: item.statusName,
+                txt_1_up: item.sensor_1_name,
+                txt_1_down: item.sensor_1_value,
+                txt_2_up: item.sensor_2_name,
+                txt_2_down: item.sensor_2_value,
+                txt_3_up: item.sensor_3_name,
+                txt_3_down: item.sensor_3_value,
+                Days: item.days,
+                view_details: widget.details,
+                alarm: widget.alarm,
+              ),
+            ),
+          );
+        }).toList(),
       ),
     );
   }

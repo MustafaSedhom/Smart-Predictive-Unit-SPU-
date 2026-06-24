@@ -9,6 +9,7 @@ import 'package:spu_linux_app/DataBase/File_Paths.dart';
 import 'package:spu_linux_app/Screens/Advanced_settings_screen/widgets/Custom_changes.dart';
 import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
+import 'package:spu_linux_app/widgets/custom_snake_bar.dart';
 
 class AdvancedSettingScreen extends StatefulWidget {
   const AdvancedSettingScreen({super.key});
@@ -149,8 +150,8 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
     alarmController.text = await getPath("alarm") ?? "";
 
     FilePaths.json_path = jsonController.text;
-    FilePaths.motor_last_Data_path = motorController.text;
-    FilePaths.pump_last_Data_path = pumpController.text;
+    FilePaths.Ac_motor_last_Data_path = motorController.text;
+    FilePaths.Dc_motor_last_Data_path = pumpController.text;
     FilePaths.belt_last_Data_path = beltController.text;
     FilePaths.health_last_Data_path = healthController.text;
     FilePaths.alarm_last_Data_path = alarmController.text;
@@ -215,7 +216,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
           /// MOTOR
           CustomChanges(
             controller: motorController,
-            title: "Motor CSV :",
+            title: "Ac Motor CSV :",
             hint: "Path",
             is_saved: motorLoading,
             ontap_prefix_icon: () async {
@@ -231,14 +232,9 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                 setLoadingOn: () => setState(() => motorLoading = true),
                 setLoadingOff: () => setState(() => motorLoading = false),
                 onDone: () {
-                  FilePaths.motor_last_Data_path = motorController.text;
+                  FilePaths.Ac_motor_last_Data_path = motorController.text;
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Motor Saved ✅"),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
+                  custom_snake_bar(context, "AC Motor Saved", Colors.green);
                 },
               );
             },
@@ -250,7 +246,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
           /// PUMP
           CustomChanges(
             controller: pumpController,
-            title: "Pump CSV :",
+            title: "DC Motor CSV :",
             hint: "Path",
             is_saved: pumpLoading,
             ontap_prefix_icon: () async {
@@ -266,14 +262,9 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                 setLoadingOn: () => setState(() => pumpLoading = true),
                 setLoadingOff: () => setState(() => pumpLoading = false),
                 onDone: () {
-                  FilePaths.pump_last_Data_path = pumpController.text;
+                  FilePaths.Dc_motor_last_Data_path = pumpController.text;
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Pump Saved ✅"),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
+                  custom_snake_bar(context, "DC Motor Saved", Colors.green);
                 },
               );
             },
@@ -303,12 +294,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                 onDone: () {
                   FilePaths.belt_last_Data_path = beltController.text;
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Belt Saved ✅"),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
+                  custom_snake_bar(context, "Belt Saved ", Colors.green);
                 },
               );
             },
@@ -338,12 +324,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                 onDone: () {
                   FilePaths.health_last_Data_path = healthController.text;
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Health Saved ✅"),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
+                  custom_snake_bar(context, "Health Saved ", Colors.green);
                 },
               );
             },
@@ -373,12 +354,7 @@ class _AdvancedSettingScreenState extends State<AdvancedSettingScreen> {
                 onDone: () {
                   FilePaths.alarm_last_Data_path = alarmController.text;
 
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Alarm Saved ✅"),
-                      backgroundColor: Colors.green,
-                    ),
-                  );
+                  custom_snake_bar(context, "Alarm Saved ", Colors.green);
                 },
               );
             },

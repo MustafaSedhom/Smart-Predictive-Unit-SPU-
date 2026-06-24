@@ -8,6 +8,7 @@ import 'package:spu_linux_app/DataBase/Settings/Gear_setting.dart';
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/changes_color_container.dart';
+import 'package:spu_linux_app/widgets/custom_snake_bar.dart';
 
 class GearSettingScreen extends StatefulWidget {
   const GearSettingScreen({super.key});
@@ -78,11 +79,10 @@ class _GearSettingScreenState extends State<GearSettingScreen> {
     //------------------------------------------------------
 
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          backgroundColor: Colors.green,
-          content: Text("Gear Setting Saved Successfully ✅"),
-        ),
+      custom_snake_bar(
+        context,
+        "Gear Setting Saved Successfully ",
+        Colors.green,
       );
     }
   }

@@ -138,7 +138,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 Gap(5),
                 // version
                 Text(
-                  "SPU  V2.1.7",
+                  "SPU  V5.5.8",
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.5),
                     fontSize: 10,

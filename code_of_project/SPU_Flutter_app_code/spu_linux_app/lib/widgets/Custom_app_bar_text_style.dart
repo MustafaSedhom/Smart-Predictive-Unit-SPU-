@@ -1,13 +1,15 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:spu_linux_app/colors/App_colors.dart';
 
 class CustomAppBarTextStyle {
   // ignore: non_constant_identifier_names
   static TextStyle appbar_text_style({double size = 30}) {
     return TextStyle(
-      color: AppColors.home_screen_title_alarm_color,
-      fontWeight: FontWeight.bold,
-      fontSize: size,
+      fontWeight: FontWeight.w900,
+      color: Colors.white,
+      letterSpacing: 1.5,
+      fontSize: 16,
     );
   }
 }

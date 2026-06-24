@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, deprecated_member_use
+// ignore_for_file: deprecated_member_use
 
 import 'dart:async';
 import 'dart:io';
@@ -11,8 +11,6 @@ import 'package:spu_linux_app/DataBase/Last_Data/file_read.dart';
 import 'package:spu_linux_app/DataBase/Last_Data/file_result.dart';
 import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Last_Data_Screen.dart/widgets/List_Last_Data.dart';
-import 'package:spu_linux_app/colors/App_colors.dart';
-import 'package:spu_linux_app/widgets/Custom_app_bar_text_style.dart';
 import 'package:spu_linux_app/widgets/Custom_divider.dart';
 
 class ActuatorsLastDataScreen extends StatefulWidget {
@@ -25,12 +23,25 @@ class ActuatorsLastDataScreen extends StatefulWidget {
 
 class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
   StreamSubscription<FileSystemEvent>? fileWatcher;
-  late Future<FileResult> fileFuture;
-
+  Future<FileResult>? fileFuture;
   String selectedType = "Motor";
   bool newestFirst = true;
 
-  final List<String> dataTypes = ["Motor", "Pump", "Belt", "Health", "Alarm"];
+  final List<String> dataTypes = [
+    "AC Motor",
+    "DC Motor",
+    "Belt",
+    "Health",
+    "Alarm",
+  ];
+
+  final Map<String, String?> paths = {
+    "AC Motor": FilePaths.Ac_motor_last_Data_path,
+    "DC Motor": FilePaths.Dc_motor_last_Data_path,
+    "Belt": FilePaths.belt_last_Data_path,
+    "Health": FilePaths.health_last_Data_path,
+    "Alarm": FilePaths.alarm_last_Data_path,
+  };
 
   @override
   void initState() {
@@ -39,57 +50,39 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
   }
 
   void loadFile() {
-    String path = "";
+    final path = paths[selectedType] ?? "";
 
-    switch (selectedType) {
-      case "Motor":
-        path = FilePaths.motor_last_Data_path!;
-        break;
-
-      case "Pump":
-        path = FilePaths.pump_last_Data_path!;
-        break;
-
-      case "Belt":
-        path = FilePaths.belt_last_Data_path!;
-        break;
-
-      case "Health":
-        path = FilePaths.health_last_Data_path!;
-        break;
-
-      case "Alarm":
-        path = FilePaths.alarm_last_Data_path!;
-        break;
+    if (path.isEmpty) {
+      setState(() {
+        fileFuture = Future.value(
+          FileResult(hasData: false, rawData: "", message: "Invalid file path"),
+        );
+      });
+      return;
     }
 
     setState(() {
       fileFuture = FileReader.readFile(path);
     });
 
-    /// cancel old watcher
     fileWatcher?.cancel();
+    final file = File(path);
 
-    /// watch new file
-    fileWatcher = File(path).watch(events: FileSystemEvent.modify).listen((
-      event,
-    ) {
-      if (event.type == FileSystemEvent.modify) {
+    if (file.existsSync()) {
+      fileWatcher = file.watch().listen((event) {
+        if (!mounted) return;
         setState(() {
           fileFuture = FileReader.readFile(path);
         });
-      }
-    });
+      });
+    }
   }
 
   List<String> sortData(String rawData) {
     List<String> lines = rawData.split("\n");
-
     lines.removeWhere((e) => e.trim().isEmpty);
 
-    /// get header
     String? header;
-
     for (var line in lines) {
       if (line.contains("Date,Time")) {
         header = line;
@@ -97,33 +90,29 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
       }
     }
 
-    /// remove header from data
     lines.removeWhere((e) => e.contains("Date,Time"));
 
     lines.sort((a, b) {
       try {
         final regex = RegExp(r'(\d{4}-\d{2}-\d{2}),(\d{2}:\d{2}:\d{2})');
-
         final matchA = regex.firstMatch(a);
         final matchB = regex.firstMatch(b);
 
         if (matchA == null || matchB == null) return 0;
 
-        DateTime dateA = DateFormat(
+        final dateA = DateFormat(
           "yyyy-MM-dd HH:mm:ss",
         ).parse("${matchA.group(1)} ${matchA.group(2)}");
-
-        DateTime dateB = DateFormat(
+        final dateB = DateFormat(
           "yyyy-MM-dd HH:mm:ss",
         ).parse("${matchB.group(1)} ${matchB.group(2)}");
 
         return newestFirst ? dateB.compareTo(dateA) : dateA.compareTo(dateB);
-      } catch (e) {
+      } catch (_) {
         return 0;
       }
     });
 
-    /// put header first
     if (header != null) {
       lines.insert(0, header);
     }
@@ -140,220 +129,224 @@ class _ActuatorsLastDataScreenState extends State<ActuatorsLastDataScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff0F172A),
-
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Custom AppBar
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Last System Data",
-                    style: CustomAppBarTextStyle.appbar_text_style(size: 30),
-                  ),
-                  // sort button
-                  GestureDetector(
+      backgroundColor: const Color(0xFF0F111A),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF1A1F38), Color(0xFF0F111A)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.5),
+                blurRadius: 10,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: AppBar(
+            title: const Text(
+              'SYSTEM HISTORICAL DATA',
+              style: TextStyle(
+                fontWeight: FontWeight.w900,
+                color: Colors.white,
+                letterSpacing: 1.5,
+                fontSize: 16,
+              ),
+            ),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            centerTitle: true,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: Center(
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(12),
                     onTap: () {
                       setState(() {
                         newestFirst = !newestFirst;
                       });
                     },
                     child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 600),
-                      curve: Curves.easeInOut,
+                      duration: const Duration(milliseconds: 1000),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 18,
-                        vertical: 12,
+                        horizontal: 12,
+                        vertical: 8,
                       ),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-
-                        gradient: LinearGradient(
-                          colors: newestFirst
-                              ? [
-                                  const Color(0xff22C55E),
-                                  const Color(0xff16A34A),
-                                ]
-                              : [
-                                  const Color(0xff3B82F6),
-                                  const Color(0xff2563EB),
-                                ],
+                        color: newestFirst
+                            ? const Color(0xFF00F5D4).withOpacity(0.15)
+                            : const Color(0xFF3B82F6).withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: newestFirst
+                              ? const Color(0xFF00F5D4)
+                              : const Color(0xFF3B82F6),
+                          width: 1,
                         ),
-
-                        boxShadow: [
-                          BoxShadow(
-                            color:
-                                (newestFirst
-                                        ? const Color(0xff22C55E)
-                                        : const Color(0xff3B82F6))
-                                    .withOpacity(0.35),
-
-                            blurRadius: 12,
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          AnimatedRotation(
-                            turns: newestFirst ? 0 : 0.5,
-                            duration: const Duration(milliseconds: 600),
-
-                            child: const Icon(
-                              Icons.sync_alt_rounded,
-                              color: Colors.white,
-                              size: 22,
-                            ),
+                          Icon(
+                            Icons.swap_vert_rounded,
+                            size: 16,
+                            color: newestFirst
+                                ? const Color(0xFF00F5D4)
+                                : const Color(0xFF3B82F6),
                           ),
-                          Gap(10),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                newestFirst ? "Newest First" : "Oldest First",
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13,
-                                ),
-                              ),
-
-                              const SizedBox(height: 2),
-
-                              Text(
-                                newestFirst
-                                    ? "Latest data on top"
-                                    : "Old data on top",
-
-                                style: TextStyle(
-                                  color: Colors.white.withOpacity(0.8),
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ],
+                          const Gap(6),
+                          Text(
+                            newestFirst ? "Newest" : "Oldest",
+                            style: TextStyle(
+                              color: newestFirst
+                                  ? const Color(0xFF00F5D4)
+                                  : const Color(0xFF3B82F6),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                            ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                ],
-              ),
-              Gap(10),
-              // Select Data Type
-              SizedBox(
-                height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: dataTypes.length,
-                  itemBuilder: (context, index) {
-                    final item = dataTypes[index];
-
-                    final isSelected = item == selectedType;
-
-                    return GestureDetector(
-                      onTap: () {
-                        selectedType = item;
-                        loadFile();
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 250),
-                        margin: const EdgeInsets.only(right: 10),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 17,
-                          vertical: 10,
-                        ),
-                        decoration: BoxDecoration(
-                          color: isSelected
-                              ? const Color(0xff22C55E)
-                              : Colors.white.withOpacity(0.08),
-
-                          borderRadius: BorderRadius.circular(18),
-
-                          border: Border.all(
-                            color: isSelected
-                                ? Colors.greenAccent
-                                : Colors.white24,
-                          ),
-                        ),
-                        child: Center(
-                          child: Row(
-                            children: [
-                              Image.asset(
-                                AppIcons.Last_Data_from_Files_Icon,
-                                width: 30,
-                                color: isSelected
-                                    ? AppColors.Home_screen_background
-                                    : AppColors.Drawer_text_color,
-                              ),
-                              Gap(10),
-                              Text(
-                                item,
-                                style: TextStyle(
-                                  color: isSelected
-                                      ? AppColors.Home_screen_background
-                                      : AppColors.Drawer_text_color,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              Gap(5),
-              CustomDivider(),
-              Gap(5),
-              // Data
-              Expanded(
-                child: FutureBuilder<FileResult>(
-                  future: fileFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    if (!snapshot.hasData) {
-                      return const Center(
-                        child: Text(
-                          "No Data",
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 60,
-                          ),
-                        ),
-                      );
-                    }
-                    final result = snapshot.data!;
-                    if (!result.hasData) {
-                      return Center(
-                        child: Text(
-                          result.message,
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 60,
-                          ),
-                        ),
-                      );
-                    }
-                    // real data
-                    List<String> sortedData = sortData(result.rawData);
-                    return ListLastData(data: sortedData);
-                  },
                 ),
               ),
             ],
           ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 0.0),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 46,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                physics: const BouncingScrollPhysics(),
+                itemCount: dataTypes.length,
+                itemBuilder: (context, index) {
+                  final item = dataTypes[index];
+                  final isSelected = item == selectedType;
+
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: ChoiceChip(
+                      label: Text(item),
+                      selected: isSelected,
+                      onSelected: (selected) {
+                        if (selected && selectedType != item) {
+                          setState(() {
+                            selectedType = item;
+                          });
+                          loadFile();
+                        }
+                      },
+                      labelStyle: TextStyle(
+                        color: isSelected
+                            ? const Color(0xff22C55E)
+                            : Colors.white70,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                      ),
+                      avatar: Image.asset(
+                        AppIcons.Last_Data_from_Files_Icon,
+                        width: 18,
+                        color: isSelected
+                            ? const Color(0xff22C55E)
+                            : Colors.white54,
+                      ),
+                      selectedColor: const Color(0xFF16192B),
+                      backgroundColor: const Color(0xFF16192B),
+                      side: BorderSide(
+                        color: isSelected
+                            ? const Color(0xff22C55E)
+                            : Colors.white12,
+                        width: 1,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      showCheckmark: false,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 6,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const Gap(10),
+            const CustomDivider(),
+            const Gap(10),
+            Expanded(
+              child: fileFuture == null
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        color: Color(0xFF00F5D4),
+                      ),
+                    )
+                  : FutureBuilder<FileResult>(
+                      future: fileFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: Color(0xFF00F5D4),
+                            ),
+                          );
+                        }
+
+                        if (snapshot.hasError) {
+                          return Center(
+                            child: Text(
+                              snapshot.error.toString(),
+                              style: const TextStyle(
+                                color: Color(0xFFFF5A5F),
+                                fontSize: 14,
+                              ),
+                            ),
+                          );
+                        }
+
+                        final result = snapshot.data;
+                        if (result == null || !result.hasData) {
+                          return Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.folder_open_rounded,
+                                  size: 48,
+                                  color: Colors.white.withOpacity(0.1),
+                                ),
+                                const Gap(12),
+                                Text(
+                                  result?.message ?? "No Data Available",
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.3),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
+
+                        final sortedData = sortData(result.rawData);
+                        return ListLastData(data: sortedData);
+                      },
+                    ),
+            ),
+          ],
         ),
       ),
     );

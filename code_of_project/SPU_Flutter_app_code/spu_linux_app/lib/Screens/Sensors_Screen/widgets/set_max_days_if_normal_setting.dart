@@ -5,6 +5,7 @@ import 'package:spu_linux_app/Images/images_and_icons.dart';
 import 'package:spu_linux_app/Screens/Sensors_Screen/widgets/Custom_container_for_max_days.dart';
 import 'package:spu_linux_app/colors/App_colors.dart';
 import 'package:spu_linux_app/widgets/changes_color_container.dart';
+import 'package:spu_linux_app/widgets/custom_snake_bar.dart';
 
 class SetMaxDaysIfNormalSetting extends StatefulWidget {
   const SetMaxDaysIfNormalSetting({super.key});
@@ -66,11 +67,10 @@ class _SetMaxDaysIfNormalSettingState extends State<SetMaxDaysIfNormalSetting> {
     //------------------------------------------------------
 
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Max Days Saved Successfully ✅"),
-          backgroundColor: Colors.green,
-        ),
+       custom_snake_bar(
+        context,
+        "Max Days Saved Successfully ",
+        Colors.green,
       );
     }
   }
@@ -108,7 +108,7 @@ class _SetMaxDaysIfNormalSettingState extends State<SetMaxDaysIfNormalSetting> {
                   Gap(20),
                   CustomContainerForMaxDays(
                     icon: AppIcons.motor_Icon,
-                    text: "Motor Max Days",
+                    text: "AC Motor Max Days",
                     color: all_color,
                     shadow: AppColors.shadow_list,
                     current_val: motorValue,
@@ -132,7 +132,7 @@ class _SetMaxDaysIfNormalSettingState extends State<SetMaxDaysIfNormalSetting> {
                   Gap(20),
                   CustomContainerForMaxDays(
                     icon: AppIcons.motor_pump_Icon,
-                    text: "Pump Max Days",
+                    text: "DC Motor Max Days",
                     color: all_color,
                     shadow: AppColors.shadow_list,
                     get_value: (value) {

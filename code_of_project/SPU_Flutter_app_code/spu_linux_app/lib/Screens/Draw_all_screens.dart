@@ -1,8 +1,16 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, unused_local_variable, unnecessary_nullable_for_final_variable_declarations
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:spu_linux_app/DataBase/Belt_Driver_Card_Data.dart';
+import 'package:spu_linux_app/DataBase/Motor_Card_Data.dart';
+import 'package:spu_linux_app/DataBase/Pump_Card_Data.dart';
+import 'package:spu_linux_app/Images/images_and_icons.dart';
+import 'package:spu_linux_app/Providers/machine_provider.dart';
+import 'package:spu_linux_app/Screens/Add_Card_Screen/Add_Card_Screen.dart';
 import 'package:spu_linux_app/Screens/Advanced_settings_screen/Advanced_settings_screen.dart';
+import 'package:spu_linux_app/Screens/Home_Screen/widgets/machine_card_data.dart';
 import 'package:spu_linux_app/Screens/Last_Data_Screen.dart/Actuators_Last_Data_screen.dart';
 import 'package:spu_linux_app/Screens/Sensors_Screen/Sensors_Screen.dart';
 import 'package:spu_linux_app/widgets/Password_dialog.dart';
@@ -24,10 +32,66 @@ class DrawAllScreens extends StatefulWidget {
 }
 
 class _DrawAllScreensState extends State<DrawAllScreens> {
+  List<MachineCardData> default_cards = [];
+  void loadData() async {
+    final Motor? motorData = await loadMotorFromFile();
+    final Pump? pumpData = await loadPumpFromFile();
+    final BeltDriver? beltDriverData = await loadBeltDriverFromFile();
+
+    if (!mounted) return;
+
+    final cards = [
+      MachineCardData(
+        value: (motorData?.Health ?? 0).toDouble(),
+        name: 'AC MOTOR',
+        img: AppImages.motor_Image,
+        imgIcon: AppIcons.motor_Icon,
+        statusName: motorData?.status ?? "None",
+        sensor_1_name: 'Temperature',
+        sensor_1_value: '${motorData?.Temperature ?? 0} °C',
+        sensor_2_name: 'Vibration',
+        sensor_2_value: '${motorData?.Vibration ?? 0} m/s²',
+        sensor_3_name: 'Current',
+        sensor_3_value: '${motorData?.Current ?? 0} A',
+        days: motorData?.Predicted_fault ?? "None",
+      ),
+      MachineCardData(
+        value: (beltDriverData?.Health ?? 0).toDouble(),
+        name: 'BELT DRIVE',
+        img: AppImages.motor_belt_Image,
+        imgIcon: AppIcons.motor_belt_Icon,
+        statusName: beltDriverData?.status ?? "None",
+        sensor_1_name: 'Tension',
+        sensor_1_value: '${beltDriverData?.Tension ?? 0} N',
+        sensor_2_name: 'Alignment',
+        sensor_2_value: '${beltDriverData?.Alignment ?? 0} mm',
+        sensor_3_name: 'Speed',
+        sensor_3_value: '${beltDriverData?.Speed ?? 0} RPM',
+        days: beltDriverData?.Predicted_fault ?? "None",
+      ),
+      MachineCardData(
+        value: (pumpData?.Health ?? 0).toDouble(),
+        name: 'DC MOTOR',
+        img: AppImages.motor_pump_Image,
+        imgIcon: AppIcons.motor_pump_Icon,
+        statusName: pumpData?.status ?? "None",
+        sensor_1_name: 'Volt',
+        sensor_1_value: '${pumpData?.Pressure_In ?? 0} V',
+        sensor_2_name: 'Current',
+        sensor_2_value: '${pumpData?.Flow_Rate ?? 0} A',
+        sensor_3_name: 'Vibration',
+        sensor_3_value: '${pumpData?.Temperature ?? 0} m/s²',
+        days: pumpData?.Predicted_fault ?? "None",
+      ),
+    ];
+    Provider.of<MachineProvider>(context, listen: false).setSystemCards(cards);
+  }
+
   @override
   void initState() {
     super.initState();
     initPassword();
+    loadData();
   }
 
   Future<void> initPassword() async {
@@ -89,6 +153,12 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
             selectedIndex = menuItems.indexWhere((e) => e.title == "Alarm");
           });
         },
+        addCard: () {
+          setState(() {
+            // ignore: recursive_getters
+            selectedIndex = menuItems.indexWhere((e) => e.title == "Add");
+          });
+        },
       ),
     ),
     // DetailsScreen
@@ -120,7 +190,7 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
       title: "Admin",
       icon: Icons.person,
       page: SettingScreen(
-        advanced_setting_ontap: () async {
+        advancedSettingOnTap: () async {
           String? savedPassword = await loadPassword();
 
           bool result = await showPasswordDialog(
@@ -141,6 +211,19 @@ class _DrawAllScreensState extends State<DrawAllScreens> {
     ),
     // SettingScreen
     DrawerItem(title: "Settings", icon: Icons.settings, page: SensorsScreen()),
+    // AddScreen
+    DrawerItem(
+      title: "Add",
+      icon: Icons.add,
+      page: AddCardPage(
+        page_after_finish: () {
+          setState(() {
+            // ignore: recursive_getters
+            selectedIndex = menuItems.indexWhere((e) => e.title == "Home");
+          });
+        },
+      ),
+    ),
     // AdvancedSettingScreen
     DrawerItem(
       title: "Advanced",
