@@ -35,21 +35,21 @@ class Phases
 };
 
 // Motor
-class Motor
+class AC_Motor
 {
    public:
       float Temperature;
       float Vibration;
       Phases Volt;
       Phases Current;
-      Motor()
+      AC_Motor()
       {
          Temperature = 0;
          Vibration = 0 ;
          Volt = Phases() ;
          Current = Phases() ;
       }
-      Motor(float temp,float vib,Phases V,Phases C)
+      AC_Motor(float temp,float vib,Phases V,Phases C)
       {
          Temperature = temp;
          Vibration = vib ;
@@ -57,7 +57,7 @@ class Motor
          Current = C ;
       }
 
-      bool operator==(const Motor& other) const
+      bool operator==(const AC_Motor& other) const
       {
          return Temperature == other.Temperature &&
                   Vibration == other.Vibration &&
@@ -65,7 +65,7 @@ class Motor
                   Current == other.Current;
       }
 
-      bool operator!=(const Motor& other) const
+      bool operator!=(const AC_Motor& other) const
       {
          return !(*this == other);
       }
@@ -102,33 +102,33 @@ class Belt
       }
 };
 
-// Pump
-class Pump
+// DC_Motor
+class DC_Motor
 {
    public:
-      float Pressure;
-      float Flow_Rate;
-      float Temperature;
-      Pump ()
+      float Volt;
+      float Current;
+      float Vibration;
+      DC_Motor ()
       {
-         Pressure = 0 ;
-         Flow_Rate = 0 ;
-         Temperature = 0 ;
+         Volt = 0 ;
+         Current = 0 ;
+         Vibration = 0 ;
       }
-      Pump (float Press ,float flow ,float Temp)
+      DC_Motor (float volt ,float current ,float vib)
       {
-         Pressure = Press ;
-         Flow_Rate = flow ;
-         Temperature = Temp ;
+        Volt = volt;
+        Current = current;
+        Vibration = vib;
       }
-      bool operator==(const Pump& other) const
+      bool operator==(const DC_Motor& other) const
          {
-            return Pressure == other.Pressure &&
-                     Flow_Rate == other.Flow_Rate &&
-                     Temperature == other.Temperature ;
+            return Volt == other.Volt &&
+                     Current == other.Current &&
+                     Vibration == other.Vibration ;
          }
 
-         bool operator!=(const Pump& other) const
+         bool operator!=(const DC_Motor& other) const
          {
             return !(*this == other);
          }

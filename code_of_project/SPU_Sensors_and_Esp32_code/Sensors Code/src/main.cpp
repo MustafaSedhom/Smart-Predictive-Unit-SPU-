@@ -6,179 +6,255 @@
 #include <Adafruit_Sensor.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include <Adafruit_ADS1X15.h>
+
 // project files
 #include "Actuators_Structs/ActuatorsStructs.h"
 #include "Handling_Communction_Data/Json_Data.h"
+
 //-----------------------------------------------------------
-#define Enable_Debug                   false
 #define communication_speed            115200
+
 //---------------- PINS ----------------
-#define Motor_Current_P_R_sensor_pin   A3 
-#define Motor_Current_P_S_sensor_pin   A6 
-#define Motor_Current_P_T_sensor_pin   A7 
-#define Motor_Volt_P_R_sensor_pin      A0 
-#define Motor_Volt_P_S_sensor_pin      A1 
-#define Motor_Volt_P_T_sensor_pin      A2 
-#define Motor_temperature_pin          10
-#define Pump_temperature_pin           3
-#define Pump_flow_rate_sensor_pin      2
+// AC_Motor Analog Pins
+#define AC_Motor_Current_P_R_sensor_pin   A3 
+#define AC_Motor_Current_P_S_sensor_pin   A6 
+#define AC_Motor_Current_P_T_sensor_pin   A7 
+#define AC_Motor_Volt_P_R_sensor_pin      A0 
+#define AC_Motor_Volt_P_S_sensor_pin      A1 
+#define AC_Motor_Volt_P_T_sensor_pin      A2 
+#define AC_Motor_temperature_pin          10
+
+// DC_Motor (ADS1115 Channels)
+#define DC_Motor_Current_ch   0 
+#define DC_Motor_Volt_ch      1 
+
 //---------------- TIMING ----------------
 const unsigned long startup_delay = 1000;
 const unsigned long send_interval = 1000;
+
 //---------------- OBJECTS ----------------
-OneWire motor_temp_oneWire(Motor_temperature_pin);
-DallasTemperature motor_temp(&motor_temp_oneWire);
-OneWire pump_temp_oneWire(Pump_temperature_pin);
-DallasTemperature pump_temp(&pump_temp_oneWire);
-Adafruit_ADXL345_Unified accel = Adafruit_ADXL345_Unified(12345);
-///////
+OneWire AC_motor_temp_oneWire(AC_Motor_temperature_pin);
+DallasTemperature AC_motor_temp(&AC_motor_temp_oneWire);
+
+Adafruit_ADXL345_Unified AC_motor_accel = Adafruit_ADXL345_Unified(12345);
+Adafruit_ADXL345_Unified DC_motor_accel = Adafruit_ADXL345_Unified(67890);
+Adafruit_ADS1115 ads;
+
 Json_Data Json;
-Motor motor , last_motor;
-Belt belt , last_belt;
-Pump pump , last_pump;
-OverAll overall , last_overall;
-SensorProblem sensor_problem , last_sensor_problem;
-//---------------- FLOW ----------------
-volatile unsigned long pulseCount = 0;
-const float calibrationFactor = 7.5;
-float totalLiters = 0;
-//---------------- VIBRATION ----------------
-float sumSq = 0;
-unsigned long samples = 0;
+AC_Motor ac_motor, last_ac_motor;
+Belt belt, last_belt;
+DC_Motor dc_motor, last_dc_motor;
+OverAll overall, last_overall;
+SensorProblem sensor_problem, last_sensor_problem;
+
+// Connection Status Flags
+bool ac_accel_connected = false;
+bool dc_accel_connected = false;
+bool ads_connected = false;
+
 //---------------- TIMERS ----------------
-unsigned long startMillis;
 unsigned long lastSend = 0;
+
 //-----------------------------------------------------------
-// INTERRUPT
-void pulseCounter()
+// SENSOR FUNCTIONS WITH HARDWARE VALIDATION
+
+// Reads analog pin and screens out unstable floating values
+float readAnalogVoltage(uint8_t pin, bool &is_valid)
 {
-    pulseCount++;
+    int raw = analogRead(pin);
+    
+    // If nothing is connected, internal floating voltage will fluctuate.
+    // Real sensor circuits typically hold a steady reference when active.
+    // For open-circuit detection, we check if raw data falls into unstable noise.
+    if (raw <= 1 || raw >= 1022) { 
+        is_valid = false;
+        return -1.0;
+    }
+    
+    is_valid = true;
+    return raw * (5.0 / 1023.0);
 }
-//-----------------------------------------------------------
-// SENSOR FUNCTIONS
-float readAnalogVoltage(uint8_t pin)
-{
-    return analogRead(pin) * (5.0 / 1023.0);
-}
-float readTemperature(DallasTemperature &sensor)
+
+// Validates OneWire bus temperature presence
+float readTemperature(DallasTemperature &sensor, bool &is_valid)
 {
     sensor.requestTemperatures();
-    return sensor.getTempCByIndex(0);
+    float temp = sensor.getTempCByIndex(0);
+    
+    if (temp == DEVICE_DISCONNECTED_C || temp == -127.0) {
+        is_valid = false;
+        return -1.0; 
+    }
+    
+    is_valid = true;
+    return temp;
 }
-// vibration struct
-struct VibrationData
+
+// Validates I2C Accelerometer and computes dynamic RMS
+float getVibrationRMS(Adafruit_ADXL345_Unified &accel, bool isConnected)
 {
-    float ax;
-    float ay;
-    float az;
-    float total;
-    float vibration;
-    float rms;
-};
-VibrationData readVibration()
-{
-    sensors_event_t event;
-    accel.getEvent(&event);
-    VibrationData v;
-    v.ax = event.acceleration.x;
-    v.ay = event.acceleration.y;
-    v.az = event.acceleration.z;
-    v.total = sqrt(v.ax*v.ax + v.ay*v.ay + v.az*v.az);
-    v.vibration = sqrt(v.ax*v.ax + v.ay*v.ay + (v.az - 9.81)*(v.az - 9.81));
-    sumSq += v.vibration * v.vibration;
-    samples++;
-    v.rms = sqrt(sumSq / samples);
-    return v;
+    if (!isConnected) return -1.0; 
+    
+    float sumSq = 0;
+    const int sample_size = 20; 
+    
+    for(int i = 0; i < sample_size; i++)
+    {
+        sensors_event_t event;
+        if (!accel.getEvent(&event)) {
+            return -1.0; 
+        }
+        
+        float ax = event.acceleration.x;
+        float ay = event.acceleration.y;
+        float az = event.acceleration.z;
+        
+        float vibration = sqrt(ax*ax + ay*ay + (az - 9.81)*(az - 9.81));
+        sumSq += vibration * vibration;
+        delay(1); 
+    }
+    
+    return sqrt(sumSq / sample_size);
 }
-float readFlowRate()
+
+// Safely reads ADS1115 over active I2C bus channel
+float readSafeADS(uint8_t channel, bool isAdsConnected)
 {
-    noInterrupts();
-    unsigned long pulses = pulseCount;
-    pulseCount = 0;
-    interrupts();
-    return pulses / calibrationFactor;
+    if (!isAdsConnected) return -1.0;
+    int16_t raw = ads.readADC_SingleEnded(channel);
+    return raw * 0.0001875;
 }
+
 //-----------------------------------------------------------
 // SETUP
 void setup()
 {
     delay(startup_delay);
     Serial.begin(communication_speed);
-    startMillis = millis();
-    motor_temp.begin();
-    pump_temp.begin();
-    accel.begin();
-    accel.setRange(ADXL345_RANGE_16_G);
-    pinMode(Pump_flow_rate_sensor_pin, INPUT_PULLUP);
-    attachInterrupt(digitalPinToInterrupt(Pump_flow_rate_sensor_pin),pulseCounter,FALLING);
-    motor = Motor(55,2.1,Phases(221.3,220.1,33),Phases(7.7,2.1,1.0));
-    pump = Pump(18.3,22.4,55);
-    belt = Belt(1122,3.5,555);
-    overall = OverAll(13,9);
+    
+    AC_motor_temp.begin();
+    
+    // Initial hardware connection handshakes
+    if (AC_motor_accel.begin(0x53)) {
+        ac_accel_connected = true;
+        AC_motor_accel.setRange(ADXL345_RANGE_16_G);
+    }
+    
+    if (DC_motor_accel.begin(0x1D)) {
+        dc_accel_connected = true;
+        DC_motor_accel.setRange(ADXL345_RANGE_16_G);
+    }
+    
+    if (ads.begin()) {
+        ads_connected = true;
+    }
+    
+    // Initialize default safe variables
+    ac_motor = AC_Motor(0, 0, Phases(0,0,0), Phases(0,0,0));
+    dc_motor = DC_Motor(0, 0, 0);
+    belt = Belt(0, 0, 0);
+    overall = OverAll(11, 0);
+    
     sensor_problem.Clear();
-    sensor_problem.Add("Motor Current Sensor P_R");
-    Json.updateMotor(motor);
-    Json.updatePump(pump);
-    Json.updateBelt(belt);
-    Json.updateOverAll(overall);
-    Json.updateSensorProblem(sensor_problem);
-    Serial.println("System Booting...");
+    Json.updateAll(ac_motor, belt, dc_motor, overall, sensor_problem);
+    
+    Serial.println("System Booting Complete...");
     lastSend = millis();
 }
+
 //-----------------------------------------------------------
 // LOOP
 void loop()
 {
     if (millis() - lastSend >= send_interval)
     {
-        //---------------- ANALOG ----------------
-        float motor_current_r = readAnalogVoltage(Motor_Current_P_R_sensor_pin);
-        float motor_current_s = readAnalogVoltage(Motor_Current_P_S_sensor_pin);
-        float motor_current_t = readAnalogVoltage(Motor_Current_P_T_sensor_pin);
-        float motor_voltage_r = readAnalogVoltage(Motor_Volt_P_R_sensor_pin);
-        float motor_voltage_s = readAnalogVoltage(Motor_Volt_P_S_sensor_pin);
-        float motor_voltage_t = readAnalogVoltage(Motor_Volt_P_T_sensor_pin);
-        //---------------- TEMP ----------------
-        float motor_temperature = readTemperature(motor_temp);
-        float pump_temperature  = readTemperature(pump_temp);
-        //---------------- VIBRATION ----------------
-        VibrationData vib = readVibration();
-        //---------------- FLOW ----------------
-        float flowRate = readFlowRate();
-        totalLiters += flowRate / 60.0;
-        //---------------- Assign data in classes for actuators from sensors ----------------
-        // motor.Current.Phase_R = motor_current_r;
-        // motor.Current.Phase_S = motor_current_s;
-        // motor.Current.Phase_T = motor_current_t;
-        // motor.Volt.Phase_R = motor_voltage_r;
-        // motor.Volt.Phase_S = motor_voltage_s;
-        // motor.Volt.Phase_T = motor_voltage_t;
-        // motor.Temperature = motor_temperature;
-        // motor.Vibration = vib.rms;
-        // pump.Temperature = pump_temperature;
-        // pump.Flow_Rate = flowRate;
-        motor.Current.Phase_R = 0;
-        motor.Current.Phase_S = 0;
-        motor.Current.Phase_T = 0;
-        motor.Volt.Phase_R = 0;
-        motor.Volt.Phase_S = 0;
-        motor.Volt.Phase_T = 0;
-        motor.Temperature = 0;
-        motor.Vibration = 0;
-        pump.Temperature = 0;
-        pump.Flow_Rate = 0;
-        belt.Speed = 0;
-        //---------------- Send data to Raspberry Pi ----------------
-        if(motor != last_motor || pump != last_pump || belt != last_belt || overall != last_overall)
-        {
-            Json.updateAll(motor, belt, pump, overall, sensor_problem);
-            Json.print_Json_formate();
-            last_motor = motor;
-            last_pump = pump;
-            last_belt = belt;
-            last_overall = overall;
+        int total_monitored_sensors = 11; // 6 Analog + 1 Temp + 2 I2C Accel + 2 ADS channels
+        int connection_failed_count = 0;
+        bool pin_valid = false;
+        
+        sensor_problem.Clear(); 
+
+        //---------------- AC MOTOR CURRENT READINGS ----------------
+        ac_motor.Current.Phase_R = readAnalogVoltage(AC_Motor_Current_P_R_sensor_pin, pin_valid);
+        if(!pin_valid) { sensor_problem.Add("AC Current R"); connection_failed_count++; }
+        
+        ac_motor.Current.Phase_S = readAnalogVoltage(AC_Motor_Current_P_S_sensor_pin, pin_valid);
+        if(!pin_valid) { sensor_problem.Add("AC Current S"); connection_failed_count++; }
+        
+        ac_motor.Current.Phase_T = readAnalogVoltage(AC_Motor_Current_P_T_sensor_pin, pin_valid);
+        if(!pin_valid) { sensor_problem.Add("AC Current T"); connection_failed_count++; }
+        
+        //---------------- AC MOTOR VOLTAGE READINGS ----------------
+        ac_motor.Volt.Phase_R = readAnalogVoltage(AC_Motor_Volt_P_R_sensor_pin, pin_valid);
+        if(!pin_valid) { sensor_problem.Add("AC Volt R"); connection_failed_count++; }
+        
+        ac_motor.Volt.Phase_S = readAnalogVoltage(AC_Motor_Volt_P_S_sensor_pin, pin_valid);
+        if(!pin_valid) { sensor_problem.Add("AC Volt S"); connection_failed_count++; }
+        
+        ac_motor.Volt.Phase_T = readAnalogVoltage(AC_Motor_Volt_P_T_sensor_pin, pin_valid);
+        if(!pin_valid) { sensor_problem.Add("AC Volt T"); connection_failed_count++; }
+        
+        //---------------- AC TEMPERATURE & VIBRATION ----------------
+        ac_motor.Temperature = readTemperature(AC_motor_temp, pin_valid);
+        if(!pin_valid) { sensor_problem.Add("AC Temp Sensor"); connection_failed_count++; }
+        
+        ac_motor.Vibration = getVibrationRMS(AC_motor_accel, ac_accel_connected);
+        if(ac_motor.Vibration == -1.0) { sensor_problem.Add("AC Vibration"); connection_failed_count++; }
+
+        //---------------- I2C ACTIVE BUS CHECK ----------------
+        Wire.beginTransmission(0x48); 
+        ads_connected = (Wire.endTransmission() == 0);
+        
+        Wire.beginTransmission(0x1D); 
+        dc_accel_connected = (Wire.endTransmission() == 0);
+
+        //---------------- DC MOTOR CURRENT (ACS712) ----------------
+        float dc_current_volt = readSafeADS(DC_Motor_Current_ch, ads_connected);
+        if(dc_current_volt == -1.0) {
+            sensor_problem.Add("DC Current (ADS)");
+            connection_failed_count++;
+            dc_motor.Current = -1.0;
+        } else {
+            float sensitivity = 0.185; 
+            dc_motor.Current = (dc_current_volt - 2.5) / sensitivity;
+            if (dc_motor.Current < 0.1 && dc_motor.Current > -0.1) {
+                dc_motor.Current = 0.0;
+            }
         }
-        //////////////////
+        
+        //---------------- DC MOTOR VOLTAGE (0-25V) ----------------
+        float dc_voltage_volt = readSafeADS(DC_Motor_Volt_ch, ads_connected);
+        if(dc_voltage_volt == -1.0) {
+            sensor_problem.Add("DC Voltage (ADS)");
+            connection_failed_count++;
+            dc_motor.Volt = -1.0;
+        } else {
+            dc_motor.Volt = dc_voltage_volt * 5.0; 
+        }
+        
+        //---------------- DC MOTOR VIBRATION ----------------
+        dc_motor.Vibration = getVibrationRMS(DC_motor_accel, dc_accel_connected);
+        if(dc_motor.Vibration == -1.0) { sensor_problem.Add("DC Vibration"); connection_failed_count++; }
+
+        //---------------- BELT READINGS (SIMULATED DATA) ----------------
+        belt.Alignment = random(10.0, 90.0);
+        belt.Speed     = random(10.0, 90.0);
+        belt.Tension   = random(10.0, 90.0);
+
+        //---------------- OVERALL DIAGNOSTICS UPDATE ----------------
+        int working_sensors = total_monitored_sensors - connection_failed_count;
+        overall = OverAll(total_monitored_sensors, working_sensors);
+
+        //---------------- JSON TRANSMISSION TO RASPBERRY PI ----------------
+        Json.updateAll(ac_motor, belt, dc_motor, overall, sensor_problem);
+        Json.print_Json_formate();
+        
+        last_ac_motor = ac_motor;
+        last_dc_motor = dc_motor;
+        last_belt     = belt;
+        last_overall  = overall;
+        
         lastSend = millis();
     }
 }

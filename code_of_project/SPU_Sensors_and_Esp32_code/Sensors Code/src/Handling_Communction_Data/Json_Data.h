@@ -8,23 +8,23 @@
 class Json_Data
 {
     private:
-        Motor _motor;
-        Pump _pump;
+        AC_Motor _ac_motor;
+        DC_Motor _dc_motor;
         Belt _belt;
         OverAll _overall;
         SensorProblem _sensor_problem;
         void convert_to_json_formate();
     public:
         void updateAll(
-                    const Motor& motor_data,
+                    const AC_Motor& motor_data,
                     const Belt& belt_data,
-                    const Pump& pump_data,
+                    const DC_Motor& pump_data,
                     const OverAll& overall_data,
                     const SensorProblem& sensor_problem
             );
-        void updateMotor(const Motor& motor_data);
+        void updateMotor(const AC_Motor& motor_data);
         void updateBelt(const Belt& belt_data);
-        void updatePump(const Pump& pump_data);
+        void updatePump(const DC_Motor& pump_data);
         void updateOverAll(const OverAll& overall_data);
         void updateSensorProblem(const SensorProblem& sensor_problem);
         void print_Json_formate();
