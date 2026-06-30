@@ -14,8 +14,7 @@
 
 //-----------------------------------------------------------
 #define communication_speed            115200
-
-//---------------- PINS ----------------
+//---------------- PINS -------------------------------------
 // AC_Motor Analog Pins
 #define AC_Motor_Current_P_R_sensor_pin   A3 
 #define AC_Motor_Current_P_S_sensor_pin   A6 
@@ -30,7 +29,7 @@
 #define DC_Motor_Volt_ch      1 
 
 //---------------- TIMING ----------------
-const unsigned long startup_delay = 1000;
+const unsigned long startup_delay = 1000; // waiting 1 second
 const unsigned long send_interval = 1000;
 
 //---------------- OBJECTS ----------------
@@ -159,7 +158,7 @@ void setup()
     sensor_problem.Clear();
     Json.updateAll(ac_motor, belt, dc_motor, overall, sensor_problem);
     
-    Serial.println("System Booting Complete...");
+    // Serial.println("System Booting Complete...");
     lastSend = millis();
 }
 
@@ -174,7 +173,6 @@ void loop()
         bool pin_valid = false;
         
         sensor_problem.Clear(); 
-
         //---------------- AC MOTOR CURRENT READINGS ----------------
         ac_motor.Current.Phase_R = readAnalogVoltage(AC_Motor_Current_P_R_sensor_pin, pin_valid);
         if(!pin_valid) { sensor_problem.Add("AC Current R"); connection_failed_count++; }
@@ -184,7 +182,6 @@ void loop()
         
         ac_motor.Current.Phase_T = readAnalogVoltage(AC_Motor_Current_P_T_sensor_pin, pin_valid);
         if(!pin_valid) { sensor_problem.Add("AC Current T"); connection_failed_count++; }
-        
         //---------------- AC MOTOR VOLTAGE READINGS ----------------
         ac_motor.Volt.Phase_R = readAnalogVoltage(AC_Motor_Volt_P_R_sensor_pin, pin_valid);
         if(!pin_valid) { sensor_problem.Add("AC Volt R"); connection_failed_count++; }
@@ -194,21 +191,18 @@ void loop()
         
         ac_motor.Volt.Phase_T = readAnalogVoltage(AC_Motor_Volt_P_T_sensor_pin, pin_valid);
         if(!pin_valid) { sensor_problem.Add("AC Volt T"); connection_failed_count++; }
-        
         //---------------- AC TEMPERATURE & VIBRATION ----------------
         ac_motor.Temperature = readTemperature(AC_motor_temp, pin_valid);
         if(!pin_valid) { sensor_problem.Add("AC Temp Sensor"); connection_failed_count++; }
         
         ac_motor.Vibration = getVibrationRMS(AC_motor_accel, ac_accel_connected);
         if(ac_motor.Vibration == -1.0) { sensor_problem.Add("AC Vibration"); connection_failed_count++; }
-
         //---------------- I2C ACTIVE BUS CHECK ----------------
         Wire.beginTransmission(0x48); 
         ads_connected = (Wire.endTransmission() == 0);
         
         Wire.beginTransmission(0x1D); 
         dc_accel_connected = (Wire.endTransmission() == 0);
-
         //---------------- DC MOTOR CURRENT (ACS712) ----------------
         float dc_current_volt = readSafeADS(DC_Motor_Current_ch, ads_connected);
         if(dc_current_volt == -1.0) {
@@ -216,13 +210,13 @@ void loop()
             connection_failed_count++;
             dc_motor.Current = -1.0;
         } else {
-            float sensitivity = 0.185; 
+            // float sensitivity = 0.185; 
+            float sensitivity = 0.100; 
             dc_motor.Current = (dc_current_volt - 2.5) / sensitivity;
             if (dc_motor.Current < 0.1 && dc_motor.Current > -0.1) {
                 dc_motor.Current = 0.0;
             }
         }
-        
         //---------------- DC MOTOR VOLTAGE (0-25V) ----------------
         float dc_voltage_volt = readSafeADS(DC_Motor_Volt_ch, ads_connected);
         if(dc_voltage_volt == -1.0) {
@@ -232,29 +226,25 @@ void loop()
         } else {
             dc_motor.Volt = dc_voltage_volt * 5.0; 
         }
-        
         //---------------- DC MOTOR VIBRATION ----------------
         dc_motor.Vibration = getVibrationRMS(DC_motor_accel, dc_accel_connected);
         if(dc_motor.Vibration == -1.0) { sensor_problem.Add("DC Vibration"); connection_failed_count++; }
-
         //---------------- BELT READINGS (SIMULATED DATA) ----------------
         belt.Alignment = random(10.0, 90.0);
         belt.Speed     = random(10.0, 90.0);
         belt.Tension   = random(10.0, 90.0);
-
         //---------------- OVERALL DIAGNOSTICS UPDATE ----------------
         int working_sensors = total_monitored_sensors - connection_failed_count;
         overall = OverAll(total_monitored_sensors, working_sensors);
-
         //---------------- JSON TRANSMISSION TO RASPBERRY PI ----------------
         Json.updateAll(ac_motor, belt, dc_motor, overall, sensor_problem);
         Json.print_Json_formate();
-        
+        // assign last data
         last_ac_motor = ac_motor;
         last_dc_motor = dc_motor;
         last_belt     = belt;
         last_overall  = overall;
-        
+        // time
         lastSend = millis();
     }
 }
